@@ -1,0 +1,19 @@
+{
+  "name": "franks-calendar",
+  "version": "0.0.1",
+  "description": "A centralized calendar for the Olin community!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jack-Greenberg/franks-calendar.git"
+  },
+  "author": "Jules Brettle, Ruby Eisenbud, Karen Hinh, Jack Greenberg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jack-Greenberg/franks-calendar/issues"
+  },
+  "homepage": "https://github.com/jack-Greenberg/franks-calendar#readme"
+}
