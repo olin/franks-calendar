@@ -8,4 +8,31 @@
 
 ## Directory Organization
 
-...still to come...
+```txt
+.
+├── app.py - Handles setting up and running the application
+├── blueprints - This is where the majority of backend work is done
+│   ├── __init__.py
+│   └── public.py - Handles routing for pages and backend functionality
+├── config.py
+├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── README.md - This file!
+├── static - All static resources go here, like CSS and JavaScript
+│   ├── build
+│   │   └── build.css
+│   └── tailwind.css
+│       If you want to add a CSS file, add it here!
+├── tailwind.config.js
+├── templates - This is where all the HTML goes
+│   ├── 404.html - The page loaded when the requested page doesn't exist
+│   ├── base.html - Every page will include this HTML. It forms the base.
+│   ├── example.html - Duplicate this to start a blank page
+│   └── home.html - The home page (franks-calendar.com/)
+└── webpack.config.js
+```
+
+### Additional Notes
+* When editing the HTML files, put everything in between the {% block page %} and {% endblock %}. This will make sure it gets included when the page is loaded
+* `tailwind.css` should take care of all CSS styling for you. [Go to this website to learn more about it](https://tailwindcss.com)
