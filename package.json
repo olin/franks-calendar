@@ -4,7 +4,7 @@
   "description": "A centralized calendar for the Olin community!",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "concurrently \"postcss static/tailwind.css -o static/build/build.css --watch\" \"FLASK_ENV=development flask run\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/jack-Greenberg/franks-calendar/issues"
   },
-  "homepage": "https://github.com/jack-Greenberg/franks-calendar#readme"
+  "homepage": "https://github.com/jack-Greenberg/franks-calendar#readme",
+  "dependencies": {
+    "autoprefixer": "^9.7.5",
+    "concurrently": "^5.1.0",
+    "cssnano": "^4.1.10",
+    "live-server": "^1.2.1",
+    "postcss-cli": "^7.1.0",
+    "postcss-import": "^12.0.1",
+    "tailwindcss": "^1.2.0"
+  }
 }
