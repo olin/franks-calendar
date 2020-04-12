@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<SharingMessage xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/sharing/2008">
+  <DataType>calendar</DataType>
+  <Initiator>
+    <Name>Jack Greenberg</Name>
+    <SmtpAddress>jgreenberg@olin.edu</SmtpAddress>
+    <EntryId>00000000DCA740C8C042101AB4B908002B2FE18201000000000000002F6F3D45786368616E67654C6162732F6F753D45786368616E67652041646D696E6973747261746976652047726F7570202846594449424F484632335350444C54292F636E3D526563697069656E74732F636E3D33663233313533643633353534336331393565326439373235393165303666612D4A61636B20477265656E6200</EntryId>
+  </Initiator>
+  <Invitation>
+    <Providers>
+      <Provider Type="ms-exchange-publish" TargetRecipients="j.lester.greenberg@gmail.com">
+        <BrowseUrl xmlns="http://schemas.microsoft.com/exchange/sharing/2008">https://outlook.office365.com/owa/calendar/59094dba4345479fab8dab9a8e735b64@olin.edu/031c8c0aa4fc4739821c844fb4432c015597740069347921801/S-1-8-2620990852-93676819-2524387111-1339785398/reachcalendar.html</BrowseUrl>
+        <ICalUrl xmlns="http://schemas.microsoft.com/exchange/sharing/2008">https://outlook.office365.com/owa/calendar/59094dba4345479fab8dab9a8e735b64@olin.edu/031c8c0aa4fc4739821c844fb4432c015597740069347921801/S-1-8-2620990852-93676819-2524387111-1339785398/reachcalendar.ics</ICalUrl>
+      </Provider>
+    </Providers>
+  </Invitation>
+</SharingMessage>
