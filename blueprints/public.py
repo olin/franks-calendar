@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 
 public = Blueprint('public', __name__, template_folder='../templates', static_folder='../static/build')
 
@@ -14,3 +14,9 @@ def public_page(page):
         rendered_page = render_template("404.html")
 
     return rendered_page
+
+@public.route('/webhook/sendgrid')
+def handle_sendgrid():
+    data = request.data
+    print(data)
+    return None
