@@ -4,7 +4,7 @@
   "description": "A centralized calendar for the Olin community!",
   "main": "index.js",
   "scripts": {
-    "serve": "concurrently \"postcss static/tailwind.css -o static/build/build.css --watch\" \"FLASK_ENV=development flask run\""
+    "serve": "concurrently \"postcss static/tailwind.css -o static/build/build.css --watch\" \"FLASK_ENV=development flask run --host=\"0.0.0.0\"\""
   },
   "repository": {
     "type": "git",
