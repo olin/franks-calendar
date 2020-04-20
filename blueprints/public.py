@@ -15,7 +15,7 @@ def public_page(page):
 
     return rendered_page
 
-@public.route('/webhook/sendgrid')
+@public.route('/webhook/calendar')
 def handle_sendgrid():
     data = request.data
     print(data)
