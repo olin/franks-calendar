@@ -2,6 +2,7 @@ import icalendar
 from bson.objectid import ObjectId
 from datetime import datetime
 
+# Turn an iCal event into a python dictionary to put into the database
 def make_dict(event):
     ret = {
         "_id": ObjectId(),
