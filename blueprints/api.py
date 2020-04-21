@@ -5,7 +5,12 @@ from datetime import datetime
 
 class API(MethodView):
     def get(self, id):
-        return None
+        if id is None:
+            ret = []
+            query = db.events.find()
+            for doc in query:
+                ret.append(json.loads(json_util.dumps(doc)))
+        return ret
 
     def post(self, id):
         return None
