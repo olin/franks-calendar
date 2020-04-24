@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 
-public = Blueprint('public', __name__, template_folder='../templates', static_folder='../static/build')
+public = Blueprint('public', __name__, template_folder='../templates', static_folder='../static/build/')
 
 @public.route('/')
 def public_index():

@@ -6,6 +6,27 @@
 3. Once you have a feature to implement (in the form of a series of commits), open a pull request on the [original repository](https://github.com/jack-greenberg/franks-calendar).
 4. I'll check for merge conflicts, resolve any that come up, and then merge your request (this helps manage merge conflicts that are a pain to deal with on your own).
 
+## Running the app
+1. Create a virtual environment (run this after you have `cd`ed to the folder:
+```bash
+$ python3 -m pip install virtualenv
+$ virtualenv venv
+```
+2. Activate the virtual environment and install the packages:
+```bash
+$ . venv/bin/activate
+$ pip install -r requirements.txt
+```
+3. Install the javascript packages:
+```bash
+$ npm install
+```
+4. Run the server:
+```bash
+$ npm run serve
+```
+5. Profit (go to http://localhost:5000)
+
 ## Directory Organization
 
 ```txt

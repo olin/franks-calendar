@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
 <h1>Welcome to Frank's Calendar!</h1>
+<div id="calendar-root"></div>
+<script src="{{url_for('public.static', filename='build.js')}}"></script>
 {% endblock %}
