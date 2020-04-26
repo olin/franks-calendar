@@ -21,7 +21,7 @@ def create_app(config):
         app.add_url_rule(url, view_func=view_func, methods=['POST',])
         app.add_url_rule('%s<%s:%s>' % (url, pk_type, pk), view_func=view_func, methods=['POST', 'GET', 'PUT', 'DELETE'])
 
-    register_api(API, 'api', '/api/v1/', pk='id', pk_type='int')
+    register_api(API, 'api', '/api/events', pk='id', pk_type='int')
 
     return app
 

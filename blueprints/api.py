@@ -2,6 +2,8 @@ from flask import jsonify, request
 import json
 from flask.views import MethodView
 from datetime import datetime
+from bson import json_util
+from ..modules.db import db
 
 class API(MethodView):
     def get(self, id):
@@ -10,7 +12,7 @@ class API(MethodView):
             query = db.events.find()
             for doc in query:
                 ret.append(json.loads(json_util.dumps(doc)))
-        return ret
+        return jsonify(ret)
 
     def post(self, id):
         return None
