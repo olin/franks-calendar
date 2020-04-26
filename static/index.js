@@ -16,7 +16,27 @@ export const AppContext = React.createContext({});
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            events: null,
+            ready: false,
+        }
     }
+
+    componentDidMount() {
+        client.get('/api/events')
+        .then(res => {
+            console.log(res)
+            this.setState({
+                events: res.data,
+                ready: true
+            })
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    }
+
     render() {
         return (
             <>
