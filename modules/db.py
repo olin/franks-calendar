@@ -28,7 +28,7 @@ db = create_client() # Create a client
 
 def check_for_changes():
     # Step one: get the .ics file from Google
-    url = "https://calendar.google.com/calendar/ical/oc7b32uiqmg7f063or4n1tmdkk%40group.calendar.google.com/private-9c9790cd2613d41bc9c3d1a51831d430/basic.ics"
+    url = "https://calendar.google.com/calendar/ical/ocrlnk9gfl2ee4shh46ffd2kgk%40group.calendar.google.com/private-50a283aa50d5e2b1108d41806b087c44/basic.ics"
     ical = urlopen(url).read() # This reads the information into a byte string
     cal = Calendar.from_ical(ical) # Create a Calendar object from our .ics file
 

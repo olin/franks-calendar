@@ -12,4 +12,8 @@ def make_dict(event):
         "start": event.get('dtstart').dt,
         "end": event.get('dtend').dt,
     }
+
+    if event.get('rrule') != None:
+        ret['rrule'] = event.get('rrule').to_ical().decode()
+        
     return ret
