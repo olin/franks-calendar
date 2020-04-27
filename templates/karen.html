@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block page %}
+
+<section>
+  <!-- Filter section -->
+  <article>
+    <button class="buttonA" onclick="location.href='eventform.com';">Submit event</button>
+
+    <h1>Filters</h1>
+    <div class="btn-group">
+      <button class="button1" onclick="trigger1()">Admissions/Financial</button>
+      <button class="button2" onclick="trigger2()">Clubs</button>
+      <button class="button3" onclick="trigger3()">Student Life</button>
+      <button class="button4" onclick="trigger4()">Foundry/BOW</button>
+      <button class="button5" onclick="trigger5()">Health/Wellness</button>
+      <button class="button6" onclick="trigger6()">Library</button>
+      <button class="button7" onclick="trigger7()">The Shop</button>
+      <button class="button8" onclick="trigger8()">PGP</button>
+    </div>
+
+    <!-- User guide section -->
+    <h1>User Guides</h1>
+    <p>For help navigating the site, sharing an event to the calendar,
+      or saving an event to your personal calendar.</p>
+    <ul style="list-style-type:disc;">
+      <li><p class="p2"><a href="https://linktouserguide.com">Share an event</a></p></li>
+      <li><p class="p2"><a href="https://linktouserguide.com"> Export an event</a></p></li>
+    </ul>
+
+    <!-- Moderator section -->
+    <h1>Moderators</h1>
+    <p> Contact them if you need urgent approval for a new event listing.
+      Otherwise, expect up to 24 hours for a new event to be displayed on the
+      calendar!</p>
+    <ul style="list-style-type:disc;">
+      <li><p class="p2"><a href="mailto:jbrettle@olin.edu"> Jules Brettle</a></p></li>
+      <li><p class="p2"><a href="mailto:jgreenberg@olin.edu"> Jack Greenberg</a></p></li>
+    </ul>
+  </article>
+
+  <article class="article1">
+    <p id="text1"> Display admissions/financial events</p>
+    <p id="text2"> Display club events</p>
+    <p id="text3"> Display student life events</p>
+    <p id="text4"> Display foundry/bow events</p>
+    <p id="text5"> Display health/wellness events</p>
+    <p id="text6"> Display library events</p>
+    <p id="text7"> Display shop events</p>
+    <p id="text8"> Display PGP events</p>
+  </article>
+</section>
+
+<li id="form">
+
+<script>
+
+function trigger1() {
+  var x = document.getElementById("text1");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger2() {
+  var x = document.getElementById("text2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger3() {
+  var x = document.getElementById("text3");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger4() {
+  var x = document.getElementById("text4");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger5() {
+  var x = document.getElementById("text5");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger6() {
+  var x = document.getElementById("text6");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger7() {
+  var x = document.getElementById("text7");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function trigger8() {
+  var x = document.getElementById("text8");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+{% endblock %}
