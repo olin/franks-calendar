@@ -1,0 +1,29 @@
+@import 'vars';
+
+.fc-header-toolbar {
+    font-family: $sans;
+}
+
+.fc-button {
+    padding: .25em .5em;
+    border: 1px solid #999;
+    border-radius: 999em;
+    background-color: white;
+    color: black !important;
+}
+
+.fc-prev-button {
+    margin-right: .5em;
+}
+.fc-prev-button, .fc-next-button {
+    width: 36px;
+    height: 36px;
+    padding: .25em;
+    border-radius: 999em !important;
+    // margin: 0 .5em;
+}
+
+.fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
+    background-color: $student-life;
+    color: white;
+}

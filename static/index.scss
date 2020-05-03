@@ -1,5 +1,138 @@
+@import 'reset.scss';
+@import 'calendar.scss';
+@import 'vars';
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
-@import 'karen.scss';
+@import '~@fullcalendar/timegrid/main.css';
 
-$sans: sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Pathway+Gothic+One&display=swap');
+
+.Header {
+    padding: 1em;
+
+    &__title {
+
+        &__icon {
+            width: 4em;
+            height: auto;
+            margin-right: 1em;
+        }
+        &__text {
+            font-size: 4em;
+            font-family: $title;
+            font-style: italic;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.Main {
+    display: flex;
+}
+
+.Button {
+    font-family: $sans;
+    border-radius: 99em;
+    padding: .5em 1em;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    background-color: #42d392;
+    margin: 0 auto;
+}
+
+.Sidebar {
+    min-width: 20%;
+    margin-right: 1em;
+    margin-top: 1em;
+    padding: 0 .5em;
+    border-right: 4px solid black;
+
+    &__header {
+        font-size: 2em;
+        font-family: $title;
+        font-style: italic;
+        margin-bottom: .5em;
+
+        &__icon {
+            width: 1em;
+            height: auto;
+        }
+    }
+    &__section {
+        font-family: $sans;
+        margin: 1em 0;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+    &__filter {
+        font-size: 1em;
+        display: block;
+        position: relative;
+        padding: .1em 0 .1em 12px;
+        margin-bottom: .5em;
+        border-top-right-radius: .25em;
+        border-bottom-right-radius: .25em;
+        background-color: none;
+
+        input[type="checkbox"] + & {
+            &[for="filter--admissions"] {background-color: rgba($admissions, 0); &::before {background-color: $admissions}}
+            &[for="filter--clubs"] {background-color: rgba($clubs, 0); &::before {background-color: $clubs}}
+            &[for="filter--student-life"] {background-color: rgba($student-life, 0); &::before {background-color: $student-life}}
+            &[for="filter--foundry-bow"] {background-color: rgba($foundry-bow, 0); &::before {background-color: $foundry-bow}}
+            &[for="filter--health-wellness"] {background-color: rgba($health-wellness, 0); &::before {background-color: $health-wellness}}
+            &[for="filter--library"] {background-color: rgba($library, 0); &::before {background-color: $library}}
+            &[for="filter--shop"] {background-color: rgba($shop, 0); &::before {background-color: $shop}}
+            &[for="filter--pgp"] {background-color: rgba($pgp, 0); &::before {background-color: $pgp}}
+        }
+
+        input[type="checkbox"]:checked + & {
+            &[for="filter--admissions"] {background-color: rgba($admissions, .2); &::before {background-color: $admissions}}
+            &[for="filter--clubs"] {background-color: rgba($clubs, .2); &::before {background-color: $clubs}}
+            &[for="filter--student-life"] {background-color: rgba($student-life, .2); &::before {background-color: $student-life}}
+            &[for="filter--foundry-bow"] {background-color: rgba($foundry-bow, .2); &::before {background-color: $foundry-bow}}
+            &[for="filter--health-wellness"] {background-color: rgba($health-wellness, .2); &::before {background-color: $health-wellness}}
+            &[for="filter--library"] {background-color: rgba($library, .2); &::before {background-color: $library}}
+            &[for="filter--shop"] {background-color: rgba($shop, .2); &::before {background-color: $shop}}
+            &[for="filter--pgp"] {background-color: rgba($pgp, .2); &::before {background-color: $pgp}}
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 8px;
+            height: 100%;
+            background-color: inherit;
+        }
+    }
+}
+
+.Calendar {
+    margin-top: 1em;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+.Footer {
+    font-size: 1.5em;
+    font-family: $sans;
+    text-align: center;
+    padding: 1em;
+
+    &__message {
+        display: block;
+    }
+    &__links {
+        margin-top: .5em;
+        display: block;
+        font-size: .7em;
+
+        a {
+            color: inherit;
+        }
+    }
+}
