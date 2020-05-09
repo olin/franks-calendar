@@ -3,7 +3,7 @@ import json
 from flask.views import MethodView
 from datetime import datetime
 from bson import json_util
-from ..modules.db import db
+from modules.db import db
 
 class API(MethodView):
     def get(self, id):

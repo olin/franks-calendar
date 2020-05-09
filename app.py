@@ -1,6 +1,6 @@
 from flask import Flask
-from .config import DevelopmentConfig, ProductionConfig
-from .blueprints.api import API
+from config import DevelopmentConfig, ProductionConfig
+from blueprints.api import API
 
 """
 Register API from modules/api.py
@@ -11,7 +11,7 @@ def create_app(config):
     app = Flask(__name__)
     app.config.from_object(config)
 
-    from .blueprints.public import public
+    from blueprints.public import public
     app.register_blueprint(public)
 
     def register_api(view, endpoint, url, pk='id', pk_type='string'):
