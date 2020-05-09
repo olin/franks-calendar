@@ -14,9 +14,9 @@ COPY requirements.txt .
 
 EXPOSE 5000
 
-# ENV FLASK_ENV development
+ENV FLASK_ENV development
 
-RUN npm install
+# RUN npm install
 RUN pip3 install -r requirements.txt
 
-ENTRYPOINT npm run serve
+ENTRYPOINT npm install && npm run serve
