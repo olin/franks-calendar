@@ -1,6 +1,5 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-import yaml
 from os.path import dirname, join
 from urllib.request import urlopen
 import hashlib
@@ -9,20 +8,16 @@ import os, time
 from calendar import *
 import re
 
-# Load in database information from a private file
-# This makes sure that no one on GitHub can see my passwords
-file = open(join(dirname(__file__), "../private/config.yml"))
-data = yaml.load(file.read(), Loader=yaml.SafeLoader)['db']
-
 # Creates a MongoDB client to access the database
 def create_client():
     client = MongoClient(
-            data['host'] + ':' + str(data['port']),
-            username=data['user'],
-            password=data['password'],
-            authSource=data['dbName']
+        "database:27017",
+        username="frank",
+        password="calendar",
+        authSource="calendar-dev",
     )
-    return client[data['dbName']]
+
+    return client['calendar-dev']
 
 db = create_client() # Create a client
 
