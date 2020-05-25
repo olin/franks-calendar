@@ -28,11 +28,16 @@
 
 6. When the command finishes and you see the prompt again, navigate to [http://localhost:5000](http://localhost:5000).
 
+### Ingesting Data (events)
+_Do this!_
 
+1. First, you have to enter the container: `docker exec -ti franks-calendar-web sh`
+    - `docker exec` means enter the container. `-ti` means "terminal interactive", and translates to "let me use a terminal". "franks-calendar-web" is the name of the container we are entering, and `sh` is the shell command.
+2. Run `cd /www` to enter the folder where the files are, and then `python3 modules/db.py` to import the events.
+
+### Windows
 
 If you are using Windows, I don't know that I will be of much assistance--I've gotten mixed results from trying to install this on Windows, but message me and I will do my best to help!
-
-
 
 ## How everything works
 
