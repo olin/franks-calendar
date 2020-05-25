@@ -12,9 +12,9 @@ import re
 def create_client():
     client = MongoClient(
         "database:27017",
-        username="frank",
-        password="calendar",
-        authSource="calendar-dev",
+        username="root",
+        password="password",
+        authSource="admin",
     )
 
     return client['calendar-dev']
@@ -40,7 +40,11 @@ def check_for_changes():
     # Retreive the old hash from the database
     old_hash = db.hashes.find_one({'name': 'latest'})
 
-    if (new_hash != old_hash['hash']):
+    try:
+        assert(new_hash == old_hash['hash'])
+        print("No changes")
+        return 0
+    except (AssertionError, TypeError):
         # If they're different, fork a new process to run separately and update the database
         pid = os.fork()
         if pid == 0:
@@ -51,10 +55,6 @@ def check_for_changes():
             # This code will only execute for the parent process
             # We should just return
             return 0
-    else:
-        # If there are no changes, we're all good
-        print("No changes")
-        return 0
 
 def update_database(cal, new_hash):
     client = create_client() # Create a new client for the child process
