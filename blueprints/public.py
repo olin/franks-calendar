@@ -14,3 +14,8 @@ def public_page(page):
         rendered_page = render_template("404.html")
 
     return rendered_page
+
+@public.route('/export/')
+def export_event():
+    # The ID of the event will be a GET variable in the query string
+    pass

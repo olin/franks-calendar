@@ -11,6 +11,7 @@ def make_dict(event):
         "location": str(event.get('location')),
         "start": event.get('dtstart').dt,
         "end": event.get('dtend').dt,
+        "google_uid": event.get('uid'),
     }
 
     if event.get('rrule') != None:
