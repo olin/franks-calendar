@@ -59,3 +59,15 @@ The back end of the app uses Python's Flask framework for HTTP routing and creat
 
 ## Additional Notes
 * When editing the HTML files, put everything in between the {% block page %} and {% endblock %}. This will make sure it gets included when the page is loaded
+
+## Docker (windows) Instructions via Nathan
+1. Clone your fork of repo using "git clone"
+2. Ensure docker desktop is running
+3. Open Docker Desktop settings (right click on tray icon)
+4. Enable Drive sharing (Resources->File Sharing->Select your drive)
+5. Navigate into root of the project using powershell
+6. In powershell run (this may take a while)
+```bash
+$ docker-compose up -d
+```
+7. Navigate to localhost:5000 to see your Franks Calendar!
