@@ -15,6 +15,7 @@
 .fc-prev-button {
     margin-right: .5em;
 }
+
 .fc-prev-button, .fc-next-button {
     width: 36px;
     height: 36px;
@@ -24,6 +25,6 @@
 }
 
 .fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
-    background-color: $student-life;
+    background-color: #FFC700;
     color: white;
 }

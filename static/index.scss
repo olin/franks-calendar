@@ -37,7 +37,7 @@
     display: inline-block;
     color: white;
     text-decoration: none;
-    background-color: #f3f3f3;
+    background-color: #42d392;
     margin: 0 auto;
 }
 
@@ -47,62 +47,89 @@
     margin-top: 1em;
     padding: 0 .5em;
     border-right: 4px solid black;
-    a {
-        text-decoration: none;
-        color: $links;
+
+    &__form {
+      font-family: $title;
+      font-style: italic;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 0.5em;
+      text-align: center;
+      font-size: 1.5em;
+      width: 100%;
+      padding-top: 0.25em;
+      padding-bottom: 0.25em;
+      margin-top: 0em;
+      margin-bottom: 1em;
     }
 
     &__header {
-        font-size: 2em;
+        font-size: 1.5em;
         font-family: $title;
         font-style: italic;
-        margin-bottom: .15em;
-        text-transform: uppercase;
+        margin-bottom: .5em;
 
         &__icon {
-            width: 1em;
+            width: 0.8em;
             height: auto;
-            margin-right: 0.25em;
+            margin-right: 0.15em;
         }
     }
     &__section {
         font-family: $sans;
-        margin: 1em 0;
+        margin: 0em 1em 1em 1em;
     }
 
     input[type="checkbox"] {
         display: none;
     }
+
     &__filter {
         font-size: 1em;
-        display: block;
+        display: flex;
         position: relative;
         padding: .1em 0 .1em 12px;
         margin-bottom: .5em;
         border-top-right-radius: .25em;
         border-bottom-right-radius: .25em;
         background-color: none;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
 
         input[type="checkbox"] + & {
-            &[for="filter--admissions"] {background-color: rgba($admissions, 0); &::before {background-color: $admissions}}
-            &[for="filter--clubs"] {background-color: rgba($clubs, 0); &::before {background-color: $clubs}}
-            &[for="filter--student-life"] {background-color: rgba($student-life, 0); &::before {background-color: $student-life}}
-            &[for="filter--foundry-bow"] {background-color: rgba($foundry-bow, 0); &::before {background-color: $foundry-bow}}
-            &[for="filter--health-wellness"] {background-color: rgba($health-wellness, 0); &::before {background-color: $health-wellness}}
+            &[for="filter--academic"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--academic_calendar"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--academic_advising"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--international"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--residential"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--health"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--PGP"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--HR"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--student"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--admission"] {background-color: rgba($admission, 0); &::before {background-color: $admission}}
             &[for="filter--library"] {background-color: rgba($library, 0); &::before {background-color: $library}}
             &[for="filter--shop"] {background-color: rgba($shop, 0); &::before {background-color: $shop}}
-            &[for="filter--pgp"] {background-color: rgba($pgp, 0); &::before {background-color: $pgp}}
+            &[for="filter--clubs"] {background-color: rgba($clubs, 0); &::before {background-color: $clubs}}
+            &[for="filter--other"] {background-color: rgba($other, 0); &::before {background-color: $other}}
         }
 
         input[type="checkbox"]:checked + & {
-            &[for="filter--admissions"] {background-color: rgba($admissions, .2); &::before {background-color: $admissions}}
-            &[for="filter--clubs"] {background-color: rgba($clubs, .2); &::before {background-color: $clubs}}
-            &[for="filter--student-life"] {background-color: rgba($student-life, .2); &::before {background-color: $student-life}}
-            &[for="filter--foundry-bow"] {background-color: rgba($foundry-bow, .2); &::before {background-color: $foundry-bow}}
-            &[for="filter--health-wellness"] {background-color: rgba($health-wellness, .2); &::before {background-color: $health-wellness}}
+            &[for="filter--academic"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--academic_calendar"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--academic_advising"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--international"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--student"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--residential"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--health"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--PGP"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--HR"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--admission"] {background-color: rgba($admission, .2); &::before {background-color: $admission}}
             &[for="filter--library"] {background-color: rgba($library, .2); &::before {background-color: $library}}
             &[for="filter--shop"] {background-color: rgba($shop, .2); &::before {background-color: $shop}}
-            &[for="filter--pgp"] {background-color: rgba($pgp, .2); &::before {background-color: $pgp}}
+            &[for="filter--clubs"] {background-color: rgba($clubs, .2); &::before {background-color: $clubs}}
+            &[for="filter--other"] {background-color: rgba($other, .2); &::before {background-color: $other}}
         }
 
         &::before {
@@ -114,6 +141,41 @@
             height: 100%;
             background-color: inherit;
         }
+
+        &__icon {
+          padding-right: 0.5em;
+          display:inline-flex;
+
+          &+label {
+            position: absolute;
+            top:0.1em;
+            right:0.2em;
+          }
+
+          &:checked {
+            &+label svg {
+              transform:rotate(90deg);
+            }
+
+            &+label+ul {
+              display:block;
+            }
+          }
+        }
+
+        &__list {
+          list-style: none;
+          margin-left:1em;
+
+          &__group {
+            display:None;
+          }
+
+          li {
+            position:relative;
+          }
+        }
+
     }
 }
 
