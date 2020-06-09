@@ -37,7 +37,7 @@
     display: inline-block;
     color: white;
     text-decoration: none;
-    background-color: #42d392;
+    background-color:rgb(243, 243, 243);
     margin: 0 auto;
 }
 
@@ -47,16 +47,22 @@
     margin-top: 1em;
     padding: 0 .5em;
     border-right: 4px solid black;
+    a {
+        text-decoration: none;
+        color: rgba($links,1);
+    }
 
     &__header {
         font-size: 2em;
         font-family: $title;
         font-style: italic;
-        margin-bottom: .5em;
+        margin-bottom: .15em;
+        text-transform: uppercase;
 
         &__icon {
             width: 1em;
             height: auto;
+            margin-right: 0.25em;
         }
     }
     &__section {

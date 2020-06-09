@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
     render() {
         return (
             <>
-                <a className="Button" href="#">Submit Event</a>
+                <a className="Button" href="#">Publish an event</a>
 
                 <section className="Sidebar__section">
                     <h2 className="Sidebar__header">
@@ -92,13 +92,14 @@ class Sidebar extends React.Component {
                         <svg className="Sidebar__header__icon" width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M427.083 302.083V333.333H395.833V302.083H427.083ZM385.417 197.917H354.167V187.5C354.167 170.924 360.752 155.027 372.473 143.306C384.194 131.585 400.092 125 416.667 125C433.242 125 449.139 131.585 460.86 143.306C472.581 155.027 479.167 170.924 479.167 187.5C479.167 207.708 468.75 226.667 452.292 237.708L446.042 241.667C434.167 250 427.083 262.708 427.083 277.083V281.25H395.833V277.083C395.833 252.292 408.333 229.167 428.958 215.625L435 211.667C443.125 206.25 447.917 197.292 447.917 187.5C447.917 179.212 444.625 171.263 438.764 165.403C432.904 159.542 424.954 156.25 416.667 156.25C408.379 156.25 400.429 159.542 394.569 165.403C388.708 171.263 385.417 179.212 385.417 187.5V197.917ZM187.5 270.833C243.125 270.833 354.167 298.75 354.167 354.167V416.667H20.8333V354.167C20.8333 298.75 131.875 270.833 187.5 270.833ZM187.5 83.3333C209.602 83.3333 230.798 92.1131 246.425 107.741C262.054 123.369 270.833 144.565 270.833 166.667C270.833 188.768 262.054 209.965 246.425 225.592C230.798 241.221 209.602 250 187.5 250C165.398 250 144.202 241.221 128.574 225.592C112.946 209.965 104.167 188.768 104.167 166.667C104.167 144.565 112.946 123.369 128.574 107.741C144.202 92.1131 165.398 83.3333 187.5 83.3333ZM187.5 310.417C125.625 310.417 60.4166 340.833 60.4166 354.167V377.083H314.583V354.167C314.583 340.833 249.375 310.417 187.5 310.417ZM187.5 122.917C175.897 122.917 164.769 127.526 156.564 135.731C148.359 143.935 143.75 155.064 143.75 166.667C143.75 178.27 148.359 189.398 156.564 197.602C164.769 205.807 175.897 210.417 187.5 210.417C199.103 210.417 210.231 205.807 218.435 197.602C226.642 189.398 231.25 178.27 231.25 166.667C231.25 155.064 226.642 143.935 218.435 135.731C210.231 127.526 199.103 122.917 187.5 122.917Z" fill="black"/>
                         </svg>
-                        User Guides
+                        Information
                     </h2>
-                    <p>For help navigating the site, sharing an event to the calendar,
-                    or saving an event to your personal calendar.</p>
+                    {/* <p>For help navigating the site, sharing an event to the calendar,
+                    or saving an event to your personal calendar.</p> */}
                     <ul>
-                        <li><p className="p2"><a href="https://linktouserguide.com">Share an event</a></p></li>
-                        <li><p className="p2"><a href="https://linktouserguide.com"> Export an event</a></p></li>
+                        <li><p className="p2"><a href="https://linktouserguide.com"> > Event type guidlines</a></p></li>
+                        <li><p className="p2"><a href="https://linktouserguide.com"> > How to publish an event</a></p></li>
+                        <li><p className="p2"><a href="https://linktouserguide.com"> > How to export an event</a></p></li>
                     </ul>
                 </section>
 
@@ -109,13 +110,14 @@ class Sidebar extends React.Component {
                         </svg>
                         Moderators
                     </h2>
+                    
+                    <ul>
+                        <li><p className="p2"><a href="mailto:jbrettle@olin.edu"> > Email Jules Brettle</a></p></li>
+                        <li><p className="p2"><a href="mailto:jgreenberg@olin.edu"> > Email Jack Greenberg</a></p></li>
+                    </ul>
                     <p> Contact them if you need urgent approval for a new event listing.
                     Otherwise, expect up to 24 hours for a new event to be displayed on the
                     calendar!</p>
-                    <ul>
-                        <li><p className="p2"><a href="mailto:jbrettle@olin.edu"> Jules Brettle</a></p></li>
-                        <li><p className="p2"><a href="mailto:jgreenberg@olin.edu"> Jack Greenberg</a></p></li>
-                    </ul>
                 </section>
             </>
         )
