@@ -48,6 +48,12 @@
     padding: 0 .5em;
     border-right: 4px solid black;
 
+    &__body {
+      font-family: $sans;
+      font-size: 1em;
+      color: black;
+    }
+
     &__form {
       font-family: $title;
       font-style: italic;
@@ -58,9 +64,7 @@
       text-align: center;
       font-size: 1.5em;
       width: 100%;
-      padding-top: 0.25em;
-      padding-bottom: 0.25em;
-      margin-top: 0em;
+      padding-top: 0.25em 0;
       margin-bottom: 1em;
     }
 
@@ -78,7 +82,7 @@
     }
     &__section {
         font-family: $sans;
-        margin: 0em 1em 1em 1em;
+        margin: 0em 1em 1em;
     }
 
     input[type="checkbox"] {
