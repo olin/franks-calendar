@@ -263,7 +263,6 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.academicDropdown = this.academicDropdown.bind(this);
 
         this.state = {
             events: null,
@@ -291,10 +290,6 @@ class App extends React.Component {
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
         this.switchPanel = this.switchPanel.bind(this);
-    }
-
-    academicDropdown() {
-      alert("Great Shot!");
     }
 
     toggleTag(e) {
