@@ -49,7 +49,7 @@
     border-right: 4px solid black;
     a {
         text-decoration: none;
-        color: rgba($links,1);
+        color: $links;
     }
 
     &__header {
