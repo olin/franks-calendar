@@ -97,9 +97,9 @@ class Sidebar extends React.Component {
                     {/* <p>For help navigating the site, sharing an event to the calendar,
                     or saving an event to your personal calendar.</p> */}
                     <ul>
-                        <li><p className="p2"><a href="https://linktouserguide.com"> > Event type guidlines</a></p></li>
-                        <li><p className="p2"><a href="https://linktouserguide.com"> > How to publish an event</a></p></li>
-                        <li><p className="p2"><a href="https://linktouserguide.com"> > How to export an event</a></p></li>
+                        <li><p><a href="https://linktouserguide.com"> > Event type guidlines</a></p></li>
+                        <li><p><a href="https://linktouserguide.com"> > How to publish an event</a></p></li>
+                        <li><p><a href="https://linktouserguide.com"> > How to export an event</a></p></li>
                     </ul>
                 </section>
 
@@ -112,8 +112,8 @@ class Sidebar extends React.Component {
                     </h2>
                     
                     <ul>
-                        <li><p className="p2"><a href="mailto:jbrettle@olin.edu"> > Email Jules Brettle</a></p></li>
-                        <li><p className="p2"><a href="mailto:jgreenberg@olin.edu"> > Email Jack Greenberg</a></p></li>
+                        <li><p><a href="mailto:jbrettle@olin.edu"> > Email Jules Brettle</a></p></li>
+                        <li><p><a href="mailto:jgreenberg@olin.edu"> > Email Jack Greenberg</a></p></li>
                     </ul>
                     <p> Contact them if you need urgent approval for a new event listing.
                     Otherwise, expect up to 24 hours for a new event to be displayed on the
