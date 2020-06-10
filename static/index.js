@@ -175,8 +175,8 @@ class Sidebar extends React.Component {
                         Other Calendars
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="p2"><a href="https://linktouserguide.com">Babson</a></p></li>
-                        <li><p className="p2"><a href="https://linktouserguide.com"> Wellesley</a></p></li>
+                        <li><p className="Sidebar__body"><a href="https://linktouserguide.com">Babson</a></p></li>
+                        <li><p className="Sidebar__body"><a href="https://linktouserguide.com"> Wellesley</a></p></li>
                     </ul>
                 </section>
 
@@ -189,7 +189,7 @@ class Sidebar extends React.Component {
                         </svg>
                         Information
                     </h2>
-                    <p>For help navigating the site, sharing an event to the calendar,
+                    <p className="Sidebar__body">For help navigating the site, sharing an event to the calendar,
                     or saving an event to your personal calendar.</p>
                     <ul>
                         <li><p><a href="https://linktouserguide.com"> > Event type guidlines</a></p></li>
@@ -206,12 +206,12 @@ class Sidebar extends React.Component {
                         </svg>
                         Moderators
                     </h2>
-                    <p> Contact them if you need urgent approval for a new event listing.
+                    <p className="Sidebar__body"> Contact them if you need urgent approval for a new event listing.
                     Otherwise, expect up to 24 hours for a new event to be displayed on the
                     calendar!</p>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="p2"><a href="mailto:jbrettle@olin.edu"> Jules Brettle</a></p></li>
-                        <li><p className="p2"><a href="mailto:jgreenberg@olin.edu"> Jack Greenberg</a></p></li>
+                        <li><p className="Sidebar__body"><a href="mailto:jbrettle@olin.edu"> Jules Brettle</a></p></li>
+                        <li><p className="Sidebar__body"><a href="mailto:jgreenberg@olin.edu"> Jack Greenberg</a></p></li>
                     </ul>
                 </section>
             </>
@@ -223,6 +223,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        this.academicDropdown = this.academicDropdown.bind(this);
 
         this.state = {
             events: null,
@@ -247,6 +248,10 @@ class App extends React.Component {
 
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
+    }
+
+    academicDropdown() {
+      alert("Great Shot!");
     }
 
     toggleTag(e) {
