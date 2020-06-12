@@ -191,9 +191,10 @@ class Sidebar extends React.Component {
                     </h2>
                     <p className="Sidebar__body">For help navigating the site, sharing an event to the calendar,
                     or saving an event to your personal calendar.</p>
-                    <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"><a href="https://linktouserguide.com">Share an event</a></p></li>
-                        <li><p className="Sidebar__body"><a href="https://linktouserguide.com"> Export an event</a></p></li>
+                    <ul>
+                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > Event type guidlines</a></li>
+                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > How to publish an event</a></li>
+                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > How to export an event</a></li>
                     </ul>
                 </section>
 
@@ -222,6 +223,7 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
+        this.academicDropdown = this.academicDropdown.bind(this);
 
         this.state = {
             events: null,
@@ -246,6 +248,10 @@ class App extends React.Component {
 
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
+    }
+
+    academicDropdown() {
+      alert("Great Shot!");
     }
 
     toggleTag(e) {
