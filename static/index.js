@@ -158,7 +158,24 @@ class App extends React.Component {
     }
 
     eventClick(e) {
-        console.log(e);
+        console.log(e)
+        //retrieves event information and returns as ical file
+        var route = '/export/'+e.event.id; 
+        client.get(route)
+        .then(res => {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
+            element.setAttribute('download', "calendar_event.ics");
+            element.style.display = 'none';
+
+            document.body.appendChild(element);
+            //autmoatically downloads ical file
+            element.click();
+            document.body.removeChild(element);
+        })
+        .catch(err => {
+            console.error(err);
+        })
     }
 
     componentDidMount() {
