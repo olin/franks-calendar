@@ -1,9 +1,11 @@
 @import 'vars';
 
+// Changed font of calendar header
 .fc-header-toolbar {
     font-family: $sans;
 }
 
+// Added text color of all calendar buttons
 .fc-button {
     padding: .25em .5em;
     border: 1px solid #E8E8E8;
@@ -12,21 +14,53 @@
     color: black !important;
 }
 
+// Added left and right padding to whole calendar module
 .fc.fc-ltr.fc-unthemed {
   padding-right: 1.5em !important;
   padding-left: 0.5em !important;
 }
 
+// Changed text style for "Sun-Sat" headers
 .fc-day-header.fc-widget-header {
   font-family: $sans;
   font-style: normal;
   padding: 0.2em;
 }
 
+// Modified font size of calendar header
+.fc-toolbar h2 {
+  font-size: 1.5em !important;
+  margin: 0;
+}
+
+// Modified text style of calendar numbers
+.fc-day-number {
+  font-size: 1em;
+  font-family: $sans;
+}
+
+// Modified background color of highlighted "today" day
+.fc-unthemed td.fc-today {
+  background: #F4F4F4;
+}
+
+// Modified color of border between "all-day" and "hours" on calendar
+.fc-unthemed .fc-divider {
+  background: #E8E8E8;
+  border-color: #E8E8E8;
+}
+
+// Modified text style of "hours" column
+.fc-axis.fc-widget-content {
+  font-family: $sans;
+}
+
+// Added right margin to calendar table for scroll bar
 .fc-row {
   margin-right: 0.75em !important;
 }
 
+// Modified scrollbar style
 .fc-scroller::-webkit-scrollbar {
   width: 0.75em;
   height:100%;
@@ -46,24 +80,7 @@
   overflow: overlay;
 }
 
-.fc-toolbar h2 {
-  font-size: 1.5em !important;
-  margin: 0;
-}
-
-.fc-unthemed td.fc-today {
-  background: #F4F4F4;
-}
-
-.fc-unthemed .fc-divider {
-  background: #E8E8E8;
-  border-color: #E8E8E8;
-}
-
-.fc-axis.fc-widget-content {
-  font-family: $sans;
-}
-
+// Changed style and background color of all buttons
 .fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
   background-color: #E8E8E8 !important;
   border-color: #E8E8E8 !important;
