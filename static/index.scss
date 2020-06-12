@@ -106,7 +106,7 @@
             &[for="filter--academic"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
             &[for="filter--academic_calendar"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
             &[for="filter--academic_advising"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
-            &[for="filter--international"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--international"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--residential"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--health"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--PGP"] {background-color: rgba($student, 0); &::before {background-color: $student}}
@@ -123,7 +123,7 @@
             &[for="filter--academic"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
             &[for="filter--academic_calendar"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
             &[for="filter--academic_advising"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
-            &[for="filter--international"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--international"] {background-color: rgba($student, .2); &::before {background-color: $student}}
             &[for="filter--student"] {background-color: rgba($student, .2); &::before {background-color: $student}}
             &[for="filter--residential"] {background-color: rgba($student, .2); &::before {background-color: $student}}
             &[for="filter--health"] {background-color: rgba($student, .2); &::before {background-color: $student}}
