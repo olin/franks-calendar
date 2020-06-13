@@ -1,0 +1,65 @@
+
+html {
+  font-family: 'Lato', sans-serif;
+  margin-left: 10px;
+}
+h1 {
+  padding: 5px;
+  font-size: 40px;
+  font-family: 'Pathway Gothic One', sans-serif;;
+  font-style: italic;
+  text-transform: uppercase;
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+
+h3{
+  font-weight: bold;
+}
+
+a {
+  color: #0087C6;
+  text-decoration: none;
+}
+strong {
+  color: #DD2E44;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+
+#main {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
+  .left {
+    width: 50%;
+  }
+  .right {
+    width: 50%;
+  }
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 900px) {
+    .left {
+      width: 100%;
+    }
+    .right {
+      width: 100%;
+    }
+  }
