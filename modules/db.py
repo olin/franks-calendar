@@ -12,9 +12,9 @@ import re
 def create_client():
     client = MongoClient(
         "database:27017",
-        username="root",
-        password="password",
-        authSource="admin",
+        username="frank",
+        password="calendar",
+        authSource="calendar-dev",
     )
 
     return client['calendar-dev']
