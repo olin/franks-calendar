@@ -243,11 +243,12 @@ class App extends React.Component {
                 "shop": true,
                 "clubs": true,
                 "other": true,
-            },
+            }
         }
 
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
+        this.switchPanel = this.switchPanel.bind(this);
     }
 
     academicDropdown() {
@@ -261,6 +262,12 @@ class App extends React.Component {
             tags: tags,
         }, () => {
             console.log(this.state.tags);
+        })
+    }
+
+    switchPanel(panel) {
+        this.setState({
+            currentPanel: panel,
         })
     }
 
@@ -279,6 +286,22 @@ class App extends React.Component {
         .catch(err => {
             console.error(err);
         })
+
+        this.switchPanel(
+            <FullCalendar
+                defaultView="timeGridWeek"
+                nowIndicator={true}
+                plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                events={this.state.events}
+                eventClick={this.eventClick}
+                header={{
+                  left: 'prev,next today',
+                  center: 'title',
+                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                }}
+                height="parent"
+            />
+        )
     }
 
     render() {
@@ -295,19 +318,7 @@ class App extends React.Component {
                         <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
                     </aside>
                     <article className="Calendar">
-                        <FullCalendar
-                            defaultView="timeGridWeek"
-                            nowIndicator={true}
-                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                            events={this.state.events}
-                            eventClick={this.eventClick}
-                            header={{
-                              left: 'prev,next today',
-                              center: 'title',
-                              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                            }}
-                            height="parent"
-                        />
+                        {this.state.currentPanel}
                     </article>
                 </main>
                 <footer className="Footer">
