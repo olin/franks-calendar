@@ -1,6 +1,6 @@
 import icalendar
 from bson.objectid import ObjectId
-from datetime import datetime
+import datetime
 
 # Turn an iCal event into a python dictionary to put into the database
 def make_dict(event):
@@ -9,14 +9,19 @@ def make_dict(event):
         "title": str(event.get('summary')),
         "description": str(event.get('description')),
         "location": str(event.get('location')),
-        "start": event.get('dtstart').dt,
-        "end": event.get('dtend').dt,
-        "google_uid": event.get('uid'),
     }
+
+    if isinstance(event.get('dtstart').dt, datetime.datetime):
+        ret['start'] = event.get('dtstart').dt
+        ret['end'] = event.get('dtend').dt
+    else:
+        ret['start'] = datetime.datetime.combine(event.get('dtstart').dt, datetime.datetime.min.time())
+        ret['end'] = datetime.datetime.combine(event.get('dtend').dt, datetime.datetime.min.time())
+
 
     if event.get('rrule') != None:
         ret['rrule'] = event.get('rrule').to_ical().decode()
-        
+
     return ret
 
 email_map = {

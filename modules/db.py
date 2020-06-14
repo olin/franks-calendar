@@ -23,7 +23,7 @@ db = create_client() # Create a client
 
 def check_for_changes():
     # Step one: get the .ics file from Google
-    url = "https://calendar.google.com/calendar/ical/ocrlnk9gfl2ee4shh46ffd2kgk%40group.calendar.google.com/private-50a283aa50d5e2b1108d41806b087c44/basic.ics"
+    url = "https://calendar.google.com/calendar/ical/frankscalendar.olin%40gmail.com/private-b30c26262bdbea078e3ad5949966d820/basic.ics"
     ical = urlopen(url).read() # This reads the information into a byte string
     cal = Calendar.from_ical(ical) # Create a Calendar object from our .ics file
 
@@ -69,7 +69,7 @@ def update_database(cal, new_hash):
 
     client.events.delete_many({}) # Clear the current database
     client.events.insert_many(insert_list) # Upload all of the events
-    client.hash.update_one({"name": "latest"}, {"$set": {"hash": new_hash}}) # Update the hash
+    client.hash.update_one({"name": "latest"}, {"$set": {"hash": new_hash}}, upsert=True) # Update the hash
 
 if __name__ == "__main__":
     check_for_changes()
