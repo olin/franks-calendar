@@ -10,6 +10,10 @@ public = Blueprint('public', __name__, template_folder='../templates', static_fo
 def public_index():
     return render_template('home.html')
 
+@public.route('/add', methods=['POST', 'GET'])
+def add_event():
+    pass
+
 @public.route('/<page>')
 def public_page(page):
     try:
