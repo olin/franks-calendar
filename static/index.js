@@ -76,12 +76,6 @@ class Sidebar extends React.Component {
                                   Academic Advising
                               </label>
                             </li>
-                            <li className="Sidebar__filter__list">
-                              <input type="checkbox" id="filter--international" defaultChecked={this.props.tags['international']} onClick={this.props.handleClick} value={"international"} />
-                              <label for="filter--international" className="Sidebar__filter">
-                                  Intl' & Study Away
-                              </label>
-                            </li>
                           </ul>
                         </li>
 
@@ -109,6 +103,12 @@ class Sidebar extends React.Component {
                               <input type="checkbox" id="filter--health" defaultChecked={this.props.tags['health']} onClick={this.props.handleClick} value={"health"} />
                               <label for="filter--health" className="Sidebar__filter">
                                   Health/Wellness
+                              </label>
+                            </li>
+                            <li className="Sidebar__filter__list">
+                              <input type="checkbox" id="filter--international" defaultChecked={this.props.tags['international']} onClick={this.props.handleClick} value={"international"} />
+                              <label for="filter--international" className="Sidebar__filter">
+                                  Intl' & Study Away
                               </label>
                             </li>
                             <li className="Sidebar__filter__list">
@@ -192,9 +192,9 @@ class Sidebar extends React.Component {
                     <p className="Sidebar__body">For help navigating the site, sharing an event to the calendar,
                     or saving an event to your personal calendar.</p>
                     <ul>
-                        <li><p><a href="https://linktouserguide.com"> > Event type guidlines</a></p></li>
-                        <li><p><a href="https://linktouserguide.com"> > How to publish an event</a></p></li>
-                        <li><p><a href="https://linktouserguide.com"> > How to export an event</a></p></li>
+                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > Event type guidlines</a></li>
+                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > How to publish an event</a></li>
+                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > How to export an event</a></li>
                     </ul>
                 </section>
 
