@@ -1,4 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, send_file, make_response
+from modules.db import db
+from bson.objectid import ObjectId
+from icalendar import Calendar, Event
+from datetime import datetime
 
 public = Blueprint('public', __name__, template_folder='../templates', static_folder='../static/build/')
 
@@ -15,7 +19,17 @@ def public_page(page):
 
     return rendered_page
 
-@public.route('/export/')
-def export_event():
-    # The ID of the event will be a GET variable in the query string
-    pass
+@public.route('/export/<eventid>', methods=['POST', 'GET'])
+def export_event(eventid):
+    if request.method == 'GET':
+
+        event_data = db.events.find_one({'_id' : ObjectId(eventid)})
+        cal = Calendar()
+        event = Event()
+        event['dtstart'] = datetime.strftime(event_data['start'], '%Y%m%dT%H%M%S')
+        event['dtend'] = datetime.strftime(event_data['end'], '%Y%m%dT%H%M%S')
+        event['summary'] = event_data['title']
+        event['location'] = event_data['location']
+        event['description'] = event_data['description']
+        cal.add_component(event)
+        return cal.to_ical()

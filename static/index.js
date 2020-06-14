@@ -19,6 +19,7 @@ function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
+        events[i]['id'] = events[i]['_id']['$oid']; 
     }
     return events
 }
@@ -272,7 +273,24 @@ class App extends React.Component {
     }
 
     eventClick(e) {
-        console.log(e);
+        console.log(e)
+        //retrieves event information and returns as ical file
+        var route = '/export/'+e.event.id; 
+        client.get(route)
+        .then(res => {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
+            element.setAttribute('download', "calendar_event.ics");
+            element.style.display = 'none';
+            console.log(res)
+            document.body.appendChild(element);
+            //autmoatically downloads ical file
+            element.click();
+            document.body.removeChild(element);
+        })
+        .catch(err => {
+            console.error(err);
+        })
     }
 
     componentDidMount() {
