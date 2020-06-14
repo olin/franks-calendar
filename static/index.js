@@ -19,7 +19,7 @@ function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
-        events[i]['id'] = events[i]['_id']['$oid']; 
+        events[i]['id'] = events[i]['_id']['$oid'];
     }
     return events
 }
@@ -224,7 +224,6 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.academicDropdown = this.academicDropdown.bind(this);
 
         this.state = {
             events: null,
@@ -252,10 +251,6 @@ class App extends React.Component {
         this.switchPanel = this.switchPanel.bind(this);
     }
 
-    academicDropdown() {
-      alert("Great Shot!");
-    }
-
     toggleTag(e) {
         var tags = this.state.tags;
         tags[e.target.value] = !tags[e.target.value];
@@ -273,9 +268,8 @@ class App extends React.Component {
     }
 
     eventClick(e) {
-        console.log(e)
         //retrieves event information and returns as ical file
-        var route = '/export/'+e.event.id; 
+        var route = '/export/'+e.event.id;
         client.get(route)
         .then(res => {
             var element = document.createElement('a');
@@ -300,26 +294,27 @@ class App extends React.Component {
                 events: clean_event_list(res.data),
                 ready: true
             })
-        })
-        .catch(err => {
-            console.error(err);
-        })
 
-        this.switchPanel(
-            <FullCalendar
+            this.switchPanel(
+                <FullCalendar
                 defaultView="timeGridWeek"
                 nowIndicator={true}
                 plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
                 events={this.state.events}
                 eventClick={this.eventClick}
                 header={{
-                  left: 'prev,next today',
-                  center: 'title',
-                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 }}
                 height="parent"
-            />
-        )
+                />
+            )
+        })
+        .catch(err => {
+            console.error(err);
+        })
+
     }
 
     render() {
