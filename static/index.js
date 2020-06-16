@@ -19,6 +19,7 @@ function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
+        events[i]['id'] = events[i]['_id']['$oid'];
     }
     return events
 }
@@ -223,7 +224,6 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.academicDropdown = this.academicDropdown.bind(this);
 
         this.state = {
             events: null,
@@ -243,15 +243,12 @@ class App extends React.Component {
                 "shop": true,
                 "clubs": true,
                 "other": true,
-            },
+            }
         }
 
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
-    }
-
-    academicDropdown() {
-      alert("Great Shot!");
+        this.switchPanel = this.switchPanel.bind(this);
     }
 
     toggleTag(e) {
@@ -264,8 +261,30 @@ class App extends React.Component {
         })
     }
 
+    switchPanel(panel) {
+        this.setState({
+            currentPanel: panel,
+        })
+    }
+
     eventClick(e) {
-        console.log(e);
+        //retrieves event information and returns as ical file
+        var route = '/export/'+e.event.id;
+        client.get(route)
+        .then(res => {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
+            element.setAttribute('download', "calendar_event.ics");
+            element.style.display = 'none';
+            console.log(res)
+            document.body.appendChild(element);
+            //autmoatically downloads ical file
+            element.click();
+            document.body.removeChild(element);
+        })
+        .catch(err => {
+            console.error(err);
+        })
     }
 
     componentDidMount() {
@@ -275,10 +294,27 @@ class App extends React.Component {
                 events: clean_event_list(res.data),
                 ready: true
             })
+
+            this.switchPanel(
+                <FullCalendar
+                defaultView="timeGridWeek"
+                nowIndicator={true}
+                plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                events={this.state.events}
+                eventClick={this.eventClick}
+                header={{
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                }}
+                height="parent"
+                />
+            )
         })
         .catch(err => {
             console.error(err);
         })
+
     }
 
     render() {
@@ -295,19 +331,7 @@ class App extends React.Component {
                         <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
                     </aside>
                     <article className="Calendar">
-                        <FullCalendar
-                            defaultView="timeGridWeek"
-                            nowIndicator={true}
-                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                            events={this.state.events}
-                            eventClick={this.eventClick}
-                            header={{
-                              left: 'prev,next today',
-                              center: 'title',
-                              right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                            }}
-                            height="parent"
-                        />
+                        {this.state.currentPanel}
                     </article>
                 </main>
                 <footer className="Footer">
