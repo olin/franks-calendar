@@ -109,8 +109,8 @@
             &[for="filter--international"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--residential"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--health"] {background-color: rgba($student, 0); &::before {background-color: $student}}
-            &[for="filter--PGP"] {background-color: rgba($student, 0); &::before {background-color: $student}}
-            &[for="filter--HR"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--pgp"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--hr"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--student"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--admission"] {background-color: rgba($admission, 0); &::before {background-color: $admission}}
             &[for="filter--library"] {background-color: rgba($library, 0); &::before {background-color: $library}}
@@ -127,8 +127,8 @@
             &[for="filter--student"] {background-color: rgba($student, .2); &::before {background-color: $student}}
             &[for="filter--residential"] {background-color: rgba($student, .2); &::before {background-color: $student}}
             &[for="filter--health"] {background-color: rgba($student, .2); &::before {background-color: $student}}
-            &[for="filter--PGP"] {background-color: rgba($student, .2); &::before {background-color: $student}}
-            &[for="filter--HR"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--pgp"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--hr"] {background-color: rgba($student, .2); &::before {background-color: $student}}
             &[for="filter--admission"] {background-color: rgba($admission, .2); &::before {background-color: $admission}}
             &[for="filter--library"] {background-color: rgba($library, .2); &::before {background-color: $library}}
             &[for="filter--shop"] {background-color: rgba($shop, .2); &::before {background-color: $shop}}

@@ -17,16 +17,14 @@ export const AppContext = React.createContext({});
 
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
+        let isAllDay = new Date(events[i]['start']['$date']).getUTCHours() == 0;
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
         events[i]['id'] = events[i]['_id']['$oid'];
+        events[i]['allDay'] = isAllDay;
     }
     return events
 }
-
-const tagList = [
-
-]
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -113,14 +111,14 @@ class Sidebar extends React.Component {
                               </label>
                             </li>
                             <li className="Sidebar__filter__list">
-                              <input type="checkbox" id="filter--PGP" defaultChecked={this.props.tags['PGP']} onClick={this.props.handleClick} value={"PGP"} />
-                              <label for="filter--PGP" className="Sidebar__filter">
+                              <input type="checkbox" id="filter--pgp" defaultChecked={this.props.tags['pgp']} onClick={this.props.handleClick} value={"pgp"} />
+                              <label for="filter--pgp" className="Sidebar__filter">
                                   PGP
                               </label>
                             </li>
                             <li className="Sidebar__filter__list">
-                              <input type="checkbox" id="filter--HR" defaultChecked={this.props.tags['HR']} onClick={this.props.handleClick} value={"HR"} />
-                              <label for="filter--HR" className="Sidebar__filter">
+                              <input type="checkbox" id="filter--hr" defaultChecked={this.props.tags['hr']} onClick={this.props.handleClick} value={"hr"} />
+                              <label for="filter--hr" className="Sidebar__filter">
                                   HR
                               </label>
                             </li>
@@ -236,8 +234,8 @@ class App extends React.Component {
                 "student": true,
                 "residential":true,
                 "health":true,
-                "PGP":true,
-                "HR":true,
+                "pgp":true,
+                "hr":true,
                 "admission": true,
                 "library": true,
                 "shop": true,
@@ -254,10 +252,24 @@ class App extends React.Component {
     toggleTag(e) {
         var tags = this.state.tags;
         tags[e.target.value] = !tags[e.target.value];
+
         this.setState({
             tags: tags,
-        }, () => {
-            console.log(this.state.tags);
+            currentPanel: (
+                <FullCalendar
+                    defaultView="timeGridWeek"
+                    nowIndicator={true}
+                    plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                    events={this.state.events.filter(event => tags[event.tag] != false)}
+                    eventClick={this.eventClick}
+                    header={{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    }}
+                    height="parent"
+                />
+            )
         })
     }
 
@@ -268,8 +280,8 @@ class App extends React.Component {
     }
 
     eventClick(e) {
-        //retrieves event information and returns as ical file
-        var route = '/export/'+e.event.id;
+        // Retrieves event information and returns as ical file
+        var route = '/export/' + e.event.id;
         client.get(route)
         .then(res => {
             var element = document.createElement('a');
@@ -278,7 +290,7 @@ class App extends React.Component {
             element.style.display = 'none';
             console.log(res)
             document.body.appendChild(element);
-            //autmoatically downloads ical file
+            // Autmoatically downloads ical file
             element.click();
             document.body.removeChild(element);
         })
@@ -290,30 +302,34 @@ class App extends React.Component {
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
+            let event_list = clean_event_list(res.data)
             this.setState({
-                events: clean_event_list(res.data),
-                ready: true
+                events: event_list,
+                ready: true,
+            }, _ => {
+                this.setState({
+                    currentPanel: (
+                        <FullCalendar
+                            defaultView="timeGridWeek"
+                            nowIndicator={true}
+                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                            events={this.state.events}
+                            eventClick={this.eventClick}
+                            header={{
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            }}
+                            height="parent"
+                        />
+                    )
+                })
             })
-
-            this.switchPanel(
-                <FullCalendar
-                defaultView="timeGridWeek"
-                nowIndicator={true}
-                plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                events={this.state.events}
-                eventClick={this.eventClick}
-                header={{
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                }}
-                height="parent"
-                />
-            )
         })
         .catch(err => {
             console.error(err);
         })
+
 
     }
 
