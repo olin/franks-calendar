@@ -39,14 +39,14 @@ class Sidebar extends React.Component {
                 <section className="Sidebar__section">
 
                     <button className="Sidebar__form">
-                      Publish an New Event
+                      PUBLISH A NEW EVENT
                     </button>
 
                     <h2 className="Sidebar__header">
                         <svg className="Sidebar__header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                         </svg>
-                        Filters
+                        FILTERS
                     </h2>
 
                     <div>
@@ -173,11 +173,12 @@ class Sidebar extends React.Component {
                         <line x1="8" y1="2" x2="8" y2="6"></line>
                         <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
-                        Other Calendars
+                        OTHER CALENDARS
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"><a href="https://linktouserguide.com">Babson</a></p></li>
-                        <li><p className="Sidebar__body"><a href="https://linktouserguide.com"> Wellesley</a></p></li>
+                        <li><p className="Sidebar__body"> > <a href="https://www.foundry.babson.edu/events-calendar" target="_blank"> The Weissman Foundry</a></p></li>
+                        <li><p className="Sidebar__body"> > <a href="http://calendar.babson.edu/" target="_blank"> Babson College</a></p></li>
+                        <li><p className="Sidebar__body"> > <a href="https://www.wellesley.edu/publiccalendar#/?i=1" target="_blank"> Wellesley College</a></p></li>
                     </ul>
                 </section>
 
@@ -188,14 +189,12 @@ class Sidebar extends React.Component {
                         <line x1="12" y1="16" x2="12" y2="12"></line>
                         <line x1="12" y1="8" x2="12.01" y2="8"></line>
                         </svg>
-                        Information
+                        INFORMATION
                     </h2>
-                    <p className="Sidebar__body">For help navigating the site, sharing an event to the calendar,
-                    or saving an event to your personal calendar.</p>
-                    <ul>
-                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > Event type guidlines</a></li>
-                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > How to publish an event</a></li>
-                        <li className="Sidebar__body"><a href="https://linktouserguide.com"> > How to export an event</a></li>
+                    <ul className="Sidebar__filter__list">
+                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> Event Norms & Guidelines </a></li>
+                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> How to Publish an Event</a></li>
+                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> How to Export an Event</a></li>
                     </ul>
                 </section>
 
@@ -205,14 +204,14 @@ class Sidebar extends React.Component {
                         <circle cx="12" cy="12" r="3"></circle>
                         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
                         </svg>
-                        Moderators
+                        MODERATORS
                     </h2>
-                    <p className="Sidebar__body"> Contact them if you need urgent approval for a new event listing.
-                    Otherwise, expect up to 24 hours for a new event to be displayed on the
-                    calendar!</p>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"><a href="mailto:jbrettle@olin.edu"> Jules Brettle</a></p></li>
-                        <li><p className="Sidebar__body"><a href="mailto:jgreenberg@olin.edu"> Jack Greenberg</a></p></li>
+                        <li><p className="Sidebar__body"> > <a href="mailto:jbrettle@olin.edu"> Jules Brettle '23</a></p></li>
+                        <li><p className="Sidebar__body"> > <a href="mailto:jgreenberg@olin.edu"> Jack Greenberg '23</a></p></li>
+                        <p className="Sidebar__body__text"> Contact them if you need urgent approval for a new event listing.
+                        Otherwise, expect up to 24 hours for a new event to be displayed on the
+                        calendar!</p>
                     </ul>
                 </section>
             </>
@@ -336,7 +335,7 @@ class App extends React.Component {
                 </main>
                 <footer className="Footer">
                     <span className="Footer__message">Made with <span style={{color: "red"}}>♥</span> at Olin College</span>
-                    <span className="Footer__links"><a href="https://forms.gle/R1WKvUcC85pcLiu28">Leave us feedback</a> | <a href="https://github.com/jack-greenberg/franks-calendar">View on Github</a></span>
+                    <span className="Footer__links"><a href = "linktoaboutus.com">About this Project</a>  |  <a href="https://forms.gle/R1WKvUcC85pcLiu28">Leave us Feedback</a>  |  <a href="https://github.com/jack-greenberg/franks-calendar">View on Github</a></span>
                 </footer>
             </>
         );
