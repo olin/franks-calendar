@@ -193,9 +193,9 @@ class Sidebar extends React.Component {
                         OTHER CALENDARS
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"> > <a href="https://www.foundry.babson.edu/events-calendar" target="_blank"> The Weissman Foundry</a></p></li>
-                        <li><p className="Sidebar__body"> > <a href="http://calendar.babson.edu/" target="_blank"> Babson College</a></p></li>
-                        <li><p className="Sidebar__body"> > <a href="https://www.wellesley.edu/publiccalendar#/?i=1" target="_blank"> Wellesley College</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="https://www.foundry.babson.edu/events-calendar" target="_blank"> The Weissman Foundry</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="http://calendar.babson.edu/" target="_blank"> Babson College</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="https://www.wellesley.edu/publiccalendar#/?i=1" target="_blank"> Wellesley College</a></p></li>
                     </ul>
                 </section>
 
@@ -209,9 +209,9 @@ class Sidebar extends React.Component {
                         INFORMATION
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> Event Norms & Guidelines </a></li>
-                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> How to Publish an Event</a></li>
-                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> How to Export an Event</a></li>
+                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> Event Norms & Guidelines </a></li>
+                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> How to Publish an Event</a></li>
+                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> How to Export an Event</a></li>
                     </ul>
                 </section>
 
@@ -224,14 +224,37 @@ class Sidebar extends React.Component {
                         MODERATORS
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"> > <a href="mailto:jbrettle@olin.edu"> Jules Brettle '23</a></p></li>
-                        <li><p className="Sidebar__body"> > <a href="mailto:jgreenberg@olin.edu"> Jack Greenberg '23</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="mailto:jbrettle@olin.edu"> Jules Brettle '23</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="mailto:jgreenberg@olin.edu"> Jack Greenberg '23</a></p></li>
                         <p className="Sidebar__body__text"> Contact them if you need urgent approval for a new event listing.
                         Otherwise, expect up to 24 hours for a new event to be displayed on the
                         calendar!</p>
                     </ul>
                 </section>
             </>
+        )
+    }
+}
+
+class EventPage extends React.Component {
+    constructor(props) {
+        super(props);
+        /*
+        use {this.props._____} instead of the actual thing
+
+        things you can use:
+            - title
+            - start, end ***(these are Date objects in JavaSciprt, you'll need to figure out how to format them)
+            - tag - is a list -- if you want just the "child" tag, just do {this.props.tag[-1]}
+            - description
+            - location
+        */
+    }
+    render() {
+        return (
+            <div class="Event">
+                {/* Write your stuff here! */}
+            </div>
         )
     }
 }
