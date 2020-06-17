@@ -17,11 +17,19 @@ export const AppContext = React.createContext({});
 
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
+        // console.log(events[i].tag ? "yeah" : "other");
+
         let isAllDay = new Date(events[i]['start']['$date']).getUTCHours() == 0;
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
         events[i]['id'] = events[i]['_id']['$oid'];
         events[i]['allDay'] = isAllDay;
+
+        if (!events[i].tag) {
+            events[i].tag = ["other"]
+        } else {
+            events[i].tag = events[i]['tag'].split(":")
+        }
     }
     return events
 }
@@ -50,7 +58,7 @@ class Sidebar extends React.Component {
                     <div>
                       <ul className="Sidebar__filter__list">
                         <li>
-                          <input type="checkbox" id="filter--academic" defaultChecked={this.props.tags['academic']} onClick={this.props.handleClick} value={"academic"} />
+                          <input type="checkbox" id="filter--academic" defaultChecked={this.props.tags['academic_affairs']} onClick={this.props.handleClick} value={"academic_affairs"} />
                           <label for="filter--academic" className="Sidebar__filter">
                               Academic Affairs
                           </label>
@@ -79,7 +87,7 @@ class Sidebar extends React.Component {
                         </li>
 
                         <li>
-                          <input type="checkbox" id="filter--student" defaultChecked={this.props.tags['student']} onClick={this.props.handleClick} value={"student"} />
+                          <input type="checkbox" id="filter--student" defaultChecked={this.props.tags['student_affairs']} onClick={this.props.handleClick} value={"student_affairs"} />
                           <label for="filter--student" className="Sidebar__filter">
                               Student Affairs
                           </label>
@@ -228,8 +236,10 @@ class App extends React.Component {
             ready: false,
             tags: {
                 "academic": true,
+                "academic_affairs": true,
                 "academic_calendar": true,
                 "academic_advising": true,
+                "student_affairs": true,
                 "international": true,
                 "student": true,
                 "residential":true,
@@ -253,6 +263,19 @@ class App extends React.Component {
         var tags = this.state.tags;
         tags[e.target.value] = !tags[e.target.value];
 
+        let events = this.state.events.filter(event => {
+            for (let i = 0; i < event.tag.length; i++) {
+                console.log(event.title, event.tag[i], this.state.tags[event.tag[i]]);
+
+                if (this.state.tags[event.tag[i]] === false) {
+                    return false;
+                } else {
+                    continue;
+                }
+            }
+            return true
+        });
+
         this.setState({
             tags: tags,
             currentPanel: (
@@ -260,7 +283,7 @@ class App extends React.Component {
                     defaultView="timeGridWeek"
                     nowIndicator={true}
                     plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                    events={this.state.events.filter(event => tags[event.tag] != false)}
+                    events={events}
                     eventClick={this.eventClick}
                     header={{
                         left: 'prev,next today',
