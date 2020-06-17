@@ -15,14 +15,24 @@ import { ErrorBoundary } from './errorboundary';
 
 export const AppContext = React.createContext({});
 
+const colorMap = {
+    links: "#0087C6",
+    academic_affairs: "#0087C6",
+    student_affairs: "#1FC9B3",
+    admission: "#DD2E44",
+    library: "#722780",
+    shop: "#95CC3F",
+    clubs: "#F37820",
+    other: "#FFC700",
+}
+
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
-        // console.log(events[i].tag ? "yeah" : "other");
-
-        let isAllDay = new Date(events[i]['start']['$date']).getUTCHours() == 0;
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
         events[i]['id'] = events[i]['_id']['$oid'];
+
+        let isAllDay = events[i]['start'].getUTCHours() == 0;
         events[i]['allDay'] = isAllDay;
 
         if (!events[i].tag) {
@@ -30,6 +40,7 @@ function clean_event_list(events) {
         } else {
             events[i].tag = events[i]['tag'].split(":")
         }
+        events[i].color = colorMap[events[i].tag[0]]
     }
     return events
 }
