@@ -6,6 +6,8 @@ services:
     environment:
       FLASK_ENV: development
       CALENDAR_LINK: https://calendar.google.com/calendar/ical/ocrlnk9gfl2ee4shh46ffd2kgk%40group.calendar.google.com/private-50a283aa50d5e2b1108d41806b087c44/basic.ics
+    env_file:
+      - ./.sendgrid.env
     restart: always
     tty: true
     ports:
