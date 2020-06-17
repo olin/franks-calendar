@@ -120,3 +120,16 @@
     background-color: #FFC700;
     color: white;
 }
+
+// Changed styling of events
+.fc-time {
+  font-family: $sans;
+  font-weight: bold;
+  font-size: 0.725em !important;
+}
+
+.fc-title {
+  font-family: $sans;
+  font-size: 1em;
+  word-wrap: break-word;
+}
