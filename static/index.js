@@ -15,18 +15,35 @@ import { ErrorBoundary } from './errorboundary';
 
 export const AppContext = React.createContext({});
 
+const colorMap = {
+    links: "#0087C6",
+    academic_affairs: "#0087C6",
+    student_affairs: "#1FC9B3",
+    admission: "#DD2E44",
+    library: "#722780",
+    shop: "#95CC3F",
+    clubs: "#F37820",
+    other: "#FFC700",
+}
+
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
         events[i]['start'] = new Date(events[i]['start']['$date']);
         events[i]['end'] = new Date(events[i]['end']['$date']);
         events[i]['id'] = events[i]['_id']['$oid'];
+
+        let isAllDay = events[i]['start'].getUTCHours() == 0;
+        events[i]['allDay'] = isAllDay;
+
+        if (!events[i].tag) {
+            events[i].tag = ["other"]
+        } else {
+            events[i].tag = events[i]['tag'].split(":")
+        }
+        events[i].color = colorMap[events[i].tag[0]]
     }
     return events
 }
-
-const tagList = [
-
-]
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -52,7 +69,7 @@ class Sidebar extends React.Component {
                     <div>
                       <ul className="Sidebar__filter__list">
                         <li>
-                          <input type="checkbox" id="filter--academic" defaultChecked={this.props.tags['academic']} onClick={this.props.handleClick} value={"academic"} />
+                          <input type="checkbox" id="filter--academic" defaultChecked={this.props.tags['academic_affairs']} onClick={this.props.handleClick} value={"academic_affairs"} />
                           <label for="filter--academic" className="Sidebar__filter">
                               Academic Affairs
                           </label>
@@ -81,7 +98,7 @@ class Sidebar extends React.Component {
                         </li>
 
                         <li>
-                          <input type="checkbox" id="filter--student" defaultChecked={this.props.tags['student']} onClick={this.props.handleClick} value={"student"} />
+                          <input type="checkbox" id="filter--student" defaultChecked={this.props.tags['student_affairs']} onClick={this.props.handleClick} value={"student_affairs"} />
                           <label for="filter--student" className="Sidebar__filter">
                               Student Affairs
                           </label>
@@ -113,14 +130,14 @@ class Sidebar extends React.Component {
                               </label>
                             </li>
                             <li className="Sidebar__filter__list">
-                              <input type="checkbox" id="filter--PGP" defaultChecked={this.props.tags['PGP']} onClick={this.props.handleClick} value={"PGP"} />
-                              <label for="filter--PGP" className="Sidebar__filter">
+                              <input type="checkbox" id="filter--pgp" defaultChecked={this.props.tags['pgp']} onClick={this.props.handleClick} value={"pgp"} />
+                              <label for="filter--pgp" className="Sidebar__filter">
                                   PGP
                               </label>
                             </li>
                             <li className="Sidebar__filter__list">
-                              <input type="checkbox" id="filter--HR" defaultChecked={this.props.tags['HR']} onClick={this.props.handleClick} value={"HR"} />
-                              <label for="filter--HR" className="Sidebar__filter">
+                              <input type="checkbox" id="filter--hr" defaultChecked={this.props.tags['hr']} onClick={this.props.handleClick} value={"hr"} />
+                              <label for="filter--hr" className="Sidebar__filter">
                                   HR
                               </label>
                             </li>
@@ -176,9 +193,9 @@ class Sidebar extends React.Component {
                         OTHER CALENDARS
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"> > <a href="https://www.foundry.babson.edu/events-calendar" target="_blank"> The Weissman Foundry</a></p></li>
-                        <li><p className="Sidebar__body"> > <a href="http://calendar.babson.edu/" target="_blank"> Babson College</a></p></li>
-                        <li><p className="Sidebar__body"> > <a href="https://www.wellesley.edu/publiccalendar#/?i=1" target="_blank"> Wellesley College</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="https://www.foundry.babson.edu/events-calendar" target="_blank"> The Weissman Foundry</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="http://calendar.babson.edu/" target="_blank"> Babson College</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="https://www.wellesley.edu/publiccalendar#/?i=1" target="_blank"> Wellesley College</a></p></li>
                     </ul>
                 </section>
 
@@ -192,9 +209,9 @@ class Sidebar extends React.Component {
                         INFORMATION
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> Event Norms & Guidelines </a></li>
-                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> How to Publish an Event</a></li>
-                        <li className="Sidebar__body"> > <a href="https://linktouserguide.com"> How to Export an Event</a></li>
+                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> Event Norms & Guidelines </a></li>
+                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> How to Publish an Event</a></li>
+                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> How to Export an Event</a></li>
                     </ul>
                 </section>
 
@@ -207,14 +224,37 @@ class Sidebar extends React.Component {
                         MODERATORS
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li><p className="Sidebar__body"> > <a href="mailto:jbrettle@olin.edu"> Jules Brettle '23</a></p></li>
-                        <li><p className="Sidebar__body"> > <a href="mailto:jgreenberg@olin.edu"> Jack Greenberg '23</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="mailto:jbrettle@olin.edu"> Jules Brettle '23</a></p></li>
+                        <li><p className="Sidebar__body">&gt; <a href="mailto:jgreenberg@olin.edu"> Jack Greenberg '23</a></p></li>
                         <p className="Sidebar__body__text"> Contact them if you need urgent approval for a new event listing.
                         Otherwise, expect up to 24 hours for a new event to be displayed on the
                         calendar!</p>
                     </ul>
                 </section>
             </>
+        )
+    }
+}
+
+class EventPage extends React.Component {
+    constructor(props) {
+        super(props);
+        /*
+        use {this.props._____} instead of the actual thing
+
+        things you can use:
+            - title
+            - start, end ***(these are Date objects in JavaSciprt, you'll need to figure out how to format them)
+            - tag - is a list -- if you want just the "child" tag, just do {this.props.tag[-1]}
+            - description
+            - location
+        */
+    }
+    render() {
+        return (
+            <div class="Event">
+                {/* Write your stuff here! */}
+            </div>
         )
     }
 }
@@ -229,14 +269,16 @@ class App extends React.Component {
             ready: false,
             tags: {
                 "academic": true,
+                "academic_affairs": true,
                 "academic_calendar": true,
                 "academic_advising": true,
+                "student_affairs": true,
                 "international": true,
                 "student": true,
                 "residential":true,
                 "health":true,
-                "PGP":true,
-                "HR":true,
+                "pgp":true,
+                "hr":true,
                 "admission": true,
                 "library": true,
                 "shop": true,
@@ -253,10 +295,37 @@ class App extends React.Component {
     toggleTag(e) {
         var tags = this.state.tags;
         tags[e.target.value] = !tags[e.target.value];
+
+        let events = this.state.events.filter(event => {
+            for (let i = 0; i < event.tag.length; i++) {
+                console.log(event.title, event.tag[i], this.state.tags[event.tag[i]]);
+
+                if (this.state.tags[event.tag[i]] === false) {
+                    return false;
+                } else {
+                    continue;
+                }
+            }
+            return true
+        });
+
         this.setState({
             tags: tags,
-        }, () => {
-            console.log(this.state.tags);
+            currentPanel: (
+                <FullCalendar
+                    defaultView="timeGridWeek"
+                    nowIndicator={true}
+                    plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                    events={events}
+                    eventClick={this.eventClick}
+                    header={{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    }}
+                    height="parent"
+                />
+            )
         })
     }
 
@@ -267,8 +336,8 @@ class App extends React.Component {
     }
 
     eventClick(e) {
-        //retrieves event information and returns as ical file
-        var route = '/export/'+e.event.id;
+        // Retrieves event information and returns as ical file
+        var route = '/export/' + e.event.id;
         client.get(route)
         .then(res => {
             var element = document.createElement('a');
@@ -277,7 +346,7 @@ class App extends React.Component {
             element.style.display = 'none';
             console.log(res)
             document.body.appendChild(element);
-            //autmoatically downloads ical file
+            // Autmoatically downloads ical file
             element.click();
             document.body.removeChild(element);
         })
@@ -289,30 +358,34 @@ class App extends React.Component {
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
+            let event_list = clean_event_list(res.data)
             this.setState({
-                events: clean_event_list(res.data),
-                ready: true
+                events: event_list,
+                ready: true,
+            }, _ => {
+                this.setState({
+                    currentPanel: (
+                        <FullCalendar
+                            defaultView="timeGridWeek"
+                            nowIndicator={true}
+                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                            events={this.state.events}
+                            eventClick={this.eventClick}
+                            header={{
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            }}
+                            height="parent"
+                        />
+                    )
+                })
             })
-
-            this.switchPanel(
-                <FullCalendar
-                defaultView="timeGridWeek"
-                nowIndicator={true}
-                plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                events={this.state.events}
-                eventClick={this.eventClick}
-                header={{
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                }}
-                height="parent"
-                />
-            )
         })
         .catch(err => {
             console.error(err);
         })
+
 
     }
 

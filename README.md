@@ -31,9 +31,12 @@
 ### Ingesting Data (events)
 _Do this!_
 
-1. First, you have to enter the container: `docker exec -ti franks-calendar-web sh`
-    - `docker exec` means enter the container. `-ti` means "terminal interactive", and translates to "let me use a terminal". "franks-calendar-web" is the name of the container we are entering, and `sh` is the shell command.
-2. Run `cd /www` to enter the folder where the files are, and then `python3 modules/db.py` to import the events.
+```bash
+docker exec -ti franks-calendar-database \
+  mongoimport --db=calendar-dev --collection=events \
+  --authenticationDatabase=calendar-dev --username=frank \
+  --password=calendar --drop --file ./events.json
+```
 
 ### Windows
 
