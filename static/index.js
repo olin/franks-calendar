@@ -251,9 +251,106 @@ class EventPage extends React.Component {
         */
     }
     render() {
+        var tag = this.props.event.tag.pop();
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+        function dateToString(date) {
+          let hours = date.getHours();
+          let minutes = ('0'+date.getMinutes()).slice(-2);
+          return (hours + ':' + minutes)
+        }
+
         return (
             <div class="Event">
-                {/* Write your stuff here! */}
+              <section class="Event__row">
+                  <button class="Event__button">
+                    <span class="Event__button__icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 8 8 12 12 16"></polyline>
+                        <line x1="16" y1="12" x2="8" y2="12"></line>
+                      </svg>
+                    </span>
+                    Back to Calendar
+                  </button>
+
+                  <button class="Event__button">
+                    <span class="Event__button__icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="8 12 12 16 16 12"></polyline>
+                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                      </svg>
+                    </span>
+                    Export Event
+                  </button>
+              </section>
+
+              <section class="Event__content">
+                  <h2 class="Event__content__title">
+                    {this.props.event.title}
+                  </h2>
+
+                  <div class="Event__content__block">
+                    <span data-tag={tag} class="Event__content__tag">
+                      {tag}
+                    </span>
+                  </div>
+
+                  <table class="Event__content__table">
+                    <tr class="Event__content__table__row">
+                      <td class="Event__content__headers">
+                        Hosted by
+                      </td>
+                      <td class="Event__content__text">
+                        <span class="Event__content__date">
+                          Karen and the Eco-Reps
+                        </span>
+                        |
+                        <a class="Event__content__text__link" href="mailto:Eco-Reps@olin.edu">
+                        Eco-Reps@olin.edu
+                        </a>
+                      </td>
+                    </tr>
+
+                    <tr class="Event__content__table__row">
+                      <td class="Event__content__headers">
+                        When?
+                      </td>
+                      <td class="Event__content__text">
+                        <span class="Event__content__date">
+                          {this.props.event.start.toLocaleDateString("en-US", options)}
+                        </span>
+                        |
+                        <span class="Event__content__time">
+                          {dateToString(this.props.event.start)}
+                        </span>
+                        -
+                        <span class="Event__content__time">
+                          {dateToString(this.props.event.end)}
+                        </span>
+                      </td>
+                    </tr>
+
+                    <tr class="Event__content__table__row">
+                      <td class="Event__content__headers">
+                        Where?
+                      </td>
+                      <td class="Event__content__text">
+                        {this.props.event.location}
+                      </td>
+                    </tr>
+
+                    <tr class="Event__content__table__row">
+                      <td class="Event__content__headers">
+                        What?
+                      </td>
+                      <td class="Event__content__text">
+                        {this.props.event.description}
+                      </td>
+                    </tr>
+                  </table>
+                </section>
             </div>
         )
     }
@@ -364,21 +461,22 @@ class App extends React.Component {
                 ready: true,
             }, _ => {
                 this.setState({
-                    currentPanel: (
-                        <FullCalendar
-                            defaultView="timeGridWeek"
-                            nowIndicator={true}
-                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                            events={this.state.events}
-                            eventClick={this.eventClick}
-                            header={{
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                            }}
-                            height="parent"
-                        />
-                    )
+                    // currentPanel: (
+                    //     <FullCalendar
+                    //         defaultView="timeGridWeek"
+                    //         nowIndicator={true}
+                    //         plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                    //         events={this.state.events}
+                    //         eventClick={this.eventClick}
+                    //         header={{
+                    //             left: 'prev,next today',
+                    //             center: 'title',
+                    //             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    //         }}
+                    //         height="parent"
+                    //     />
+                    // )
+                    currentPanel: <EventPage event={this.state.events[0]}/>,
                 })
             })
         })
