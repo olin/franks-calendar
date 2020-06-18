@@ -1,0 +1,207 @@
+html {
+    font-family: 'Lato', sans-serif;
+    line-height:1.5;
+	scroll-behavior: smooth;
+  }
+
+#main {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top:90px;
+  }
+
+.box{
+	border: 2px solid grey;
+	border-radius: 5px;
+	padding:20px;
+	padding-top:0px;
+	margin-bottom:30px;
+	margin-top:30px;
+}
+  
+h1 {
+padding: 5px;
+font-size: 40px;
+font-family: 'Pathway Gothic One', sans-serif;;
+font-style: italic;
+text-transform: uppercase;
+margin-top: 3px;
+margin-bottom:0px;
+}
+.fixedheader {
+background-color: white;
+width:100%;
+position:fixed;
+top:0;
+padding-bottom:0;
+height:80px;
+border-bottom: 1px solid #CCCCCC;
+}
+#frankscal {
+	opacity:0.5;
+}
+.addspace {
+	margin-left:15px;
+}
+
+
+h2 {
+font-size: 30px;
+font-family: 'Pathway Gothic One', sans-serif;;
+font-style: italic;
+text-transform: uppercase;
+margin-top:10px;
+}
+fieldset {
+	border-radius: 5px;
+}
+.non-fieldset {
+    padding:20px;
+}
+
+textarea, input, select{
+	font-family: 'Lato', sans-serif;
+    line-height:1.5;
+	font-size:15px;
+	padding:5px;
+}
+
+#title, #location, #description{
+	width:90%;
+}
+#start, #end, #category {
+	width:43.4%;
+}
+#hostname,#hostemail, #submittername, #submitteremail {
+	width:70%;	
+}
+#submitbutton {
+	padding-left:10px;
+	padding-right:15px;
+	font-family: 'Pathway Gothic One', sans-serif;;
+	font-style: italic;
+	text-transform: uppercase;
+	font-size:20px;
+	background-color:black;
+	color:white;
+	border: transparent;
+	border-radius: 5px;
+	border: 2px solid black;
+}
+#submitbutton:hover {
+	background-color:white;
+	color:black;
+	transition-duration: 0.5s;
+}
+
+.light {
+	color:#1F1F1F;
+	font-size: 20px;
+	font-family: 'Pathway Gothic One', sans-serif;;
+	font-style: italic;
+	/* text-transform: uppercase; */
+}
+p {
+	text-size:2px;
+	color:darkgrey;
+	line-height:1.1;
+}
+small {
+	font-style:italic;
+}
+
+a {
+color: #0087C6;
+text-decoration: none;
+}
+
+.underlined {
+  text-decoration:underline;
+}
+
+mark {
+  padding-top: 0px;
+  padding-bottom:2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 3px;
+}
+
+
+#category {
+	margin-top:10px;
+	width:300px;
+	border:transparent;
+	
+}
+
+.academic-affairs, .student-affairs, .admission-financial-aid, .library, .shop, .clubs-organizations, .other-events{
+	color:white;
+	text-shadow:1px 1px #00000030;
+	
+}
+
+.select-one {
+  background-color:#e1e1e1;
+  color:black;
+  text-shadow:none;
+}
+.academic-affairs {
+  background-color: #0087C6;
+}
+.student-affairs {
+  background-color: #1FC9B3;
+}
+
+.admission-financial-aid {
+  background-color: #DD2E44;
+}
+.library {
+  background-color: #722780;
+}
+.shop {
+  background-color: #95CC3F;
+}
+.clubs-organizations {
+  background-color: #F37820;
+}
+.other-events {
+  background-color: #FFC700;
+}
+
+
+* {
+    box-sizing: border-box;
+  }
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    padding: 15px;
+  }
+  .left {
+    width: 30%;
+  }
+  .right {
+    width: 70%;
+  }
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 900px) {
+    .left {
+      width: 100%;
+    }
+    .right {
+      width: 100%;
+    }
+  }
+
+.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
