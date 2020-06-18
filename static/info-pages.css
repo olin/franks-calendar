@@ -1,0 +1,137 @@
+html {
+    font-family: 'Lato', sans-serif;
+    line-height:1.5;
+	scroll-behavior: smooth;
+  }
+
+#main {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top:90px;
+  }
+
+.box{
+	border: 2px solid grey;
+	border-radius: 5px;
+	padding:20px;
+	padding-top:30px;
+	margin-bottom:30px;
+}
+  
+h1 {
+padding: 5px;
+font-size: 40px;
+font-family: 'Pathway Gothic One', sans-serif;;
+font-style: italic;
+text-transform: uppercase;
+margin-top: 3px;
+margin-bottom:0px;
+}
+.fixedheader {
+background-color: white;
+width:100%;
+position:fixed;
+top:0;
+padding-bottom:0;
+height:80px;
+border-bottom: 1px solid #CCCCCC;
+}
+#frankscal {
+	opacity:0.5;
+}
+.addspace {
+	margin-left:15px;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: 'Pathway Gothic One', sans-serif;;
+  font-style: italic;
+  text-transform: uppercase;
+}
+h3{
+  font-weight: bold;
+}
+
+a {
+  color: #0087C6;
+  text-decoration: none;
+}
+strong {
+  font-weight: 900;
+}
+
+.underlined {
+	text-decoration:underline;
+}
+
+mark {
+	padding-top: 0px;
+	padding-bottom:2px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-radius: 3px;
+}
+.academic-affairs {
+	background-color: #0087C680;
+}
+.student-affairs {
+	background-color: #1FC9B380;
+}
+
+.admission-financial-aid {
+	background-color: #DD2E4480;
+}
+.library {
+	background-color: #72278080;
+}
+.shop {
+	background-color: #95CC3F80;
+}
+.clubs-organizations {
+	background-color: #F3782080;
+}
+.other-events {
+	background-color: #FFC70080;
+}
+
+th, td{
+	padding:15px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+* {
+    box-sizing: border-box;
+  }
+  /* Create two equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+  }
+  .left {
+    width: 50%;
+  }
+  .right {
+    width: 50%;
+  }
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 900px) {
+    .left {
+      width: 100%;
+    }
+    .right {
+      width: 100%;
+    }
+  }
