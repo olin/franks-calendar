@@ -42,8 +42,8 @@
 }
 
 .Sidebar {
-    min-width: 20%;
-    margin-right: 1em;
+    min-width:12.5em;
+    max-width:20em;
     margin-top: 1em;
     padding: 0 1em;
     border-right: 4px solid black;
@@ -115,6 +115,7 @@
             &[for="filter--academic"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
             &[for="filter--academic_calendar"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
             &[for="filter--academic_advising"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--student_affairs"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--international"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--residential"] {background-color: rgba($student, 0); &::before {background-color: $student}}
             &[for="filter--health"] {background-color: rgba($student, 0); &::before {background-color: $student}}
@@ -192,10 +193,127 @@
     }
 }
 
+.Event {
+  max-width: 45em;
+
+  &__row {
+    //add margins and padding and height / width for top strip
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    font-size: 1em;
+    font-family: $sans;
+    border-radius: 0.5em;
+    padding: 0.5em 0.5em;
+    color: black;
+    display: inherit;
+    vertical-align: middle;
+    text-decoration: none;
+    background-color: #E8E8E8;
+
+    &__icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0.5em;
+      height: 20px;
+    }
+  }
+
+  &__content {
+    padding: 1em 0em 1em 0em;
+
+    &__title {
+      font-family: $title;
+      font-size: 3em;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+
+    &__block {
+      display: block;
+      margin: 0.75em 0em;
+    }
+
+    &__tag {
+      font-size: 1em;
+      font-family: $sans;
+      color: black;
+      text-transform: capitalize;
+      text-decoration: none;
+      border-radius: 0.5em;
+      padding: 0.5em 0.5em;
+      display: inline-block;
+
+      &[data-tag="academic_affairs"] {background-color: $academic;}
+      &[data-tag="academic_advising"] {background-color: $academic;}
+      &[data-tag="academic_calendar"] {background-color: $academic;}
+      &[data-tag="international"] {background-color: $student;}
+      &[data-tag="residential"] {background-color: $student;}
+      &[data-tag="health"] {background-color: $student;}
+      &[data-tag="pgp"] {background-color: $student;}
+      &[data-tag="hr"] {background-color: $student;}
+      &[data-tag="student_affairs"] {background-color: $student;}
+      &[data-tag="admission"] {background-color: $admission;}
+      &[data-tag="library"] {background-color: $library;}
+      &[data-tag="shop"] {background-color: $shop;}
+      &[data-tag="clubs"] {background-color: $clubs;}
+      &[data-tag="other"] {background-color: $other;}
+    }
+
+    &__table {
+      width: 100%;
+
+      &__row {
+        height: 1.75em;
+      }
+    }
+
+    &__headers {
+      font-family: $sans;
+      font-size: 1em;
+      color: black;
+      font-weight: bold;
+      width: 6em;
+      vertical-align: top;
+    }
+
+    &__text {
+      font-family: $sans;
+      font-size: 1em;
+      color: black;
+      vertical-align: top;
+
+      &__link {
+        padding-left: 0.5em;
+        color: $links;
+        text-decoration: none;
+      }
+    }
+
+    &__date {
+      color: black;
+      font-family: $sans;
+      font-size: 1em;
+      padding-right: 0.5em;
+    }
+
+    &__time {
+      color: black;
+      font-family: $sans;
+      font-size: 1em;
+      padding-right: 0.5em;
+      padding-left: 0.5em;
+    }
+  }
+}
+
 .Calendar {
-    margin-top: 1em;
+    margin: 1em 2em 0em 2em;
     max-height: 90vh;
     overflow: hidden;
+    flex-grow: 1;
 }
 
 .Footer {

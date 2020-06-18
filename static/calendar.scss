@@ -70,6 +70,7 @@
 .fc-scroller::-webkit-scrollbar-thumb {
   background: transparent;
   border-radius: 0.5em;
+  transition-duration: 0.3s;
 }
 
 .fc-scroller:hover::-webkit-scrollbar-thumb {
