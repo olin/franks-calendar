@@ -239,17 +239,28 @@ class Sidebar extends React.Component {
 class EventPage extends React.Component {
     constructor(props) {
         super(props);
-        /*
-        use {this.props._____} instead of the actual thing
 
-        things you can use:
-            - title
-            - start, end ***(these are Date objects in JavaSciprt, you'll need to figure out how to format them)
-            - tag - is a list -- if you want just the "child" tag, just do {this.props.tag[-1]}
-            - description
-            - location
-        */
+        this.exportEvent = this.exportEvent.bind(this);
     }
+    exportEvent() {
+        // Retrieves event information and returns as ical file
+        let eventID = this.props.event.id;
+        client.get('/export/' + eventID)
+        .then(res => {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
+            element.setAttribute('download', "calendar_event.ics");
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            // Autmoatically downloads ical file
+            element.click();
+            document.body.removeChild(element);
+        })
+        .catch(err => {
+            console.error(err);
+        })
+    }
+
     render() {
         var tag = this.props.event.tag.pop();
         var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -263,7 +274,7 @@ class EventPage extends React.Component {
         return (
             <div class="Event">
               <section class="Event__row">
-                  <button class="Event__button">
+                  <button class="Event__button" onClick={this.props.returnToCalendar}>
                     <span class="Event__button__icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -274,7 +285,7 @@ class EventPage extends React.Component {
                     Back to Calendar
                   </button>
 
-                  <button class="Event__button">
+                  <button class="Event__button" onClick={this.exportEvent}>
                     <span class="Event__button__icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -304,11 +315,11 @@ class EventPage extends React.Component {
                       </td>
                       <td class="Event__content__text">
                         <span class="Event__content__date">
-                          Karen and the Eco-Reps
+                          Franklin Olin
                         </span>
                         |
                         <a class="Event__content__text__link" href="mailto:Eco-Reps@olin.edu">
-                        Eco-Reps@olin.edu
+                        franklin.olin@olin.edu
                         </a>
                       </td>
                     </tr>
@@ -345,8 +356,7 @@ class EventPage extends React.Component {
                       <td class="Event__content__headers">
                         What?
                       </td>
-                      <td class="Event__content__text">
-                        {this.props.event.description}
+                      <td class="Event__content__text" dangerouslySetInnerHTML={{__html: this.props.event.description.replace(/\<br\>/, '')}}>
                       </td>
                     </tr>
                   </table>
@@ -357,12 +367,12 @@ class EventPage extends React.Component {
 }
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
-            events: null,
+            events: [],
+            allEvents: [],
             ready: false,
             tags: {
                 "academic": true,
@@ -381,112 +391,62 @@ class App extends React.Component {
                 "shop": true,
                 "clubs": true,
                 "other": true,
-            }
+            },
+            popUp: null,
         }
 
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
-        this.switchPanel = this.switchPanel.bind(this);
+        // this.switchPanel = this.switchPanel.bind(this);
+        this.destroyPopUp = this.destroyPopUp.bind(this);
     }
-
+    destroyPopUp() {
+        this.setState({
+            popUp: null
+        })
+    }
     toggleTag(e) {
         var tags = this.state.tags;
         tags[e.target.value] = !tags[e.target.value];
 
-        let events = this.state.events.filter(event => {
-            for (let i = 0; i < event.tag.length; i++) {
-                console.log(event.title, event.tag[i], this.state.tags[event.tag[i]]);
-
-                if (this.state.tags[event.tag[i]] === false) {
-                    return false;
-                } else {
-                    continue;
-                }
-            }
-            return true
-        });
-
         this.setState({
             tags: tags,
-            currentPanel: (
-                <FullCalendar
-                    defaultView="timeGridWeek"
-                    nowIndicator={true}
-                    plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                    events={events}
-                    eventClick={this.eventClick}
-                    header={{
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                    }}
-                    height="parent"
-                />
-            )
+        }, () => {
+            let events = this.state.allEvents.filter(event => {
+                for (let i = 0; i < event.tag.length; i++) {
+                    if (tags[event.tag[i]] === false) {
+                        return false;
+                    } else {
+                        continue;
+                    }
+                }
+                return true
+            });
+            this.setState({
+                events: events
+            })
         })
     }
-
-    switchPanel(panel) {
-        this.setState({
-            currentPanel: panel,
-        })
-    }
-
     eventClick(e) {
-        // Retrieves event information and returns as ical file
-        var route = '/export/' + e.event.id;
-        client.get(route)
-        .then(res => {
-            var element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
-            element.setAttribute('download', "calendar_event.ics");
-            element.style.display = 'none';
-            console.log(res)
-            document.body.appendChild(element);
-            // Autmoatically downloads ical file
-            element.click();
-            document.body.removeChild(element);
-        })
-        .catch(err => {
-            console.error(err);
+        let eventID = e.event.id;
+        this.setState({
+            popUp: <EventPage event={this.state.events.find(obj => obj.id === eventID)} returnToCalendar={this.destroyPopUp} />
         })
     }
-
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
             let event_list = clean_event_list(res.data)
             this.setState({
                 events: event_list,
+                allEvents: event_list,
                 ready: true,
-            }, _ => {
-                this.setState({
-                    // currentPanel: (
-                    //     <FullCalendar
-                    //         defaultView="timeGridWeek"
-                    //         nowIndicator={true}
-                    //         plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                    //         events={this.state.events}
-                    //         eventClick={this.eventClick}
-                    //         header={{
-                    //             left: 'prev,next today',
-                    //             center: 'title',
-                    //             right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                    //         }}
-                    //         height="parent"
-                    //     />
-                    // )
-                    currentPanel: <EventPage event={this.state.events[0]}/>,
-                })
             })
         })
         .catch(err => {
             console.error(err);
         })
-
-
     }
-
     render() {
         return (
             <>
@@ -501,7 +461,20 @@ class App extends React.Component {
                         <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
                     </aside>
                     <article className="Calendar">
-                        {this.state.currentPanel}
+                        {this.state.popUp}
+                        <FullCalendar
+                            defaultView="timeGridWeek"
+                            nowIndicator={true}
+                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                            events={this.state.events}
+                            eventClick={this.eventClick}
+                            header={{
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                            }}
+                            height="parent"
+                        />
                     </article>
                 </main>
                 <footer className="Footer">

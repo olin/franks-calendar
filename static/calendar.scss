@@ -1,5 +1,9 @@
 @import 'vars';
 
+.fc-event {
+    cursor: pointer;
+}
+
 // Changed font of calendar header
 .fc-header-toolbar {
     font-family: $sans;

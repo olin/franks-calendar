@@ -42,8 +42,10 @@
 }
 
 .Sidebar {
-    min-width:12.5em;
-    max-width:20em;
+    flex-grow: 2;
+    min-width: 20%;
+    max-width: 20%;
+    width: 20%;
     margin-top: 1em;
     padding: 0 1em;
     border-right: 4px solid black;
@@ -194,10 +196,18 @@
 }
 
 .Event {
-  max-width: 45em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 
   &__row {
-    //add margins and padding and height / width for top strip
     display: flex;
     justify-content: space-between;
   }
@@ -311,9 +321,7 @@
 
 .Calendar {
     margin: 1em 2em 0em 2em;
-    max-height: 90vh;
-    overflow: hidden;
-    flex-grow: 1;
+    position: relative;
 }
 
 .Footer {
