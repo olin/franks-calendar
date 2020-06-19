@@ -12,7 +12,12 @@ def public_index():
 
 @public.route('/add', methods=['POST', 'GET'])
 def add_event():
-    pass
+    if request.method == 'GET':
+        return render_template('add.html')
+
+@public.route('/about', methods=['GET'])
+def about_page():
+    return render_template("about.html")
 
 @public.route('/<page>')
 def public_page(page):

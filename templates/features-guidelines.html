@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
-    <link href="info-pages.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='info-pages.css')}}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -9,15 +9,80 @@
 <div class="fixedheader">
     <h1>
         <span id="frankscal"> <img src="franks_cal_logo.png" alt="Frank's Calendar Logo" height="30px"
-        margin-right="1em"/> Frank's Calendar </span> 
-		<span  class="addspace"></span> - <span  class="addspace"></span> 
-		<span id="post">Filter Guide</span>
+        margin-right="1em"/> Frank's Calendar </span>
+		<span  class="addspace"></span> - <span  class="addspace"></span>
+		<span id="post">Features and Guidelines</span>
     </h1>
 </div>
 
 <div id="main">
-	
+
 [table of contents goes here]
+
+<h2 id="event-guidelines">Features and Guidelines</h2>
+
+
+<h3>Types of Events</h3>
+
+
+<p>
+These events belong on Frank’s Calendar:
+</p>
+<ul>
+
+<li>Events public to the <span class="underlined">whole Olin community</span>
+
+<li>Events hosted by an <span class="underlined">Olin community member</span>
+</li>
+</ul>
+
+<p>
+These events don’t belong on Frank’s Calendar:
+</p>
+<ul>
+
+<li>Events only open to a <span class="underlined">smaller group of people</span> (for example: classes, course specific office hours, club design reviews)
+
+<li>Events hosted by <span class="underlined">non-Oliners</span>
+</li>
+</ul>
+<h3>Interacting with the Calendar</h3>
+
+<table>
+  <tr>
+   <td>
+	 <img src="info-images/publish-event.png" alt="publish event button image" height="50px" class="center"/></td>
+   <td>When you hover over this button, you are given two options to publish an event: via the calendar’s online form where you manually input data, and via your existing calendar event invite.
+   </td>
+  </tr>
+  <tr>
+   <td>
+
+     <img src="info-images/export-event.png" alt="export event button image" height="50px" class="center"/></td>
+   </td>
+   <td>This is on every event page you open. Use this to export one event to your personal calendar in the form of an email invite or downloading a .ics file.
+   </td>
+  </tr>
+  <tr>
+   <td>
+	<img src="info-images/filters.png" alt="filter section image" height="50px" class="center"/></td>
+
+   </td>
+   <td>The filters in the sidebar categorize events and allow you to choose the types of events displayed on the calendar. Learn more about filters <span class="underlined">here</span>.
+   </td>
+  </tr>
+</table>
+
+
+<h3 id="moderating-events">Moderating Events</h3>
+
+
+<p>
+Calendar moderators maintain the events on the calendar to guarantee that Frank’s Calendar is populated with accurate, up to date information about what is happening on campus. They also monitor events to make sure they meet the requirements of what is okay to share.
+</p>
+<p>
+If you have questions or concerns about an event or any information on the calendar, you can contact a moderator to resolve the issue.
+</p>
 
 <h2 id="filter-guide">Filter Guide</h2>
 
@@ -30,13 +95,13 @@ Events get filtered in two different ways:
 </p>
 <ul>
 
-<li>If the event was published via a <em>calendar invite</em>, the database will check and see if it’s from an email sender that has an associated category 
+<li>If the event was published via a <em>calendar invite</em>, the database will check and see if it’s from an email sender that has an associated category
 <ul>
- 
+
 <li>For instance, the Director of PGP’s email will be associated with the <mark class="student-affairs">PGP</mark> filter, so any events they send will automatically be tagged that way
- 
+
 <li>If they share an event that isn’t related to PGP, they need to <span class="underlined">contact the moderator</span> to have them manually change the associated category
-</li> 
+</li>
 </ul>
 
 <li>If an event was published via the <em>online form</em>, the person will manually assign a category to the event before submitting it for approval
@@ -50,24 +115,24 @@ There are certain filter groups to shorten the long list of filters at first gla
 </p>
 <ul>
 
-<li><strong>Academic Affairs</strong>  
+<li><strong>Academic Affairs</strong>
 <ul>
- 
+
 <li>Any event that is related to academics at Olin
- 
+
 <li>Sub-filters are <mark class="academic-affairs">Academic Calendar</mark> and <mark class=academic-affairs>Academic Advising</mark>
-</li> 
+</li>
 </ul>
 
-<li><strong>Student Affairs</strong> 
+<li><strong>Student Affairs</strong>
 <ul>
- 
+
 <li>Any event that is related to student affairs at Olin
- 
+
 <li>Sub-filters are <mark class="student-affairs">Residential</mark>, <mark class="student-affairs">Health & Wellness</mark>, <mark class="student-affairs">PGP</mark>, <mark class="student-affairs">HR</mark>, <mark class="student-affairs">Intl’ & Study Away</mark>, and <mark class="student-affairs">Diversity & Inclusion</mark>
-</li> 
+</li>
 </ul>
-</li> 
+</li>
 </ul>
 <h3>Individuals associated with a filter</h3>
 
@@ -77,81 +142,81 @@ The list of individual filters is somewhat long, because Frank’s Calendar aime
 </p>
 <ul>
 
-<li><mark class="academic-affairs">Academic Calendar:</mark> Registrar’s Office, Provost, Director of Academic Affairs 
+<li><mark class="academic-affairs">Academic Calendar:</mark> Registrar’s Office, Provost, Director of Academic Affairs
 <ul>
- 
+
 <li>Currently <span class="underlined">Angela Burke</span>, <span class="underlined">Vivien Bouffard</span>, <span class="underlined">Linda Canavan</span>, <span class="underlined">Mark Somerville</span>, and <span class="underlined">Susan Mihailidis</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="academic-affairs">Academic Advising:</mark> Assistant Dean of Student Affairs 
+<li><mark class="academic-affairs">Academic Advising:</mark> Assistant Dean of Student Affairs
 <ul>
- 
+
 <li>Currently <span class="underlined">Adva Waranyuwat</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="student-affairs">Residential:</mark> Assistant Dean of Student Affairs 
+<li><mark class="student-affairs">Residential:</mark> Assistant Dean of Student Affairs
 <ul>
- 
+
 <li>Currently <span class="underlined">Seth Hodge</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="student-affairs">Health & Wellness:</mark> Director of Wellness 
+<li><mark class="student-affairs">Health & Wellness:</mark> Director of Wellness
 <ul>
- 
+
 <li>Currently <span class="underlined">Beth Grampetro</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="student-affairs">PGP:</mark> PGP’s Office 
+<li><mark class="student-affairs">PGP:</mark> PGP’s Office
 <ul>
- 
+
 <li>Currently <span class="underlined">Suzanne Alcott</span> and <span class="underlined">Sally Phelps</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="student-affairs">HR:</mark> Human Resources 
+<li><mark class="student-affairs">HR:</mark> Human Resources
 <ul>
- 
+
 <li>Currently <span class="underlined">hr@olin.edu</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="student-affairs">Diversity & Inclusion:</mark> Director of Diversity & Inclusion 
+<li><mark class="student-affairs">Diversity & Inclusion:</mark> Director of Diversity & Inclusion
 <ul>
- 
+
 <li>Currently <span class="underlined">Stephanie Milton</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="student-affairs">Intl’ & Study Away:</mark> International Programs Coordinator 
+<li><mark class="student-affairs">Intl’ & Study Away:</mark> International Programs Coordinator
 <ul>
- 
+
 <li>Currently <span class="underlined">Courtney Beach</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="admission-financial-aid">Admission & Financial Aid:</mark> The entire office of Admission & Financial Aid 
+<li><mark class="admission-financial-aid">Admission & Financial Aid:</mark> The entire office of Admission & Financial Aid
 <ul>
- 
+
 <li>Currently <span class="underlined">Emily Roper-Doten</span>, <span class="underlined">Krystal Burgos</span>, <span class="underlined">Stephanie Hill</span>, <span class="underlined">Alia Georges</span>, <span class="underlined">Susan Brisson</span>, <span class="underlined">Jean Ricker</span>, <span class="underlined">Victoria Moore</span>, and <span class="underlined">FinAid@olin.edu</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="library">The Library:</mark> The entire Library team 
+<li><mark class="library">The Library:</mark> The entire Library team
 <ul>
- 
+
 <li>Currently <span class="underlined">Callan Bignoli</span>, <span class="underlined">Maggie Anderson</span>, and <span class="underlined">Mckenzie Mullen</span>
-</li> 
+</li>
 </ul>
 
-<li><mark class="shop">The Shop:</mark> The entire Shop team 
+<li><mark class="shop">The Shop:</mark> The entire Shop team
 <ul>
- 
+
 <li>Currently <span class="underlined">Daniela Faas</span>, <span class="underlined">Nathan Cantrell</span>, <span class="underlined">Bruce Andruskiewicz</span>, and <span class="underlined">Lucas Ewing</span>
-</li> 
+</li>
 </ul>
 
 <li><mark class="clubs-organizations">Clubs & Organizations:</mark> No associated emails, since club and organization student leadership changes so frequently; moderator will assign as needed

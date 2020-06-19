@@ -1,8 +1,8 @@
-html {
+/* html {
     font-family: 'Lato', sans-serif;
     line-height:1.5;
 	scroll-behavior: smooth;
-  }
+  } */
 
 #main {
     margin-left: 20px;
@@ -21,7 +21,7 @@ html {
 h1 {
 padding: 5px;
 font-size: 40px;
-font-family: 'Pathway Gothic One';
+font-family: $title;
 font-style: italic;
 text-transform: uppercase;
 margin-top: 3px;
@@ -45,7 +45,7 @@ border-bottom: 1px solid #CCCCCC;
 
 h2 {
   font-size: 30px;
-  font-family: 'Pathway Gothic One';
+  font-family: $title;
   font-style: italic;
   text-transform: uppercase;
 }

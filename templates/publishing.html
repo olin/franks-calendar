@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
-    <link href="info-pages.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='info-pages.css')}}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -9,14 +9,14 @@
 <div class="fixedheader">
     <h1>
         <span id="frankscal"> <img src="franks_cal_logo.png" alt="Frank's Calendar Logo" height="30px"
-        margin-right="1em"/> Frank's Calendar </span> 
-		<span  class="addspace"></span> - <span  class="addspace"></span> 
+        margin-right="1em"/> Frank's Calendar </span>
+		<span  class="addspace"></span> - <span  class="addspace"></span>
 		<span id="post">How to Publish Events</span>
     </h1>
 </div>
 
 <div id="main">
-	
+
 [table of contents goes here]
 
 <h2 id="publishing-events"> How to Publish Events </h2>
@@ -24,7 +24,7 @@
         <ol>
         <li>Filling out <a href="event-form.html">this form</a> to manually enter event information</li>
         <li>Sending an ical (.ics file) to frankscalendar.olin@gmail.com</li>
-        </ol>   
+        </ol>
     <h3 id="how-to-send-ical"> How to send an ical from your personal calendar: </h3>
 	<ol>
         <li>Open the event into full editing mode in your personal calendar. Focus on the panel labeled “Guests” in Google Calendar or “Invite attendees” in Outlook Calendar. If you can’t edit the correct fields, go to <a href="#no-edit-access">“Sharing on behalf of someone else”</a></li>
@@ -44,7 +44,7 @@
         <li>Click the event to open the pop-up. Click the three dots in the upper right hand corner.</li>
         <img src="info-images/google-copy-to.png" alt="where to find Copy To option in Google Calendar" width="95%" class="center"/>
         <li>Select the “Copy to” option and a calendar of your choice. </li>
-        
+
         <li>This should open an event editing screen. Now <a href="#how-to-send-ical">return to the original steps.</a></li>
         </ol>
     </div>
@@ -53,7 +53,7 @@
         <ol>
         <li>Click the event to open the pop-up. Click the expand option in the upper right hand corner.</li>
         <img src="info-images/outlook-expand.png" alt="how to expand event info in Outlook Calendar" width="95%" class="center"/>
-        <li>Click the 3 horizontal dots on the navigation bar. Select the “Copy to” option and a calendar of your choice.</li> 
+        <li>Click the 3 horizontal dots on the navigation bar. Select the “Copy to” option and a calendar of your choice.</li>
         <img src="info-images/outlook-duplicate-event.png" alt="where to find Duplicate Event option in Outlook Calendar" width="95%" class="center"/>
 
         <li>This should open an event editing screen. Now <a href="#how-to-send-ical">return to the original steps.</a></li>

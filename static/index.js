@@ -55,9 +55,9 @@ class Sidebar extends React.Component {
             <>
                 <section className="Sidebar__section">
 
-                    <button className="Sidebar__form">
+                    <a href="/add" className="Sidebar__form">
                       PUBLISH A NEW EVENT
-                    </button>
+                    </a>
 
                     <h2 className="Sidebar__header">
                         <svg className="Sidebar__header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -209,9 +209,9 @@ class Sidebar extends React.Component {
                         INFORMATION
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> Event Norms & Guidelines </a></li>
-                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> How to Publish an Event</a></li>
-                        <li className="Sidebar__body">&gt; <a href="https://linktouserguide.com"> How to Export an Event</a></li>
+                        <li className="Sidebar__body">&gt; <a href="/features-guidelines"> Event Norms & Guidelines </a></li>
+                        <li className="Sidebar__body">&gt; <a href="/publishing"> How to Publish an Event</a></li>
+                        <li className="Sidebar__body">&gt; <a href="/exporting"> How to Export an Event</a></li>
                     </ul>
                 </section>
 
@@ -452,7 +452,7 @@ class App extends React.Component {
             <>
                 <header className="Header">
                     <h1 className="Header__title">
-                        <img src="/static/franks_cal_logo.png" alt="Frank's Calendar Logo" className="Header__title__icon" />
+                        <img src="/static/images/franks_cal_logo.png" alt="Frank's Calendar Logo" className="Header__title__icon" />
                         <span className="Header__title__text">Frank's Calendar</span>
                     </h1>
                 </header>
@@ -479,7 +479,7 @@ class App extends React.Component {
                 </main>
                 <footer className="Footer">
                     <span className="Footer__message">Made with <span style={{color: "red"}}>♥</span> at Olin College</span>
-                    <span className="Footer__links"><a href = "linktoaboutus.com">About this Project</a>  |  <a href="https://forms.gle/R1WKvUcC85pcLiu28">Leave us Feedback</a>  |  <a href="https://github.com/jack-greenberg/franks-calendar">View on Github</a></span>
+                    <span className="Footer__links"><a href="/about">About this Project</a>  |  <a href="https://forms.gle/R1WKvUcC85pcLiu28">Leave us Feedback</a>  |  <a href="https://github.com/jack-greenberg/franks-calendar">View on Github</a></span>
                 </footer>
             </>
         );
