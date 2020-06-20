@@ -60,10 +60,13 @@ The back end of the app uses Python's Flask framework for HTTP routing and creat
 ## Additional Notes
 * When editing the HTML files, put everything in between the {% block page %} and {% endblock %}. This will make sure it gets included when the page is loaded
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 * `tailwind.css` should take care of all CSS styling for you. [Go to this website to learn more about it](https://tailwindcss.com)
 
 
+=======
+>>>>>>> e1f4d06ef83b246e1a0e0cc2a2288e5d7c7cb910
 
 ## Docker (windows) Instructions via Nathan
 1. Clone your fork of repo using "git clone"
@@ -76,4 +79,7 @@ The back end of the app uses Python's Flask framework for HTTP routing and creat
 $ docker-compose up -d
 ```
 7. Navigate to localhost:5000 to see your Franks Calendar!
+<<<<<<< HEAD
 >>>>>>> 5a71010... Update README.md
+=======
+>>>>>>> e1f4d06ef83b246e1a0e0cc2a2288e5d7c7cb910
