@@ -1,9 +1,9 @@
 @import 'reset.scss';
-@import 'calendar.scss';
 @import 'vars';
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
+@import 'calendar.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Pathway+Gothic+One&display=swap');
 
@@ -37,72 +37,116 @@
     display: inline-block;
     color: white;
     text-decoration: none;
-    background-color: #f3f3f3;
+    background-color: #42d392;
     margin: 0 auto;
 }
 
 .Sidebar {
+    flex-grow: 2;
     min-width: 20%;
-    margin-right: 1em;
+    max-width: 20%;
+    width: 20%;
     margin-top: 1em;
-    padding: 0 .5em;
+    padding: 0 1em;
     border-right: 4px solid black;
-    a {
-        text-decoration: none;
+
+    &__body {
+      font-family: $sans;
+      font-size: 1em;
+      color: black;
+
+      &__text {
+        margin-top: 0.5em;
+      }
+
+      a {
         color: $links;
+        text-decoration: none;
+      }
+    }
+
+    &__form {
+      font-family: $title;
+      font-style: italic;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 0.5em;
+      text-align: center;
+      display: block;
+      font-size: 1.5em;
+      width: 100%;
+      padding: 0.25em 0;
     }
 
     &__header {
-        font-size: 2em;
+        font-size: 1.5em;
         font-family: $title;
         font-style: italic;
-        margin-bottom: .15em;
-        text-transform: uppercase;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
 
         &__icon {
-            width: 1em;
+            width: 0.8em;
             height: auto;
-            margin-right: 0.25em;
+            margin-right: 0.15em;
         }
     }
     &__section {
         font-family: $sans;
-        margin: 1em 0;
+        margin: 0em 1em 1em;
     }
 
     input[type="checkbox"] {
         display: none;
     }
+
     &__filter {
         font-size: 1em;
-        display: block;
+        display: flex;
         position: relative;
         padding: .1em 0 .1em 12px;
         margin-bottom: .5em;
         border-top-right-radius: .25em;
         border-bottom-right-radius: .25em;
         background-color: none;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
 
         input[type="checkbox"] + & {
-            &[for="filter--admissions"] {background-color: rgba($admissions, 0); &::before {background-color: $admissions}}
-            &[for="filter--clubs"] {background-color: rgba($clubs, 0); &::before {background-color: $clubs}}
-            &[for="filter--student-life"] {background-color: rgba($student-life, 0); &::before {background-color: $student-life}}
-            &[for="filter--foundry-bow"] {background-color: rgba($foundry-bow, 0); &::before {background-color: $foundry-bow}}
-            &[for="filter--health-wellness"] {background-color: rgba($health-wellness, 0); &::before {background-color: $health-wellness}}
+            &[for="filter--academic"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--academic_calendar"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--academic_advising"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
+            &[for="filter--student_affairs"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--international"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--residential"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--health"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--pgp"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--hr"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--student"] {background-color: rgba($student, 0); &::before {background-color: $student}}
+            &[for="filter--admission"] {background-color: rgba($admission, 0); &::before {background-color: $admission}}
             &[for="filter--library"] {background-color: rgba($library, 0); &::before {background-color: $library}}
             &[for="filter--shop"] {background-color: rgba($shop, 0); &::before {background-color: $shop}}
-            &[for="filter--pgp"] {background-color: rgba($pgp, 0); &::before {background-color: $pgp}}
+            &[for="filter--clubs"] {background-color: rgba($clubs, 0); &::before {background-color: $clubs}}
+            &[for="filter--other"] {background-color: rgba($other, 0); &::before {background-color: $other}}
         }
 
         input[type="checkbox"]:checked + & {
-            &[for="filter--admissions"] {background-color: rgba($admissions, .2); &::before {background-color: $admissions}}
-            &[for="filter--clubs"] {background-color: rgba($clubs, .2); &::before {background-color: $clubs}}
-            &[for="filter--student-life"] {background-color: rgba($student-life, .2); &::before {background-color: $student-life}}
-            &[for="filter--foundry-bow"] {background-color: rgba($foundry-bow, .2); &::before {background-color: $foundry-bow}}
-            &[for="filter--health-wellness"] {background-color: rgba($health-wellness, .2); &::before {background-color: $health-wellness}}
+            &[for="filter--academic"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--academic_calendar"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--academic_advising"] {background-color: rgba($academic, .2); &::before {background-color: $academic}}
+            &[for="filter--international"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--student"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--residential"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--health"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--pgp"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--hr"] {background-color: rgba($student, .2); &::before {background-color: $student}}
+            &[for="filter--admission"] {background-color: rgba($admission, .2); &::before {background-color: $admission}}
             &[for="filter--library"] {background-color: rgba($library, .2); &::before {background-color: $library}}
             &[for="filter--shop"] {background-color: rgba($shop, .2); &::before {background-color: $shop}}
-            &[for="filter--pgp"] {background-color: rgba($pgp, .2); &::before {background-color: $pgp}}
+            &[for="filter--clubs"] {background-color: rgba($clubs, .2); &::before {background-color: $clubs}}
+            &[for="filter--other"] {background-color: rgba($other, .2); &::before {background-color: $other}}
         }
 
         &::before {
@@ -114,17 +158,175 @@
             height: 100%;
             background-color: inherit;
         }
+
+        &__icon {
+          padding-right: 0.5em;
+          display:inline-flex;
+
+          &+label {
+            position: absolute;
+            top:0.1em;
+            right:0.2em;
+          }
+
+          &:checked {
+            &+label svg {
+              transform:rotate(90deg);
+            }
+
+            &+label+ul {
+              display:block;
+            }
+          }
+        }
+
+        &__list {
+          list-style: none;
+          margin-left:1em;
+
+          &__group {
+            display:None;
+          }
+
+          li {
+            position:relative;
+          }
+        }
+
     }
 }
 
+.Event {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 9;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__button {
+    font-size: 1em;
+    font-family: $sans;
+    border-radius: 0.5em;
+    padding: 0.5em 0.5em;
+    color: black;
+    display: inherit;
+    vertical-align: middle;
+    text-decoration: none;
+    background-color: #E8E8E8;
+
+    &__icon {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0.5em;
+      height: 20px;
+    }
+  }
+
+  &__content {
+    padding: 1em 0em 1em 0em;
+
+    &__title {
+      font-family: $title;
+      font-size: 3em;
+      text-transform: uppercase;
+      font-style: italic;
+    }
+
+    &__block {
+      display: block;
+      margin: 0.75em 0em;
+    }
+
+    &__tag {
+      font-size: 1em;
+      font-family: $sans;
+      color: black;
+      text-transform: capitalize;
+      text-decoration: none;
+      border-radius: 0.5em;
+      padding: 0.5em 0.5em;
+      display: inline-block;
+
+      &[data-tag="academic_affairs"] {background-color: $academic;}
+      &[data-tag="academic_advising"] {background-color: $academic;}
+      &[data-tag="academic_calendar"] {background-color: $academic;}
+      &[data-tag="international"] {background-color: $student;}
+      &[data-tag="residential"] {background-color: $student;}
+      &[data-tag="health"] {background-color: $student;}
+      &[data-tag="pgp"] {background-color: $student;}
+      &[data-tag="hr"] {background-color: $student;}
+      &[data-tag="student_affairs"] {background-color: $student;}
+      &[data-tag="admission"] {background-color: $admission;}
+      &[data-tag="library"] {background-color: $library;}
+      &[data-tag="shop"] {background-color: $shop;}
+      &[data-tag="clubs"] {background-color: $clubs;}
+      &[data-tag="other"] {background-color: $other;}
+    }
+
+    &__table {
+      width: 100%;
+
+      &__row {
+        height: 1.75em;
+      }
+    }
+
+    &__headers {
+      font-family: $sans;
+      font-size: 1em;
+      color: black;
+      font-weight: bold;
+      width: 6em;
+      vertical-align: top;
+    }
+
+    &__text {
+      font-family: $sans;
+      font-size: 1em;
+      color: black;
+      vertical-align: top;
+
+      &__link {
+        padding-left: 0.5em;
+        color: $links;
+        text-decoration: none;
+      }
+    }
+
+    &__date {
+      color: black;
+      font-family: $sans;
+      font-size: 1em;
+      padding-right: 0.5em;
+    }
+
+    &__time {
+      color: black;
+      font-family: $sans;
+      font-size: 1em;
+      padding-right: 0.5em;
+      padding-left: 0.5em;
+    }
+  }
+}
+
 .Calendar {
-    margin-top: 1em;
-    max-height: 90vh;
-    overflow: hidden;
+    margin: 1em 2em 0em 2em;
+    position: relative;
 }
 
 .Footer {
-    font-size: 1.5em;
+    font-size: 1.25em;
     font-family: $sans;
     text-align: center;
     padding: 1em;
@@ -135,10 +337,10 @@
     &__links {
         margin-top: .5em;
         display: block;
-        font-size: .7em;
+        font-size: .6em;
 
         a {
-            color: inherit;
+            color: $links;
         }
     }
 }

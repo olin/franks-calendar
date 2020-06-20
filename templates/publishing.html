@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Pathway+Gothic+One&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='info-pages.css')}}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="fixedheader">
+    <h1>
+        <span id="frankscal"> <img src="franks_cal_logo.png" alt="Frank's Calendar Logo" height="30px"
+        margin-right="1em"/> Frank's Calendar </span>
+		<span  class="addspace"></span> - <span  class="addspace"></span>
+		<span id="post">How to Publish Events</span>
+    </h1>
+</div>
+
+<div id="main">
+
+[table of contents goes here]
+
+<h2 id="publishing-events"> How to Publish Events </h2>
+    <p> You can publish an event to the Frank’s Calendar platform in one of two ways: </p>
+        <ol>
+        <li>Filling out <a href="event-form.html">this form</a> to manually enter event information</li>
+        <li>Sending an ical (.ics file) to frankscalendar.olin@gmail.com</li>
+        </ol>
+    <h3 id="how-to-send-ical"> How to send an ical from your personal calendar: </h3>
+	<ol>
+        <li>Open the event into full editing mode in your personal calendar. Focus on the panel labeled “Guests” in Google Calendar or “Invite attendees” in Outlook Calendar. If you can’t edit the correct fields, go to <a href="#no-edit-access">“Sharing on behalf of someone else”</a></li>
+		<img src="info-images/google-invite.png" width="48%" alt="where the Guests panel is"/>
+        <img src="info-images/outlook-invite.png" width="48%" alt="where the Attendees panel is"/>
+	    <li>In the text box, type frankscalendar.olin@gmail.com and press enter.</li>
+        <li> Save the changes.</li>
+        <li> Check your email. You should shortly receive an email with the subject “Please select a category for the event you have submitted.” Use the magic link inside to go to the event editing portal.</li>
+        <li>Select the most appropriate category and make sure that all of the fields are filled. See the <a href="#filter-guide">Filter Guide</a> to help you determine which category is best.</li>
+        <li>Make sure to click the “Save changes” button!</li>
+        <li>Keep an eye on your inbox. You should get a confirmation email when your event is approved and made visible on the Frank’s Calendar site. If there is a problem with your submission, a moderator should email you about it within 24 hours.</li>
+    </ol>
+    <div class="row" id="no-edit-access">
+    <div class="column left">
+        <h3 id="how-to-duplicate-in-google">Publishing on behalf of someone else with <strong>Google Calendar</strong>:</h3>
+        <ol>
+        <li>Click the event to open the pop-up. Click the three dots in the upper right hand corner.</li>
+        <img src="info-images/google-copy-to.png" alt="where to find Copy To option in Google Calendar" width="95%" class="center"/>
+        <li>Select the “Copy to” option and a calendar of your choice. </li>
+
+        <li>This should open an event editing screen. Now <a href="#how-to-send-ical">return to the original steps.</a></li>
+        </ol>
+    </div>
+    <div class="column right">
+        <h3 id="how-to-duplicate-in-outlook">Publishing on behalf of someone else with <strong>Outlook Calendar</strong>:</h3>
+        <ol>
+        <li>Click the event to open the pop-up. Click the expand option in the upper right hand corner.</li>
+        <img src="info-images/outlook-expand.png" alt="how to expand event info in Outlook Calendar" width="95%" class="center"/>
+        <li>Click the 3 horizontal dots on the navigation bar. Select the “Copy to” option and a calendar of your choice.</li>
+        <img src="info-images/outlook-duplicate-event.png" alt="where to find Duplicate Event option in Outlook Calendar" width="95%" class="center"/>
+
+        <li>This should open an event editing screen. Now <a href="#how-to-send-ical">return to the original steps.</a></li>
+        </ol>
+    </div><p>
+
+</p>
+
+
+    </body>
