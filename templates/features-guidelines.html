@@ -8,8 +8,9 @@
 
 <div class="fixedheader">
     <h1>
-        <span id="frankscal"> <img src="franks_cal_logo.png" alt="Frank's Calendar Logo" height="30px"
-        margin-right="1em"/> Frank's Calendar </span>
+        <img src="{{ url_for('static', filename='images/franks_cal_logo.png') }}" alt="Frank's Calendar Logo" height="30px"
+        margin-right="1em"/>
+        <span id="frankscal"> Frank's Calendar </span>
 		<span  class="addspace"></span> - <span  class="addspace"></span>
 		<span id="post">Features and Guidelines</span>
     </h1>
@@ -51,21 +52,21 @@ These events don’t belong on Frank’s Calendar:
 <table>
   <tr>
    <td>
-	 <img src="info-images/publish-event.png" alt="publish event button image" height="50px" class="center"/></td>
+	 <img src="{{ url_for('static', filename='images/publish-event.png') }}" alt="publish event button image" height="50px" class="center"/></td>
    <td>When you hover over this button, you are given two options to publish an event: via the calendar’s online form where you manually input data, and via your existing calendar event invite.
    </td>
   </tr>
   <tr>
    <td>
 
-     <img src="info-images/export-event.png" alt="export event button image" height="50px" class="center"/></td>
+     <img src="{{ url_for('static', filename='images/export-event.png') }}" alt="export event button image" height="50px" class="center"/></td>
    </td>
    <td>This is on every event page you open. Use this to export one event to your personal calendar in the form of an email invite or downloading a .ics file.
    </td>
   </tr>
   <tr>
    <td>
-	<img src="info-images/filters.png" alt="filter section image" height="50px" class="center"/></td>
+	<img src="{{ url_for('static', filename='images/filters.png') }}" alt="filter section image" height="50px" class="center"/></td>
 
    </td>
    <td>The filters in the sidebar categorize events and allow you to choose the types of events displayed on the calendar. Learn more about filters <span class="underlined">here</span>.

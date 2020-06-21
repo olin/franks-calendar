@@ -120,7 +120,7 @@ class Sidebar extends React.Component {
                             <li className="Sidebar__filter__list">
                               <input type="checkbox" id="filter--health" defaultChecked={this.props.tags['health']} onClick={this.props.handleClick} value={"health"} />
                               <label for="filter--health" className="Sidebar__filter">
-                                  Health/Wellness
+                                  Health & Wellness
                               </label>
                             </li>
                             <li className="Sidebar__filter__list">
@@ -209,7 +209,7 @@ class Sidebar extends React.Component {
                         INFORMATION
                     </h2>
                     <ul className="Sidebar__filter__list">
-                        <li className="Sidebar__body">&gt; <a href="/features-guidelines"> Event Norms & Guidelines </a></li>
+                        <li className="Sidebar__body">&gt; <a href="/features-guidelines"> Calendar Features & Guidelines </a></li>
                         <li className="Sidebar__body">&gt; <a href="/publishing"> How to Publish an Event</a></li>
                         <li className="Sidebar__body">&gt; <a href="/exporting"> How to Export an Event</a></li>
                     </ul>
