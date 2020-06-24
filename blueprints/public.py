@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, send_file, make_response
 from modules.db import db
+from modules.email import send_confirmation
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
 from datetime import datetime
@@ -27,6 +28,13 @@ def public_page(page):
         rendered_page = render_template("404.html")
 
     return rendered_page
+
+@public.route('/new', methods=['POST', 'GET'])
+def new_import():
+    if request.method == 'POST':  
+        link = generate_link()  
+        send_confirmation(request.form['email'], link)
+
 
 @public.route('/export/<eventid>', methods=['POST', 'GET'])
 def export_event(eventid):
