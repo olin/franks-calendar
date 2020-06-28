@@ -39,7 +39,6 @@ def new_import():
 @public.route('/export/<eventid>', methods=['POST', 'GET'])
 def export_event(eventid):
     if request.method == 'GET':
-
         event_data = db.events.find_one({'_id' : ObjectId(eventid)})
         cal = Calendar()
         event = Event()

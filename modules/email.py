@@ -1,16 +1,20 @@
 import os
 from sendgrid import SendGridAPIClient
-from sendgrid.helpers.mail import Mail
+import sendgrid
+from sendgrid.helpers.mail import *
+
 
 def send_confirmation(toemail, link):
-    message = Mail(
-    from_email='frankscalendar@gmail.com',
-    to_emails=toemail, #email of person who created event
-    subject='New event added to Franks calendar!',
-    html_content='<strong>and easy to do anywhere, even with Python</strong>')
+    sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_LINK'))
+    from_email = Email("kellyyen4101@gmail.com")
+    to_email = To(toemail)
+    subject = "New event added to frankscalendar"
+    content = Content("text/plain", "New event added to frankscalendar. To edit, click here: "+link)
+    mail = Mail(from_email, to_email, subject, content)
+    
+        
     try:
-        sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-        response = sg.send(message)
+        response = sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
         print(response.body)
         print(response.headers)
@@ -21,3 +25,5 @@ def generate_link():
     #creates a link for user to be able to access/edit event. Maybe this function belongs in the db module
     pass
 
+if __name__ == "__main__":
+    pass
