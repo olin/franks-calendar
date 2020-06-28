@@ -6,13 +6,12 @@ from sendgrid.helpers.mail import *
 
 def send_confirmation(toemail, link):
     sg = sendgrid.SendGridAPIClient(os.environ.get('SENDGRID_API_LINK'))
-    from_email = Email("kellyyen4101@gmail.com")
+    from_email = Email("frankscalendar.olin@gmail.com")
     to_email = To(toemail)
     subject = "New event added to frankscalendar"
     content = Content("text/plain", "New event added to frankscalendar. To edit, click here: "+link)
     mail = Mail(from_email, to_email, subject, content)
     
-        
     try:
         response = sg.client.mail.send.post(request_body=mail.get())
         print(response.status_code)
