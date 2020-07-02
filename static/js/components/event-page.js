@@ -1,7 +1,6 @@
 import React from 'react';
 import client from '../api';
 
-
 export default class EventPage extends React.Component {
     constructor(props) {
         super(props);

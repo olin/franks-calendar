@@ -20,7 +20,7 @@ def add_event():
         return render_template('add.html')
     elif request.method == 'POST':
         magicid = uuid.uuid4()
-        eventid = ObjectId
+        eventid = ObjectId()
         event = {
             "_id": eventid,
             "title": request.form["title"],
@@ -29,12 +29,12 @@ def add_event():
             "start": request.form["start"],
             "end": request.form["end"],
             "rrule": request.form["rrule"],
-            "last_edited": datetime.now(timezon.utc),
+            "last_edited": datetime.now(timezone.utc),
             "magic": magicid,
         }
         db.events.insert_one(event)
 
-        link = request.base_url + "/edit?event_id=" + eventid + "&magic=" + magicid
+        link = request.base_url + "/edit/" + eventid + "?magic=" + magicid
         send_confirmation(request.form['email'], link)
         return redirect(url_for('confirmation/' + eventid))
 
@@ -76,7 +76,7 @@ def edit_event(event_id):
                 "start": request.form["start"],
                 "end": request.form["end"],
                 "rrule": request.form["rrule"],
-                "last_edited": datetime.now(timezon.utc),            
+                "last_edited": datetime.now(timezone.utc),            
             }
         )
     elif request.method == 'DELETE':
@@ -87,10 +87,11 @@ def edit_event(event_id):
         #render a customized error page eventually?
 
 
-@public.route('/admin/<adminid>', methods=['GET'])
-def admin_page(adminid):
+@public.route('/admin', methods=['GET'])
+def admin_page():
     if request.method == "GET":
         magicid = request.args.get('magic')
+        adminid = request.args.get('adminid')
         admin = db.admins.find_one({'_id' : ObjectId(adminid)})
         if admin is None:
             return render_template('404.html')
@@ -102,9 +103,10 @@ def admin_page(adminid):
             return render_template("404.html")
             #render a customized error page eventually?
 
-@public.route('/confirmation/<eventid>', methods=['GET'])
-def confirmation_page(eventid):
+@public.route('/confirmation', methods=['GET'])
+def confirmation_page():
     if request.method == "GET":
+        eventid = request.args.get('eventid')
         event_data = db.events.find_one({'_id' : ObjectId(eventid)})
         if event_data is None:
             return render_template('404.html')
