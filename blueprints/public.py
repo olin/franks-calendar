@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 from modules.db import db
-from modules.email import send_confirmation
+# from modules.sg_client import send_confirmation
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
 from datetime import datetime
@@ -35,7 +35,7 @@ def add_event():
         db.events.insert_one(event)
 
         link = request.base_url + "/edit/" + eventid + "?magic=" + magicid
-        send_confirmation(request.form['email'], link)
+        # send_confirmation(request.form['email'], link)
         return redirect(url_for('confirmation/' + eventid))
 
 @public.route('/about', methods=['GET'])
@@ -54,7 +54,7 @@ def public_page(page):
 
 @public.route('/edit/<event_id>', methods=['PUT', 'GET', 'DELETE'])
 def edit_event(event_id):
-    
+
     magicid = request.args.get('magic')
     eventid = event_id
     event_data = db.events.find_one({'_id' : ObjectId(eventid)})
@@ -67,7 +67,7 @@ def edit_event(event_id):
     elif request.method == 'PUT':
         db.events.update(
             { _id: ObjectId(event_id)},
-            #form is prepopulated with old values, so if user didn't change every a certain field, 
+            #form is prepopulated with old values, so if user didn't change every a certain field,
             #the database is updated with the old value (nothing changes)
             {
                 "title": request.form["title"],
@@ -76,13 +76,13 @@ def edit_event(event_id):
                 "start": request.form["start"],
                 "end": request.form["end"],
                 "rrule": request.form["rrule"],
-                "last_edited": datetime.now(timezone.utc),            
+                "last_edited": datetime.now(timezone.utc),
             }
         )
     elif request.method == 'DELETE':
         db.content.delete_one({'_id': ObjectId(eventid)})
         #notify users that an event has been deleted?
-    else: 
+    else:
         return render_template("404.html")
         #render a customized error page eventually?
 
@@ -95,7 +95,7 @@ def admin_page():
         admin = db.admins.find_one({'_id' : ObjectId(adminid)})
         if admin is None:
             return render_template('404.html')
-        adminmagic = admin['magic']    
+        adminmagic = admin['magic']
         if magicid == adminmagic:
             all_events = db.events.find()
             return render_template('admin.html', events = all_events)

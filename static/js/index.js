@@ -5,8 +5,6 @@ import ReactDOM from "react-dom";
 import '../css/index.scss';
 import Sidebar from './components/sidebar.js';
 import EventPage from './components/event-page.js';
-import Header from './components/header.js';
-import Footer from './components/footer.js';
 import { ErrorBoundary } from './errorboundary';
 import client from './api';
 
@@ -128,7 +126,6 @@ class App extends React.Component {
     render() {
         return (
             <>
-                <Header />
                 <main className="Main">
                     <aside className="Sidebar">
                         <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
@@ -151,7 +148,6 @@ class App extends React.Component {
                         />
                     </article>
                 </main>
-                <Footer />
             </>
         );
     };
