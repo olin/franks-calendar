@@ -1,9 +1,62 @@
+{% extends 'base.html' %}
 {% block page %}
-<header>
-</header>
-<main>
-    <form action="" method="POST">
-
-    </form>
-</main>
+    {% include 'components/header.html' %}
+    <main>
+        <a href="/">← Back to Calendar</a>
+        <form action="" method="POST">
+            {{ form.csrf_token }}
+            <div class="Form__field  Form__field--text">
+                <label>{{ form.title.label }}</label>
+                {{ form.title }}
+            </div>
+            <div class="Form__field  Form__field--text">
+                <label>{{ form.location.label }}</label>
+                {{ form.location }}
+            </div>
+            <div class="Form__field  Form__field--">
+                <label>{{ form.dtstart.label }}</label>
+                {{ form.dtstart }}
+                <label>{{ form.dtend.label }}</label>
+                {{ form.dtend }}
+                <label>{{ form.all_day.label }}</label>
+                {{ form.all_day }}
+            </div>
+            <div class="Form__field  Form__field--select">
+                <label>
+                    {{ form.category.label }}
+                </label>
+                {{ form.category }}
+            </div>
+            <div class="Form__field  Form__field--textarea">
+                <label>
+                    {{ form.description.label }}
+                </label>
+                {{ form.description }}
+            </div>
+            <div class="Form__field  Form__field--">
+                Host
+                <label>
+                    {{ form.host.name_.label }}
+                </label>
+                {{ form.host.name_ }}
+                <label>
+                    {{ form.host.email.label }}
+                </label>
+                {{ form.host.email }}
+            </div>
+            <div class="Form__field  Form__field--">
+                Submitter
+                <label>
+                    {{ form.submitter.name_.label }}
+                </label>
+                {{ form.submitter.name_ }}
+                <label>
+                    {{ form.submitter.email.label }}
+                </label>
+                {{ form.submitter.email }}
+            </div>
+            <input type="submit" name="Submit" value="Submit" />
+        </form>
+    </main>
+    {% include 'components/footer.html' %}
 {% endblock %}

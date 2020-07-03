@@ -6,6 +6,7 @@ chardet==3.0.4
 click==7.1.1
 Flask==1.1.2
 Flask-SQLAlchemy==2.4.1
+Flask-WTF==0.14.3
 httplib2==0.18.0
 icalendar==4.0.5
 idna==2.9
@@ -33,3 +34,4 @@ TatSu==4.4.0
 uritemplate==3.0.1
 urllib3==1.25.9
 Werkzeug==1.0.1
+WTForms==2.3.1
