@@ -9,5 +9,4 @@ class DevelopmentConfig():
     TESTING = True
     ENV = 'development'
     TEMPLATES_AUTO_RELOAD = True
-    # WTF_CSRF_SECRET_KEY = 'a random string'
-    SECRET_KEY="asdfasdfasdf"
+    SECRET_KEY="ahhhimasecret"

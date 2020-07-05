@@ -113,7 +113,7 @@ class App extends React.Component {
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
-            let event_list = clean_event_list(res.data)
+            let event_list = clean_event_list(JSON.parse(res.data))
             this.setState({
                 events: event_list,
                 allEvents: event_list,
