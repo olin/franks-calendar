@@ -21,7 +21,7 @@ class DatabaseClient(object):
 
     def get_one(self, event_id):
         return self.client.events.find_one({
-            "_id": ObjectID(event_id)
+            "_id": ObjectId(event_id)
         }, {
             "magic": False
         })
@@ -31,7 +31,7 @@ class DatabaseClient(object):
 
     def get_event_with_magic(self, event_id):
         return self.client.events.find_one({
-            "_id": ObjectID(event_id)
+            "_id": ObjectId(event_id)
         })
 
     def create_new_event(self, event):
@@ -43,8 +43,19 @@ class DatabaseClient(object):
         event["_id"] = inserted_id
         return event
 
+    def authenticate_magic_link(self, event_id, magic):
+        event = self.client.events.find_one({
+            "_id": ObjectId(event_id),
+        }, {
+            "magic": True
+        })
+        _magic = event["magic"]
+        if _magic == magic:
+            return True
+        else:
+            return False
+
     def delete(self, event_id):
-        assert(isinstance(event_id, ObjectID))
         self.client.delete_one({
             "_id": event_id
         })
@@ -52,3 +63,6 @@ class DatabaseClient(object):
     @staticmethod
     def generate_magic_string():
         return uuid()
+
+if __name__ == "__main__":
+    db = DatabaseClient()
