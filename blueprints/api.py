@@ -15,6 +15,7 @@ class API(MethodView):
             return db.get_one(id)
         else:
             query = db.get_all_events()
+            print(db.authenticate_magic_link("5ee684858e38da6033299985", 'asdf'))
             return jsonify(json_util.dumps(query)), 200
 
     # def post(self):
