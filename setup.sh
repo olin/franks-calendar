@@ -10,11 +10,11 @@ read -p "Enter your Sendgrid API key: " API_KEY
 if [ "$API_KEY" = "" ]; then
     echo -e "${RED}WARNING: No API key entered.${NC} Something might break..."
 else
-    echo $API_KEY > .sendgrid.env
+    echo "API_KEY=$API_KEY" > .sendgrid.env
 fi
 
 echo "Setting up docker containers..."
-docker-compose up -d
+docker-compose up -d;
 
 echo "Ingesting mock events from events.json..."
 docker exec -ti franks-calendar-database \

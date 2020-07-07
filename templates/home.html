@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block page %}
-<div id="calendar-root"></div>
-<script src="{{url_for('public.static', filename='build.js')}}"></script>
+    {% include 'components/header.html' %}
+
+    <div id="calendar-root"></div>
+
+    {% include 'components/footer.html' %}
+
+    <script src="{{url_for('public.static', filename='build.js')}}"></script>
 {% endblock %}

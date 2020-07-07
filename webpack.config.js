@@ -7,7 +7,7 @@ module.exports =  {
     mode: 'development',
     entry: {
         build: [
-            './static/index.js',
+            './static/js/index.js',
             'babel-polyfill',
         ]
     },

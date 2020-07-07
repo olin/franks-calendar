@@ -9,3 +9,4 @@ class DevelopmentConfig():
     TESTING = True
     ENV = 'development'
     TEMPLATES_AUTO_RELOAD = True
+    SECRET_KEY="ahhhimasecret"

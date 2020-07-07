@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block page %}
-<h1>404 Error!</h1>
-<p>Sorry, this page doesn't exist.</p>
-<a href="/">Click here to go back home</a>
+    {% include 'components/header.html' %}
+    
+    <h1>404 Error!</h1>
+    <p>Sorry, this page doesn't exist.</p>
+    <a href="/">Click here to go back home</a>
+
+    {% include 'components/footer.html' %}
 {% endblock %}
