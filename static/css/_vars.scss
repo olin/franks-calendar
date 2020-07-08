@@ -1,11 +1,34 @@
-$title: 'Pathway Gothic One', sans-serif;
+$title: 'din-2014', sans-serif;
 $sans: 'Lato', sans-serif;
 
-$links:  #0087C6;
-$academic: #0087C6;
-$student: #1FC9B3;
-$admission: #DD2E44;
-$library: #722780;
-$shop: #95CC3F;
-$clubs: #F37820;
-$other: #FFC700;
+//Branding colors
+$links:  #009BDF;
+$links-light: #80CDEF;
+$secondary: #A7A9AC;
+$secondary-light: #F3F3F3;
+$main: black;
+
+//Filter colors
+$academic: #00458C;
+$academic-light: #BFD1E2;
+
+$student: #26AAA5;
+$student-light: #C9EAE8;
+
+$admission: #E31D3C;
+$admission-light: #F8C7CE;
+
+$library: #511C74;
+$library-light: #DED6E9;
+
+$shop: #8EBE3F;
+$shop-light: #E3EFCF;
+
+$clubs: #F47920;
+$clubs-light: #FCDDC7;
+
+$other: #FFC20E;
+$other-light: #FFF0C3;
+
+//Form colors
+$form-header: #87888A;
