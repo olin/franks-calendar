@@ -1,0 +1,266 @@
+.Page {
+  text-align: center;
+}
+
+.Form {
+  display: block;
+  // Page title
+  &__title {
+    font-family: $title;
+    font-size: 2em;
+    font-weight: 400;
+    color: $links;
+    display: block;
+    text-align: center;
+    margin-bottom: 0.25em;
+  }
+
+  // Boundary box around form
+  &__box {
+    display: block;
+    width: 32.5em;
+    border: 0.05em solid $main;
+    border-radius: 0.5em;
+    padding: 1em 1.5em;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1em;
+    box-shadow: 0.1em 0.1em 0.25em $secondary;
+  }
+
+  // Row for duration section
+  &__row {
+    display: block;
+
+    h2 {
+      display: block;
+      text-align: left;
+      font-family: $title;
+      font-size: 1em;
+      font-weight: 800;
+      color: $form-header;
+      text-transform: uppercase;
+      padding-left: 0.1em;
+      margin-bottom: 0.5em;
+    }
+
+    &__buttons {
+      display: flex;
+
+      input {
+        display: none;
+      }
+
+      label {
+        align-content: flex-start;
+        font-family: $title;
+        font-size: 1em;
+        font-weight: 800;
+        color: white;
+        text-transform: uppercase;
+        padding: 0.5em 0.5em;
+        margin: 0em 0.5em 0.5em 0em;
+        border: none;
+        border-radius: 0.5em;
+        background-color: $links-light;
+        transition-duration: 0.3s;
+
+        &:hover {
+          background-color: $links;
+        }
+
+        &:focus {
+          background-color: $links;
+        }
+      }
+    }
+  }
+
+  // Row for Date-Time sections
+  &__date {
+    display: flex;
+
+    label {
+      display: block;
+      text-align: left;
+      font-family: $title;
+      font-size: 1em;
+      font-weight: 800;
+      color: $form-header;
+      text-transform: uppercase;
+      padding-left: 0.1em;
+      margin-bottom: 0.5em;
+    }
+
+    input {
+
+    }
+  }
+
+  // Styling dropdown menu
+  &__category {
+    overflow: hidden;
+
+    select {
+      display: block;
+      font-family: $title;
+      font-size: 1em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: $secondary;
+      background-color: white;
+      border: 0.05em solid $main;
+      border-radius: 0.5em;
+      padding: 0.5em 0.5em;
+      margin-bottom: 0.5em;
+      transition: box-shadow 0.3s;
+
+      // Changing the dropdown arrow to a chevron
+    	background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") right center no-repeat;
+    	appearance: none;
+
+      &:hover {
+        box-shadow: 0 0 0.3em $secondary;
+      }
+
+      option {
+        font-family: $title;
+        font-size: 1em;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      option[value="academic_calendar"] {
+        color: $academic;
+      }
+
+      option[value="academic_advising"] {
+        color: $academic;
+      }
+
+      option[value="residential"] {
+        color: $student;
+      }
+
+      option[value="international"] {
+        color: $student;
+      }
+
+      option[value="diversity"] {
+        color: $student;
+      }
+
+      option[value="pgp"] {
+        color: $student;
+      }
+
+      option[value="hr"] {
+        color: $student;
+      }
+
+      option[value="health"] {
+        color: $student;
+      }
+
+      option[value="admission"] {
+        color: $admission;
+      }
+
+      option[value="library"] {
+        color: $library;
+      }
+
+      option[value="shop"] {
+        color: $shop;
+      }
+
+      option[value="clubs"] {
+        color: $clubs;
+      }
+
+      option[value="other"] {
+        color: $other;
+      }
+    }
+  }
+
+  // Row for each form line
+  &__field {
+    display: block;
+
+    &--flex {
+      display:flex;
+      justify-content: flex-start;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-family: $title;
+      font-size: 1em;
+      font-weight: 800;
+      color: $form-header;
+      text-transform: uppercase;
+      padding-left: 0.1em;
+      margin-bottom: 0.5em;
+    }
+
+    input {
+      display: block;
+      text-align: left;
+      width: 100%;
+      border: none;
+      border-radius: 0.5em;
+      background-color: $secondary-light;
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+      font-family: $sans;
+      font-size: 1em;
+      color: $main;
+
+      &::placeholder {
+        color: $secondary;
+      }
+    }
+
+    textarea {
+      display: block;
+      text-align: left;
+      width: 29.5em;
+      height: 7em;
+      border: none;
+      border-radius: 0.5em;
+      background-color: $secondary-light;
+      padding: 0.75em 0.5em;
+      margin-bottom: 0.5em;
+      font-family: $sans;
+      font-size: 1em;
+      color: $main;
+
+      &::placeholder {
+        color: $secondary;
+      }
+    }
+  }
+
+  &__submit {
+    background-color: $links;
+    border: none;
+    border-radius: 0.25em;
+    color: white;
+    font-size: 1.5em;
+    font-family: $title;
+    font-weight: 400;
+    padding: 0.25em 0.5em;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    transition-duration: 0.3s;
+    box-shadow: 0.1em 0.1em 0.25em $secondary;
+
+    &:hover {
+      background-color: $links-light;
+    }
+  }
+}

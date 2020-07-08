@@ -2,61 +2,96 @@
 {% block page %}
     {% include 'components/header.html' %}
     <main>
-        <a href="/">← Back to Calendar</a>
-        <form action="" method="POST">
+      <div class="Page">
+        <h1 class="Form__title">Submit a New Event</h1>
+
+        <form class="Form" action="" method="POST">
             {{ form.csrf_token }}
-            <div class="Form__field  Form__field--text">
-                <label>{{ form.title.label }}</label>
-                {{ form.title }}
+
+          <div class="Form__box">
+
+            <div class="Form__field">
+              {{ form.title.label }}
+              {{ form.title(placeholder="e.g. 'Hang out with Frank the Phoenix!'") }}
             </div>
-            <div class="Form__field  Form__field--text">
-                <label>{{ form.location.label }}</label>
-                {{ form.location }}
+
+            <div class="Form__row">
+              <h2>Duration</h2>
+              <div class="Form__row__buttons">
+                <input type="radio" id="duration--hour" name="duration" value="hour">
+                <label for="duration--hour">
+                  &#60;1 day</label>
+                <input type="radio" id="duration--day" name="duration" value="day">
+                <label for="duration--day">
+                  All day</label>
+                <input type="radio" id="duration--many" name="duration" value="many">
+                <label for="duration--many">
+                  Many days</label>
+              </div>
             </div>
-            <div class="Form__field  Form__field--">
-                <label>{{ form.dtstart.label }}</label>
-                {{ form.dtstart }}
-                <label>{{ form.dtend.label }}</label>
-                {{ form.dtend }}
-                <label>{{ form.all_day.label }}</label>
-                {{ form.all_day }}
+
+            <div id="duration--hour" class="Form__field Form__field--flex">
+              <div class="Form__field">
+                <label>Date</label>
+                {{ form.dtstart(placeholder="mm/dd/yy") }}
+              </div>
+              <div class="Form__field">
+                <label>Start Time</label>
+                {{ form.dtstart(placeholder="h:mm xm") }}
+              </div>
+              <div class="Form__field">
+                <label>End Time</label>
+                {{ form.dtend(placeholder="h:mm xm") }}
+              </div>
             </div>
-            <div class="Form__field  Form__field--select">
-                <label>
-                    {{ form.category.label }}
-                </label>
+
+            <div id="duration--day" class="Form__field Form__field--flex">
+              <div class="Form__field">
+                <label>Date</label>
+                {{ form.dtstart(placeholder="mm/dd/yy") }}
+              </div>
+            </div>
+
+            <div id="duration--many" class="Form__field Form__field--flex">
+              <div class="Form__field">
+                <label>Start Date</label>
+                {{ form.dtstart(placeholder="mm/dd/yy") }}
+              </div>
+              <div class="Form__field">
+                <label>End Date</label>
+                {{ form.dtend(placeholder="mm/dd/yy") }}
+              </div>
+            </div>
+
+            <div class="Form__field">
+              {{ form.location.label }}
+              {{ form.location(placeholder="e.g. 'Dining Hall' or 'https://olin.zoom.us/j/123456789'") }}
+            </div>
+
+            <div class="Form__field">
+              {{ form.category.label }}
+              <div class="Form__category">
                 {{ form.category }}
+              </div>
             </div>
-            <div class="Form__field  Form__field--textarea">
-                <label>
-                    {{ form.description.label }}
-                </label>
-                {{ form.description }}
+
+            <div class="Form__field">
+              {{ form.description.label }}
+              {{ form.description(placeholder="Who might be interested? What would they be doing? Is there anything they need to have done before hand?
+
+If you sent out an email about this event, the text from that email is probably a good thing to include here!") }}
             </div>
-            <div class="Form__field  Form__field--">
-                Host
-                <label>
-                    {{ form.host.name_.label }}
-                </label>
-                {{ form.host.name_ }}
-                <label>
-                    {{ form.host.email.label }}
-                </label>
-                {{ form.host.email }}
+
+            <div class="Form__field">
+                <label>Host Name</label>
+                {{ form.host.name_(placeholder="e.g. 'Frankie Olin' or 'The Phoenix Club'") }}
+                <label>Point of Contact Email</label>
+                {{ form.host.email(placeholder="e.g. 'frankie@olin.edu' or 'phoenixclub@olin.edu'") }}
             </div>
-            <div class="Form__field  Form__field--">
-                Submitter
-                <label>
-                    {{ form.submitter.name_.label }}
-                </label>
-                {{ form.submitter.name_ }}
-                <label>
-                    {{ form.submitter.email.label }}
-                </label>
-                {{ form.submitter.email }}
-            </div>
-            <input type="submit" name="Submit" value="Submit" />
+
+          </div>
+          <input class="Form__submit" type="submit" name="Submit" value="Submit Event" />
         </form>
-    </main>
+      </div>
     {% include 'components/footer.html' %}
 {% endblock %}

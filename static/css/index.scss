@@ -1,11 +1,12 @@
 @import 'reset.scss';
 @import 'vars';
+@import 'add';
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
 @import 'calendar.scss';
 
-@import url('https://fonts.googleapis.com/css2?family=Lato&family=Pathway+Gothic+One&display=swap');
+@import url('https://use.typekit.net/gsh7wuf.css');
 
 .Header {
     padding: 1em;
