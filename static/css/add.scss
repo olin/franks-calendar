@@ -18,7 +18,7 @@
   // Boundary box around form
   &__box {
     display: block;
-    width: 32.5em;
+    width: $box-width;
     border: 0.05em solid $main;
     border-radius: 0.5em;
     padding: 1em 1.5em;
