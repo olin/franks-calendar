@@ -26,6 +26,16 @@
     margin-left: auto;
     margin-bottom: 1em;
     box-shadow: 0.1em 0.1em 0.25em $secondary;
+    
+    &--buttons {
+      padding: .1em .1em;
+      border:transparent;
+      box-shadow: 0.1em 0.1em 0.25em transparent;
+    }
+  }
+
+  &__flex {
+    display:flex;
   }
 
   // Row for duration section
@@ -262,5 +272,44 @@
     &:hover {
       background-color: $links-light;
     }
+  }
+
+  &__button {
+    border: none;
+    border-radius: 0.25em;
+    color: white;
+    font-size: 1.2em;
+    font-family: $title;
+    font-weight: 400;
+    text-transform:uppercase;
+    padding: 0.25em 0.5em;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    transition-duration: 0.3s;
+    box-shadow: 0.1em 0.1em 0.25em $secondary;
+
+    &--green {
+      background-color: $green;
+      &:hover {
+          background-color: $green-light;
+        }
+    }
+
+    &--blue {
+      background-color: $blue;
+      &:hover {
+          background-color: $blue-light;
+        }
+    }
+
+    &--red {
+      background-color: $red;
+      &:hover {
+          background-color: $red-light;
+        }
+    }
+
   }
 }
