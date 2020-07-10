@@ -62,7 +62,7 @@
         margin: 0em 0.5em 0.5em 0em;
         border: none;
         border-radius: 0.5em;
-        background-color: $links-light;
+        background-color: $links--light;
         transition-duration: 0.3s;
 
         &:hover {
@@ -114,10 +114,6 @@
       padding: 0.5em 0.5em;
       margin-bottom: 0.5em;
       transition: box-shadow 0.3s;
-
-      // Changing the dropdown arrow to a chevron
-    	background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") right center no-repeat;
-    	appearance: none;
 
       &:hover {
         box-shadow: 0 0 0.3em $secondary;
@@ -211,7 +207,7 @@
       width: 100%;
       border: none;
       border-radius: 0.5em;
-      background-color: $secondary-light;
+      background-color: $secondary--light;
       padding: 0.5em;
       margin-bottom: 0.5em;
       font-family: $sans;
@@ -228,9 +224,10 @@
       text-align: left;
       width: 29.5em;
       height: 7em;
+      resize: vertical;
       border: none;
       border-radius: 0.5em;
-      background-color: $secondary-light;
+      background-color: $secondary--light;
       padding: 0.75em 0.5em;
       margin-bottom: 0.5em;
       font-family: $sans;
@@ -260,7 +257,7 @@
     box-shadow: 0.1em 0.1em 0.25em $secondary;
 
     &:hover {
-      background-color: $links-light;
+      background-color: $links--light;
     }
   }
 }
