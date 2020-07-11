@@ -293,21 +293,21 @@
     &--green {
       background-color: $green;
       &:hover {
-          background-color: $green-light;
+          background-color: $green--light;
         }
     }
 
     &--blue {
       background-color: $blue;
       &:hover {
-          background-color: $blue-light;
+          background-color: $blue--light;
         }
     }
 
     &--red {
       background-color: $red;
       &:hover {
-          background-color: $red-light;
+          background-color: $red--light;
         }
     }
 
