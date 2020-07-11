@@ -19,9 +19,10 @@ class UserForm(FlaskForm):
 class EventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     location = StringField('Location', validators=[DataRequired()])
-    all_day = BooleanField('All Day')
-    dtstart = DateTimeField('Start', validators=[DataRequired()])
-    dtend = DateTimeField('End', validators=[DataRequired()])
+    # allDay = BooleanField('All Day')
+    # multiDay = BooleanField('Multi Day')
+    dtstart = DateTimeField('Start', validators=[DataRequired()], format="%y/%m/%d %H:%M:%S")
+    dtend = DateTimeField('End', validators=[DataRequired()], format="%y/%m/%d %H:%M:%S")
     category = SelectField('Category', validators=[DataRequired()], choices=[
         ("academic_calendar", "Academic Calendar"),
         ("academic_advising", "Academic Advising"),
@@ -39,4 +40,3 @@ class EventForm(FlaskForm):
     ])
     description = TextAreaField('Description', validators=[DataRequired()])
     host = FormField(UserForm)
-    submitter = FormField(UserForm)

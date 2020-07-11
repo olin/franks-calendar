@@ -5,7 +5,7 @@
       <div class="Page">
         <h1 class="Form__title">Submit a New Event</h1>
 
-        <form class="Form" action="" method="POST" autocomplete="off">
+        <form class="Form" action="" method="POST" autocomplete="off" id="eventForm">
             {{ form.csrf_token }}
 
           <div class="Form__box">
@@ -37,11 +37,205 @@
               </div>
               <div class="Form__field">
                 <label>Start Time</label>
-                <input type="text" id="hour__start" placeholder="hh:mm" />
+                <select id="hour__start">
+                    <option value="00:00:00">12:00am</option>
+                    <option value="00:15:00">12:15am</option>
+                    <option value="00:30:00">12:30am</option>
+                    <option value="00:45:00">12:45am</option>
+                    <option value="01:00:00">1:00am</option>
+                    <option value="01:15:00">1:15am</option>
+                    <option value="01:30:00">1:30am</option>
+                    <option value="01:45:00">1:45am</option>
+                    <option value="02:00:00">2:00am</option>
+                    <option value="02:15:00">2:15am</option>
+                    <option value="02:30:00">2:30am</option>
+                    <option value="02:45:00">2:45am</option>
+                    <option value="03:00:00">3:00am</option>
+                    <option value="03:15:00">3:15am</option>
+                    <option value="03:30:00">3:30am</option>
+                    <option value="03:45:00">3:45am</option>
+                    <option value="04:00:00">4:00am</option>
+                    <option value="04:15:00">4:15am</option>
+                    <option value="04:30:00">4:30am</option>
+                    <option value="04:45:00">4:45am</option>
+                    <option value="05:00:00">5:00am</option>
+                    <option value="05:15:00">5:15am</option>
+                    <option value="05:30:00">5:30am</option>
+                    <option value="05:45:00">5:45am</option>
+                    <option value="06:00:00">6:00am</option>
+                    <option value="06:15:00">6:15am</option>
+                    <option value="06:30:00">6:30am</option>
+                    <option value="06:45:00">6:45am</option>
+                    <option value="07:00:00">7:00am</option>
+                    <option value="07:15:00">7:15am</option>
+                    <option value="07:30:00">7:30am</option>
+                    <option value="07:45:00">7:45am</option>
+                    <option value="08:00:00">8:00am</option>
+                    <option value="08:15:00">8:15am</option>
+                    <option value="08:30:00">8:30am</option>
+                    <option value="08:45:00">8:45am</option>
+                    <option value="09:00:00">9:00am</option>
+                    <option value="09:15:00">9:15am</option>
+                    <option value="09:30:00">9:30am</option>
+                    <option value="09:45:00">9:45am</option>
+                    <option value="10:00:00">10:00am</option>
+                    <option value="10:15:00">10:15am</option>
+                    <option value="10:30:00">10:30am</option>
+                    <option value="10:45:00">10:45am</option>
+                    <option value="11:00:00">11:00am</option>
+                    <option value="11:15:00">11:15am</option>
+                    <option value="11:30:00">11:30am</option>
+                    <option value="11:45:00">11:45am</option>
+                    <option value="12:00:00">12:00pm</option>
+                    <option value="12:15:00">12:15pm</option>
+                    <option value="12:30:00">12:30pm</option>
+                    <option value="12:45:00">12:45pm</option>
+                    <option value="13:00:00">1:00pm</option>
+                    <option value="13:15:00">1:15pm</option>
+                    <option value="13:30:00">1:30pm</option>
+                    <option value="13:45:00">1:45pm</option>
+                    <option value="14:00:00">2:00pm</option>
+                    <option value="14:15:00">2:15pm</option>
+                    <option value="14:30:00">2:30pm</option>
+                    <option value="14:45:00">2:45pm</option>
+                    <option value="15:00:00">3:00pm</option>
+                    <option value="15:15:00">3:15pm</option>
+                    <option value="15:30:00">3:30pm</option>
+                    <option value="15:45:00">3:45pm</option>
+                    <option value="16:00:00">4:00pm</option>
+                    <option value="16:15:00">4:15pm</option>
+                    <option value="16:30:00">4:30pm</option>
+                    <option value="16:45:00">4:45pm</option>
+                    <option value="17:00:00">5:00pm</option>
+                    <option value="17:15:00">5:15pm</option>
+                    <option value="17:30:00">5:30pm</option>
+                    <option value="17:45:00">5:45pm</option>
+                    <option value="18:00:00">6:00pm</option>
+                    <option value="18:15:00">6:15pm</option>
+                    <option value="18:30:00">6:30pm</option>
+                    <option value="18:45:00">6:45pm</option>
+                    <option value="19:00:00">7:00pm</option>
+                    <option value="19:15:00">7:15pm</option>
+                    <option value="19:30:00">7:30pm</option>
+                    <option value="19:45:00">7:45pm</option>
+                    <option value="20:00:00">8:00pm</option>
+                    <option value="20:15:00">8:15pm</option>
+                    <option value="20:30:00">8:30pm</option>
+                    <option value="20:45:00">8:45pm</option>
+                    <option value="21:00:00">9:00pm</option>
+                    <option value="21:15:00">9:15pm</option>
+                    <option value="21:30:00">9:30pm</option>
+                    <option value="21:45:00">9:45pm</option>
+                    <option value="22:00:00">10:00pm</option>
+                    <option value="22:15:00">10:15pm</option>
+                    <option value="22:30:00">10:30pm</option>
+                    <option value="22:45:00">10:45pm</option>
+                    <option value="23:00:00">11:00pm</option>
+                    <option value="23:15:00">11:15pm</option>
+                    <option value="23:30:00">11:30pm</option>
+                    <option value="23:45:00">11:45pm</option>
+                </select>
               </div>
               <div class="Form__field">
                 <label>End Time</label>
-                <input type="text" id="hour__end" placeholder="hh:mm" />
+                <select id="hour__end">
+                    <option value="00:00:00">12:00am</option>
+                    <option value="00:15:00">12:15am</option>
+                    <option value="00:30:00">12:30am</option>
+                    <option value="00:45:00">12:45am</option>
+                    <option value="01:00:00">1:00am</option>
+                    <option value="01:15:00">1:15am</option>
+                    <option value="01:30:00">1:30am</option>
+                    <option value="01:45:00">1:45am</option>
+                    <option value="02:00:00">2:00am</option>
+                    <option value="02:15:00">2:15am</option>
+                    <option value="02:30:00">2:30am</option>
+                    <option value="02:45:00">2:45am</option>
+                    <option value="03:00:00">3:00am</option>
+                    <option value="03:15:00">3:15am</option>
+                    <option value="03:30:00">3:30am</option>
+                    <option value="03:45:00">3:45am</option>
+                    <option value="04:00:00">4:00am</option>
+                    <option value="04:15:00">4:15am</option>
+                    <option value="04:30:00">4:30am</option>
+                    <option value="04:45:00">4:45am</option>
+                    <option value="05:00:00">5:00am</option>
+                    <option value="05:15:00">5:15am</option>
+                    <option value="05:30:00">5:30am</option>
+                    <option value="05:45:00">5:45am</option>
+                    <option value="06:00:00">6:00am</option>
+                    <option value="06:15:00">6:15am</option>
+                    <option value="06:30:00">6:30am</option>
+                    <option value="06:45:00">6:45am</option>
+                    <option value="07:00:00">7:00am</option>
+                    <option value="07:15:00">7:15am</option>
+                    <option value="07:30:00">7:30am</option>
+                    <option value="07:45:00">7:45am</option>
+                    <option value="08:00:00">8:00am</option>
+                    <option value="08:15:00">8:15am</option>
+                    <option value="08:30:00">8:30am</option>
+                    <option value="08:45:00">8:45am</option>
+                    <option value="09:00:00">9:00am</option>
+                    <option value="09:15:00">9:15am</option>
+                    <option value="09:30:00">9:30am</option>
+                    <option value="09:45:00">9:45am</option>
+                    <option value="10:00:00">10:00am</option>
+                    <option value="10:15:00">10:15am</option>
+                    <option value="10:30:00">10:30am</option>
+                    <option value="10:45:00">10:45am</option>
+                    <option value="11:00:00">11:00am</option>
+                    <option value="11:15:00">11:15am</option>
+                    <option value="11:30:00">11:30am</option>
+                    <option value="11:45:00">11:45am</option>
+                    <option value="12:00:00">12:00pm</option>
+                    <option value="12:15:00">12:15pm</option>
+                    <option value="12:30:00">12:30pm</option>
+                    <option value="12:45:00">12:45pm</option>
+                    <option value="13:00:00">1:00pm</option>
+                    <option value="13:15:00">1:15pm</option>
+                    <option value="13:30:00">1:30pm</option>
+                    <option value="13:45:00">1:45pm</option>
+                    <option value="14:00:00">2:00pm</option>
+                    <option value="14:15:00">2:15pm</option>
+                    <option value="14:30:00">2:30pm</option>
+                    <option value="14:45:00">2:45pm</option>
+                    <option value="15:00:00">3:00pm</option>
+                    <option value="15:15:00">3:15pm</option>
+                    <option value="15:30:00">3:30pm</option>
+                    <option value="15:45:00">3:45pm</option>
+                    <option value="16:00:00">4:00pm</option>
+                    <option value="16:15:00">4:15pm</option>
+                    <option value="16:30:00">4:30pm</option>
+                    <option value="16:45:00">4:45pm</option>
+                    <option value="17:00:00">5:00pm</option>
+                    <option value="17:15:00">5:15pm</option>
+                    <option value="17:30:00">5:30pm</option>
+                    <option value="17:45:00">5:45pm</option>
+                    <option value="18:00:00">6:00pm</option>
+                    <option value="18:15:00">6:15pm</option>
+                    <option value="18:30:00">6:30pm</option>
+                    <option value="18:45:00">6:45pm</option>
+                    <option value="19:00:00">7:00pm</option>
+                    <option value="19:15:00">7:15pm</option>
+                    <option value="19:30:00">7:30pm</option>
+                    <option value="19:45:00">7:45pm</option>
+                    <option value="20:00:00">8:00pm</option>
+                    <option value="20:15:00">8:15pm</option>
+                    <option value="20:30:00">8:30pm</option>
+                    <option value="20:45:00">8:45pm</option>
+                    <option value="21:00:00">9:00pm</option>
+                    <option value="21:15:00">9:15pm</option>
+                    <option value="21:30:00">9:30pm</option>
+                    <option value="21:45:00">9:45pm</option>
+                    <option value="22:00:00">10:00pm</option>
+                    <option value="22:15:00">10:15pm</option>
+                    <option value="22:30:00">10:30pm</option>
+                    <option value="22:45:00">10:45pm</option>
+                    <option value="23:00:00">11:00pm</option>
+                    <option value="23:15:00">11:15pm</option>
+                    <option value="23:30:00">11:30pm</option>
+                    <option value="23:45:00">11:45pm</option>
+                </select>
               </div>
             </div>
 
@@ -65,8 +259,8 @@
 
             <div style="display: none" tabindex="-1">
                 <!-- Don't edit this! Things won't work lol 😂 -->
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
-                {{ form.dtend(placeholder="mm/dd/yy") }}
+                {{ form.dtstart }}
+                {{ form.dtend }}
             </div>
 
             <div class="Form__field">
@@ -100,25 +294,83 @@ If you sent out an email about this event, the text from that email is probably 
         </form>
       </div>
     {% include 'components/footer.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script>
+        var cleave = new Cleave("#hour__date", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+        var cleave = new Cleave("#day__date", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+        var cleave = new Cleave("#many__startDate", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+        var cleave = new Cleave("#many__endDate", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
         document.querySelectorAll('[name="duration"]')
             .forEach(el => {
                 // On click, the proper form fields should be shown
                 el.addEventListener('click', e => {
                     // Remove from the ones currently have it
-                    console.log("Removing from " + document.querySelector('.js-showFieldSet').outerHTML)
                     document.querySelectorAll('.js-showFieldSet')[0]
                         .classList.remove('js-showFieldSet');
 
                     // And add it to the proper one
                     var nextElement = document.getElementById("duration--" + e.target.value);
                     nextElement.classList.add('js-showFieldSet');
-                    console.log(nextElement.outerHTML)
                 })
             })
         document.getElementById('submitButton')
             .addEventListener('click', e => {
-                e.preventDefault();
+                var durationChosen = document.querySelector('input[name="duration"]:checked').value;
+                switch (durationChosen) {
+                    case "hour":
+                        var date = document.getElementById('hour__date').value.split('/');
+                            var year = date[2];
+                            var month = date[0];
+                            var day = date[1];
+                        var startTime = document.getElementById('hour__start').value;
+                        var endTime = document.getElementById('hour__end').value;
+
+                        var dtstart = [year, month, day].join('/') + ' ' + startTime;
+                        var dtend = [year, month, day].join('/') + ' ' + endTime;
+                        break;
+                    case "day":
+                        var date = document.getElementById('day__date').value.split('/');
+                            var year = date[2];
+                            var month = date[0];
+                            var day = date[1];
+
+                            var dtstart = [year, month, day].join('/') + " 00:00:00";
+                            var dtend = [year, month, day].join('/') + " 23:59:59";
+                        break;
+                    case "many":
+                        var startDate = document.getElementById('many__startDate').value.split('/');
+                            var startYear = startDate[2];
+                            var startMonth = startDate[0];
+                            var startDay = startDate[1];
+                        var endDate = document.getElementById('many__endDate').value.split('/');
+                            var endYear = endDate[2];
+                            var endMonth = endDate[0];
+                            var endDay = endDate[1];
+
+                            var dtstart = [startYear, startMonth, startDay].join('/') + " 00:00:00";
+                            var dtend = [endYear, endMonth, endDay].join('/') + " 23:59:59";
+                        break;
+                }
+                document.getElementById('dtstart').value = dtstart;
+                document.getElementById('dtend').value = dtend;
+
+                document.getElementById("eventForm").submit();
             })
     </script>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from modules.db import DatabaseClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
@@ -22,11 +22,12 @@ def public_index():
 @public.route("/add", methods=["POST", "GET"])
 def add_event():
     form = EventForm()
-    if request.method == "POST" and form.validate_on_submit():
+    if request.method == "POST": # and form.validate_on_submit():
+        print(form.data)
         inserted_event = db.create_new_event(form)
         # send email
         return redirect(
-            url_for('confirmation', event_data=inserted_event)
+            url_for('public.confirmation', event_data=inserted_event)
         )
     return render_template("add.html", form=form)
 
@@ -98,9 +99,9 @@ def admin_page():
 
 
 @public.route("/confirmation", methods=["GET"])
-def confirmation_page():
-    event_id = request.args.get("form")
-    event_data = db.get_one(event_id)
+def confirmation():
+    event_data = request.args.get("event_data")
+    # event_data = db.get_one(event_id)
     if event_data is None:
         return render_template("404.html"), 404
     else:

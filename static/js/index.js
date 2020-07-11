@@ -45,13 +45,25 @@ const tagList = {
 
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
-        events[i]['start'] = new Date(events[i]['start']['$date']);
-        events[i]['end'] = new Date(events[i]['end']['$date']);
+        let dtstart = new Date(events[i]['dtstart']['$date']);
+        let dtend = new Date(events[i]['dtend']['$date']);
+
         events[i]['id'] = events[i]['_id']['$oid'];
 
-        let isAllDay = events[i]['start'].getUTCHours() == 0;
-        events[i]['allDay'] = isAllDay;
-
+        let numDays = events[i]['dtend']['$date'] - events[i]['dtstart']['$date'] + 1000;
+        if (numDays % 86400000 == 0) {
+            events[i]['allDay'] = true;
+            /*
+            I hate javascript :(
+            */
+            let startDate = new Date([dtstart.getFullYear(), dtstart.getUTCMonth()+1, dtstart.getUTCDate()].join('-'));
+            let endDate = new Date([dtend.getFullYear(), dtend.getUTCMonth()+1, dtend.getUTCDate()].join('-'));
+            events[i]['start'] = startDate.setDate(startDate.getDate() + 1);
+            events[i]['end'] = endDate.setDate(endDate.getDate() + 1);
+        } else {
+            events[i]['start'] = dtstart;
+            events[i]['end'] = dtend;
+        }
         if (!events[i].tag) {
             events[i].tag = ["other"]
         } else {

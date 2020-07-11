@@ -2,7 +2,7 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 from bson import json_util
 from uuid import uuid4 as uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 class DatabaseClient(object):
     """
@@ -35,13 +35,14 @@ class DatabaseClient(object):
         })
 
     def create_new_event(self, event):
-        event.update({
-            "magic": generate_magic_string(),
+        event.data.update({
+            "magic": self.generate_magic_string(),
             "last_edited": datetime.now(timezone.utc)
         })
-        inserted_id = self.client.events.insert_one(event)
-        event["_id"] = inserted_id
-        return event
+        del event.data['csrf_token']
+        inserted_id = self.client.events.insert_one(event.data)
+        event.data["_id"] = inserted_id
+        return event.data
 
     def authenticate_magic_link(self, event_id, magic):
         event = self.client.events.find_one({
