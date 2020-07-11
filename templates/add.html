@@ -5,7 +5,7 @@
       <div class="Page">
         <h1 class="Form__title">Submit a New Event</h1>
 
-        <form class="Form" action="" method="POST">
+        <form class="Form" action="" method="POST" autocomplete="off">
             {{ form.csrf_token }}
 
           <div class="Form__box">
@@ -18,49 +18,55 @@
             <div class="Form__row">
               <h2>Duration</h2>
               <div class="Form__row__buttons">
-                <input type="radio" id="duration--hour" name="duration" value="hour">
-                <label for="duration--hour">
-                  &#60;1 day</label>
-                <input type="radio" id="duration--day" name="duration" value="day">
-                <label for="duration--day">
+                <input type="radio" id="button__duration--hour" name="duration" value="hour" checked="checked">
+                <label for="button__duration--hour">
+                  &lt; 1 day</label>
+                <input type="radio" id="button__duration--day" name="duration" value="day">
+                <label for="button__duration--day">
                   All day</label>
-                <input type="radio" id="duration--many" name="duration" value="many">
-                <label for="duration--many">
+                <input type="radio" id="button__duration--many" name="duration" value="many">
+                <label for="button__duration--many">
                   Many days</label>
               </div>
             </div>
 
-            <div id="duration--hour" class="Form__field Form__field--flex">
+            <div id="duration--hour" class="Form__field Form__field--flex  js-showFieldSet">
               <div class="Form__field">
                 <label>Date</label>
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                <input type="text" id="hour__date" placeholder="mm/dd/yy" />
               </div>
               <div class="Form__field">
                 <label>Start Time</label>
-                {{ form.dtstart(placeholder="h:mm xm") }}
+                <input type="text" id="hour__start" placeholder="hh:mm" />
               </div>
               <div class="Form__field">
                 <label>End Time</label>
-                {{ form.dtend(placeholder="h:mm xm") }}
+                <input type="text" id="hour__end" placeholder="hh:mm" />
               </div>
             </div>
 
             <div id="duration--day" class="Form__field Form__field--flex">
               <div class="Form__field">
                 <label>Date</label>
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                <input type="text" id="day__date" placeholder="mm/dd/yy" />
               </div>
             </div>
 
             <div id="duration--many" class="Form__field Form__field--flex">
               <div class="Form__field">
                 <label>Start Date</label>
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                <input type="text" id="many__startDate" placeholder="mm/dd/yy" />
               </div>
               <div class="Form__field">
                 <label>End Date</label>
-                {{ form.dtend(placeholder="mm/dd/yy") }}
+                <input type="text" id="many__endDate" placeholder="mm/dd/yy" />
               </div>
+            </div>
+
+            <div style="display: none" tabindex="-1">
+                <!-- Don't edit this! Things won't work lol 😂 -->
+                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                {{ form.dtend(placeholder="mm/dd/yy") }}
             </div>
 
             <div class="Form__field">
@@ -90,8 +96,29 @@ If you sent out an email about this event, the text from that email is probably 
             </div>
 
           </div>
-          <input class="Form__submit" type="submit" name="Submit" value="Submit Event" />
+          <input class="Form__submit" id="submitButton" type="submit" name="Submit" value="Submit Event" />
         </form>
       </div>
     {% include 'components/footer.html' %}
+    <script>
+        document.querySelectorAll('[name="duration"]')
+            .forEach(el => {
+                // On click, the proper form fields should be shown
+                el.addEventListener('click', e => {
+                    // Remove from the ones currently have it
+                    console.log("Removing from " + document.querySelector('.js-showFieldSet').outerHTML)
+                    document.querySelectorAll('.js-showFieldSet')[0]
+                        .classList.remove('js-showFieldSet');
+
+                    // And add it to the proper one
+                    var nextElement = document.getElementById("duration--" + e.target.value);
+                    nextElement.classList.add('js-showFieldSet');
+                    console.log(nextElement.outerHTML)
+                })
+            })
+        document.getElementById('submitButton')
+            .addEventListener('click', e => {
+                e.preventDefault();
+            })
+    </script>
 {% endblock %}
