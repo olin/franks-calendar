@@ -9,3 +9,5 @@ private/
 
 .sendgrid.env
 sendgrid.env
+
+*.log
