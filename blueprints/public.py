@@ -3,6 +3,8 @@ from modules.db import DatabaseClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
+import json
+from datetime import datetime
 
 db = DatabaseClient()
 
@@ -23,11 +25,21 @@ def public_index():
 def add_event():
     form = EventForm()
     if request.method == "POST": # and form.validate_on_submit():
-        print(form.data)
-        inserted_event = db.create_new_event(form)
+        inserted_event = db.create_new_event(form.data)
+        print(inserted_event)
         # send email
         return redirect(
-            url_for('public.confirmation', event_data=inserted_event)
+            url_for('public.confirmation',
+                title=inserted_event['title'],
+                category=inserted_event['category'],
+                location=inserted_event['location'],
+                start=inserted_event['dtstart'].strftime("%m/%d/%Y %-I:%M %p"),
+                end=inserted_event['dtend'].strftime("%m/%d/%Y %-I:%M %p"),
+                description=inserted_event['description'],
+                host_name=inserted_event['host_name'],
+                host_email=inserted_event['host_email'],
+                event_id=inserted_event['_id'],
+            )
         )
     return render_template("add.html", form=form)
 
@@ -36,16 +48,6 @@ def add_event():
 def about_page():
     if request.method == "GET":
         return render_template("about.html")
-
-
-@public.route("/<page>", methods=["GET"])
-def public_page(page):
-    if request.method == "GET":
-        try:
-            rendered_page = render_template("%s.html" % page)
-        except:
-            rendered_page = render_template("404.html")
-        return rendered_page
 
 
 @public.route("/edit/<event_id>", methods=["PUT", "GET", "DELETE"])
@@ -100,12 +102,19 @@ def admin_page():
 
 @public.route("/confirmation", methods=["GET"])
 def confirmation():
-    event_data = request.args.get("event_data")
-    # event_data = db.get_one(event_id)
-    if event_data is None:
-        return render_template("404.html"), 404
-    else:
-        return render_template("confirmation.html", event_data=event_data), 200
+    event_id = request.args.get('event_id')
+    magic_id = db.get_event_with_magic(event_id)["magic"]
+    return render_template("confirmation.html",
+        title=request.args.get('title'),
+        category=request.args.get('category'),
+        location=request.args.get('location'),
+        start=request.args.get('start'),
+        end=request.args.get('end'),
+        description=request.args.get('description'),
+        host_name=request.args.get('host_name'),
+        host_email=request.args.get('host_email'),
+        magic_link=f"https://frankscalendar.com/edit/{event_id}?magic={magic_id}"
+    ), 200
 
 
 @public.route("/export/<eventid>", methods=["GET"])

@@ -5,17 +5,17 @@
 
         <div class="Confirmation">
             <h1 class="Confirmation__title">Event Submitted for Approval!</h1>
-            
+
             <div class="Submission">
             <div class="Submission__box">
             <section class="Submission__content">
                 <h2 class="Submission__content__title">
-                  SLAC: Zero Waste Living
+                  {{ title }}
                 </h2>
 
                 <div class="Submission__content__block">
-                  <span data-tag={tag} class="Submission__content__tag">
-                    {tag}
+                  <span data-tag="{{ category }}" class="Submission__content__tag">
+                    {{ category }}
                   </span>
                 </div>
 
@@ -26,11 +26,11 @@
                     </td>
                     <td class="Submission__content__text">
                       <span class="Submission__content__date">
-                        Karen and the Eco-Reps
+                        {{ host_name }}
                       </span>
                       |
-                      <a class="Submission__content__text__link" href="mailto:Eco-Reps@olin.edu">
-                      Eco-Reps@olin.edu
+                      <a class="Submission__content__text__link" href="mailto:{{ host_email }}">
+                          {{ host_email }}
                       </a>
                     </td>
                   </tr>
@@ -41,15 +41,11 @@
                     </td>
                     <td class="Submission__content__text">
                       <span class="Submission__content__date">
-                        Wednesday April 21, 2020
+                        {{ start }}
                       </span>
                       |
-                      <span class="Submission__content__time">
-                        9:00 PM
-                      </span>
-                      -
-                      <span class="Submission__content__time">
-                        10:00 PM
+                      <span class="Submission__content__date">
+                        {{ end }}
                       </span>
                     </td>
                   </tr>
@@ -59,7 +55,7 @@
                       Where?
                     </td>
                     <td class="Submission__content__text">
-                        olin.zoom.us/j/9681166966
+                        {{ location }}
                     </td>
                   </tr>
 
@@ -68,11 +64,7 @@
                       What?
                     </td>
                     <td class="Submission__content__text">
-                        Come learn about concepts of zero waste living and what a circular economy looks like! Short summary of subtopics below:
-
-                        <li> The impact of waste on our ecosystems </li>
-                        <li> Tips and tricks to eliminate single-use products from your daily life </li>
-                        <li> How voting with your $$ makes tangible change </li>
+                        {{ description }}
 
                     </td>
                   </tr>
@@ -82,8 +74,8 @@
             </div>
             <div class="Confirmation__message">
                 <p>Thanks for submitting an event to Frank’s Calendar!</p>
-                <p> A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link">event guidelines</a> within 24 hours. You will receive an email at <a  class="Confirmation__message__link">Eco-Reps@olin.edu</a> notifying you of the event status. </p>
-                <p> If you wish to edit your event submission, use this magic link to make changes: <a  class="Confirmation__message__link">frankscalendar.build/djsk14495</a>. The link will be emailed to you, and will be valid until the start of the event.</p>
+                <p> A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link">event guidelines</a> within 24 hours. You will receive an email at <a href="mailto:{{ host_email }}" class="Confirmation__message__link">{{ host_email }}</a> notifying you of the event status. </p>
+                <p> If you wish to edit your event submission, use this magic link to make changes: <a href="{{ magic_link }}" class="Confirmation__message__link">{{ magic_link }}</a>. The link will be emailed to you, and will be valid until the start of the event.</p>
             </div>
         </div>
     </main>
