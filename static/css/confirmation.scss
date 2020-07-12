@@ -1,0 +1,136 @@
+
+.Confirmation {
+    font-family: $sans;
+    &__title {
+        font-family: $title;
+        font-size: 2em;
+        font-weight: 400;
+        color: $green;
+        display: block;
+        margin-bottom: 0.25em;
+        text-align: center;
+    }
+    &__message {
+        display: block;
+        width: $box-width;
+        padding: 1em 1.5em;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 1em;
+
+        &__link {
+            color: $links;
+            text-decoration: none;
+        }
+
+        p {
+            margin-bottom:1em;
+        }
+    }
+}
+
+.Submission {
+    &__row {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__content {
+        padding: 1em 0em 1em 0em;
+
+        &__title {
+        font-family: $title;
+        font-size: 2em;
+        text-transform: uppercase;
+        font-style: italic;
+        }
+
+        &__block {
+        display: block;
+        margin: 0.75em 0em;
+        }
+
+        &__tag {
+        font-size: 1em;
+        font-family: $sans;
+        color: black;
+        text-transform: capitalize;
+        text-decoration: none;
+        border-radius: 0.5em;
+        padding: 0.5em 0.5em;
+        display: inline-block;
+
+        &[data-tag="academic_affairs"] {background-color: $academic;}
+        &[data-tag="academic_advising"] {background-color: $academic;}
+        &[data-tag="academic_calendar"] {background-color: $academic;}
+        &[data-tag="international"] {background-color: $student;}
+        &[data-tag="residential"] {background-color: $student;}
+        &[data-tag="health"] {background-color: $student;}
+        &[data-tag="pgp"] {background-color: $student;}
+        &[data-tag="hr"] {background-color: $student;}
+        &[data-tag="student_affairs"] {background-color: $student;}
+        &[data-tag="admission"] {background-color: $admission;}
+        &[data-tag="library"] {background-color: $library;}
+        &[data-tag="shop"] {background-color: $shop;}
+        &[data-tag="clubs"] {background-color: $clubs;}
+        &[data-tag="other"] {background-color: $other;}
+        }
+
+        &__table {
+        width: 100%;
+
+        &__row {
+            height: 1.75em;
+        }
+        }
+
+        &__headers {
+        font-family: $sans;
+        font-size: 1em;
+        color: black;
+        font-weight: bold;
+        width: 6em;
+        vertical-align: top;
+        }
+
+        &__text {
+        font-family: $sans;
+        font-size: 1em;
+        color: black;
+        vertical-align: top;
+
+            &__link {
+                padding-left: 0.5em;
+                color: $links;
+                text-decoration: none;
+            }
+        }
+
+        &__date {
+        color: black;
+        font-family: $sans;
+        font-size: 1em;
+        padding-right: 0.5em;
+        }
+
+        &__time {
+        color: black;
+        font-family: $sans;
+        font-size: 1em;
+        padding-right: 0.5em;
+        padding-left: 0.5em;
+        }
+    }
+    &__box {
+        display: block;
+        width: $box-width;
+        border: 0.05em solid $main;
+        border-radius: 0.5em;
+        padding: 1em 1.5em;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 1em;
+        box-shadow: 0.1em 0.1em 0.25em $secondary;
+        
+    }
+}

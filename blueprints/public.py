@@ -121,3 +121,12 @@ def export_event(eventid):
         event["description"] = event_data["description"]
         cal.add_component(event)
         return cal.to_ical()
+
+@public.route("/test-edit", methods=["GET"])
+def test_edit_page():
+    form = EventForm()
+    return render_template("edit.html", form=form)
+
+@public.route("/test-confirmation", methods=["GET"])
+def test_confirmation_page():
+    return render_template("confirmation.html")
