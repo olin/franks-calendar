@@ -33,11 +33,11 @@
             <div id="duration--hour" class="Form__field Form__field--flex  js-showFieldSet">
               <div class="Form__field">
                 <label>Date</label>
-                <input type="text" id="hour__date" placeholder="mm/dd/yy" />
+                <input type="text" name="hour__date" id="hour__date" placeholder="mm/dd/yy" required=""/>
               </div>
-              <div class="Form__field">
+              <div class="Form__time">
                 <label>Start Time</label>
-                <select id="hour__start">
+                <select name="hour__start" id="hour__start">
                     <option value="00:00:00">12:00am</option>
                     <option value="00:15:00">12:15am</option>
                     <option value="00:30:00">12:30am</option>
@@ -86,7 +86,7 @@
                     <option value="11:15:00">11:15am</option>
                     <option value="11:30:00">11:30am</option>
                     <option value="11:45:00">11:45am</option>
-                    <option value="12:00:00">12:00pm</option>
+                    <option selected="selected" value="12:00:00">12:00pm</option>
                     <option value="12:15:00">12:15pm</option>
                     <option value="12:30:00">12:30pm</option>
                     <option value="12:45:00">12:45pm</option>
@@ -136,9 +136,9 @@
                     <option value="23:45:00">11:45pm</option>
                 </select>
               </div>
-              <div class="Form__field">
+              <div class="Form__time">
                 <label>End Time</label>
-                <select id="hour__end">
+                <select name="hour__end" id="hour__end">
                     <option value="00:00:00">12:00am</option>
                     <option value="00:15:00">12:15am</option>
                     <option value="00:30:00">12:30am</option>
@@ -188,7 +188,7 @@
                     <option value="11:30:00">11:30am</option>
                     <option value="11:45:00">11:45am</option>
                     <option value="12:00:00">12:00pm</option>
-                    <option value="12:15:00">12:15pm</option>
+                    <option selected="selected" value="12:15:00">12:15pm</option>
                     <option value="12:30:00">12:30pm</option>
                     <option value="12:45:00">12:45pm</option>
                     <option value="13:00:00">1:00pm</option>
@@ -242,18 +242,18 @@
             <div id="duration--day" class="Form__field Form__field--flex">
               <div class="Form__field">
                 <label>Date</label>
-                <input type="text" id="day__date" placeholder="mm/dd/yy" />
+                <input type="text" name="day__date" id="day__date" placeholder="mm/dd/yy" />
               </div>
             </div>
 
             <div id="duration--many" class="Form__field Form__field--flex">
               <div class="Form__field">
                 <label>Start Date</label>
-                <input type="text" id="many__startDate" placeholder="mm/dd/yy" />
+                <input type="text" name="many__startDate" id="many__startDate" placeholder="mm/dd/yy" />
               </div>
               <div class="Form__field">
                 <label>End Date</label>
-                <input type="text" id="many__endDate" placeholder="mm/dd/yy" />
+                <input type="text" name="many__endDate" id="many__endDate" placeholder="mm/dd/yy" />
               </div>
             </div>
 
@@ -265,7 +265,7 @@
 
             <div class="Form__field">
               {{ form.location.label }}
-              {{ form.location(placeholder="e.g. 'Dining Hall' or 'https://olin.zoom.us/j/123456789'") }}
+              {{ form.location(placeholder="e.g. 'Dining Hall' or 'olin.zoom.us/j/123456789'") }}
             </div>
 
             <div class="Form__field">
@@ -296,6 +296,22 @@ If you sent out an email about this event, the text from that email is probably 
     {% include 'components/footer.html' %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script>
+        // const colorMap = {
+        //     academic_calendar: "#0087C6",
+        //     academic_advising: "#0087C6",
+        //     residential: "#1FC9B3",
+        //     international: "#1FC9B3",
+        //     diversity: "#1FC9B3",
+        //     pgp: "#1FC9B3",
+        //     hr: "#1FC9B3",
+        //     health: "#1FC9B3",
+        //     admission: "#DD2E44",
+        //     library: "#722780",
+        //     shop: "#95CC3F",
+        //     clubs: "#F37820",
+        //     other: "#FFC700",
+        // }
+
         var cleave = new Cleave("#hour__date", {
             date: true,
             delimiter: '/',
@@ -316,6 +332,56 @@ If you sent out an email about this event, the text from that email is probably 
             delimiter: '/',
             datePattern: ['m', 'd', 'y']
         })
+
+        function validateForm(e) {
+            var durationChosen = document.querySelector('input[name="duration"]:checked').value;
+            switch (durationChosen) {
+                case "hour":
+                    var date = document.getElementById('hour__date').value.split('/');
+                        var year = date[2];
+                        var month = date[0];
+                        var day = date[1];
+                    var startTime = document.getElementById('hour__start').value;
+                    var endTime = document.getElementById('hour__end').value;
+
+                    var dtstart = [year, month, day].join('/') + ' ' + startTime;
+                    var dtend = [year, month, day].join('/') + ' ' + endTime;
+                    break;
+                case "day":
+                    var date = document.getElementById('day__date').value.split('/');
+                        var year = date[2];
+                        var month = date[0];
+                        var day = date[1];
+
+                        var dtstart = [year, month, day].join('/') + " 00:00:00";
+                        var dtend = [year, month, day].join('/') + " 23:59:59";
+                    break;
+                case "many":
+                    var startDate = document.getElementById('many__startDate').value.split('/');
+                        var startYear = startDate[2];
+                        var startMonth = startDate[0];
+                        var startDay = startDate[1];
+                    var endDate = document.getElementById('many__endDate').value.split('/');
+                        var endYear = endDate[2];
+                        var endMonth = endDate[0];
+                        var endDay = endDate[1];
+
+                        var dtstart = [startYear, startMonth, startDay].join('/') + " 00:00:00";
+                        var dtend = [endYear, endMonth, endDay].join('/') + " 23:59:59";
+                    break;
+            }
+            document.getElementById('dtstart').value = dtstart;
+            document.getElementById('dtend').value = dtend;
+
+            if (dtstart > dtend) {
+              alert("Start Time cannot be later than End Time!");
+              window.history.forward(-1);
+              return;
+            }
+
+            //document.getElementById("eventForm").submit();
+        }
+
         document.querySelectorAll('[name="duration"]')
             .forEach(el => {
                 // On click, the proper form fields should be shown
@@ -329,48 +395,18 @@ If you sent out an email about this event, the text from that email is probably 
                     nextElement.classList.add('js-showFieldSet');
                 })
             })
+
         document.getElementById('submitButton')
-            .addEventListener('click', e => {
-                var durationChosen = document.querySelector('input[name="duration"]:checked').value;
-                switch (durationChosen) {
-                    case "hour":
-                        var date = document.getElementById('hour__date').value.split('/');
-                            var year = date[2];
-                            var month = date[0];
-                            var day = date[1];
-                        var startTime = document.getElementById('hour__start').value;
-                        var endTime = document.getElementById('hour__end').value;
+            .addEventListener('click', e => validateForm(e))
 
-                        var dtstart = [year, month, day].join('/') + ' ' + startTime;
-                        var dtend = [year, month, day].join('/') + ' ' + endTime;
-                        break;
-                    case "day":
-                        var date = document.getElementById('day__date').value.split('/');
-                            var year = date[2];
-                            var month = date[0];
-                            var day = date[1];
-
-                            var dtstart = [year, month, day].join('/') + " 00:00:00";
-                            var dtend = [year, month, day].join('/') + " 23:59:59";
-                        break;
-                    case "many":
-                        var startDate = document.getElementById('many__startDate').value.split('/');
-                            var startYear = startDate[2];
-                            var startMonth = startDate[0];
-                            var startDay = startDate[1];
-                        var endDate = document.getElementById('many__endDate').value.split('/');
-                            var endYear = endDate[2];
-                            var endMonth = endDate[0];
-                            var endDay = endDate[1];
-
-                            var dtstart = [startYear, startMonth, startDay].join('/') + " 00:00:00";
-                            var dtend = [endYear, endMonth, endDay].join('/') + " 23:59:59";
-                        break;
-                }
-                document.getElementById('dtstart').value = dtstart;
-                document.getElementById('dtend').value = dtend;
-
-                document.getElementById("eventForm").submit();
-            })
+        // Changing category selector/dropdown to the correct filter
+        // function updateColor() {
+        //   	var catEl = document.getElementById("category");
+        //   	var catSelect = catEl.options[catEl.selectedIndex];
+        //   	var selectedClass = catSelect.value;
+        //   	catEl.style.color = colorMap(selectedClass);
+        // }
+        // document.getElementById('category')
+        //     .addEventListener('click', updateColor());
     </script>
 {% endblock %}
