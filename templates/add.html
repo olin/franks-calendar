@@ -261,6 +261,7 @@
                 <!-- Don't edit this! Things won't work lol 😂 -->
                 {{ form.dtstart }}
                 {{ form.dtend }}
+                {{ form.duration }}
             </div>
 
             <div class="Form__field">
@@ -343,6 +344,7 @@ If you sent out an email about this event, the text from that email is probably 
 
                         var dtstart = [year, month, day].join('/') + ' ' + startTime;
                         var dtend = [year, month, day].join('/') + ' ' + endTime;
+                        document.getElementById('duration').value = "hour";
                         break;
                     case "day":
                         var date = document.getElementById('day__date').value.split('/');
@@ -352,6 +354,7 @@ If you sent out an email about this event, the text from that email is probably 
 
                             var dtstart = [year, month, day].join('/') + " 00:00:00";
                             var dtend = [year, month, day].join('/') + " 23:59:59";
+                        document.getElementById('duration').value = "day";
                         break;
                     case "many":
                         var startDate = document.getElementById('many__startDate').value.split('/');
@@ -365,6 +368,7 @@ If you sent out an email about this event, the text from that email is probably 
 
                             var dtstart = [startYear, startMonth, startDay].join('/') + " 00:00:00";
                             var dtend = [endYear, endMonth, endDay].join('/') + " 23:59:59";
+                        document.getElementById('duration').value = "many";
                         break;
                 }
                 document.getElementById('dtstart').value = dtstart;

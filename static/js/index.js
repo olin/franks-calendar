@@ -64,12 +64,12 @@ function clean_event_list(events) {
             events[i]['start'] = dtstart;
             events[i]['end'] = dtend;
         }
-        if (!events[i].tag) {
-            events[i].tag = ["other"]
+        if (!events[i].category) {
+            events[i].category = ["other"]
         } else {
-            events[i].tag = events[i]['tag'].split(":")
+            events[i].category = events[i]['category'].split(":")
         }
-        events[i].color = colorMap[events[i].tag[0]]
+        events[i].color = colorMap[events[i].category[0]]
     }
     return events
 }

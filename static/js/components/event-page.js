@@ -27,13 +27,12 @@ export default class EventPage extends React.Component {
     }
 
     render() {
-        var tag = this.props.event.tag.pop();
-        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var category = this.props.event.category.pop();
 
         function dateToString(date) {
-          let hours = date.getHours();
-          let minutes = ('0'+date.getMinutes()).slice(-2);
-          return (hours + ':' + minutes)
+            let hours = date.getHours();
+            let minutes = ('0' + date.getMinutes()).slice(-2);
+            return (hours + ':' + minutes);
         }
 
         return (
@@ -68,8 +67,8 @@ export default class EventPage extends React.Component {
                   </h2>
 
                   <div class="Event__content__block">
-                    <span data-tag={tag} class="Event__content__tag">
-                      {tag}
+                    <span data-tag={category} class="Event__content__tag">
+                      {category === "pgp" ? "PGP" : category.replace("_", " ")}
                     </span>
                   </div>
 
@@ -80,11 +79,11 @@ export default class EventPage extends React.Component {
                       </td>
                       <td class="Event__content__text">
                         <span class="Event__content__date">
-                          Franklin Olin
+                          {this.props.event.host_name}
                         </span>
                         |
-                        <a class="Event__content__text__link" href="mailto:Eco-Reps@olin.edu">
-                        franklin.olin@olin.edu
+                        <a class="Event__content__text__link" href={"mailto:" + this.props.event.host_email}>
+                          {this.props.event.host_email}
                         </a>
                       </td>
                     </tr>
@@ -95,7 +94,7 @@ export default class EventPage extends React.Component {
                       </td>
                       <td class="Event__content__text">
                         <span class="Event__content__date">
-                          {this.props.event.start.toLocaleDateString("en-US", options)}
+                          {this.props.event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                         </span>
                         |
                         <span class="Event__content__time">

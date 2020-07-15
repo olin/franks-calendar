@@ -26,7 +26,6 @@ def add_event():
     form = EventForm()
     if request.method == "POST": # and form.validate_on_submit():
         inserted_event = db.create_new_event(form.data)
-        print(inserted_event)
         # send email
         return redirect(
             url_for('public.confirmation',
@@ -39,6 +38,7 @@ def add_event():
                 host_name=inserted_event['host_name'],
                 host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
+                duration=inserted_event['duration']
             )
         )
     return render_template("add.html", form=form)
@@ -104,16 +104,26 @@ def admin_page():
 def confirmation():
     event_id = request.args.get('event_id')
     magic_id = db.get_event_with_magic(event_id)["magic"]
+
+    duration_type = request.args.get('duration')
+    if duration_type == "hour":
+        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
+    elif duration_type == "day":
+        duration = request.args.get('start').split(' ')[0]
+    elif duration_type == "many":
+        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
+    else:
+        duration = request.args.get('start') + " - " + request.args.get('end')
+
     return render_template("confirmation.html",
         title=request.args.get('title'),
         category=request.args.get('category'),
         location=request.args.get('location'),
-        start=request.args.get('start'),
-        end=request.args.get('end'),
         description=request.args.get('description'),
         host_name=request.args.get('host_name'),
         host_email=request.args.get('host_email'),
-        magic_link=f"https://frankscalendar.com/edit/{event_id}?magic={magic_id}"
+        magic_link=f"https://frankscalendar.com/edit/{event_id}?magic={magic_id}",
+        duration=duration,
     ), 200
 
 

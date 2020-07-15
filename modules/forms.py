@@ -34,3 +34,4 @@ class EventForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     host_name = StringField('Host Name', validators=[DataRequired()])
     host_email = EmailField('Host Email', validators=[DataRequired()])
+    duration = SelectField('Duration', choices=[("hour", "Hour"),("day", "Day"),("many", "Many")])
