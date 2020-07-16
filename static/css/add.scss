@@ -26,7 +26,7 @@
     margin-left: auto;
     margin-bottom: 1em;
     box-shadow: 0.1em 0.1em 0.25em $secondary;
-    
+
     &__buttons {
       padding: .1em .1em;
       border:transparent;
@@ -113,19 +113,54 @@
     }
   }
 
+  &__time {
+    overflow: hidden;
+
+    label {
+      display: block;
+      text-align: left;
+      font-family: $title;
+      font-size: 1em;
+      font-weight: 800;
+      color: $form-header;
+      text-transform: uppercase;
+      padding-left: 0.1em;
+      margin-bottom: 0.5em;
+    }
+
+    select {
+      display: block;
+      font-family: $sans;
+      font-size: 1em;
+      color: $main;
+      border: none;
+      background-color: $secondary--light;
+      border-radius: 0.5em;
+      padding: 0.5em 0.5em;
+      margin-bottom: 0.5em;
+
+      option {
+        font-family: $sans;
+        font-size: 1em;
+        color: $main;
+      }
+    }
+  }
+
   // Styling dropdown menu
   &__category {
     overflow: hidden;
 
     select {
       display: block;
-      font-family: $title;
+      font-family: $sans;
       font-size: 1em;
-      font-weight: 800;
-      text-transform: uppercase;
-      color: $secondary;
-      background-color: white;
-      border: 0.05em solid $main;
+      //font-weight: 800;
+      //text-transform: uppercase;
+      color: $main;
+      background-color: $secondary--light;
+      //border: 0.05em solid $main;
+      border: none;
       border-radius: 0.5em;
       padding: 0.5em 0.5em;
       margin-bottom: 0.5em;
@@ -136,63 +171,63 @@
       }
 
       option {
-        font-family: $title;
+        font-family: $sans;
         font-size: 1em;
-        font-weight: 800;
-        text-transform: uppercase;
+        //font-weight: 800;
+        //text-transform: uppercase;
       }
 
-      option[value="academic_calendar"] {
-        color: $academic;
-      }
-
-      option[value="academic_advising"] {
-        color: $academic;
-      }
-
-      option[value="residential"] {
-        color: $student;
-      }
-
-      option[value="international"] {
-        color: $student;
-      }
-
-      option[value="diversity"] {
-        color: $student;
-      }
-
-      option[value="pgp"] {
-        color: $student;
-      }
-
-      option[value="hr"] {
-        color: $student;
-      }
-
-      option[value="health"] {
-        color: $student;
-      }
-
-      option[value="admission"] {
-        color: $admission;
-      }
-
-      option[value="library"] {
-        color: $library;
-      }
-
-      option[value="shop"] {
-        color: $shop;
-      }
-
-      option[value="clubs"] {
-        color: $clubs;
-      }
-
-      option[value="other"] {
-        color: $other;
-      }
+      // option[value="academic_calendar"] {
+      //   color: $academic;
+      // }
+      //
+      // option[value="academic_advising"] {
+      //   color: $academic;
+      // }
+      //
+      // option[value="residential"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="international"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="diversity"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="pgp"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="hr"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="health"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="admission"] {
+      //   color: $admission;
+      // }
+      //
+      // option[value="library"] {
+      //   color: $library;
+      // }
+      //
+      // option[value="shop"] {
+      //   color: $shop;
+      // }
+      //
+      // option[value="clubs"] {
+      //   color: $clubs;
+      // }
+      //
+      // option[value="other"] {
+      //   color: $other;
+      // }
     }
   }
 
