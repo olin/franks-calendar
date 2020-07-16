@@ -79,15 +79,6 @@
         border-radius: 0.5em;
         background-color: $links;
         transition-duration: 0.3s;
-        cursor: pointer;
-
-        &:hover {
-          // background-color: darken($links, .8);
-        }
-
-        &:focus {
-          // background-color: darken($links, .8);
-        }
       }
     }
   }
@@ -113,10 +104,11 @@
     }
   }
 
-  &__time {
+  // Styling dropdown menu
+  &__category {
     overflow: hidden;
 
-    label {
+    select {
       display: block;
       text-align: left;
       font-family: $title;
@@ -140,9 +132,10 @@
       margin-bottom: 0.5em;
 
       option {
-        font-family: $sans;
+        font-family: $title;
         font-size: 1em;
-        color: $main;
+        font-weight: 800;
+        text-transform: uppercase;
       }
     }
   }
@@ -166,68 +159,20 @@
       margin-bottom: 0.5em;
       transition: box-shadow 0.3s;
 
+      // Changing the dropdown arrow to a chevron
+    	background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") right center no-repeat;
+    	appearance: none;
+
       &:hover {
         box-shadow: 0 0 0.3em $secondary;
       }
 
       option {
-        font-family: $sans;
+        font-family: $title;
         font-size: 1em;
-        //font-weight: 800;
-        //text-transform: uppercase;
+        font-weight: 800;
+        text-transform: uppercase;
       }
-
-      // option[value="academic_calendar"] {
-      //   color: $academic;
-      // }
-      //
-      // option[value="academic_advising"] {
-      //   color: $academic;
-      // }
-      //
-      // option[value="residential"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="international"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="diversity"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="pgp"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="hr"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="health"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="admission"] {
-      //   color: $admission;
-      // }
-      //
-      // option[value="library"] {
-      //   color: $library;
-      // }
-      //
-      // option[value="shop"] {
-      //   color: $shop;
-      // }
-      //
-      // option[value="clubs"] {
-      //   color: $clubs;
-      // }
-      //
-      // option[value="other"] {
-      //   color: $other;
-      // }
     }
   }
 

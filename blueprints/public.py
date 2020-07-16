@@ -49,6 +49,10 @@ def about_page():
     if request.method == "GET":
         return render_template("about.html")
 
+@public.route("/faq", methods=["GET"])
+def faq_page():
+    return render_template("faq.html")
+
 
 @public.route("/edit/<event_id>", methods=["PUT", "GET", "DELETE"])
 def edit_event(event_id):
