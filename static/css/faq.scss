@@ -8,6 +8,21 @@
         text-decoration:none;
     }
 
+    ul, ol {
+        list-style-position: inside;
+        margin-left:1em;
+        margin-bottom:1em;
+    }
+
+    p {
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+    }
+
+    &__underline {
+        text-decoration:underline;
+    }
+
     &__title {
         font-family: $title;
         text-transform:uppercase;
@@ -36,11 +51,12 @@
             font-family: $title;
             font-size: 1.25em;
         }
-        &__text {
+        &__answer {
             font-family: $sans;
             margin-top: 0.5em;
             margin-left:2.5em;
             margin-right:3em;
+            line-height:1.5em;
         }
         
     }
