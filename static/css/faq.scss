@@ -1,0 +1,63 @@
+
+.FAQ {
+    margin-left:2em;
+    margin-right:2.5em;
+
+    a {
+        color: $links;
+        text-decoration:none;
+    }
+
+    &__title {
+        font-family: $title;
+        text-transform:uppercase;
+        font-size: 2em;
+
+        &__icon {
+            margin-right: 0.2em;
+        }
+    }
+    &__section-header {
+        font-family: $title;
+        text-transform:uppercase;
+        font-size: 1.5em;
+        margin-top: 1.5em;
+        margin-bottom:.7em;
+    }
+    &__question {
+        
+        display: block;
+        border: 0.05em solid $main;
+        border-radius: 0.5em;
+        padding: 1em 1.5em;
+        margin-bottom: 1em;
+        
+        &__summary {
+            font-family: $title;
+            font-size: 1.25em;
+        }
+        &__text {
+            font-family: $sans;
+            margin-top: 0.5em;
+            margin-left:2.5em;
+            margin-right:3em;
+        }
+        
+    }
+
+}
+
+.Color {
+    &--green {
+        background-color:  #E3EFCF;;
+    }
+    &--blue {
+        background-color: #BFD1E2;
+    }
+    &--yellow {
+        background-color:  #FFF0C3;
+    }
+    &--purple {
+        background-color: #DED6E9;
+    }
+}

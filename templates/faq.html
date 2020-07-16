@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block page %}
+    {% include 'components/header.html' %}
+
+    <main>
+    <div class="FAQ">
+        <h1 class="FAQ__title">
+            <svg class="FAQ__title__icon" xmlns="http://www.w3.org/2000/svg" width=".7em" height=".7em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            Frequently Asked Questions
+        </h1>
+
+        
+
+        <h2 class="FAQ__section-header">Adding</h2>
+        <details class="FAQ__question Color--green">
+            <summary class="FAQ__question__summary">How do you add an event to Frank's Calendar?</summary>
+            <div class="FAQ__question__text">
+            <p>Fill out <a href="../add">this form</a>! </p>
+            <p> [answer goes here]</p>
+            </div>
+            
+        </details>
+        <details class="FAQ__question Color--green">
+            <summary class="FAQ__question__summary">Can I add an event by sharing it from my personal calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>
+        </details>
+
+        <h2 class="FAQ__section-header">Filtering</h2>
+        <details class="FAQ__question Color--blue">
+            <summary class="FAQ__question__summary">How do you add an event to Frank's Calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>        </details>
+        <details class="FAQ__question Color--blue">
+            <summary class="FAQ__question__summary">Can I add an event by sharing it from my personal calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>        </details>
+
+        <h2 class="FAQ__section-header">Exporting</h2>
+        <details class="FAQ__question Color--yellow">
+            <summary class="FAQ__question__summary">How do you add an event to Frank's Calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>        </details>
+        <details class="FAQ__question Color--yellow">
+            <summary class="FAQ__question__summary">Can I add an event by sharing it from my personal calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>        </details>
+
+        <h2 class="FAQ__section-header">About</h2>
+        <details class="FAQ__question Color--purple">
+            <summary class="FAQ__question__summary">How do you add an event to Frank's Calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>        </details>
+        <details class="FAQ__question Color--purple">
+            <summary class="FAQ__question__summary">Can I add an event by sharing it from my personal calendar?</summary>
+            <div class="FAQ__question__text">
+                <p> [answer goes here]</p>
+            </div>        </details>
+
+    </div>
+
+    </main>
+
+    {% include 'components/footer.html' %}
+{% endblock %}

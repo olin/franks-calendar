@@ -36,6 +36,10 @@ def about_page():
     if request.method == "GET":
         return render_template("about.html")
 
+@public.route("/faq", methods=["GET"])
+def faq_page():
+    return render_template("faq.html")
+
 
 @public.route("/<page>", methods=["GET"])
 def public_page(page):
