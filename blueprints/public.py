@@ -1,10 +1,8 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request
 from modules.db import DatabaseClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
-import json
-from datetime import datetime
 
 db = DatabaseClient()
 
@@ -105,30 +103,13 @@ def admin_page():
 
 
 @public.route("/confirmation", methods=["GET"])
-def confirmation():
-    event_id = request.args.get('event_id')
-    magic_id = db.get_event_with_magic(event_id)["magic"]
-
-    duration_type = request.args.get('duration')
-    if duration_type == "hour":
-        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
-    elif duration_type == "day":
-        duration = request.args.get('start').split(' ')[0]
-    elif duration_type == "many":
-        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
+def confirmation_page():
+    event_id = request.args.get("form")
+    event_data = db.get_one(event_id)
+    if event_data is None:
+        return render_template("404.html"), 404
     else:
-        duration = request.args.get('start') + " - " + request.args.get('end')
-
-    return render_template("confirmation.html",
-        title=request.args.get('title'),
-        category=request.args.get('category'),
-        location=request.args.get('location'),
-        description=request.args.get('description'),
-        host_name=request.args.get('host_name'),
-        host_email=request.args.get('host_email'),
-        magic_link=f"https://frankscalendar.com/edit/{event_id}?magic={magic_id}",
-        duration=duration,
-    ), 200
+        return render_template("confirmation.html", event_data=event_data), 200
 
 
 @public.route("/export/<eventid>", methods=["GET"])
@@ -144,12 +125,3 @@ def export_event(eventid):
         event["description"] = event_data["description"]
         cal.add_component(event)
         return cal.to_ical()
-
-@public.route("/test-edit", methods=["GET"])
-def test_edit_page():
-    form = EventForm()
-    return render_template("edit.html", form=form)
-
-@public.route("/test-confirmation", methods=["GET"])
-def test_confirmation_page():
-    return render_template("confirmation.html")

@@ -79,6 +79,14 @@
         border-radius: 0.5em;
         background-color: $links;
         transition-duration: 0.3s;
+
+        &:hover {
+          background-color: $links;
+        }
+
+        &:focus {
+          background-color: $links;
+        }
       }
     }
   }
@@ -172,6 +180,58 @@
         font-size: 1em;
         font-weight: 800;
         text-transform: uppercase;
+      }
+
+      option[value="academic_calendar"] {
+        color: $academic;
+      }
+
+      option[value="academic_advising"] {
+        color: $academic;
+      }
+
+      option[value="residential"] {
+        color: $student;
+      }
+
+      option[value="international"] {
+        color: $student;
+      }
+
+      option[value="diversity"] {
+        color: $student;
+      }
+
+      option[value="pgp"] {
+        color: $student;
+      }
+
+      option[value="hr"] {
+        color: $student;
+      }
+
+      option[value="health"] {
+        color: $student;
+      }
+
+      option[value="admission"] {
+        color: $admission;
+      }
+
+      option[value="library"] {
+        color: $library;
+      }
+
+      option[value="shop"] {
+        color: $shop;
+      }
+
+      option[value="clubs"] {
+        color: $clubs;
+      }
+
+      option[value="other"] {
+        color: $other;
       }
     }
   }
