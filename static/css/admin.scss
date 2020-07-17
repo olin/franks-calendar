@@ -1,0 +1,159 @@
+.Admin {
+  min-width: 80em;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+
+    &__title {
+      text-align: center;
+      display: block;
+      font-family: $title;
+      font-size: 1.5em;
+      color: $links;
+      margin-left: 1em;
+    }
+
+    select {
+      display: block;
+      font-family: $sans;
+      font-size: 1em;
+      color: $main;
+      border: 0.05em solid $main;
+      background-color: white;
+      border-radius: 0.5em;
+      padding: 0.5em 0.5em;
+      margin-right: 1em;
+
+      option {
+        font-family: $sans;
+        font-size: 1em;
+        color: $main;
+      }
+    }
+  }
+
+  &__table-wrapper {
+    margin: 0em 1em;
+
+    table {
+      margin-bottom: 1em;
+      border-collapse: collapse;
+      width: 100%;
+      float: left;
+
+      td, th {
+        padding: 0.5em 1em;
+        text-align: left;
+      }
+
+      thead {
+        border-bottom: 0.2em solid $secondary;
+
+        th {
+          font-family: $title;
+          font-weight: 800;
+          color: $main;
+          text-transform: uppercase;
+        }
+      }
+
+      tbody {
+
+        td {
+          font-family: $sans;
+          color: $main;
+        }
+
+        td[value="Timestamp"] {
+          width: 11.5em;
+        }
+
+        td[value="Submitter"] {
+          min-width: 10em;
+        }
+
+        td[value="Status"] {
+          width: 8em;
+        }
+
+        td[value="Event--Name"] {
+          min-width: 10em;
+          max-width: 12em;
+        }
+
+        td[value="Event--Page"] {
+          min-width: 5em;
+          max-width: 12em;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        td[value="Edit--Link"] {
+          min-width: 5em;
+          max-width: 12em;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        td[value="Moderator"] {
+          width: 23.5em;
+          display: flex;
+        }
+      }
+
+      tbody tr:hover {
+        background: $secondary--light;
+      }
+    }
+  }
+}
+
+.Moderator {
+
+  border: none;
+  border-radius: 0.25em;
+  color: black;
+  font-size: 0.9em;
+  font-family: $title;
+  font-weight: 800;
+  text-transform:uppercase;
+  text-decoration: none;
+  padding: 0.5em 0.5em;
+  align-items: center;
+  text-align: center;
+  margin-right: 0.5em;
+  transition-duration: 0.3s;
+  justify-content: flex-start;
+
+  &--approve {
+    border: 0.25em solid $shop;
+    flex-grow: 1;
+
+    &:hover {
+      background-color: $shop;
+      color: white;
+    }
+  }
+
+  &--request {
+    border: 0.25em solid $links;
+    flex-grow: 1;
+
+    &:hover {
+      background-color: $links;
+      color: white;
+    }
+  }
+
+  &--cancel {
+    border: 0.25em solid $admission;
+    flex-grow: 1;
+
+    &:hover {
+      background-color: $admission;
+      color: white;
+    }
+  }
+}

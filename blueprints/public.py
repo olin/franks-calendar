@@ -41,7 +41,6 @@ def add_event():
         )
     return render_template("add.html", form=form)
 
-
 @public.route("/about", methods=["GET"])
 def about_page():
     if request.method == "GET":
@@ -125,3 +124,17 @@ def export_event(eventid):
         event["description"] = event_data["description"]
         cal.add_component(event)
         return cal.to_ical()
+
+@public.route("/test-edit", methods=["GET"])
+def test_edit_page():
+    form = EventForm()
+    return render_template("edit.html", form=form)
+
+@public.route("/test-confirmation", methods=["GET"])
+def test_confirmation_page():
+    return render_template("confirmation.html")
+
+@public.route("/test-admin", methods=["GET"])
+def test_admin_page():
+    if request.method == "GET":
+        return render_template("admin.html", events=[])

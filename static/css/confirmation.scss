@@ -36,7 +36,6 @@
     }
 
     &__content {
-        padding: 1em 0em 1em 0em;
 
         &__title {
         font-family: $title;
@@ -131,6 +130,6 @@
         margin-left: auto;
         margin-bottom: 1em;
         box-shadow: 0.1em 0.1em 0.25em $secondary;
-        
+
     }
 }
