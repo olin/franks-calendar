@@ -1,7 +1,75 @@
+{% extends 'base.html' %}
 {% block page %}
-<main>
-    <form>
-        {{ events[0]['title'] }}
-    </form>
+{% include 'components/header.html' %}
+<main class="Admin">
+  <div class="Admin__header">
+    <div class="Admin__header__title">
+      Admin Event List
+    </div>
+    <select>
+      <option>Sort By</option>
+      <option value="Newest">Newest</option>
+      <option value="Oldest">Oldest</option>
+      <option value="Status">Status</option>
+      <option value="Event__Name">Event Name</option>
+    </select>
+  </div>
+
+  <div class="Admin__table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Timestamp</th>
+          <th>Submitter</th>
+          <th>Status</th>
+          <th>Event Name</th>
+          <th>Event Page</th>
+          <th>User Edit Link</th>
+          <th>Moderator Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td value="Timestamp">2020/06/20 13:00:20</td>
+          <td value="Submitter">courtney@olin.edu</td>
+          <td value="Status">event status</td>
+          <td value="Event--Name">Test Event Title</td>
+          <td value="Event--Page">linktoeventpage.com</td>
+          <td value="Edit--Link">magiclinkforedits.com</td>
+          <td value="Moderator" class="Moderator">
+            <a href="approvallink.com" class="Moderator Moderator--approve">Approve</a>
+            <a href="requestchangeslink.com" class="Moderator Moderator--request">Request Changes</a>
+            <a href="cancellink.com" class="Moderator Moderator--cancel">Cancel</a>
+          </td>
+        </tr>
+        {% for event in events %}
+        <tr>
+          <td value="Timestamp">{{ event["$date"] }}</td>
+          <td value="Submitter">courtney@olin.edu</td>
+          <td value="Status">event status</td>
+          <td value="Event--Name">{{ event["title"] }}</td>
+          <td value="Event--Page">linktoeventpage.com</td>
+          <td value="Edit--Link">magiclinkforedits.com</td>
+          <td value="Moderator" class="Moderator">
+            <a href="approvallink.com" class="Moderator Moderator--approve">Approve</a>
+            <a href="requestchangeslink.com" class="Moderator Moderator--request">Request Changes</a>
+            <a href="cancellink.com" class="Moderator Moderator--cancel">Cancel</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </main>
+{% include 'components/footer.html' %}
 {% endblock %}
+
+<tr>
+  <td value="Timestamp">2020-06-26T15:30:00Z</td>
+  <td value="Submitter">courtney@olin.edu</td>
+  <td value="Status">Status</td>
+  <td value="Event--Name">Study Away info session</td>
+  <td value="Event--Page">linktoeventpage.com</td>
+  <td value="Edit--Link">magiclinkforedits.com</td>
+  <td value="Moderator">Moderator Actions</td>
+</tr>
