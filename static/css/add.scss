@@ -112,11 +112,10 @@
     }
   }
 
-  // Styling dropdown menu
-  &__category {
+  &__time {
     overflow: hidden;
 
-    select {
+    label {
       display: block;
       text-align: left;
       font-family: $title;
@@ -140,10 +139,9 @@
       margin-bottom: 0.5em;
 
       option {
-        font-family: $title;
+        font-family: $sans;
         font-size: 1em;
-        font-weight: 800;
-        text-transform: uppercase;
+        color: $main;
       }
     }
   }
@@ -167,72 +165,68 @@
       margin-bottom: 0.5em;
       transition: box-shadow 0.3s;
 
-      // Changing the dropdown arrow to a chevron
-    	background: url("http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png") right center no-repeat;
-    	appearance: none;
-
       &:hover {
         box-shadow: 0 0 0.3em $secondary;
       }
 
       option {
-        font-family: $title;
+        font-family: $sans;
         font-size: 1em;
-        font-weight: 800;
-        text-transform: uppercase;
+        //font-weight: 800;
+        //text-transform: uppercase;
       }
 
-      option[value="academic_calendar"] {
-        color: $academic;
-      }
-
-      option[value="academic_advising"] {
-        color: $academic;
-      }
-
-      option[value="residential"] {
-        color: $student;
-      }
-
-      option[value="international"] {
-        color: $student;
-      }
-
-      option[value="diversity"] {
-        color: $student;
-      }
-
-      option[value="pgp"] {
-        color: $student;
-      }
-
-      option[value="hr"] {
-        color: $student;
-      }
-
-      option[value="health"] {
-        color: $student;
-      }
-
-      option[value="admission"] {
-        color: $admission;
-      }
-
-      option[value="library"] {
-        color: $library;
-      }
-
-      option[value="shop"] {
-        color: $shop;
-      }
-
-      option[value="clubs"] {
-        color: $clubs;
-      }
-
-      option[value="other"] {
-        color: $other;
-      }
+      // option[value="academic_calendar"] {
+      //   color: $academic;
+      // }
+      //
+      // option[value="academic_advising"] {
+      //   color: $academic;
+      // }
+      //
+      // option[value="residential"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="international"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="diversity"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="pgp"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="hr"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="health"] {
+      //   color: $student;
+      // }
+      //
+      // option[value="admission"] {
+      //   color: $admission;
+      // }
+      //
+      // option[value="library"] {
+      //   color: $library;
+      // }
+      //
+      // option[value="shop"] {
+      //   color: $shop;
+      // }
+      //
+      // option[value="clubs"] {
+      //   color: $clubs;
+      // }
+      //
+      // option[value="other"] {
+      //   color: $other;
+      // }
     }
   }
 
