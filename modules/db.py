@@ -3,6 +3,14 @@ from bson.objectid import ObjectId
 from bson import json_util
 from uuid import uuid4 as uuid
 from datetime import datetime, timezone
+from enum import Enum
+
+
+class Status(Enum):
+    WAITING = "Awaiting Info"
+    PENDING = "Pending Approval"
+    APPROVED = "Approved"
+
 
 class DatabaseClient(object):
     """
@@ -40,6 +48,7 @@ class DatabaseClient(object):
         del event['csrf_token']
         inserted_id = self.client.events.insert_one(event).inserted_id
         event["_id"] = inserted_id
+        event["status"] = Status.PENDING.value
         return event
 
     def authenticate_magic_link(self, event_id, magic):
