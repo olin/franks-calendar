@@ -1,8 +1,4 @@
 import os
-<<<<<<< HEAD
-from bson.objectid import ObjectId
-=======
->>>>>>> partially completed email integration
 from jinja2 import Template
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (
@@ -39,7 +35,6 @@ class EmailClient(object):
         eventname = event['title']
         recipient = event['host_email']
         path = os.getcwd() + "/templates/emails/edit_event.txt"
-
         template = Template(open(path).read())
         content = template.render(name=eventname, reasons=comments, link=eventlink)
 
