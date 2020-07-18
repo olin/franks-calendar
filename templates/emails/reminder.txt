@@ -1,0 +1,6 @@
+Hi!
+
+You must make edits to your event, {{name}}, before it can be considered for approval. Please do so within 2 days, or it will automatically be removed from the approval process. You can make the required edits via this link: {{link}}.  
+
+Sincerely, 
+Frank's Calendar

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from modules.db import DatabaseClient
+from modules.sg_client import EmailClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
@@ -9,6 +10,7 @@ import uuid
 
 
 db = DatabaseClient()
+email = EmailClient()
 
 public = Blueprint(
     "public",
@@ -26,9 +28,9 @@ def public_index():
 @public.route("/add", methods=["POST", "GET"])
 def add_event():
     form = EventForm()
-    if request.method == "POST": # and form.validate_on_submit():
-        inserted_event = db.create_new_event(form.data)
-        # send email
+    if request.method == "POST" and form.validate_on_submit():
+        inserted_event = db.create_new_event(form)
+        email.send_submission_confirmation(request.base_url, inserted_event)
         return redirect(
             url_for('public.confirmation',
                 title=inserted_event['title'],
@@ -44,7 +46,6 @@ def add_event():
             )
         )
     return render_template("add.html", form=form)
-
 
 @public.route("/about", methods=["GET"])
 def about_page():

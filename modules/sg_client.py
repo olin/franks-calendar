@@ -1,5 +1,8 @@
 import os
+<<<<<<< HEAD
 from bson.objectid import ObjectId
+=======
+>>>>>>> partially completed email integration
 from jinja2 import Template
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import (
@@ -96,4 +99,3 @@ class EmailClient(object):
         #issues with retrieving base right now, but should be resolved when we have permanent hosting solution
         #return base + "/edit?event_id=" + eventid + "&magic=" + magic   
         return "frankscalendar/edit?event_id=" + eventid + "&magic=" + magic    
-
