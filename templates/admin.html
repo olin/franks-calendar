@@ -19,8 +19,8 @@
     <table>
       <thead>
         <tr>
-          <th>Timestamp</th>
-          <th>Submitter</th>
+          <th>Last Changed</th>
+          <th>Host</th>
           <th>Status</th>
           <th>Event Name</th>
           <th>Event Page</th>
@@ -29,33 +29,20 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td value="Timestamp">2020/06/20 13:00:20</td>
-          <td value="Submitter">courtney@olin.edu</td>
-          <td value="Status">event status</td>
-          <td value="Event--Name">Test Event Title Title Title Title Title Title Title Title</td>
-          <td value="Event--Page">linktoeventpage.comlinktoeventpage.comlinktoeventpage.com</td>
-          <td value="Edit--Link">magiclinkforedits.comlinktoeventpage.comlinktoeventpage.com</td>
-          <td value="Moderator" class="Moderator">
-            <a href="approvallink.com" class="Moderator Moderator--approve">Approve</a>
-            <a href="requestchangeslink.com" class="Moderator Moderator--request">Request Changes</a>
-            <a href="cancellink.com" class="Moderator Moderator--cancel">Cancel</a>
-          </td>
-        </tr>
         {% for event in events %}
-        <tr>
-          <td value="Timestamp">{{ timestamp }}</td>
-          <td value="Submitter">{{ submitter }}</td>
-          <td value="Status">{{ status }}</td>
-          <td value="Event--Name">{{ event["title"] }}</td>
-          <td value="Event--Page">linktoeventpage.com</td>
-          <td value="Edit--Link">magiclinkforedits.com</td>
-          <td value="Moderator" class="Moderator">
-            <a href="approvallink.com" class="Moderator Moderator--approve">Approve</a>
-            <a href="requestchangeslink.com" class="Moderator Moderator--request">Request Changes</a>
-            <a href="cancellink.com" class="Moderator Moderator--cancel">Cancel</a>
-          </td>
-        </tr>
+            <tr>
+                <td value="Timestamp">{{ event["last_edited"] }}</td>
+                <td value="Submitter"><a href="mailto:{{ event['host_email'] }}">{{ event["host_name"] }}</a></td>
+                <td value="Status">{{ event["status"] }}</td>
+                <td value="Event--Name">{{ event["title"] }}</td>
+                <td value="Event--Page"><a href="/">Event Page Permalink</a></td>
+                <td value="Edit--Link"><a href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">Edit Page Permalink</a></td>
+                <td value="Moderator" class="Moderator">
+                    <a href="approvallink.com" class="Moderator Moderator--approve">Approve</a>
+                    <a href="requestchangeslink.com" class="Moderator Moderator--request">Request Changes</a>
+                    <a href="cancellink.com" class="Moderator Moderator--cancel">Cancel</a>
+                </td>
+                </tr>
         {% endfor %}
       </tbody>
     </table>

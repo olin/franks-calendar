@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for
 from modules.db import DatabaseClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
+import json
+from datetime import datetime
 
 db = DatabaseClient()
 
@@ -41,10 +43,12 @@ def add_event():
         )
     return render_template("add.html", form=form)
 
+
 @public.route("/about", methods=["GET"])
 def about_page():
     if request.method == "GET":
         return render_template("about.html")
+
 
 @public.route("/faq", methods=["GET"])
 def faq_page():
@@ -55,12 +59,22 @@ def faq_page():
 def edit_event(event_id):
     magic_id = request.args.get("magic")
     event = db.get_event_with_magic(event_id)
+    form = EventForm(obj=event)
+    form.title.data = event.get("title")
+    form.location.data = event.get("location")
+    form.dtstart.data = event.get("dtstart")
+    form.dtend.data = event.get("dtend")
+    form.category.data = event.get("category")
+    form.description.data = event.get("description")
+    form.host_name.data = event.get("host_name")
+    form.host_email.data = event.get("host_email")
+    form.duration.data = event.get("duration")
 
-    if even["magic"] != magic_id or even is None:
+    if (str(event["magic"]) != magic_id) or (event is None):
         return render_template("404.html")
         # render a customized error page eventually?
     if request.method == "GET":
-        return render_template("edit-event.html", event=event)
+        return render_template("edit.html", form=form)
     elif request.method == "PUT":
         db.events.update(
             {_id: ObjectId(event_id)},
@@ -87,28 +101,35 @@ def edit_event(event_id):
 @public.route("/admin", methods=["GET"])
 def admin_page():
     if request.method == "GET":
-        magicid = request.args.get("magic")
-        adminid = request.args.get("adminid")
-        admin = db.admins.find_one({"_id": ObjectId(adminid)})
-        if admin is None:
-            return render_template("404.html")
-        adminmagic = admin["magic"]
-        if magicid == adminmagic:
-            all_events = db.events.find()
-            return render_template("admin.html", events=all_events)
-        else:
-            return render_template("404.html")
-            # render a customized error page eventually?
+        events = db.get_all_events_with_magic()
+        return render_template("admin.html", events=events)
 
 
 @public.route("/confirmation", methods=["GET"])
-def confirmation_page():
-    event_id = request.args.get("form")
-    event_data = db.get_one(event_id)
-    if event_data is None:
-        return render_template("404.html"), 404
+def confirmation():
+    event_id = request.args.get('event_id')
+    magic_id = db.get_event_with_magic(event_id)["magic"]
+
+    duration_type = request.args.get('duration')
+    if duration_type == "hour":
+        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
+    elif duration_type == "day":
+        duration = request.args.get('start').split(' ')[0]
+    elif duration_type == "many":
+        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
     else:
-        return render_template("confirmation.html", event_data=event_data), 200
+        duration = request.args.get('start') + " - " + request.args.get('end')
+
+    return render_template("confirmation.html",
+        title=request.args.get('title'),
+        category=request.args.get('category'),
+        location=request.args.get('location'),
+        description=request.args.get('description'),
+        host_name=request.args.get('host_name'),
+        host_email=request.args.get('host_email'),
+        magic_link=f"https://frankscalendar.com/edit/{event_id}?magic={magic_id}",
+        duration=duration,
+    ), 200
 
 
 @public.route("/export/<eventid>", methods=["GET"])

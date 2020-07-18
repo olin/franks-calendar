@@ -37,6 +37,9 @@ class DatabaseClient(object):
     def get_all_events(self):
         return [doc for doc in self.client.events.find({}, {'magic': False})]
 
+    def get_all_events_with_magic(self):
+        return [doc for doc in self.client.events.find()]
+
     def get_event_with_magic(self, event_id):
         return self.client.events.find_one({
             "_id": ObjectId(event_id)
