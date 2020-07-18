@@ -1,5 +1,0 @@
-Hi!
-
-The event you submitted to Frank's Calendar, {{name}}, requires edits. 
-
-Please go to this link to make the requested changes: {{link}}

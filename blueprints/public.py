@@ -142,8 +142,8 @@ def export_event(eventid):
         email.send_edit_link(request.base_url, event_data)
         cal = Calendar()
         event = Event()
-        event["dtstart"] = datetime.strftime(event_data["start"], "%Y%m%dT%H%M%S")
-        event["dtend"] = datetime.strftime(event_data["end"], "%Y%m%dT%H%M%S")
+        event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
+        event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
         event["summary"] = event_data["title"]
         event["location"] = event_data["location"]
         event["description"] = event_data["description"]
