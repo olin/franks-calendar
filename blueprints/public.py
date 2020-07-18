@@ -138,7 +138,8 @@ def confirmation():
 @public.route("/export/<eventid>", methods=["GET"])
 def export_event(eventid):
     if request.method == "GET":
-        event_data = db.events.find_one({"_id": ObjectId(eventid)})
+        event_data = db.get_one(ObjectId(eventid))
+        email.send_edit_link(request.base_url, event_data)
         cal = Calendar()
         event = Event()
         event["dtstart"] = datetime.strftime(event_data["start"], "%Y%m%dT%H%M%S")
