@@ -1,5 +1,9 @@
 import React from 'react';
 import client from '../api';
+<<<<<<< HEAD
+=======
+
+>>>>>>> Added routes for edit, add, confirmation, and admin
 
 export default class EventPage extends React.Component {
     constructor(props) {

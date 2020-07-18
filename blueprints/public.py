@@ -5,6 +5,8 @@ from bson.objectid import ObjectId
 from icalendar import Calendar, Event
 import json
 from datetime import datetime
+import uuid
+
 
 db = DatabaseClient()
 
