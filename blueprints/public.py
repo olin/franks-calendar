@@ -19,7 +19,7 @@ public = Blueprint(
 )
 
 @public.route("/", methods=["GET"])
-def public_index():
+def index():
     if request.method == "GET":
         return render_template("home.html")
 
@@ -28,7 +28,7 @@ def public_index():
 def add_event():
     form = EventForm()
     if request.method == "POST" and form.validate_on_submit():
-        inserted_event = db.create_new_event(form)
+        inserted_event = db.create_new_event(form.data)
         email.send_submission_confirmation(request.base_url, inserted_event)
         return redirect(
             url_for('public.confirmation',
@@ -57,41 +57,31 @@ def faq_page():
     return render_template("faq.html")
 
 
-@public.route("/edit/<event_id>", methods=["PUT", "GET", "DELETE"])
+@public.route("/edit/<event_id>", methods=["POST", "GET", "DELETE"])
 def edit_event(event_id):
-    magic_id = request.args.get("magic")
     event = db.get_event_with_magic(event_id)
-    form = EventForm(obj=event)
-    form.title.data = event.get("title")
-    form.location.data = event.get("location")
-    form.dtstart.data = event.get("dtstart")
-    form.dtend.data = event.get("dtend")
-    form.category.data = event.get("category")
-    form.description.data = event.get("description")
-    form.host_name.data = event.get("host_name")
-    form.host_email.data = event.get("host_email")
-    form.duration.data = event.get("duration")
+    form = EventForm()
 
-    if (str(event["magic"]) != magic_id) or (event is None):
-        return render_template("404.html")
-        # render a customized error page eventually?
     if request.method == "GET":
+        # Should've used SQLAlchemy and Postgres
+        form.title.data = event.get("title")
+        form.location.data = event.get("location")
+        form.dtstart.data = event.get("dtstart")
+        form.dtend.data = event.get("dtend")
+        form.category.data = event.get("category")
+        form.description.data = event.get("description")
+        form.host_name.data = event.get("host_name")
+        form.host_email.data = event.get("host_email")
+        form.duration.data = event.get("duration")
+
+        if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
+            return render_template("404.html")
+
         return render_template("edit.html", form=form)
-    elif request.method == "PUT":
-        db.events.update(
-            {_id: ObjectId(event_id)},
-            # form is prepopulated with old values, so if user didn't change every a certain field,
-            # the database is updated with the old value (nothing changes)
-            {
-                "title": request.form["title"],
-                "description": request.form["description"],
-                "location": request.form["location"],
-                "start": request.form["start"],
-                "end": request.form["end"],
-                "rrule": request.form["rrule"],
-                "last_edited": datetime.now(timezone.utc),
-            },
-        )
+    elif request.method == "POST":
+        db.update_event(event_id, form.data)
+
+        return redirect(url_for("public.index"))
     elif request.method == "DELETE":
         db.delete_event(event_id)
         # notify users that an event has been deleted?
@@ -129,7 +119,7 @@ def confirmation():
         description=request.args.get('description'),
         host_name=request.args.get('host_name'),
         host_email=request.args.get('host_email'),
-        magic_link=f"https://frankscalendar.com/edit/{event_id}?magic={magic_id}",
+        magic_link=f"/edit/{event_id}?magic={magic_id}",
         duration=duration,
     ), 200
 
@@ -147,6 +137,18 @@ def export_event(eventid):
         event["description"] = event_data["description"]
         cal.add_component(event)
         return cal.to_ical()
+
+
+@public.route("/approve/<event_id>", methods=["GET"])
+def update_status(event_id):
+    new_status = request.args.get("status")
+    if not new_status:
+        return redirect(url_for("public.index"))
+
+    event_data = db.get_event_with_magic(event_id)
+    if not event_data:
+        return redirect(url_for("public.index"))
+
 
 @public.route("/test-edit", methods=["GET"])
 def test_edit_page():

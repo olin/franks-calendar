@@ -14,7 +14,7 @@ class API(MethodView):
         if id:
             return db.get_one(id)
         else:
-            query = db.get_all_events()
+            query = db.get_approved_events()
             return jsonify(json_util.dumps(query)), 200
 
     # def post(self):

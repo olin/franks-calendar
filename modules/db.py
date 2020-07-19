@@ -37,13 +37,21 @@ class DatabaseClient(object):
     def get_all_events(self):
         return [doc for doc in self.client.events.find({}, {'magic': False})]
 
+    def get_approved_events(self):
+        return [doc for doc in self.client.events.find({}, {"magic": False}) if doc.get("status") == Status.APPROVED.value]
+
     def get_all_events_with_magic(self):
         return [doc for doc in self.client.events.find()]
 
     def get_event_with_magic(self, event_id):
-        return self.client.events.find_one({
-            "_id": ObjectId(event_id)
-        })
+        try:
+            object_id = ObjectId(event_id)
+
+            return self.client.events.find_one({
+                "_id": object_id
+            })
+        except:
+            return {}
 
     def create_new_event(self, event):
         event["magic"] = self.generate_magic_string()
@@ -60,11 +68,21 @@ class DatabaseClient(object):
         }, {
             "magic": True
         })
-        _magic = event["magic"]
-        if _magic == magic:
+        if event["magic"] == magic:
             return True
         else:
             return False
+
+    def update_event(self, event_id, form):
+        print(form)
+        self.client.events.update_one(
+            {
+                "_id": ObjectId(event_id)
+            },
+            {
+                "$set": form
+            }
+        )
 
     def delete(self, event_id):
         self.client.delete_one({
