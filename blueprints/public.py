@@ -1,12 +1,15 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from modules.db import DatabaseClient
+from modules.sg_client import EmailClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
 from icalendar import Calendar, Event
 import json
 from datetime import datetime
+import uuid
 
 db = DatabaseClient()
+email = EmailClient()
 
 public = Blueprint(
     "public",
@@ -24,9 +27,9 @@ def public_index():
 @public.route("/add", methods=["POST", "GET"])
 def add_event():
     form = EventForm()
-    if request.method == "POST": # and form.validate_on_submit():
-        inserted_event = db.create_new_event(form.data)
-        # send email
+    if request.method == "POST" and form.validate_on_submit():
+        inserted_event = db.create_new_event(form)
+        email.send_submission_confirmation(request.base_url, inserted_event)
         return redirect(
             url_for('public.confirmation',
                 title=inserted_event['title'],
@@ -42,7 +45,6 @@ def add_event():
             )
         )
     return render_template("add.html", form=form)
-
 
 @public.route("/about", methods=["GET"])
 def about_page():
@@ -135,11 +137,11 @@ def confirmation():
 @public.route("/export/<eventid>", methods=["GET"])
 def export_event(eventid):
     if request.method == "GET":
-        event_data = db.events.find_one({"_id": ObjectId(eventid)})
+        event_data = db.get_one(ObjectId(eventid))
         cal = Calendar()
         event = Event()
-        event["dtstart"] = datetime.strftime(event_data["start"], "%Y%m%dT%H%M%S")
-        event["dtend"] = datetime.strftime(event_data["end"], "%Y%m%dT%H%M%S")
+        event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
+        event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
         event["summary"] = event_data["title"]
         event["location"] = event_data["location"]
         event["description"] = event_data["description"]

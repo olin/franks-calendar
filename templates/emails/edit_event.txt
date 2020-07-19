@@ -1,0 +1,6 @@
+Hi!
+
+The event you submitted to Frank’s Calendar, {{name}}, requires edits before it can be approved! The moderator requests the following changes: {{reasons}}. Please make the required changes within 7 days via this magic link: {{link}}.
+
+Sincerely, 
+Frank's Calendar
