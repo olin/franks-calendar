@@ -8,7 +8,6 @@ import json
 from datetime import datetime
 import uuid
 
-
 db = DatabaseClient()
 email = EmailClient()
 
@@ -139,7 +138,6 @@ def confirmation():
 def export_event(eventid):
     if request.method == "GET":
         event_data = db.get_one(ObjectId(eventid))
-        email.send_edit_link(request.base_url, event_data)
         cal = Calendar()
         event = Event()
         event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")

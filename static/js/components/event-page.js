@@ -1,19 +1,13 @@
 import React from 'react';
 import client from '../api';
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
->>>>>>> Added routes for edit, add, confirmation, and admin
-
-=======
->>>>>>> fixed typos/bugs that jack pointed out
 export default class EventPage extends React.Component {
     constructor(props) {
         super(props);
 
         this.exportEvent = this.exportEvent.bind(this);
     }
+    
     exportEvent() {
         // Retrieves event information and returns as ical file
         let eventID = this.props.event.id;
@@ -37,14 +31,9 @@ export default class EventPage extends React.Component {
         var category = this.props.event.category.pop();
 
         function dateToString(date) {
-<<<<<<< HEAD
             let hours = date.getHours();
             let minutes = ('0' + date.getMinutes()).slice(-2);
             return (hours + ':' + minutes);
-=======
-          
-          return (date)
->>>>>>> in the middle of osmething
         }
 
         return (
@@ -105,18 +94,14 @@ export default class EventPage extends React.Component {
                         When?
                       </td>
                       <td class="Event__content__text">
-<<<<<<< HEAD
                         <span class="Event__content__date">
                           {this.props.event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                         </span>
                         |
-=======
-                     
->>>>>>> in the middle of osmething
                         <span class="Event__content__time">
                           {dateToString(this.props.event.start)}
                         </span>
-                        -
+                        
                         <span class="Event__content__time">
                           {dateToString(this.props.event.end)}
                         </span>
