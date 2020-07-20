@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% block page %}
-    {% include 'components/header.html' %}
+    {% include 'components/header--edit.html' %}
     <main>
       <div class="Page">
-        <h1 class="Form__title">Edit Your Event</h1>
 
         <form class="Form" action="" method="post">
             {{ form.csrf_token }}

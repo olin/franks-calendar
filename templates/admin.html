@@ -1,20 +1,7 @@
 {% extends 'base.html' %}
 {% block page %}
-{% include 'components/header.html' %}
+{% include 'components/header--admin.html' %}
 <main class="Admin">
-  <div class="Admin__header">
-    <div class="Admin__header__title">
-      Admin Event List
-    </div>
-    <select>
-      <option>Sort By</option>
-      <option value="Newest">Newest</option>
-      <option value="Oldest">Oldest</option>
-      <option value="Status">Status</option>
-      <option value="Event__Name">Event Name</option>
-    </select>
-  </div>
-
   <div class="Admin__table-wrapper">
     <table>
       <thead>

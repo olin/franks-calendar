@@ -1,0 +1,26 @@
+<html>
+  <header class="Header">
+      <div class="Header__logo">
+          <img src="/static/images/franks_cal_logo.png" alt="Frank's Calendar Logo" class="Header__logo__icon" />
+          <div class="Header__logo__side">
+            <h1 class="Header__logo__text">Frank's</h1>
+            <h1 class="Header__logo__text">Calendar</h1>
+          </div>
+      </div>
+      <div class="Header__nav">
+        <h1 class="Header__title">
+          Edit Your Event
+        </h1>
+      </div>
+
+      <div class="Header__timezone">
+        <p class="Header__timezone__title">Display Timezone</p>
+        <p class="Header__timezone__time" id="Timezone"></p>
+      </div>
+  </header>
+
+  <script>
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    document.getElementById("Timezone").innerHTML = tz;
+  </script>
+</html>
