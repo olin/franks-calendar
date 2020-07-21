@@ -87,25 +87,24 @@
         margin-left: 0.5em;
         transition-duration: 0.25s;
         width: 8em;
-        cursor: default;
+        cursor: pointer;
         text-decoration: none;
 
-        &:hover {
+        &:hover, :active {
           background-color: white;
           border: 0.1em solid $links;
           color: $links;
-        }
 
-        &:active {
-          background-color: white;
-          border: 0.1em solid $links;
-          color: $links;
+          .Header__nav__event__icon {
+            stroke: $links;
+          }
         }
 
         &__icon {
           display: inline-block;
           stroke: white;
           margin-right: 0.25em;
+          transition-duration: 0.25s;
         }
       }
 
@@ -123,7 +122,7 @@
         margin-right: 0.5em;
         width: 8em;
         text-align: center;
-        cursor: default;
+        cursor: pointer;
         text-decoration: none;
 
         &__wrapper {
@@ -135,14 +134,15 @@
           display: inline-block;
           stroke: $main;
           margin-right: 0.25em;
+          transition-duration: 0.25s;
         }
 
-        &:hover {
+        &:hover, :active {
           color: $links;
-        }
 
-        &:active {
-          color: $links;
+          .Header__nav__link__icon {
+            stroke: $links;
+          }
         }
       }
     }
@@ -490,6 +490,8 @@
     text-align: center;
     padding: 1.5em 1em 1em 1em;
     flex: 0 1 0;
+    position: sticky;
+    bottom: -999em;
 
     &__message {
         display: block;
