@@ -38,9 +38,9 @@
                 <td value="Event--Page"><a href="/">Event Page Permalink</a></td>
                 <td value="Edit--Link"><a href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">Edit Page Permalink</a></td>
                 <td value="Moderator" class="Moderator">
-                    <a href="approvallink.com" class="Moderator Moderator--approve">Approve</a>
-                    <a href="requestchangeslink.com" class="Moderator Moderator--request">Request Changes</a>
-                    <a href="cancellink.com" class="Moderator Moderator--cancel">Cancel</a>
+                    <a href="/approve/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--approve">Approve</a>
+                    <a href="/request_changes/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--request">Request Changes</a>
+                    <a href="/cancel_event/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--cancel">Cancel</a>
                 </td>
                 </tr>
         {% endfor %}

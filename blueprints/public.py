@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from modules.db import DatabaseClient
+from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
@@ -140,26 +140,42 @@ def export_event(eventid):
 
 
 @public.route("/approve/<event_id>", methods=["GET"])
-def update_status(event_id):
-    new_status = request.args.get("status")
-    if not new_status:
-        return redirect(url_for("public.index"))
-
+def approve_event(event_id):
+    magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if not event_data:
+    if (event_data["magic"] != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
+    db.update_event(event_id, {
+        "status": Status.APPROVED.value
+    })
 
-@public.route("/test-edit", methods=["GET"])
-def test_edit_page():
-    form = EventForm()
-    return render_template("edit.html", form=form)
+    return redirect(url_for("public.admin_page", admin_magic="test"))
 
-@public.route("/test-confirmation", methods=["GET"])
-def test_confirmation_page():
-    return render_template("confirmation.html")
 
-@public.route("/test-admin", methods=["GET"])
-def test_admin_page():
-    if request.method == "GET":
-        return render_template("admin.html", events=[])
+@public.route("/request_changes/<event_id>", methods=["GET"])
+def request_event_changes(event_id):
+    magic = request.args.get("magic")
+    event_data = db.get_event_with_magic(event_id)
+    if (event_data["magic"] != magic) or (not event_data):
+        return redirect(url_for("public.index"))
+
+    db.update_event(event_id, {
+        "status": Status.WAITING.value
+    })
+
+    return redirect(url_for("public.admin_page", admin_magic="test"))
+
+
+@public.route("/cancel_event/<event_id>", methods=["GET"])
+def cancel_event(event_id):
+    magic = request.args.get("magic")
+    event_data = db.get_event_with_magic(event_id)
+    if (event_data["magic"] != magic) or (not event_data):
+        return redirect(url_for("public.index"))
+
+    db.update_event(event_id, {
+        "status": Status.CANCELED.value
+    })
+
+    return redirect(url_for("public.admin_page", admin_magic="test"))

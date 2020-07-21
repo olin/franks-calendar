@@ -10,6 +10,7 @@ class Status(Enum):
     WAITING = "Awaiting Info"
     PENDING = "Pending Approval"
     APPROVED = "Approved"
+    CANCELED = "Canceled"
 
 
 class DatabaseClient(object):
@@ -74,7 +75,6 @@ class DatabaseClient(object):
             return False
 
     def update_event(self, event_id, form):
-        print(form)
         self.client.events.update_one(
             {
                 "_id": ObjectId(event_id)
