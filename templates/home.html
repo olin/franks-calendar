@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block page %}
+
+  <div style="display:flex; flex-direction: column; height:100%">
     {% include 'components/header.html' %}
 
-    <div id="calendar-root"></div>
+    <div id="calendar-root" class="Main"></div>
 
     {% include 'components/footer.html' %}
+  </div>
 
     <script src="{{url_for('public.static', filename='build.js')}}"></script>
 {% endblock %}

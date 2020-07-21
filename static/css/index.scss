@@ -11,27 +11,167 @@
 
 @import url('https://use.typekit.net/gsh7wuf.css');
 
+.Home {
+  display: flex;
+}
+
 .Header {
-    padding: 1em;
+    padding: 0.5em 1em;
+    display: flex;
+    flex: 0 1 0;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0.1em 0.1em 0.25em $secondary;
 
     &__title {
+      font-family: $title;
+      font-size: 2em;
+      color: $links;
+      text-transform: uppercase;
+
+      &--confirm {
+        color: $shop;
+      }
+    }
+
+    &__logo {
+      width: 12em;
+      overflow: auto;
+      display: flex;
+      flex-direction: row;
+      padding: 0.5em 1em 0.5em 0.5em;
+
+      &__side {
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        vertical-align: center;
+      }
+
+      &__icon {
+        order: 1;
+        width: 2.5em;
+        height: auto;
+        margin-right: 1em;
+      }
+
+      &__text {
+        font-size: 1.5em;
+        font-family: $title;
+        font-weight: 600;
+        text-transform: uppercase;
+        display: block;
+        line-height: 85%;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      &__event {
+        background-color: $links;
+        border: none;
+        border-radius: 0.35em;
+        color: white;
+        font-size: 1em;
+        font-family: $title;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.25em 0.5em;
+        text-align: center;
+        align-items: center;
+        display: flex;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+        transition-duration: 0.25s;
+        width: 8em;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover, :active {
+          background-color: white;
+          border: 0.1em solid $links;
+          color: $links;
+
+          .Header__nav__event__icon {
+            stroke: $links;
+          }
+        }
 
         &__icon {
-            width: 4em;
-            height: auto;
-            margin-right: 1em;
+          display: inline-block;
+          stroke: white;
+          margin-right: 0.25em;
+          transition-duration: 0.25s;
         }
-        &__text {
-            font-size: 4em;
-            font-family: $title;
-            font-style: italic;
-            text-transform: uppercase;
+      }
+
+      &__link {
+        background-color: $secondary--light;
+        border: none;
+        border-radius: 0.35em;
+        color: $main;
+        font-size: 1em;
+        font-family: $title;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 0.25em 0.5em;
+        transition-duration: 0.25s;
+        margin-right: 0.5em;
+        width: 8em;
+        text-align: center;
+        cursor: pointer;
+        text-decoration: none;
+
+        &__wrapper {
+          display: inline-flex;
+          align-items: center;
         }
+
+        &__icon {
+          display: inline-block;
+          stroke: $main;
+          margin-right: 0.25em;
+          transition-duration: 0.25s;
+        }
+
+        &:hover, :active {
+          color: $links;
+
+          .Header__nav__link__icon {
+            stroke: $links;
+          }
+        }
+      }
+    }
+
+    &__timezone {
+      text-align: right;
+
+      &__title {
+        font-family: $title;
+        font-weight: 600;
+        font-size: 1em;
+        color: $secondary;
+        text-transform: uppercase;
+      }
+
+      &__time {
+        font-family: $title;
+        font-weight: 600;
+        font-size: 1em;
+        color: $main;
+        text-transform: uppercase;
+      }
     }
 }
 
 .Main {
     display: flex;
+    flex-direction: row;
+    flex: 1 0 auto;
 }
 
 .Button {
@@ -46,13 +186,20 @@
 }
 
 .Sidebar {
-    flex-grow: 2;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
     min-width: 20em;
     max-width: 20%;
     width: 20%;
-    margin-top: 1em;
+    margin-top: 1.5em;
     padding: 0 1em;
-    border-right: 4px solid black;
+
+    &__block {
+      order: 1;
+      display: block;
+    }
 
     &__body {
       font-family: $sans;
@@ -66,6 +213,11 @@
       a {
         color: $links;
         text-decoration: none;
+        transition-duration: 0.3s;
+
+        &:hover {
+          opacity: 60%;
+        }
       }
     }
 
@@ -85,10 +237,9 @@
     }
 
     &__header {
-        font-size: 1.5em;
+        font-size: 1.25em;
         font-family: $title;
-        font-style: italic;
-        margin-top: 1em;
+        font-weight: 600;
         margin-bottom: 0.5em;
 
         &__icon {
@@ -100,6 +251,7 @@
     &__section {
         font-family: $sans;
         margin: 0em 1em 1em;
+        display: block;
     }
 
     input[type="checkbox"] {
@@ -326,26 +478,40 @@
 }
 
 .Calendar {
-    margin: 1em 2em 0em 2em;
-    position: relative;
+    margin: 1.5em 1em 0em 0em;
+    display: block;
 }
 
 .Footer {
-    font-size: 1.25em;
-    font-family: $sans;
+    font-size: 1em;
+    font-family: $title;
+    text-transform: uppercase;
+    font-weight: 600;
     text-align: center;
-    padding: 1em;
+    padding: 1.5em 1em 1em 1em;
+    flex: 0 1 0;
+    position: sticky;
+    bottom: -999em;
 
     &__message {
         display: block;
     }
     &__links {
-        margin-top: .5em;
+        font-family: $sans;
+        text-transform: none;
+        font-weight: 400;
+        margin-top: 0.2em;
         display: block;
-        font-size: .6em;
+        font-size: .875em;
 
         a {
             color: $links;
+            text-decoration: none;
+            transition-duration: 0.3s;
+
+            &:hover {
+              opacity: 60%;
+            }
         }
     }
 }

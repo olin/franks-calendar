@@ -138,28 +138,26 @@ class App extends React.Component {
     render() {
         return (
             <>
-                <main className="Main">
-                    <aside className="Sidebar">
-                        <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
-                    </aside>
-                    <article className="Calendar">
-                        {this.state.popUp}
+              <aside className="Sidebar">
+              <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
+              </aside>
+                <div className="Calendar">
+                    {this.state.popUp}
 
-                        <FullCalendar
-                            defaultView="timeGridWeek"
-                            nowIndicator={true}
-                            plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                            events={this.state.events}
-                            eventClick={this.eventClick}
-                            header={{
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                            }}
-                            height="parent"
-                        />
-                    </article>
-                </main>
+                    <FullCalendar
+                        defaultView="timeGridWeek"
+                        nowIndicator={true}
+                        plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                        events={this.state.events}
+                        eventClick={this.eventClick}
+                        header={{
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                        }}
+                        height="parent"
+                    />
+                </div>
             </>
         );
     };
