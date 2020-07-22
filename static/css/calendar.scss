@@ -5,23 +5,28 @@
 }
 
 // Changed font of calendar header
-.fc-header-toolbar {
+.fc-left, .fc-right {
     font-family: $sans;
+}
+
+.fc-center, h2 {
+  font-family: $title;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
 }
 
 // Added text color of all calendar buttons
 .fc-button {
     padding: .25em .5em;
-    border: 1px solid #E8E8E8;
+    border: 1px solid $secondary--light;
     border-radius: 0.5em;
     background-color: white;
     color: black !important;
 }
 
-// Added left and right padding to whole calendar module
-.fc.fc-ltr.fc-unthemed {
-  // padding-right: 1.5em !important;
-  // padding-left: 1em !important;
+.fc-button.fc-icon {
+  vertical-align:  baseline !important;
 }
 
 // Changed text style for "Sun-Sat" headers
@@ -29,6 +34,22 @@
   font-family: $sans;
   font-style: normal;
   padding: 0.2em;
+  font-size: 0.75em;
+}
+
+// Modified font size of time text on table
+.fc-axis.fc-widget-content {
+  font-size: 1em !important;
+
+  // Modified font size of "all-day" header
+  span {
+    font-size: 0.75em;
+  }
+}
+
+// Modified bottom margin from header strip
+.fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0.75em;
 }
 
 // Modified font size of calendar header
@@ -106,7 +127,7 @@
 }
 
 .fc-today-button {
-  height: 2.5em !important;
+  height: 2em !important;
 }
 
 .fc-prev-button {
@@ -114,16 +135,19 @@
 }
 
 .fc-prev-button, .fc-next-button {
-    width: 2.5em;
-    height: 2.5em;
+    width: 2em;
+    height: 2em;
     padding: .25em;
     border-radius: 0.5em !important;
-    // margin: 0 .5em;
 }
 
 .fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
     background-color: #FFC700;
     color: white;
+}
+
+.fc-button-group {
+  height: 2em;
 }
 
 // Changed styling of events

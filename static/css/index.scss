@@ -250,7 +250,7 @@
     }
     &__section {
         font-family: $sans;
-        margin: 0em 1em 1em;
+        margin: 0em 1em 1.5em 1em;
         display: block;
     }
 
@@ -489,7 +489,7 @@
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
-    padding: 1.5em 1em 1em 1em;
+    padding: 1em 1em;
     flex: 0 1 0;
     position: sticky;
     bottom: -999em;

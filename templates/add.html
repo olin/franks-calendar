@@ -3,8 +3,6 @@
     {% include 'components/header.html' %}
     <main>
       <div class="Page">
-        <h1 class="Form__title">Submit a New Event</h1>
-
         <form class="Form" action="" method="POST" autocomplete="off" id="eventForm">
             {{ form.csrf_token }}
 
@@ -137,7 +135,15 @@
                 </select>
               </div>
               <div class="Form__time">
-                <label>End Time</label>
+                <label>End Time
+                  <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <span class="Form__tooltip__text">The start and end times will be submitted in your time zone! i.e. if you are scheduling an event for 8pm EST but you are in PST, submit it for 11pm PST. See top right corner of this page if you don’t know what time zone you’re in.</span>
+                </label>
+                <!-- </label> -->
                 <select name="hour__end" id="hour__end">
                     <option value="00:00:00">12:00am</option>
                     <option value="00:15:00">12:15am</option>
@@ -270,7 +276,14 @@
             </div>
 
             <div class="Form__field">
-              {{ form.category.label }}
+              <label>Category
+                <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span class="Form__tooltip__text">Choose the one that best describes the type of your event or who’s hosting it. If still unsure, refer to the FAQ.</span>
+              </label>
               <div class="Form__category">
                 {{ form.category }}
               </div>
@@ -284,9 +297,23 @@ If you sent out an email about this event, the text from that email is probably 
             </div>
 
             <div class="Form__field">
-                <label>Host Name</label>
+                <label>Host Name
+                  <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span class="Form__tooltip__text">A host can be either an individual or a group on campus. This will be displayed on the event page.</span>
+                </label>
                 {{ form.host_name(placeholder="e.g. 'Frankie Olin' or 'The Phoenix Club'") }}
-                <label>Point of Contact Email</label>
+                <label>Point of Contact Email
+                  <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span class="Form__tooltip__text">This email will receive updates about this event submission. It will also be displayed for people to reach out with questions.</span>
+                </label>
                 {{ form.host_email(placeholder="e.g. 'frankie@olin.edu' or 'phoenixclub@olin.edu'") }}
             </div>
 
@@ -294,24 +321,10 @@ If you sent out an email about this event, the text from that email is probably 
           <input class="Form__submit" id="submitButton" type="submit" name="Submit" value="Submit Event" />
         </form>
       </div>
+    </main>
     {% include 'components/footer.html' %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script>
-        // const colorMap = {
-        //     academic_calendar: "#0087C6",
-        //     academic_advising: "#0087C6",
-        //     residential: "#1FC9B3",
-        //     international: "#1FC9B3",
-        //     diversity: "#1FC9B3",
-        //     pgp: "#1FC9B3",
-        //     hr: "#1FC9B3",
-        //     health: "#1FC9B3",
-        //     admission: "#DD2E44",
-        //     library: "#722780",
-        //     shop: "#95CC3F",
-        //     clubs: "#F37820",
-        //     other: "#FFC700",
-        // }
 
         var cleave = new Cleave("#hour__date", {
             date: true,
