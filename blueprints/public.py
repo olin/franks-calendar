@@ -77,7 +77,7 @@ def edit_event(event_id):
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
 
-        return render_template("edit.html", form=form)
+        return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id)
     elif request.method == "POST":
         db.update_event(event_id, form.data)
 
