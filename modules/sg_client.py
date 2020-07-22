@@ -93,4 +93,4 @@ class EmailClient(object):
         eventid = str(event['_id'])
         #issues with retrieving base right now, but should be resolved when we have permanent hosting solution
         #return base + "/edit?event_id=" + eventid + "&magic=" + magic   
-        return "frankscalendar/edit?event_id=" + eventid + "&magic=" + magic    
+        return "frankscalendar/edit/" + eventid + "?magic=" + magic    
