@@ -1,3 +1,5 @@
+@import 'vars';
+
 .Admin {
   min-width: 80em;
   margin-top: 1em;
@@ -89,7 +91,7 @@
           }
 
           &[data-status="Awaiting"] {
-            color: $clubs;
+            color: $other;
           }
 
           &[data-status="Canceled"] {

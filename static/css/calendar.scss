@@ -66,13 +66,36 @@
 
 // Modified background color of highlighted "today" day
 .fc-unthemed td.fc-today {
-  background: #F4F4F4;
+  background: $secondary--light;
+}
+
+// Modified "today" button
+.fc-today-button.fc-button.fc-button-primary:active {
+  color: $links !important;
+  background-color: white !important;
+}
+
+.fc-today-button.fc-button.fc-button-primary:hover {
+  color: $links !important;
+  background-color: white !important;
+}
+
+// Modified border color of calendar time-grid
+.fc-unthemed {
+  td, th {
+  border-color: #d0d0d0;
+  }
+}
+
+.fc-unthemed .fc-divider {
+  background: #d0d0d0 !important;
+  border-color: #d0d0d0 !important;
 }
 
 // Modified color of border between "all-day" and "hours" on calendar
 .fc-unthemed .fc-divider {
-  background: #E8E8E8;
-  border-color: #E8E8E8;
+  background: #d0d0d0;
+  border-color: #d0d0d0;
 }
 
 // Modified text style of "hours" column
@@ -89,6 +112,7 @@
 .fc-scroller::-webkit-scrollbar {
   width: 0.75em;
   height:100%;
+  border-left: #d0d0d0 solid 0.05em;
   background: transparent;
 }
 
@@ -108,8 +132,8 @@
 
 // Changed style and background color of all buttons
 .fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
-  background-color: #E8E8E8 !important;
-  border-color: #E8E8E8 !important;
+  background-color: $secondary--light !important;
+  border-color: $secondary--light !important;
 }
 
 .fc-button-primary:not(:disabled):active:focus, .fc-button-primary:not(:disabled).fc-button-active:focus {
@@ -117,13 +141,13 @@
 }
 
 .fc-button-primary:hover {
-  background-color: #E8E8E8 !important;
-  border-color: #E8E8E8 !important;
+  background-color: $secondary--light !important;
+  border-color: $secondary--light !important;
 }
 
 .fc-button-primary:disabled {
   background-color: white !important;
-  border-color: #E8E8E8 !important;
+  border-color: $secondary--light !important;
 }
 
 .fc-today-button {
@@ -142,7 +166,7 @@
 }
 
 .fc-button-primary:not(:disabled):active, .fc-button-primary:not(:disabled).fc-button-active {
-    background-color: #FFC700;
+    background-color: $secondary--light;
     color: white;
 }
 
