@@ -179,3 +179,8 @@ def cancel_event(event_id):
     })
 
     return redirect(url_for("public.admin_page", admin_magic="test"))
+
+
+@public.route("/test-404", methods=["GET"])
+def test404():
+    return render_template("404.html")
