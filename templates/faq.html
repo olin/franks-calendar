@@ -5,47 +5,71 @@
     <main>
     <div class="FAQ">
         <h1 class="FAQ__title">
-            <svg class="FAQ__title__icon" xmlns="http://www.w3.org/2000/svg" width=".7em" height=".7em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"></circle>
-                <line x1="12" y1="16" x2="12" y2="12"></line>
-                <line x1="12" y1="8" x2="12.01" y2="8"></line>
-            </svg>
             Frequently Asked Questions
         </h1>
 
-        
-
-        <h2 class="FAQ__section-header">Adding</h2>
-        <details class="FAQ__question Color--green">
-            <summary class="FAQ__question__summary">How do you add an event to Frank's Calendar?</summary>
-            <div class="FAQ__question__answer">
-            <p>Fill out <a href="../add">this form</a> to submit your event for display on Frank's Calendar, and wait for an email from the moderators! Moderators will get back to you within 24 hours either to let you know that your event has been approved and is being displayed on the calendar, or that there are some changes you need to make to your submission before it can be approved. </p>
-            </div>
-            
-        </details>
-        <details class="FAQ__question Color--green">
-            <summary class="FAQ__question__summary">Can I add an event by sharing it from my personal calendar?</summary>
-            <div class="FAQ__question__answer">
-                <p>Not right now. This may be an upcoming feature, though. If you think you'd use a feature like this if it were availible, please let us know in the <a href="https://forms.gle/R1WKvUcC85pcLiu28">feedback form</a>!</p>
-            </div>
-        </details>
-
-        <h2 class="FAQ__section-header">Filtering</h2>
-        <details class="FAQ__question Color--blue">
+        <h2 class="FAQ__section-header">Filtering Events</h2>
+        <details class="FAQ__question Color--1">
             <summary class="FAQ__question__summary">How are events categorized?</summary>
             <div class="FAQ__question__answer">
-                <p>Events get categorized in two different ways:</p>
-                <ul>
-                <li>If the event was published via a <em>calendar invite</em>, the database will check and see if it’s from an email sender that has an associated category.</li>
-                <ul>
-                <li>For instance, the Director of PGP’s email will be associated with the <strong>PGP</strong> filter, so any events they send will automatically be tagged that way.</li>
-                <li>If they share an event that isn’t related to PGP, they need to <span class="FAQ__underline">contact the moderator</span> to have them manually change the associated category.</li> 
-                </ul>
-                <li>If an event was published via the <em>online form</em>, the person will manually assign a category to the event before submitting it for approval.</li>
-                </ul>
+                <p>When an event was published via the online form, the organizer will manually assign a category to the event before submitting it for approval.</p>
             </div>        
         </details>
-        <details class="FAQ__question Color--blue">
+        <details class="FAQ__question Color--1">
+            <summary class="FAQ__question__summary">What category does my event belong to?</summary>
+            <div class="FAQ__question__answer">
+                <p> There are certain filter groups to shorten the long list of filters at first glance, and unite similar filters together under one comprehensive category. Here’s an overview of what certain groups and categories mean: </p>
+
+                <table>
+                    <tr>
+                        <td><p> <strong class="Color__mark--academic">Academic Affairs</strong> </p>
+                        </td>
+                        <td><p> Any event that is related to academics at Olin</p>
+                    <p>Sub-filters are <strong class="Color__mark--academic">Academic Calendar</strong> and <strong class="Color__mark--academic">Academic Advising</strong></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p> <strong class="Color__mark--student">Student Affairs</strong></p>
+                        </td>
+                        <td><p> Any event that is related to student affairs at Olin</p>
+                        <p> Sub-filters are <strong class="Color__mark--student">Residential</strong>, <strong class="Color__mark--student">Health & Wellness</strong>, <strong class="Color__mark--student">PGP</strong>, <strong class="Color__mark--student">HR</strong>, <strong class="Color__mark--student">Intl’ & Study Away</strong>, and <strong class="Color__mark--student">Diversity & Inclusion</strong></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p> <strong class="Color__mark--admission"> Admission & Financial Aid</strong></p>
+                        </td>
+                        <td><p> Any event related to or hosted by Admission and Financial Aid, e.g. Candidate’s Weekend or Financial Aid hours (as long as these hours are open to the whole community)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p> <strong class="Color__mark--library">The Library</strong></p>
+                        </td>
+                        <td><p> Any event related to or hosted by the Library, e.g. a Book Talk with an author</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p> <strong class="Color__mark--shop">The Shop</strong></p>
+                        </td>
+                        <td><p> Any event related to or hosted by the Shop, e.g. a “Chips and Guac” session with NINJAs</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p> <strong class="Color__mark--clubs">Clubs & Organizations</strong></p>
+                        </td>
+                        <td><p> Any event hosted by student clubs on campus <span class="FAQ__underline">that are open to the whole community</span>, e.g. a PInT speaker event or a Formula info session for interested students</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><p> <strong class="Color__mark--other">Other Events</strong></p>
+                        </td>
+                        <td><p> Any event <span class="FAQ__underline">not</span> hosted by or relating to any of the above categories, e.g. a COVID update or an individually hosted workshop</p>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>        
+        </details>
+        <details class="FAQ__question Color--1">
             <summary class="FAQ__question__summary">What if my event is a collaboration between two of the filter groups?</summary>
             <div class="FAQ__question__answer">
                 <p> In that case, please pick a category that you think best suits the intention of the event!</p>
@@ -53,8 +77,15 @@
             </div>        
         </details>
 
-        <h2 class="FAQ__section-header">Exporting</h2>
-        <details class="FAQ__question Color--yellow">
+        <h2 class="FAQ__section-header">Adding/Exporting Events</h2>
+        <details class="FAQ__question Color--2">
+            <summary class="FAQ__question__summary">How do you add an event to Frank's Calendar?</summary>
+            <div class="FAQ__question__answer">
+            <p>Fill out <a href="../add">this form</a> to submit your event for display on Frank's Calendar, and wait for an email from the moderators! Moderators will get back to you within 24 hours either to let you know that your event has been approved and is being displayed on the calendar, or that there are some changes you need to make to your submission before it can be approved. </p>
+            </div>
+            
+        </details>
+        <details class="FAQ__question Color--2">
             <summary class="FAQ__question__summary">How do I export an event to my personal calendar?</summary>
             <div class="FAQ__question__answer">
 
@@ -68,22 +99,32 @@
                 </ol>
             </div>        
         </details>
-        <details class="FAQ__question Color--yellow">
+        <details class="FAQ__question Color--2">
             <summary class="FAQ__question__summary">What happens if an event you exported to your calendar is edited or deleted on Frank’s Calendar?</summary>
             <div class="FAQ__question__answer">
                 <p> If an event detail or timing has changed, Frank’s Calendar will send you an email notifying you of event changes for an event you exported to your calendar. The email will also contain an updated event invitation for you to add to your calendar. </p>
             </div>        
         </details>
 
-        <h2 class="FAQ__section-header">About</h2>
-        <details class="FAQ__question Color--purple">
+        
+        <details class="FAQ__question Color--2">
+            <summary class="FAQ__question__summary">Can I add an event by sharing it from my personal calendar?</summary>
+            <div class="FAQ__question__answer">
+                <p>Not right now. This may be an upcoming feature, though. If you think you'd use a feature like this if it were availible, please let us know in the <a href="https://forms.gle/R1WKvUcC85pcLiu28">feedback form</a>!</p>
+            </div>
+        </details>
+
+
+
+        <h2 class="FAQ__section-header">About the Project</h2>
+        <details class="FAQ__question Color--3">
             <summary class="FAQ__question__summary">How was Frank's Calendar founded?</summary>
             <div class="FAQ__question__answer">
                 <p>Frank’s Calendar was founded through the last three sprints of Products & Markets in Spring 2020. The original team consisted of Ruby Eisenbud, Jules Brettle, Jack Greenberg, and Karen Hinh, who took the project from initial ideation and market research to full product development. </p>
                 <p>Over the summer, the project expanded to include Kyle Combes as a mentor, and added Kelly Yen as a back-end developer. The MVP was built and launched in time for Fall 2020.</p>
             </div>        
         </details>
-        <details class="FAQ__question Color--purple">
+        <details class="FAQ__question Color--3">
             <summary class="FAQ__question__summary">Why was this calendar built?</summary>
             <div class="FAQ__question__answer">
                 
@@ -92,7 +133,7 @@
                 <p>That’s why Frank’s Calendar was built: it takes all of the community-wide events on campus and puts them in one place. Its’ main design focus is <strong>ease-of-use</strong> for both event browsers and hosters. </p>
             </div>        
         </details>
-        <details class="FAQ__question Color--purple">
+        <details class="FAQ__question Color--3">
             <summary class="FAQ__question__summary">What's its main purpose?</summary>
             <div class="FAQ__question__answer">
                 <p>The platform easily allows any member of the Olin Community to:</p>
