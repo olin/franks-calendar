@@ -45,7 +45,7 @@
         padding: 0.5em 1em 0.5em 0.5em;
         color: $main;
 
-        &:link + :visited + :hover + :active {
+        &:link {
           color: $main;
         }
       }

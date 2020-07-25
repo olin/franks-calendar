@@ -60,18 +60,5 @@
   <script lazy="True">
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById("Timezone").innerHTML = tz;
-
-    var navClass = document.querySelectorAll(".Header__nav__link");
-    var navLinks = document.querySelector(".Header__nav__link").href;
-    console.log(navLinks);
-    console.log(window.location.href);
-    console.log(navClass[1])
-    console.log(navClass[1].classList);
-    for (let i = 0; i < navLinks.length; i++) {
-      if (navLinks[i] == window.location.href) {
-        console.log("test");
-        navClass[i].classList.add(".Header__nav__link:active");
-      }
-    }
   </script>
 </html>
