@@ -56,6 +56,10 @@ def about_page():
 def faq_page():
     return render_template("faq.html")
 
+@public.route("/guidelines", methods=["GET"])
+def guidelines_page():
+    return render_template("guidelines.html")
+
 
 @public.route("/edit/<event_id>", methods=["POST", "GET", "DELETE"])
 def edit_event(event_id):
