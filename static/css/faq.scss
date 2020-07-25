@@ -70,7 +70,10 @@
 
 }
 
+// modify background and letter colors
 .Color {
+    // modify text color for variety
+    // used for color-coding sections on FAQ page
     &--1 {
         color:  $ocean;
     }
@@ -85,61 +88,42 @@
     }
 
     &__mark {
-
+        // highlight the mention of a category with the associated color for clarity and aesthetics
+        // used where categories are defined on FAQ page
+        
         &--academic {
             background-color: $academic--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
         &--student {
             background-color: $student--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
         &--admission {
             background-color: $admission--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
         &--library {
             background-color: $library--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
         &--shop {
             background-color: $shop--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
         &--clubs {
             background-color: $clubs--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
         &--other {
             background-color: $other--light;
-            padding-top: 2px;
-            padding-bottom:2px;
-            padding-left: 5px;
-            padding-right: 5px;
+            padding: 2px 5px 2px 5px;
             border-radius: 3px;
         }
     }
