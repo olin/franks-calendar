@@ -88,6 +88,26 @@ class EmailClient(object):
 
         self.send_email(recipient, "Event submission approved!", content) 
 
+    def notify_moderator(self, url, event, moderator):
+        #if event was modified after the moderator already approved it, an email will notify the moderator of changes
+        editlink = url + "/admin"
+        path = os.getcwd() + "/templates/emails/notify_moderator.txt"
+        recipient = moderator
+
+        template = Template(open(path).read())
+
+        content = template.render(
+            link=editlink,
+            title=event['title'], 
+            location=event['location'], 
+            dtstart=event['dtstart'], 
+            dtend=event['dtend'], 
+            description=event['description'], 
+            host=event['host_name'], 
+            host_email=event['host_email'])
+        
+        self.send_email(recipient, "A published event was updated", content) 
+
     def generate_link(self, base, event):
         magic = str(event['magic'])
         eventid = str(event['_id'])
