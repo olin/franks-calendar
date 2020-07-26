@@ -487,6 +487,10 @@
       color: black;
       vertical-align: top;
 
+      summary {
+        color: $links;
+      }
+
       &__link {
         padding-left: 0.5em;
         color: $links;
