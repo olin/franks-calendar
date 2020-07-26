@@ -82,6 +82,9 @@
         &[type="radio"][name="duration"]:not(:checked) + label {
             opacity: .5;
         }
+        &[type="radio"][name="duration"]:checked + label {
+            opacity: 1;
+        }
       }
 
       label {

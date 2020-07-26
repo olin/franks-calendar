@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% block page %}
-    {% include 'components/header--edit.html' %}
+    {% include 'components/header.html' %}
     <main>
       <div class="Page">
-
-        <form class="Form" action="" method="post">
+        <form class="Form" action="" method="POST" autocomplete="off" id="eventForm">
             {{ form.csrf_token }}
 
           <div class="Form__box">
@@ -17,58 +16,274 @@
             <div class="Form__row">
               <h2>Duration</h2>
               <div class="Form__row__buttons">
-                <input type="radio" id="duration--hour" name="duration" value="hour">
-                <label for="duration--hour">
-                  &#60;1 day</label>
-                <input type="radio" id="duration--day" name="duration" value="day">
-                <label for="duration--day">
+                <input type="radio" id="button__duration--hour" name="duration" value="hour" {{ "checked" if form.duration.data == "hour" }}>
+                <label for="button__duration--hour">
+                  &lt; 1 day</label>
+                <input type="radio" id="button__duration--day" name="duration" value="day" {{ "checked" if form.duration.data == "day" }}>
+                <label for="button__duration--day">
                   All day</label>
-                <input type="radio" id="duration--many" name="duration" value="many">
-                <label for="duration--many">
+                <input type="radio" id="button__duration--many" name="duration" value="many" {{ "checked" if form.duration.data == "many" }}>
+                <label for="button__duration--many">
                   Many days</label>
               </div>
             </div>
 
-            <div id="duration--hour" class="Form__field Form__field--flex">
+            <div id="duration--hour" class="Form__field Form__field--flex  {{"js-showFieldSet" if form.duration.data == "hour" }}">
               <div class="Form__field">
                 <label>Date</label>
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                <input type="text" name="hour__date" id="hour__date" placeholder="mm/dd/yy" required=""/>
               </div>
-              <div class="Form__field">
+              <div class="Form__time">
                 <label>Start Time</label>
-                {{ form.dtstart(placeholder="h:mm xm") }}
+                <!-- <option disabled selected hidden value={{form.dtstart}}>{{form.dtstart}}</option> -->
+                <select name="hour__start" id="hour__start">
+                    <option value="00:00:00">12:00am</option>
+                    <option value="00:15:00">12:15am</option>
+                    <option value="00:30:00">12:30am</option>
+                    <option value="00:45:00">12:45am</option>
+                    <option value="01:00:00">1:00am</option>
+                    <option value="01:15:00">1:15am</option>
+                    <option value="01:30:00">1:30am</option>
+                    <option value="01:45:00">1:45am</option>
+                    <option value="02:00:00">2:00am</option>
+                    <option value="02:15:00">2:15am</option>
+                    <option value="02:30:00">2:30am</option>
+                    <option value="02:45:00">2:45am</option>
+                    <option value="03:00:00">3:00am</option>
+                    <option value="03:15:00">3:15am</option>
+                    <option value="03:30:00">3:30am</option>
+                    <option value="03:45:00">3:45am</option>
+                    <option value="04:00:00">4:00am</option>
+                    <option value="04:15:00">4:15am</option>
+                    <option value="04:30:00">4:30am</option>
+                    <option value="04:45:00">4:45am</option>
+                    <option value="05:00:00">5:00am</option>
+                    <option value="05:15:00">5:15am</option>
+                    <option value="05:30:00">5:30am</option>
+                    <option value="05:45:00">5:45am</option>
+                    <option value="06:00:00">6:00am</option>
+                    <option value="06:15:00">6:15am</option>
+                    <option value="06:30:00">6:30am</option>
+                    <option value="06:45:00">6:45am</option>
+                    <option value="07:00:00">7:00am</option>
+                    <option value="07:15:00">7:15am</option>
+                    <option value="07:30:00">7:30am</option>
+                    <option value="07:45:00">7:45am</option>
+                    <option value="08:00:00">8:00am</option>
+                    <option value="08:15:00">8:15am</option>
+                    <option value="08:30:00">8:30am</option>
+                    <option value="08:45:00">8:45am</option>
+                    <option value="09:00:00">9:00am</option>
+                    <option value="09:15:00">9:15am</option>
+                    <option value="09:30:00">9:30am</option>
+                    <option value="09:45:00">9:45am</option>
+                    <option value="10:00:00">10:00am</option>
+                    <option value="10:15:00">10:15am</option>
+                    <option value="10:30:00">10:30am</option>
+                    <option value="10:45:00">10:45am</option>
+                    <option value="11:00:00">11:00am</option>
+                    <option value="11:15:00">11:15am</option>
+                    <option value="11:30:00">11:30am</option>
+                    <option value="11:45:00">11:45am</option>
+                    <option value="12:00:00">12:00pm</option>
+                    <option value="12:15:00">12:15pm</option>
+                    <option value="12:30:00">12:30pm</option>
+                    <option value="12:45:00">12:45pm</option>
+                    <option value="13:00:00">1:00pm</option>
+                    <option value="13:15:00">1:15pm</option>
+                    <option value="13:30:00">1:30pm</option>
+                    <option value="13:45:00">1:45pm</option>
+                    <option value="14:00:00">2:00pm</option>
+                    <option value="14:15:00">2:15pm</option>
+                    <option value="14:30:00">2:30pm</option>
+                    <option value="14:45:00">2:45pm</option>
+                    <option value="15:00:00">3:00pm</option>
+                    <option value="15:15:00">3:15pm</option>
+                    <option value="15:30:00">3:30pm</option>
+                    <option value="15:45:00">3:45pm</option>
+                    <option value="16:00:00">4:00pm</option>
+                    <option value="16:15:00">4:15pm</option>
+                    <option value="16:30:00">4:30pm</option>
+                    <option value="16:45:00">4:45pm</option>
+                    <option value="17:00:00">5:00pm</option>
+                    <option value="17:15:00">5:15pm</option>
+                    <option value="17:30:00">5:30pm</option>
+                    <option value="17:45:00">5:45pm</option>
+                    <option value="18:00:00">6:00pm</option>
+                    <option value="18:15:00">6:15pm</option>
+                    <option value="18:30:00">6:30pm</option>
+                    <option value="18:45:00">6:45pm</option>
+                    <option value="19:00:00">7:00pm</option>
+                    <option value="19:15:00">7:15pm</option>
+                    <option value="19:30:00">7:30pm</option>
+                    <option value="19:45:00">7:45pm</option>
+                    <option value="20:00:00">8:00pm</option>
+                    <option value="20:15:00">8:15pm</option>
+                    <option value="20:30:00">8:30pm</option>
+                    <option value="20:45:00">8:45pm</option>
+                    <option value="21:00:00">9:00pm</option>
+                    <option value="21:15:00">9:15pm</option>
+                    <option value="21:30:00">9:30pm</option>
+                    <option value="21:45:00">9:45pm</option>
+                    <option value="22:00:00">10:00pm</option>
+                    <option value="22:15:00">10:15pm</option>
+                    <option value="22:30:00">10:30pm</option>
+                    <option value="22:45:00">10:45pm</option>
+                    <option value="23:00:00">11:00pm</option>
+                    <option value="23:15:00">11:15pm</option>
+                    <option value="23:30:00">11:30pm</option>
+                    <option value="23:45:00">11:45pm</option>
+                </select>
               </div>
-              <div class="Form__field">
-                <label>End Time</label>
-                {{ form.dtend(placeholder="h:mm xm") }}
+              <div class="Form__time">
+                <label>End Time
+                  <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="12"></line>
+                    <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                  </svg>
+                  <span class="Form__tooltip__text">The start and end times will be submitted in your time zone! i.e. if you are scheduling an event for 8pm EST but you are in PST, submit it for 11pm PST. See top right corner of this page if you don’t know what time zone you’re in.</span>
+                </label>
+                <select name="hour__end" id="hour__end">
+                    <option value="00:00:00">12:00am</option>
+                    <option value="00:15:00">12:15am</option>
+                    <option value="00:30:00">12:30am</option>
+                    <option value="00:45:00">12:45am</option>
+                    <option value="01:00:00">1:00am</option>
+                    <option value="01:15:00">1:15am</option>
+                    <option value="01:30:00">1:30am</option>
+                    <option value="01:45:00">1:45am</option>
+                    <option value="02:00:00">2:00am</option>
+                    <option value="02:15:00">2:15am</option>
+                    <option value="02:30:00">2:30am</option>
+                    <option value="02:45:00">2:45am</option>
+                    <option value="03:00:00">3:00am</option>
+                    <option value="03:15:00">3:15am</option>
+                    <option value="03:30:00">3:30am</option>
+                    <option value="03:45:00">3:45am</option>
+                    <option value="04:00:00">4:00am</option>
+                    <option value="04:15:00">4:15am</option>
+                    <option value="04:30:00">4:30am</option>
+                    <option value="04:45:00">4:45am</option>
+                    <option value="05:00:00">5:00am</option>
+                    <option value="05:15:00">5:15am</option>
+                    <option value="05:30:00">5:30am</option>
+                    <option value="05:45:00">5:45am</option>
+                    <option value="06:00:00">6:00am</option>
+                    <option value="06:15:00">6:15am</option>
+                    <option value="06:30:00">6:30am</option>
+                    <option value="06:45:00">6:45am</option>
+                    <option value="07:00:00">7:00am</option>
+                    <option value="07:15:00">7:15am</option>
+                    <option value="07:30:00">7:30am</option>
+                    <option value="07:45:00">7:45am</option>
+                    <option value="08:00:00">8:00am</option>
+                    <option value="08:15:00">8:15am</option>
+                    <option value="08:30:00">8:30am</option>
+                    <option value="08:45:00">8:45am</option>
+                    <option value="09:00:00">9:00am</option>
+                    <option value="09:15:00">9:15am</option>
+                    <option value="09:30:00">9:30am</option>
+                    <option value="09:45:00">9:45am</option>
+                    <option value="10:00:00">10:00am</option>
+                    <option value="10:15:00">10:15am</option>
+                    <option value="10:30:00">10:30am</option>
+                    <option value="10:45:00">10:45am</option>
+                    <option value="11:00:00">11:00am</option>
+                    <option value="11:15:00">11:15am</option>
+                    <option value="11:30:00">11:30am</option>
+                    <option value="11:45:00">11:45am</option>
+                    <option value="12:00:00">12:00pm</option>
+                    <option selected="selected" value="12:15:00">12:15pm</option>
+                    <option value="12:30:00">12:30pm</option>
+                    <option value="12:45:00">12:45pm</option>
+                    <option value="13:00:00">1:00pm</option>
+                    <option value="13:15:00">1:15pm</option>
+                    <option value="13:30:00">1:30pm</option>
+                    <option value="13:45:00">1:45pm</option>
+                    <option value="14:00:00">2:00pm</option>
+                    <option value="14:15:00">2:15pm</option>
+                    <option value="14:30:00">2:30pm</option>
+                    <option value="14:45:00">2:45pm</option>
+                    <option value="15:00:00">3:00pm</option>
+                    <option value="15:15:00">3:15pm</option>
+                    <option value="15:30:00">3:30pm</option>
+                    <option value="15:45:00">3:45pm</option>
+                    <option value="16:00:00">4:00pm</option>
+                    <option value="16:15:00">4:15pm</option>
+                    <option value="16:30:00">4:30pm</option>
+                    <option value="16:45:00">4:45pm</option>
+                    <option value="17:00:00">5:00pm</option>
+                    <option value="17:15:00">5:15pm</option>
+                    <option value="17:30:00">5:30pm</option>
+                    <option value="17:45:00">5:45pm</option>
+                    <option value="18:00:00">6:00pm</option>
+                    <option value="18:15:00">6:15pm</option>
+                    <option value="18:30:00">6:30pm</option>
+                    <option value="18:45:00">6:45pm</option>
+                    <option value="19:00:00">7:00pm</option>
+                    <option value="19:15:00">7:15pm</option>
+                    <option value="19:30:00">7:30pm</option>
+                    <option value="19:45:00">7:45pm</option>
+                    <option value="20:00:00">8:00pm</option>
+                    <option value="20:15:00">8:15pm</option>
+                    <option value="20:30:00">8:30pm</option>
+                    <option value="20:45:00">8:45pm</option>
+                    <option value="21:00:00">9:00pm</option>
+                    <option value="21:15:00">9:15pm</option>
+                    <option value="21:30:00">9:30pm</option>
+                    <option value="21:45:00">9:45pm</option>
+                    <option value="22:00:00">10:00pm</option>
+                    <option value="22:15:00">10:15pm</option>
+                    <option value="22:30:00">10:30pm</option>
+                    <option value="22:45:00">10:45pm</option>
+                    <option value="23:00:00">11:00pm</option>
+                    <option value="23:15:00">11:15pm</option>
+                    <option value="23:30:00">11:30pm</option>
+                    <option value="23:45:00">11:45pm</option>
+                </select>
               </div>
             </div>
 
-            <div id="duration--day" class="Form__field Form__field--flex">
+            <div id="duration--day" class="Form__field Form__field--flex  {{"js-showFieldSet" if form.duration.data == "day" }}">
               <div class="Form__field">
                 <label>Date</label>
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                <input type="text" name="day__date" id="day__date" placeholder="mm/dd/yy" />
               </div>
             </div>
 
-            <div id="duration--many" class="Form__field Form__field--flex">
+            <div id="duration--many" class="Form__field Form__field--flex  {{"js-showFieldSet" if form.duration.data == "many" }}">
               <div class="Form__field">
                 <label>Start Date</label>
-                {{ form.dtstart(placeholder="mm/dd/yy") }}
+                <input type="text" name="many__startDate" id="many__startDate" placeholder="mm/dd/yy" />
               </div>
               <div class="Form__field">
                 <label>End Date</label>
-                {{ form.dtend(placeholder="mm/dd/yy") }}
+                <input type="text" name="many__endDate" id="many__endDate" placeholder="mm/dd/yy" />
               </div>
+            </div>
+
+            <div style="display: none" tabindex="-1">
+                <!-- Don't edit this! Things won't work lol 😂 -->
+                {{ form.dtstart }}
+                {{ form.dtend }}
+                {{ form.duration }}
             </div>
 
             <div class="Form__field">
               {{ form.location.label }}
-              {{ form.location(placeholder="e.g. 'Dining Hall' or 'https://olin.zoom.us/j/123456789'") }}
+              {{ form.location(placeholder="e.g. 'Dining Hall' or 'olin.zoom.us/j/123456789'") }}
             </div>
 
             <div class="Form__field">
-              {{ form.category.label }}
+              <label>Category
+                <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+                <span class="Form__tooltip__text">Choose the one that best describes the type of your event or who’s hosting it. If still unsure, refer to the FAQ.</span>
+              </label>
               <div class="Form__category">
                 {{ form.category }}
               </div>
@@ -82,19 +297,182 @@ If you sent out an email about this event, the text from that email is probably 
             </div>
 
             <div class="Form__field">
-                <label>Host Name</label>
+                <label>Host Name
+                  <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span class="Form__tooltip__text">A host can be either an individual or a group on campus. This will be displayed on the event page.</span>
+                </label>
                 {{ form.host_name(placeholder="e.g. 'Frankie Olin' or 'The Phoenix Club'") }}
-                <label>Point of Contact Email</label>
+                <label>Point of Contact Email
+                  <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                  </svg>
+                  <span class="Form__tooltip__text">This email will receive updates about this event submission. It will also be displayed for people to reach out with questions.</span>
+                </label>
                 {{ form.host_email(placeholder="e.g. 'frankie@olin.edu' or 'phoenixclub@olin.edu'") }}
             </div>
 
           </div>
-          <div class="Form__flex Form__box Form__box__buttons">
-            <input class="Form__button Form__button--green" type="submit" name="Submit" value="Submit Changes" />
-            <input class="Form__button Form__button--blue" type="reset" name="Reset" value="Reset Changes" onClick="window.location.reload()" />
-            <a class="Form__button Form__button--red" href="/cancel_event/{{ event_id }}?magic={{ magic }}">Cancel Event</a>
-          </div>
+          <input class="Form__submit" id="submitButton" type="submit" name="Submit" value="Submit Event" />
         </form>
       </div>
+    </main>
     {% include 'components/footer.html' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            var duration = "{{ form.duration.data }}";
+            switch(duration) {
+                case "hour":
+                    var dtstart = "{{ form.dtstart.data }}";
+                    var dtend = "{{ form.dtend.data }}";
+
+                    var date = dtstart.split(" ")[0].split("-");
+                    var startTime = dtstart.split(" ")[1];
+                    var endTime = dtend.split(" ")[1];
+
+                    var year = date[0].substring(2);
+                    var month = date[1];
+                    var day = date[2];
+
+                    document.getElementById("hour__date").value = [month, day, year].join("/");
+                    document.getElementById("hour__start").value = startTime;
+                    document.getElementById("hour__end").value = endTime;
+                    break;
+                case "day":
+                    var dtstart = "{{ form.dtstart.data }}"
+                    date = date.split(" ")[0].split("-")
+                    var year = date[0].substring(2);
+                    var month = date[1];
+                    var day = date[2];
+                    document.getElementById("day__date").value = [month, day, year].join("/");
+                    break;
+                case "many":
+                    var dtstart = "{{ form.dtstart.data }}"
+                    var dtend = "{{ form.dtend.data }}"
+                    var startDate = dtstart.split(" ")[0].split("-")
+                    var endDate = dtend.split(" ")[0].split("-")
+
+                    var startYear = startDate[0].substring(2);
+                    var startMonth = startDate[1];
+                    var startDay = startDate[2];
+
+                    var endYear = endDate[0].substring(2);
+                    var endMonth = endDate[1];
+                    var endDay = endDate[2];
+
+                    document.getElementById("many__startDate").value = [startMonth, startDay, startYear].join("/");
+                    document.getElementById("many__endDate").value = [endMonth, startDay, startYear].join("/");
+                    break;
+            }
+        });
+
+        var cleave = new Cleave("#hour__date", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+        var cleave = new Cleave("#day__date", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+        var cleave = new Cleave("#many__startDate", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+        var cleave = new Cleave("#many__endDate", {
+            date: true,
+            delimiter: '/',
+            datePattern: ['m', 'd', 'y']
+        })
+
+        function validateForm(e) {
+            var durationChosen = document.querySelector('input[name="duration"]:checked').value;
+            switch (durationChosen) {
+                case "hour":
+                    var date = document.getElementById('hour__date').value.split('/');
+                        var year = date[2];
+                        var month = date[0];
+                        var day = date[1];
+                    var startTime = document.getElementById('hour__start').value;
+                    var endTime = document.getElementById('hour__end').value;
+
+                    var dtstart = [year, month, day].join('/') + ' ' + startTime;
+                    var dtend = [year, month, day].join('/') + ' ' + endTime;
+                    document.getElementById('duration').value = "hour";
+                    break;
+                case "day":
+                    var date = document.getElementById('day__date').value.split('/');
+                        var year = date[2];
+                        var month = date[0];
+                        var day = date[1];
+
+                        var dtstart = [year, month, day].join('/') + " 00:00:00";
+                        var dtend = [year, month, day].join('/') + " 23:59:59";
+                    document.getElementById('duration').value = "day";
+                    break;
+                case "many":
+                    var startDate = document.getElementById('many__startDate').value.split('/');
+                        var startYear = startDate[2];
+                        var startMonth = startDate[0];
+                        var startDay = startDate[1];
+                    var endDate = document.getElementById('many__endDate').value.split('/');
+                        var endYear = endDate[2];
+                        var endMonth = endDate[0];
+                        var endDay = endDate[1];
+
+                        var dtstart = [startYear, startMonth, startDay].join('/') + " 00:00:00";
+                        var dtend = [endYear, endMonth, endDay].join('/') + " 23:59:59";
+                    document.getElementById('duration').value = "many";
+                    break;
+            }
+            document.getElementById('dtstart').value = dtstart;
+            document.getElementById('dtend').value = dtend;
+
+            if (dtstart > dtend) {
+              alert("Start Time cannot be later than End Time!");
+              window.history.forward(-1);
+              e.preventDefault(); // Prevent form from being submitted
+              return;
+            }
+
+            // Must be an Olin Email
+            var emailPattern = /.*@olin\.edu/
+            var email = document.getElementById('host_email').value;
+
+            if (!emailPattern.test(email)) {
+                alert("You must use an Olin email!");
+                e.preventDefault()
+                return;
+            }
+
+            document.getElementById('dtstart').value = dtstart;
+            document.getElementById('dtend').value = dtend;
+        }
+
+        document.querySelectorAll('[name="duration"]')
+            .forEach(el => {
+                // On click, the proper form fields should be shown
+                el.addEventListener('click', e => {
+                    // Remove from the ones currently have it
+                    document.querySelectorAll('.js-showFieldSet')[0]
+                        .classList.remove('js-showFieldSet');
+
+                    // And add it to the proper one
+                    var nextElement = document.getElementById("duration--" + e.target.value);
+                    nextElement.classList.add('js-showFieldSet');
+                })
+            })
+
+        document.getElementById('submitButton')
+            .addEventListener('click', e => validateForm(e))
+
+    </script>
 {% endblock %}
