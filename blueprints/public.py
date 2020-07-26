@@ -128,6 +128,7 @@ def confirmation():
 def export_event(eventid):
     if request.method == "GET":
         event_data = db.get_one(ObjectId(eventid))
+        email.notify_moderator("frankscalendar", event_data, "kellyyen4101@gmail.com")
         cal = Calendar()
         event = Event()
         event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
