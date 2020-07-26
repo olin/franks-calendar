@@ -4,27 +4,14 @@
 
 .Form {
   display: block;
-  // Page title
-  &__title {
-    font-family: $title;
-    font-size: 2em;
-    font-weight: 400;
-    color: $links;
-    display: block;
-    text-align: center;
-    margin-bottom: 0.25em;
-  }
 
   // Boundary box around form
   &__box {
     display: block;
     width: $box-width;
-    border: 0.05em solid $main;
     border-radius: 0.5em;
     padding: 1em 1.5em;
-    margin-right: auto;
-    margin-left: auto;
-    margin-bottom: 1em;
+    margin: 1.5em auto 1em;
     box-shadow: 0.1em 0.1em 0.25em $secondary;
 
     &__buttons {
@@ -36,6 +23,37 @@
 
   &__flex {
     display:flex;
+  }
+
+  // Hoverable messages
+  &__tooltip {
+    stroke: $links;
+    position: relative;
+    display: inline-block;
+
+    &__text {
+      padding: 0.5em 0.5em;
+      visibility: hidden;
+      text-align: left;
+      border-radius: 0.5em;
+      width: 20em;
+      background-color: $main;
+      opacity: 80%;
+
+      font-family: $sans;
+      font-size: 0.75em;
+      text-transform: none;
+      font-weight: 400;
+      color: white;
+
+      position: absolute;
+      z-index: 1;
+      margin-left: 1em;
+    }
+
+    &:hover + .Form__tooltip__text {
+      visibility: visible;
+    }
   }
 
   // Row for duration section
@@ -78,14 +96,15 @@
         border: none;
         border-radius: 0.5em;
         background-color: $links;
+        opacity: 0.5;
         transition-duration: 0.3s;
 
         &:hover {
-          background-color: $links;
+          opacity: 1;
         }
 
         &:focus {
-          background-color: $links;
+          opacity: 1;
         }
       }
     }
@@ -154,11 +173,8 @@
       display: block;
       font-family: $sans;
       font-size: 1em;
-      //font-weight: 800;
-      //text-transform: uppercase;
       color: $main;
       background-color: $secondary--light;
-      //border: 0.05em solid $main;
       border: none;
       border-radius: 0.5em;
       padding: 0.5em 0.5em;
@@ -172,61 +188,7 @@
       option {
         font-family: $sans;
         font-size: 1em;
-        //font-weight: 800;
-        //text-transform: uppercase;
       }
-
-      // option[value="academic_calendar"] {
-      //   color: $academic;
-      // }
-      //
-      // option[value="academic_advising"] {
-      //   color: $academic;
-      // }
-      //
-      // option[value="residential"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="international"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="diversity"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="pgp"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="hr"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="health"] {
-      //   color: $student;
-      // }
-      //
-      // option[value="admission"] {
-      //   color: $admission;
-      // }
-      //
-      // option[value="library"] {
-      //   color: $library;
-      // }
-      //
-      // option[value="shop"] {
-      //   color: $shop;
-      // }
-      //
-      // option[value="clubs"] {
-      //   color: $clubs;
-      // }
-      //
-      // option[value="other"] {
-      //   color: $other;
-      // }
     }
   }
 
@@ -256,7 +218,7 @@
       text-transform: uppercase;
       padding-left: 0.1em;
       margin-bottom: 0.5em;
-    }
+      }
 
     input {
       display: block;

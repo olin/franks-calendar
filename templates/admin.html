@@ -18,13 +18,13 @@
       <tbody>
         {% for event in events %}
             <tr>
-                <td value="Timestamp">{{ event["last_edited"] }}</td>
-                <td value="Submitter"><a href="mailto:{{ event['host_email'] }}">{{ event["host_name"] }}</a></td>
-                <td value="Status">{{ event["status"] }}</td>
-                <td value="Event--Name">{{ event["title"] }}</td>
-                <td value="Event--Page"><a href="/#{{ event['_id'] }}">Event Page Permalink</a></td>
-                <td value="Edit--Link"><a href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">Edit Page Permalink</a></td>
-                <td value="Moderator" class="Moderator">
+                <td class="Timestamp">{{ event["last_edited"] }}</td>
+                <td class="Submitter"><a href="mailto:{{ event['host_email'] }}">{{ event["host_name"] }}</a></td>
+                <td class="Status" data-status={{ event["status"] }}>{{ event["status"] }}</td>
+                <td class="Event--Name">{{ event["title"] }}</td>
+                <td class="Event--Page"><a href="/">Event Page Permalink</a></td>
+                <td class="Edit--Link"><a href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">Edit Page Permalink</a></td>
+                <td class="Cell--Moderator">
                     <a href="/approve/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--approve">Approve</a>
                     <a href="/request_changes/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--request">Request Changes</a>
                     <a href="/cancel_event/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--cancel">Cancel</a>
@@ -37,13 +37,3 @@
 </main>
 {% include 'components/footer.html' %}
 {% endblock %}
-
-<tr>
-  <td value="Timestamp">2020-06-26T15:30:00Z</td>
-  <td value="Submitter">courtney@olin.edu</td>
-  <td value="Status">Status</td>
-  <td value="Event--Name">Study Away info session</td>
-  <td value="Event--Page">linktoeventpage.com</td>
-  <td value="Edit--Link">magiclinkforedits.com</td>
-  <td value="Moderator">Moderator Actions</td>
-</tr>

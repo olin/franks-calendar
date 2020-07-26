@@ -1,5 +1,8 @@
+@import 'vars';
+
 .Admin {
   min-width: 80em;
+  margin-top: 1em;
 
   &__header {
     display: flex;
@@ -49,11 +52,12 @@
       }
 
       thead {
-        border-bottom: 0.2em solid $secondary;
+        border-bottom: 0.1em solid $main;
 
         th {
           font-family: $title;
-          font-weight: 800;
+          font-weight: 600;
+          font-size: 1em;
           color: $main;
           text-transform: uppercase;
         }
@@ -64,42 +68,61 @@
         td {
           font-family: $sans;
           color: $main;
+          vertical-align: center;
         }
 
-        td[value="Timestamp"] {
+        td[class="Timestamp"] {
           width: 11.5em;
         }
 
-        td[value="Submitter"] {
+        td[class="Submitter"] {
+          min-width: 8em;
+        }
+
+        td[class="Status"] {
+          min-width: 10em;
+
+          &[data-status="Approved"] {
+            color: $shop;
+          }
+
+          &[data-status="Pending"] {
+            color: $clubs;
+          }
+
+          &[data-status="Awaiting"] {
+            color: $other;
+          }
+
+          &[data-status="Canceled"] {
+            color: $admission;
+          }
+        }
+
+        td[class="Event--Name"] {
           min-width: 10em;
         }
 
-        td[value="Status"] {
-          width: 8em;
-        }
-
-        td[value="Event--Name"] {
-          min-width: 10em;
-          max-width: 12em;
-        }
-
-        td[value="Event--Page"] {
+        td[class="Event--Page"] {
           min-width: 5em;
           max-width: 12em;
           overflow: hidden;
           white-space: nowrap;
         }
 
-        td[value="Edit--Link"] {
+        td[class="Edit--Link"] {
           min-width: 5em;
           max-width: 12em;
           overflow: hidden;
           white-space: nowrap;
         }
 
-        td[value="Moderator"] {
+        td[class="Cell--Moderator"] {
           width: 23.5em;
           display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          flex-direction: row;
         }
       }
 
@@ -111,25 +134,22 @@
 }
 
 .Moderator {
-
   border: none;
   border-radius: 0.25em;
   color: black;
   font-size: 0.9em;
   font-family: $title;
-  font-weight: 800;
-  text-transform:uppercase;
+  font-weight: 600;
+  text-transform: uppercase;
   text-decoration: none;
   padding: 0.5em 0.5em;
-  align-items: center;
   text-align: center;
   margin-right: 0.5em;
   transition-duration: 0.3s;
-  justify-content: flex-start;
+
 
   &--approve {
-    border: 0.25em solid $shop;
-    flex-grow: 1;
+    border: 0.2em solid $shop;
 
     &:hover {
       background-color: $shop;
@@ -138,8 +158,8 @@
   }
 
   &--request {
-    border: 0.25em solid $links;
-    flex-grow: 1;
+    width: 10.25em;
+    border: 0.2em solid $links;
 
     &:hover {
       background-color: $links;
@@ -148,8 +168,7 @@
   }
 
   &--cancel {
-    border: 0.25em solid $admission;
-    flex-grow: 1;
+    border: 0.2em solid $admission;
 
     &:hover {
       background-color: $admission;

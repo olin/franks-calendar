@@ -4,6 +4,8 @@
 @import 'confirmation';
 @import 'faq';
 @import 'admin';
+@import '404.scss';
+@import 'guidelines.scss';
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
@@ -35,11 +37,20 @@
     }
 
     &__logo {
-      width: 12em;
-      overflow: auto;
-      display: flex;
-      flex-direction: row;
-      padding: 0.5em 1em 0.5em 0.5em;
+
+      a {
+        text-decoration: none;
+        width: 14em;
+        overflow: auto;
+        display: flex;
+        flex-direction: row;
+        padding: 0.5em 1em 0.5em 0.5em;
+        color: $main;
+
+        &:link {
+          color: $main;
+        }
+      }
 
       &__side {
         order: 2;
@@ -90,7 +101,16 @@
         cursor: pointer;
         text-decoration: none;
 
-        &:hover, :active {
+        &:hover {
+          background-color: white;
+          border: 0.1em solid $links;
+          color: $links;
+
+          .Header__nav__event__icon {
+            stroke: $links;
+          }
+        }
+        &--active {
           background-color: white;
           border: 0.1em solid $links;
           color: $links;
@@ -137,7 +157,15 @@
           transition-duration: 0.25s;
         }
 
-        &:hover, :active {
+        &:hover {
+          color: $links;
+
+          .Header__nav__link__icon {
+            stroke: $links;
+          }
+        }
+
+        &--active {
           color: $links;
 
           .Header__nav__link__icon {
@@ -250,7 +278,7 @@
     }
     &__section {
         font-family: $sans;
-        margin: 0em 1em 1em;
+        margin: 0em 1em 1.5em 1em;
         display: block;
     }
 
@@ -489,7 +517,7 @@
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
-    padding: 1.5em 1em 1em 1em;
+    padding: 1em 1em;
     flex: 0 1 0;
     position: sticky;
     bottom: -999em;

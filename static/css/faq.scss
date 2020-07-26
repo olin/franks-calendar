@@ -8,9 +8,13 @@
     }
 
     ul, ol {
-        list-style-position: inside;
-        margin-left:1em;
+        list-style-position: outside;
+        margin-left:3em;
         margin-bottom:1em;
+    }
+
+    td {
+        min-width:15em;
     }
 
     p {
@@ -26,6 +30,7 @@
         font-family: $title;
         text-transform:uppercase;
         font-size: 2em;
+        margin-top:2em;
 
         &__icon {
             margin-right: 0.2em;
@@ -37,12 +42,14 @@
         font-size: 1.5em;
         margin-top: 1.5em;
         margin-bottom:.7em;
+        color: $secondary;
     }
     &__question {
         
         display: block;
-        border: 0.05em solid $main;
+        border: transparent;
         border-radius: 0.5em;
+        box-shadow: 0.1em 0.1em 0.25em $secondary;
         padding: 1em 1.5em;
         margin-bottom: 1em;
         
@@ -51,6 +58,7 @@
             font-size: 1.25em;
         }
         &__answer {
+            color: $main;
             font-family: $sans;
             margin-top: 0.5em;
             margin-left:2.5em;
@@ -62,17 +70,61 @@
 
 }
 
+// modify background/highlight and letter colors
 .Color {
-    &--green {
-        background-color:  #E3EFCF;;
+    // modify text color for variety
+    // used for color-coding sections on FAQ page
+    &--1 {
+        color:  $ocean;
     }
-    &--blue {
-        background-color: #BFD1E2;
+    &--2 {
+        color: $navy;
     }
-    &--yellow {
-        background-color:  #FFF0C3;
+    &--3 {
+        color: $green;
     }
-    &--purple {
-        background-color: #DED6E9;
+    &--4 {
+        color: $purple;
+    }
+
+    &__mark {
+        // highlight the mention of a category with the associated color for clarity and aesthetics
+        // used where categories are defined on FAQ page
+        
+        &--academic {
+            background-color: $academic--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
+        &--student {
+            background-color: $student--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
+        &--admission {
+            background-color: $admission--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
+        &--library {
+            background-color: $library--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
+        &--shop {
+            background-color: $shop--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
+        &--clubs {
+            background-color: $clubs--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
+        &--other {
+            background-color: $other--light;
+            padding: 2px 5px 2px 5px;
+            border-radius: 3px;
+        }
     }
 }
