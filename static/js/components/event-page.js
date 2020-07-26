@@ -29,10 +29,45 @@ export default class EventPage extends React.Component {
     render() {
         var category = this.props.event.category.pop();
 
-        function dateToString(date) {
+        function timeString(date) {
             let hours = date.getHours();
             let minutes = ('0' + date.getMinutes()).slice(-2);
             return (hours + ':' + minutes);
+        }
+
+        var timeText;
+        if (this.props.event.allDay) {
+            var startDate = new Date(this.props.event.start).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            var endDate = new Date(this.props.event.end).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+            if (startDate === endDate) {
+                timeText = (
+                    <span class="Event__content__time">{startDate}</span>
+                )
+            } else {
+                timeText = (
+                    <>
+                        <span class="Event__content__time">{startDate}</span> -
+                        <span class="Event__content__time">{endDate}</span>
+                    </>
+                )
+            }
+        } else {
+            timeText = (
+                <>
+                    <span class="Event__content__date">
+                      {this.props.event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    </span>
+                    |
+                    <span class="Event__content__time">
+                      {timeString(this.props.event.start)}
+                    </span>
+                    -
+                    <span class="Event__content__time">
+                      {timeString(this.props.event.end)}
+                    </span>
+                </>
+            )
         }
 
         return (
@@ -93,35 +128,30 @@ export default class EventPage extends React.Component {
                         When?
                       </td>
                       <td class="Event__content__text">
-                        <span class="Event__content__date">
-                          {this.props.event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                        </span>
-                        |
-                        <span class="Event__content__time">
-                          {dateToString(this.props.event.start)}
-                        </span>
-                        <span class="Event__content__time">
-                          {dateToString(this.props.event.end)}
-                        </span>
+                        {timeText}
                       </td>
                     </tr>
 
-                    <tr class="Event__content__table__row">
-                      <td class="Event__content__headers">
-                        Where?
-                      </td>
-                      <td class="Event__content__text">
-                        {this.props.event.location}
-                      </td>
-                    </tr>
+                    {this.props.event.location &&
+                        <tr class="Event__content__table__row">
+                          <td class="Event__content__headers">
+                            Where?
+                          </td>
+                          <td class="Event__content__text">
+                            {this.props.event.location}
+                          </td>
+                        </tr>
+                    }
 
-                    <tr class="Event__content__table__row">
-                      <td class="Event__content__headers">
-                        What?
-                      </td>
-                      <td class="Event__content__text" dangerouslySetInnerHTML={{__html: this.props.event.description.replace(/\<br\>/, '')}}>
-                      </td>
-                    </tr>
+                    {this.props.event.description &&
+                        <tr class="Event__content__table__row">
+                          <td class="Event__content__headers">
+                            What?
+                          </td>
+                          <td class="Event__content__text" dangerouslySetInnerHTML={{__html: this.props.event.description.replace(/\<br\>/, '')}}>
+                          </td>
+                        </tr>
+                    }
                   </table>
                 </section>
             </div>
