@@ -15,14 +15,14 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import rrulePlugin from '@fullcalendar/rrule';
 
 const colorMap = {
-    links: "#0087C6",
-    academic_affairs: "#0087C6",
-    student_affairs: "#1FC9B3",
-    admission: "#DD2E44",
-    library: "#722780",
-    shop: "#95CC3F",
-    clubs: "#F37820",
-    other: "#FFC700",
+    links: "#009BDF",
+    academic_affairs: "#BFD1E2",
+    student_affairs: "#C9EAE8",
+    admission: "#F8C7CE",
+    library: "#DED6E9",
+    shop: "#E3EFCF",
+    clubs: "#FCDDC7",
+    other: "#FFF0C3",
 }
 const tagList = {
     "academic": true,
@@ -72,6 +72,29 @@ function clean_event_list(events) {
         events[i].color = colorMap[events[i].category[0]]
     }
     return events
+}
+
+const EventComponent = ({ event, el }) => {
+  console.log(event);
+
+  var startTime = new Date(event.start);
+  var startHours = ('0' + startTime.getHours()).slice(-2);
+  var startMins = ('0' + startTime.getMinutes()).slice(-2);
+
+
+  var endTime = new Date(event.end);
+  var endHours = ('0' + endTime.getHours()).slice(-2);
+  var endMins = ('0' + endTime.getMinutes()).slice(-2);
+
+  const content = (
+    <div class="EventContent" data-category={event.extendedProps.category}>
+      <div class="EventContent__time">{startHours}:{startMins} - {endHours}:{endMins}</div>
+      <div class="EventContent__title">{event.title}</div>
+      <div class="EventContent__time">{event.extendedProps.location}</div>
+    </div>
+  );
+  ReactDOM.render(content, el);
+  return el;
 }
 
 class App extends React.Component {
@@ -125,6 +148,7 @@ class App extends React.Component {
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
+          console.log(res)
             let event_list = clean_event_list(JSON.parse(res.data))
             this.setState({
                 events: event_list,
@@ -139,7 +163,7 @@ class App extends React.Component {
         return (
             <>
               <aside className="Sidebar">
-              <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
+                <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
               </aside>
                 <div className="Calendar">
                     {this.state.popUp}
@@ -147,8 +171,10 @@ class App extends React.Component {
                     <FullCalendar
                         defaultView="timeGridWeek"
                         nowIndicator={true}
-                        plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                        plugins={[ dayGridPlugin, timeGridPlugin ]}
                         events={this.state.events}
+                        displayEventTime={true}
+                        eventRender={EventComponent}
                         eventClick={this.eventClick}
                         header={{
                             left: 'prev,next today',
