@@ -1,0 +1,39 @@
+
+.Page404 {
+
+    font-family: $sans;
+
+    &__table {
+        display: block;
+        width: 40em;
+        border: none;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top:2em;
+        margin-bottom:2em;
+        padding: 1em;
+    }
+    &__number {
+        font-family:$title;
+        font-weight:bold;
+        font-size: 10em;
+    }
+    &__ohno {
+        font-family:$title;
+        font-weight:bold;
+        font-size: 3em;
+        color: $links;
+    }
+    &__logo {
+        display:block;
+        overflow: auto;
+        flex-direction: row;
+        padding: 0.5em 1em 0.5em 0.5em;
+    }
+    &__message {
+        font-family:$title;
+        font-size: 1em;
+        color: $secondary;
+        margin-top:1em;
+    }
+}

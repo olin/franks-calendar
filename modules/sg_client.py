@@ -89,9 +89,8 @@ class EmailClient(object):
         self.send_email(recipient, "Event submission approved!", content) 
 
     def generate_link(self, base, event):
-        #magic = event['magic']
-        magic = "fakemagiclink"
+        magic = str(event['magic'])
         eventid = str(event['_id'])
         #issues with retrieving base right now, but should be resolved when we have permanent hosting solution
         #return base + "/edit?event_id=" + eventid + "&magic=" + magic   
-        return "frankscalendar/edit?event_id=" + eventid + "&magic=" + magic    
+        return "frankscalendar/edit/" + eventid + "?magic=" + magic    
