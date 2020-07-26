@@ -1,10 +1,32 @@
 {% extends 'base.html' %}
 {% block page %}
     {% include 'components/header.html' %}
+    <main>
+        <div class="Page404">
+            <table class="Page404__table">
+                <tr>
+                    <td>
+                        <h2 class="Page404__number">404</h1>
+                        <p class="Page404__ohno"> Ohhh nooo...</p>
+                    </td>
+                    <td>
+                        <img src="/static/images/franks_cal_logo.png" alt="Frank's Calendar Logo" height="250px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="Page404__ohno">Something's wrong.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="Page404__message">We’re working on fixing the problem. Check back to Frank’s Calendar later!</p>
+                    </td>
+                </tr>
+            </table>
+        
+        </div>
+    </main>
     
-    <h1>404 Error!</h1>
-    <p>Sorry, this page doesn't exist.</p>
-    <a href="/">Click here to go back home</a>
-
     {% include 'components/footer.html' %}
 {% endblock %}

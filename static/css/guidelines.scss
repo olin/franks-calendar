@@ -1,0 +1,99 @@
+.Guidelines {
+    margin-left:2em;
+    margin-right:2.5em;
+
+    a {
+        color: $links;
+        text-decoration:none;
+    }
+
+    ul, ol {
+        list-style-position: outside;
+        margin-left:2em;
+        margin-bottom:1em;
+    }
+
+    &__pluses {
+        list-style-type:"  +  ";
+    }
+    &__minuses {
+        list-style-type:"  -  ";
+    }
+
+    &__table {
+        display: block;
+        border: transparent;
+        align-self:center;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 1em;
+
+        &__row {
+
+            &__data {
+                width:30em;
+                vertical-align:top;
+            }
+        }
+    }
+
+
+    p {
+        margin-top:0.5em;
+        margin-bottom:0.5em;
+    }
+    h3 {
+        font-family: $title;
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size:1.2em;
+        text-align: center;
+        margin-bottom: 0.7em;
+    }
+
+    &__underline {
+        text-decoration:underline;
+    }
+    &__centered {
+        text-align:center;
+    }
+
+
+    &__section {
+        
+        display: block;
+        border: transparent;
+        border-radius: 0.5em;
+        box-shadow: 0.1em 0.1em 0.25em $secondary;
+        padding: 1em 1.5em;
+        margin-top:1em;
+        margin-bottom: 1em;
+        
+        &__head {
+            font-family: $title;
+            font-size: 1.5em;
+            margin-bottom:.7em;
+            color: $secondary--dark;
+        }
+        &__content {
+            color: $main;
+            font-family: $sans;
+            margin-top: 0.5em;
+            margin-left:2.5em;
+            margin-right:3em;
+            line-height:1.5em;
+        }
+        
+    }
+
+    &__belong {
+        color: $green;
+    }
+    &__dont-belong {
+        color: $red;
+    }
+    &__mods {
+        color: $navy;
+    }
+
+}
