@@ -1,21 +1,24 @@
 <html>
   <header class="Header">
       <div class="Header__logo">
+        <a href="/">
           <img src="/static/images/franks_cal_logo.png" alt="Frank's Calendar Logo" class="Header__logo__icon" />
           <div class="Header__logo__side">
             <h1 class="Header__logo__text">Frank's</h1>
             <h1 class="Header__logo__text">Calendar</h1>
           </div>
+        </a>
       </div>
       <div class="Header__nav">
-        <a class="Header__nav__event" href="/add">
+
+        <a class="Header__nav__event {{ 'Header__nav__event--active' if request.path == '/add' }}" href="/add">
           <svg class="Header__nav__event__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <line x1="5" y1="12" x2="19" y2="12"></line>
           </svg>
           New Event
         </a>
-        <a class="Header__nav__link" href="/">
+        <a class="Header__nav__link {{ 'Header__nav__link--active' if request.path == '/' }}" href="/">
           <div class="Header__nav__link__wrapper">
             <svg class="Header__nav__link__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -26,7 +29,7 @@
             Calendar
           </div>
         </a>
-        <a class="Header__nav__link" href="/guidelines">
+        <a class="Header__nav__link {{ 'Header__nav__link--active' if request.path == '/guidelines' }}" href="/guidelines">
           <div class="Header__nav__link__wrapper">
             <svg class="Header__nav__link__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
@@ -37,7 +40,7 @@
             Guidelines
           </div>
         </a>
-        <a class="Header__nav__link" href="/faq">
+        <a class="Header__nav__link {{ 'Header__nav__link--active' if request.path == '/faq' }}" href="/faq">
           <div class="Header__nav__link__wrapper">
             <svg class="Header__nav__link__icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"></circle>
@@ -57,21 +60,5 @@
   <script lazy="True">
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     document.getElementById("Timezone").innerHTML = tz;
-
-//     $(function(){
-//     // this will get the full URL at the address bar
-//     var url = window.location.href;
-//
-//     // passes on every "a" tag
-//     $("#sub-header a").each(function() {
-//             // checks if its the same on the address bar
-//         if(url == (this.href)) {
-//             $(this).closest("li").addClass("active");
-//         }
-//     });
-// });
-    $(function() {
-      $('nav a[href^="/' + location.pathname.split("/")[1] + '"]').addClass('active');
-    });
   </script>
 </html>
