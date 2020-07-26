@@ -1,7 +1,44 @@
 @import 'vars';
 
+.fc-time-grid-event.fc-event.fc-start.fc-end {
+  border-radius: 0.5em !important;
+}
+
+.EventContent[data-category="academic_affairs"] {
+  &:before {
+    background-color: $academic;
+  }
+}
+
+.EventContent {
+  height: 75%;
+  color: $main;
+  background-color: transparent !important;
+  padding: 0.5em 0.75em;
+  overflow: hidden;
+
+  &__time {
+    font-family: $sans;
+    font-size: 0.75em;
+  }
+
+  &__title {
+    font-family: $title;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 1.25;
+    margin-bottom: 0.2em;
+  }
+}
+
 .fc-event {
     cursor: pointer;
+
+    // &[data-status="academic-affairs"] {
+    //   background-color: $academic--light;
+    //
+    //   &::before {background-color:$academic}
+    // }
 }
 
 // Changed font of calendar header

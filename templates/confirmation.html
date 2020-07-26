@@ -3,9 +3,6 @@
     {% include 'components/header.html' %}
     <main>
         <div class="Confirmation">
-            <h1 class="Confirmation__title">Event Submitted for Approval!</h1>
-
-            <div class="Submission">
             <div class="Submission__box">
             <section class="Submission__content">
                 <h2 class="Submission__content__title">
@@ -66,13 +63,11 @@
             </div>
             </div>
             <div class="Confirmation__message">
-                <p>Thanks for submitting an event to Frank’s Calendar!</p>
-                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link">event guidelines</a> within 24 hours. You will receive an email at <a href="mailto:{{ host_email }}" class="Confirmation__message__link">{{ host_email }}</a> notifying you of the event status. </p>
+                <h2>Thanks for submitting an event!</h2>
+                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours. You will receive an email at <a href="mailto:{{ host_email }}" class="Confirmation__message__link">{{ host_email }}</a> notifying you of the event status. </p>
 
-                <p><a href="{{ magic_link }}">Click here to edit your event.</a></p>
-                <p>The link will be emailed to you, and will be valid until the start of the event.</p>
+                <p>If you wish to make changes to your event submission, use this magic link to make changes: <a class="Confirmation__message__link" href="{{ magic_link }}">link to edit this event</a>. This link will also be emailed to you and will be valid until the start of the event.</p>
             </div>
-        </div>
     </main>
 {% include 'components/footer.html' %}
 {% endblock %}
