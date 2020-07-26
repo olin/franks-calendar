@@ -29,6 +29,8 @@ export default class EventPage extends React.Component {
     render() {
         var category = this.props.event.category.pop();
 
+        window.location.hash = this.props.event.id
+
         function timeString(date) {
             let hours = date.getHours();
             let minutes = ('0' + date.getMinutes()).slice(-2);

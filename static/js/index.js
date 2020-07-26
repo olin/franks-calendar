@@ -1,7 +1,7 @@
 // Import React stuff
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route } from "react-router-dom"; 
+import { HashRouter, Route } from "react-router-dom";
 
 import '../css/index.scss';
 import Sidebar from './components/sidebar.js';
@@ -126,10 +126,10 @@ class App extends React.Component {
         })
     }
     renderEventPage() {
-        let valid = this.state.allEvents.find(obj => obj.id.toString() === this.state.urlid)
-        if (valid){
+        let event = this.state.allEvents.find(obj => obj.id.toString() === this.state.urlid)
+        if (event){
             this.setState({
-                popUp: <EventPage event={valid} returnToCalendar={this.destroyPopUp} />
+                popUp: <EventPage event={event} returnToCalendar={this.destroyPopUp} />
             })
         }
     }
@@ -147,10 +147,12 @@ class App extends React.Component {
         .catch(err => {
             console.error(err);
         })
-    
+
 
     }
     render() {
+        window.location.hash = ""; // Clear the hash when the calendar renders
+
         return (
             <>
               <aside className="Sidebar">
@@ -158,7 +160,7 @@ class App extends React.Component {
               </aside>
                 <div className="Calendar">
                     {this.state.popUp}
-                       
+
                     <FullCalendar
                     defaultView="timeGridWeek"
                     nowIndicator={true}
@@ -170,8 +172,8 @@ class App extends React.Component {
                         center: 'title',
                         right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                     }}
-                    height="parent"/>              
-                  
+                    height="parent"/>
+
                 </div>
             </>
         );
@@ -180,8 +182,7 @@ class App extends React.Component {
 
 var renderedApp = (
     <ErrorBoundary>
-        <HashRouter
-            hashType="noslash">
+        <HashRouter hashType="noslash">
             <App />
         </HashRouter>
     </ErrorBoundary>
