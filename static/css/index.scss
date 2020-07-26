@@ -393,38 +393,44 @@
   height: 100%;
   overflow-y: auto;
 
-  &__row {
-    display: flex;
-    justify-content: space-between;
+  &__width {
+    min-width: 20em;
+    max-width: 60em;
   }
 
   &__button {
-    font-size: 1em;
-    font-family: $sans;
     border-radius: 0.5em;
-    padding: 0.5em 0.5em;
+    padding: 0.35em 0.5em;
     color: black;
-    display: inherit;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
     text-decoration: none;
-    background-color: #E8E8E8;
+    background-color: $secondary--light;
+
+    &__text {
+      font-size: 1em;
+      font-family: $title;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
 
     &__icon {
       display: inline-block;
       vertical-align: middle;
-      margin-right: 0.5em;
+      margin-right: 0.25em;
       height: 20px;
     }
   }
 
   &__content {
-    padding: 1em 0em 1em 0em;
+    padding: 1.5em 0em 1em 0em;
 
     &__title {
       font-family: $title;
-      font-size: 3em;
+      font-size: 2em;
+      font-weight: 600;
       text-transform: uppercase;
-      font-style: italic;
+      line-height: 1;
     }
 
     &__block {
@@ -439,23 +445,23 @@
       text-transform: capitalize;
       text-decoration: none;
       border-radius: 0.5em;
-      padding: 0.5em 0.5em;
+      padding: 0.35em 0.5em;
       display: inline-block;
 
-      &[data-tag="academic_affairs"] {background-color: $academic;}
-      &[data-tag="academic_advising"] {background-color: $academic;}
-      &[data-tag="academic_calendar"] {background-color: $academic;}
-      &[data-tag="international"] {background-color: $student;}
-      &[data-tag="residential"] {background-color: $student;}
-      &[data-tag="health"] {background-color: $student;}
-      &[data-tag="pgp"] {background-color: $student;}
-      &[data-tag="hr"] {background-color: $student;}
-      &[data-tag="student_affairs"] {background-color: $student;}
-      &[data-tag="admission"] {background-color: $admission;}
-      &[data-tag="library"] {background-color: $library;}
-      &[data-tag="shop"] {background-color: $shop;}
-      &[data-tag="clubs"] {background-color: $clubs;}
-      &[data-tag="other"] {background-color: $other;}
+      &[data-tag="academic_affairs"] {background-color: $academic--light; &::before {background-color: $academic}}
+      &[data-tag="academic_advising"] {background-color: $academic--light; &::before {background-color: $academic}}
+      &[data-tag="academic_calendar"] {background-color: $academic--light; &::before {background-color: $academic}}
+      &[data-tag="international"] {background-color: $student--light; &::before {background-color: $student}}
+      &[data-tag="residential"] {background-color: $student--light; &::before {background-color: $student}}
+      &[data-tag="health"] {background-color: $student--light; &::before {background-color: $student}}
+      &[data-tag="pgp"] {background-color: $student--light; &::before {background-color: $student}}
+      &[data-tag="hr"] {background-color: $student--light; &::before {background-color: $student}}
+      &[data-tag="student_affairs"] {background-color: $student--light; &::before {background-color: $student}}
+      &[data-tag="admission"] {background-color: $admission--light; &::before {background-color: $admission}}
+      &[data-tag="library"] {background-color: $library--light; &::before {background-color: $library}}
+      &[data-tag="shop"] {background-color: $shop--light; &::before {background-color: $shop}}
+      &[data-tag="clubs"] {background-color: $clubs--light; &::before {background-color: $clubs}}
+      &[data-tag="other"] {background-color: $other--light; &::before {background-color: $other}}
     }
 
     &__table {
@@ -501,6 +507,54 @@
       font-size: 1em;
       padding-right: 0.5em;
       padding-left: 0.5em;
+    }
+  }
+
+  &__export {
+    margin-top: 3em;
+    background-color: $secondary--light;
+    border-radius: 0.5em;
+    border: none;
+    padding: 0.5em 0.5em;
+    display: flex;
+    justify-content: center;
+    width: 25.5em;
+
+    input {
+      border: none;
+      border-radius: 0.35em;
+      background-color: white;
+      font-family: $sans;
+      font-size: 1em;
+      color: $main;
+      display: block;
+      margin-right: 0.5em;
+      padding: 0em 0.5em;
+
+      &::placeholder {
+        color: $secondary;
+      }
+    }
+
+    &__button {
+      display: flex;
+      justify-content: center;
+      background-color: $links;
+      border-radius: 0.35em;
+      border: none;
+      padding: 0.25em 0.5em;
+
+      svg {
+        margin-right: 0.25em;
+      }
+
+      span {
+        font-family: $title;
+        font-size: 1em;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
     }
   }
 }
