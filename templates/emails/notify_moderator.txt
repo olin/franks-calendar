@@ -1,0 +1,14 @@
+Hi! 
+
+Changes were made to, {{title}} today. The event information now consists of: 
+
+Title: {{title}}
+Host: {{host}}, {{host_email}}
+When: {{dtstart}} to {{dtend}}
+Where: {{location}}
+What: {{description}}
+          
+If changes were not appropriate, cancel the event via this link:  {{link}}.
+
+Sincerely, 
+Frank's Calendar
