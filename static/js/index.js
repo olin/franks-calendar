@@ -1,6 +1,7 @@
 // Import React stuff
 import React from "react";
 import ReactDOM from "react-dom";
+import { HashRouter, Route } from "react-router-dom"; 
 
 import '../css/index.scss';
 import Sidebar from './components/sidebar.js';
@@ -83,11 +84,13 @@ class App extends React.Component {
             allEvents: [],
             tags: tagList,
             popUp: null,
+            urlid: window.location.hash.substring(1),
         }
-
         this.eventClick = this.eventClick.bind(this);
         this.toggleTag = this.toggleTag.bind(this);
         this.destroyPopUp = this.destroyPopUp.bind(this);
+        this.renderEventPage = this.renderEventPage.bind(this);
+
     }
     destroyPopUp() {
         this.setState({
@@ -122,6 +125,15 @@ class App extends React.Component {
             popUp: <EventPage event={this.state.events.find(obj => obj.id === eventID)} returnToCalendar={this.destroyPopUp} />
         })
     }
+    renderEventPage() {
+        let valid = this.state.allEvents.find(obj => obj.id.toString() === this.state.urlid)
+        if (valid){
+            this.setState({
+                popUp: <EventPage event={valid} returnToCalendar={this.destroyPopUp} />
+            })
+        }
+    }
+
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
@@ -130,10 +142,13 @@ class App extends React.Component {
                 events: event_list,
                 allEvents: event_list,
             })
+            this.renderEventPage();
         })
         .catch(err => {
             console.error(err);
         })
+    
+
     }
     render() {
         return (
@@ -143,20 +158,20 @@ class App extends React.Component {
               </aside>
                 <div className="Calendar">
                     {this.state.popUp}
-
+                       
                     <FullCalendar
-                        defaultView="timeGridWeek"
-                        nowIndicator={true}
-                        plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
-                        events={this.state.events}
-                        eventClick={this.eventClick}
-                        header={{
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                        }}
-                        height="parent"
-                    />
+                    defaultView="timeGridWeek"
+                    nowIndicator={true}
+                    plugins={[ dayGridPlugin, rrulePlugin, timeGridPlugin ]}
+                    events={this.state.events}
+                    eventClick={this.eventClick}
+                    header={{
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    }}
+                    height="parent"/>              
+                  
                 </div>
             </>
         );
@@ -165,7 +180,10 @@ class App extends React.Component {
 
 var renderedApp = (
     <ErrorBoundary>
-        <App />
+        <HashRouter
+            hashType="noslash">
+            <App />
+        </HashRouter>
     </ErrorBoundary>
 );
 
