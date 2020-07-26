@@ -56,6 +56,10 @@ def about_page():
 def faq_page():
     return render_template("faq.html")
 
+@public.route("/guidelines", methods=["GET"])
+def guidelines_page():
+    return render_template("guidelines.html")
+
 
 @public.route("/edit/<event_id>", methods=["POST", "GET", "DELETE"])
 def edit_event(event_id):
@@ -77,7 +81,7 @@ def edit_event(event_id):
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
 
-        return render_template("edit.html", form=form)
+        return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id)
     elif request.method == "POST":
         db.update_event(event_id, form.data)
 
@@ -179,3 +183,8 @@ def cancel_event(event_id):
     })
 
     return redirect(url_for("public.admin_page", admin_magic="test"))
+
+
+@public.route("/test-404", methods=["GET"])
+def test404():
+    return render_template("404.html")

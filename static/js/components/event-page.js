@@ -7,7 +7,6 @@ export default class EventPage extends React.Component {
 
         this.exportEvent = this.exportEvent.bind(this);
     }
-
     exportEvent() {
         // Retrieves event information and returns as ical file
         let eventID = this.props.event.id;
@@ -101,7 +100,6 @@ export default class EventPage extends React.Component {
                         <span class="Event__content__time">
                           {dateToString(this.props.event.start)}
                         </span>
-
                         <span class="Event__content__time">
                           {dateToString(this.props.event.end)}
                         </span>
