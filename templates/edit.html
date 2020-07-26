@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
-    {% include 'components/header.html' %}
+    {% include 'components/header--edit.html' %}
     <main>
       <div class="Page">
         <form class="Form" action="" method="POST" autocomplete="off" id="eventForm">
@@ -35,7 +35,6 @@
               </div>
               <div class="Form__time">
                 <label>Start Time</label>
-                <!-- <option disabled selected hidden value={{form.dtstart}}>{{form.dtstart}}</option> -->
                 <select name="hour__start" id="hour__start">
                     <option value="00:00:00">12:00am</option>
                     <option value="00:15:00">12:15am</option>
@@ -318,7 +317,11 @@ If you sent out an email about this event, the text from that email is probably 
             </div>
 
           </div>
-          <input class="Form__submit" id="submitButton" type="submit" name="Submit" value="Submit Event" />
+          <div class="Form__flex Form__box Form__box__buttons">
+            <input class="Form__button Form__button--green" type="submit" name="Submit" value="Submit Changes" />
+            <input class="Form__button Form__button--blue" type="reset" name="Reset" value="Reset Changes" onClick="window.location.reload()" />
+            <a class="Form__button Form__button--red" href="/cancel_event/{{ event_id }}?magic={{ magic }}">Cancel Event</a>
+          </div>
         </form>
       </div>
     </main>
