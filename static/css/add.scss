@@ -1,5 +1,6 @@
 .Page {
   text-align: center;
+  margin-bottom: 1em;
 }
 
 .Form {
@@ -103,11 +104,11 @@
         transition-duration: 0.3s;
 
         &:hover {
-          opacity: 1;
+          opacity: 1 !important;
         }
 
         &:focus {
-          opacity: 1;
+          opacity: 1 !important;
         }
       }
     }
@@ -135,7 +136,7 @@
   }
 
   &__time {
-    overflow: hidden;
+    overflow: visible;
 
     label {
       display: block;
@@ -154,11 +155,28 @@
       font-family: $sans;
       font-size: 1em;
       color: $main;
-      border: none;
+      border:  0.1em solid transparent;
       background-color: $secondary--light;
       border-radius: 0.5em;
       padding: 0.5em 0.5em;
       margin-bottom: 0.5em;
+      transition-duration: 0.3s;
+
+      &:hover {
+        box-shadow: 0.1em 0.1em 0.2em $secondary;
+      }
+
+      &:active {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
+      }
+
+      &:focus {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
+      }
 
       option {
         font-family: $sans;
@@ -170,7 +188,7 @@
 
   // Styling dropdown menu
   &__category {
-    overflow: hidden;
+    overflow: visible;
 
     select {
       display: block;
@@ -178,14 +196,26 @@
       font-size: 1em;
       color: $main;
       background-color: $secondary--light;
-      border: none;
+      border: 0.1em solid transparent;
       border-radius: 0.5em;
       padding: 0.5em 0.5em;
       margin-bottom: 0.5em;
-      transition: box-shadow 0.3s;
+      transition-duration: 0.3s;
 
       &:hover {
-        box-shadow: 0 0 0.3em $secondary;
+        box-shadow: 0.1em 0.1em 0.2em $secondary;
+      }
+
+      &:active {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
+      }
+
+      &:focus {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
       }
 
       option {
@@ -227,7 +257,7 @@
       display: block;
       text-align: left;
       width: 100%;
-      border: none;
+      border:  0.1em solid transparent;
       border-radius: 0.5em;
       background-color: $secondary--light;
       padding: 0.5em;
@@ -235,9 +265,26 @@
       font-family: $sans;
       font-size: 1em;
       color: $main;
+      transition-duration: 0.3s;
 
       &::placeholder {
         color: $secondary;
+      }
+
+      &:hover {
+        box-shadow: 0.1em 0.1em 0.2em $secondary;
+      }
+
+      &:active {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
+      }
+
+      &:focus {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
       }
     }
 
@@ -247,7 +294,7 @@
       width: 29.5em;
       height: 7em;
       resize: vertical;
-      border: none;
+      border: 0.1em solid transparent;
       border-radius: 0.5em;
       background-color: $secondary--light;
       padding: 0.75em 0.5em;
@@ -255,9 +302,26 @@
       font-family: $sans;
       font-size: 1em;
       color: $main;
+      transition-duration: 0.3s;
 
       &::placeholder {
         color: $secondary;
+      }
+
+      &:hover {
+        box-shadow: 0.1em 0.1em 0.2em $secondary;
+      }
+
+      &:active {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
+      }
+
+      &:focus {
+        border: 0.1em solid $links;
+        outline: none;
+        transition-duration: none;
       }
     }
   }
