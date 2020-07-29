@@ -76,7 +76,6 @@ function clean_event_list(events) {
 }
 
 const EventComponent = ({ event, el }) => {
-
   var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
   var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
 
