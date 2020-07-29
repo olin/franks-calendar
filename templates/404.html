@@ -3,28 +3,21 @@
     {% include 'components/header.html' %}
     <main>
         <div class="Page404">
-            <table class="Page404__table">
-                <tr>
-                    <td>
-                        <h2 class="Page404__number">404</h1>
-                        <p class="Page404__ohno"> Ohhh nooo...</p>
-                    </td>
-                    <td>
-                        <img src="/static/images/franks_cal_logo.png" alt="Frank's Calendar Logo" height="250px"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p class="Page404__ohno">Something's wrong.</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2">
-                        <p class="Page404__message">We’re working on fixing the problem. Check back to Frank’s Calendar later!</p>
-                    </td>
-                </tr>
-            </table>
-        
+            <div class="Page404__container">
+                <div class="Page404__item">
+                    <p class="Page404__number">404</p>
+                    <p class="Page404__oh-no"> Ohhh nooo...</p>
+                </div>
+                <div class="Page404__item">
+                    <img src="/static/images/franks_cal_logo.png" alt="Frank's Calendar Logo" height="100%"/>
+                </div>
+            </div>
+            <div class="Page404__container">
+                <div class="Page404__double-item">
+                    <p class="Page404__somethings-wrong">Something's wrong.</p>
+                    <p class="Page404__message">We’re working on fixing the problem. Check back to Frank’s Calendar later!</p>
+                </div>
+            </div>
         </div>
     </main>
     

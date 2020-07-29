@@ -1,10 +1,17 @@
 .FAQ {
-    margin-left:2em;
-    margin-right:2.5em;
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 60em;
+    padding: 1em;
 
     a {
         color: $links;
         text-decoration:none;
+
+        &:hover {
+            opacity: 60%;
+            transition-duration: 0.3s;
+          }
     }
 
     ul, ol {
@@ -56,6 +63,8 @@
         &__summary {
             font-family: $title;
             font-size: 1.25em;
+            outline:none;
+            cursor: pointer;
         }
         &__answer {
             color: $main;
