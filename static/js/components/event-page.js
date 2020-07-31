@@ -27,9 +27,7 @@ export default class EventPage extends React.Component {
     }
 
     render() {
-        var category = this.props.event.category.pop();
-
-        window.location.hash = this.props.event.id
+        window.location.hash = this.props.event.id;
 
         function timeString(date) {
             let hours = date.getHours();
@@ -71,6 +69,8 @@ export default class EventPage extends React.Component {
                 </>
             )
         }
+
+        var category = this.props.event.category.pop();
 
         return (
             <div class="Event">
