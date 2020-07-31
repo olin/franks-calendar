@@ -75,7 +75,7 @@ class DatabaseClient(object):
             return False
 
     def update_event(self, event_id, form):
-        self.client.events.update_one(
+        ret = self.client.events.update_one(
             {
                 "_id": ObjectId(event_id)
             },
@@ -83,6 +83,8 @@ class DatabaseClient(object):
                 "$set": form
             }
         )
+        form["_id"] = event_id
+        return form
 
     def delete(self, event_id):
         self.client.delete_one({

@@ -76,20 +76,12 @@ function clean_event_list(events) {
 }
 
 const EventComponent = ({ event, el }) => {
-  console.log(event);
-
-  var startTime = new Date(event.start);
-  var startHours = ('0' + startTime.getHours()).slice(-2);
-  var startMins = ('0' + startTime.getMinutes()).slice(-2);
-
-
-  var endTime = new Date(event.end);
-  var endHours = ('0' + endTime.getHours()).slice(-2);
-  var endMins = ('0' + endTime.getMinutes()).slice(-2);
+  var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
+  var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
 
   const content = (
     <div class="EventContent" data-category={event.extendedProps.category}>
-      <div class="EventContent__time">{startHours}:{startMins} - {endHours}:{endMins}</div>
+      <div class="EventContent__time">{startTime} - {endTime}</div>
       <div class="EventContent__title">{event.title}</div>
       <div class="EventContent__time">{event.extendedProps.location}</div>
     </div>
@@ -128,8 +120,8 @@ class App extends React.Component {
             tags: tags,
         }, () => {
             let events = this.state.allEvents.filter(event => {
-                for (let i = 0; i < event.tag.length; i++) {
-                    if (tags[event.tag[i]] === false) {
+                for (let i = 0; i < event.category.length; i++) {
+                    if (tags[event.category[i]] === false) {
                         return false;
                     } else {
                         continue;

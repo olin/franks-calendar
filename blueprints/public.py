@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort
 from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
 from modules.forms import EventForm
@@ -83,9 +83,22 @@ def edit_event(event_id):
 
         return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id)
     elif request.method == "POST":
-        db.update_event(event_id, form.data)
+        inserted_event = db.update_event(event_id, form.data)
 
-        return redirect(url_for("public.index"))
+        return redirect(
+            url_for("public.edit_confirmation",
+                title=inserted_event['title'],
+                category=inserted_event['category'],
+                location=inserted_event['location'],
+                start=inserted_event['dtstart'].strftime("%m/%d/%Y %-I:%M %p"),
+                end=inserted_event['dtend'].strftime("%m/%d/%Y %-I:%M %p"),
+                description=inserted_event['description'],
+                host_name=inserted_event['host_name'],
+                host_email=inserted_event['host_email'],
+                event_id=inserted_event['_id'],
+                duration=inserted_event['duration']
+            ),
+        )
     elif request.method == "DELETE":
         db.delete_event(event_id)
         # notify users that an event has been deleted?
@@ -97,6 +110,9 @@ def edit_event(event_id):
 @public.route("/admin", methods=["GET"])
 def admin_page():
     if request.method == "GET":
+        if request.args.get("code") != current_app.config.get("ADMIN_CODE"):
+            abort(404)
+
         events = db.get_all_events_with_magic()
         return render_template("admin.html", events=events)
 
@@ -117,6 +133,33 @@ def confirmation():
         duration = request.args.get('start') + " - " + request.args.get('end')
 
     return render_template("confirmation.html",
+        title=request.args.get('title'),
+        category=request.args.get('category'),
+        location=request.args.get('location'),
+        description=request.args.get('description'),
+        host_name=request.args.get('host_name'),
+        host_email=request.args.get('host_email'),
+        magic_link=f"/edit/{event_id}?magic={magic_id}",
+        duration=duration,
+    ), 200
+
+
+@public.route("/edit-confirmation")
+def edit_confirmation():
+    event_id = request.args.get('event_id')
+    magic_id = db.get_event_with_magic(event_id)["magic"]
+
+    duration_type = request.args.get('duration')
+    if duration_type == "hour":
+        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
+    elif duration_type == "day":
+        duration = request.args.get('start').split(' ')[0]
+    elif duration_type == "many":
+        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
+    else:
+        duration = request.args.get('start') + " - " + request.args.get('end')
+
+    return render_template("confirmation--published.html",
         title=request.args.get('title'),
         category=request.args.get('category'),
         location=request.args.get('location'),
@@ -183,9 +226,4 @@ def cancel_event(event_id):
         "status": Status.CANCELED.value
     })
 
-    return redirect(url_for("public.admin_page", admin_magic="test"))
-
-
-@public.route("/test-404", methods=["GET"])
-def test404():
-    return render_template("404.html")
+    return redirect(url_for("public.index"))
