@@ -320,7 +320,7 @@ If you sent out an email about this event, the text from that email is probably 
           <div class="Form__flex Form__box Form__box__buttons">
             <input class="Form__button Form__button--green" type="submit" id="submitButton" name="Submit" value="Submit Changes" />
             <input class="Form__button Form__button--blue" type="reset" name="Reset" value="Reset Changes" onClick="window.location.reload()" />
-            <a class="Form__button Form__button--red" href="/cancel_event/{{ event_id }}?magic={{ magic }}">Cancel Event</a>
+            <input class="Form__button Form__button--red" type="button" value="Cancel Event" onClick="confirmDelete()" />
           </div>
         </form>
       </div>
@@ -328,6 +328,16 @@ If you sent out an email about this event, the text from that email is probably 
     {% include 'components/footer.html' %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script>
+        function confirmDelete(e) {
+            if (confirm("Are you sure you want to delete this event?")) {
+                console.log("Called")
+                window.location.href = "/cancel_event/{{ event_id }}?magic={{ magic }}";
+            } else {
+                console.log("Called2")
+                e.preventDefault();
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function(){
             var duration = "{{ form.duration.data }}";
             switch(duration) {

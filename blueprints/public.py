@@ -226,4 +226,4 @@ def cancel_event(event_id):
         "status": Status.CANCELED.value
     })
 
-    return redirect(url_for("public.admin_page", admin_magic="test"))
+    return redirect(url_for("public.index"))
