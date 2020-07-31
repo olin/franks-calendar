@@ -7,6 +7,7 @@ build/
 venv/
 private/
 
+.env
 .sendgrid.env
 sendgrid.env
 

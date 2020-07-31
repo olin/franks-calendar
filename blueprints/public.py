@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort
 from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
 from modules.forms import EventForm
@@ -110,6 +110,9 @@ def edit_event(event_id):
 @public.route("/admin", methods=["GET"])
 def admin_page():
     if request.method == "GET":
+        if request.args.get("code") != current_app.config.get("ADMIN_CODE"):
+            abort(404)
+
         events = db.get_all_events_with_magic()
         return render_template("admin.html", events=events)
 
