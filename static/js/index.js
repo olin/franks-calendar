@@ -76,7 +76,6 @@ function clean_event_list(events) {
 }
 
 const EventComponent = ({ event, el }) => {
-
   var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
   var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
 
@@ -121,8 +120,8 @@ class App extends React.Component {
             tags: tags,
         }, () => {
             let events = this.state.allEvents.filter(event => {
-                for (let i = 0; i < event.tag.length; i++) {
-                    if (tags[event.tag[i]] === false) {
+                for (let i = 0; i < event.category.length; i++) {
+                    if (tags[event.category[i]] === false) {
                         return false;
                     } else {
                         continue;

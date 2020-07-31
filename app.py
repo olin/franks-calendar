@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from config import DevelopmentConfig, ProductionConfig
 from blueprints.api import API
 from blueprints.public import public
@@ -20,6 +20,10 @@ def create_app(config):
     app.config.from_object(config)
     app.register_blueprint(public)
     register_api(app, API, 'api', '/api/events', pk='id', pk_type='int')
+
+    @app.errorhandler(404)
+    def handle_four_oh_four(err):
+        return render_template("404.html"), 404
 
     return app
 

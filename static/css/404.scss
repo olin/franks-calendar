@@ -1,33 +1,50 @@
-
 .Page404 {
 
     font-family: $sans;
+    padding: 2em 1em 2em 1em;
 
-    &__table {
-        display: block;
-        width: 40em;
-        border: none;
-        margin-right: auto;
-        margin-left: auto;
-        margin-top:2em;
-        margin-bottom:2em;
-        padding: 1em;
+    &__container {
+        display:flex;
+        justify-content:center;
+        flex-direction:row;
+        flex-wrap: wrap-reverse;
+        width: 100%;
     }
+
+    &__item {
+        width:20em;
+        height: 19em;
+    }
+    &__double-item {
+        width:40em;
+        flex-shrink:3;
+    }
+    
     &__number {
         font-family:$title;
         font-weight:bold;
-        font-size: 10em;
+        font-size: 11em;
+        display:block;
+        margin-top:0.2em;
+        margin-bottom:-0.1em;
     }
-    &__ohno {
+    &__oh-no {
+        display:block;
+        font-family:$title;
+        font-weight:bold;
+        font-size: 3em;
+        color: $links;
+        margin-top:-0.5em;
+    }
+    &__somethings-wrong {
+        display:block;
         font-family:$title;
         font-weight:bold;
         font-size: 3em;
         color: $links;
     }
     &__logo {
-        display:block;
         overflow: auto;
-        flex-direction: row;
         padding: 0.5em 1em 0.5em 0.5em;
     }
     &__message {
