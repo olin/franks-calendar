@@ -120,8 +120,8 @@ class App extends React.Component {
             tags: tags,
         }, () => {
             let events = this.state.allEvents.filter(event => {
-                for (let i = 0; i < event.tag.length; i++) {
-                    if (tags[event.tag[i]] === false) {
+                for (let i = 0; i < event.category.length; i++) {
+                    if (tags[event.category[i]] === false) {
                         return false;
                     } else {
                         continue;
