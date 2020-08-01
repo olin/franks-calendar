@@ -72,6 +72,17 @@ export default class EventPage extends React.Component {
 
         var category = this.props.event.category.pop();
 
+        // check if the location is a url
+        // location is a url if matches this pattern: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
+        // display the location as <a href="location">location</a>
+        var location_text = this.props.event.location;
+        var location_el;
+        if (location_text.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/)) {
+            location_el = <a class="Event__content__text__link" href={location_text}>{location_text}</a>;
+        } else {
+            location_el = location_text;
+        }
+
         return (
             <div class="Event">
               <div class="Event__width">
@@ -109,7 +120,7 @@ export default class EventPage extends React.Component {
                           {this.props.event.host_name}
                         </span>
                         |
-                        <a class="Event__content__text__link" href={"mailto:" + this.props.event.host_email}>
+                        <a style={{paddingLeft:'0.5em'}} class="Event__content__text__link" href={"mailto:" + this.props.event.host_email}>
                           {this.props.event.host_email}
                         </a>
                       </td>
@@ -130,7 +141,7 @@ export default class EventPage extends React.Component {
                             Where?
                           </td>
                           <td class="Event__content__text">
-                            {this.props.event.location}
+                            {location_el}
                           </td>
                         </tr>
                     }
