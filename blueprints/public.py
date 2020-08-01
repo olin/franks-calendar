@@ -198,7 +198,7 @@ def approve_event(event_id):
         "status": Status.APPROVED.value
     })
 
-    return redirect(url_for("public.admin_page", admin_magic="test"))
+    return redirect(url_for("public.admin_page", code="test"))
 
 
 @public.route("/request_changes/<event_id>", methods=["GET"])
@@ -212,7 +212,7 @@ def request_event_changes(event_id):
         "status": Status.WAITING.value
     })
 
-    return redirect(url_for("public.admin_page", admin_magic="test"))
+    return redirect(url_for("public.admin_page", code="test"))
 
 
 @public.route("/cancel_event/<event_id>", methods=["GET"])
