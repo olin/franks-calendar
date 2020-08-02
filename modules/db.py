@@ -57,10 +57,10 @@ class DatabaseClient(object):
     def create_new_event(self, event):
         event["magic"] = self.generate_magic_string()
         event["last_edited"] = datetime.now(timezone.utc)
+        event["status"] = Status.PENDING.value
         del event['csrf_token']
         inserted_id = self.client.events.insert_one(event).inserted_id
         event["_id"] = inserted_id
-        event["status"] = Status.PENDING.value
         return event
 
     def authenticate_magic_link(self, event_id, magic):
