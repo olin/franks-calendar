@@ -171,21 +171,22 @@ def edit_confirmation():
     ), 200
 
 
-@public.route("/export/<eventid>", methods=["GET"])
+@public.route("/export/<eventid>", methods=["POST"])
 def export_event(eventid):
-    if request.method == "GET":
-        event_data = db.get_one(ObjectId(eventid))
-        email.notify_moderator("frankscalendar", event_data, "kellyyen4101@gmail.com")
-        cal = Calendar()
-        event = Event()
-        event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
-        event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
-        event["summary"] = event_data["title"]
-        event["location"] = event_data["location"]
-        event["description"] = event_data["description"]
-        cal.add_component(event)
-        return cal.to_ical()
+    email = json.loads(request.data).get("email")
 
+    # event_data = db.get_one(ObjectId(eventid))
+    # email.notify_moderator("frankscalendar", event_data, "")
+    # cal = Calendar()
+    # event = Event()
+    # event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
+    # event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
+    # event["summary"] = event_data["title"]
+    # event["location"] = event_data["location"]
+    # event["description"] = event_data["description"]
+    # cal.add_component(event)
+    # return cal.to_ical()
+    return "Success", 200
 
 @public.route("/approve/<event_id>", methods=["GET"])
 def approve_event(event_id):
