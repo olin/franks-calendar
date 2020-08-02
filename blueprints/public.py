@@ -192,7 +192,7 @@ def export_event(eventid):
 def approve_event(event_id):
     magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if (event_data["magic"] != magic) or (not event_data):
+    if (str(event_data["magic"]) != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
     db.update_event(event_id, {
@@ -206,7 +206,7 @@ def approve_event(event_id):
 def request_event_changes(event_id):
     magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if (event_data["magic"] != magic) or (not event_data):
+    if (str(event_data["magic"]) != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
     db.update_event(event_id, {
@@ -220,7 +220,7 @@ def request_event_changes(event_id):
 def cancel_event(event_id):
     magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if (event_data["magic"] != magic) or (not event_data):
+    if (str(event_data["magic"]) != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
     db.update_event(event_id, {
