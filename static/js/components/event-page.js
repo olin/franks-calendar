@@ -7,22 +7,44 @@ export default class EventPage extends React.Component {
 
         this.exportEvent = this.exportEvent.bind(this);
     }
-    exportEvent() {
+    exportEvent(e) {
         // Retrieves event information and returns as ical file
-        let eventID = this.props.event.id;
-        client.get('/export/' + eventID)
+        var eventID = this.props.event.id;
+        var email = document.getElementById("exportEmail").value;
+        console.log(email);
+
+        if (!email) {
+          alert("You must enter an email!");
+          e.preventDefault();
+          return;
+        }
+        //
+        // var pattern = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/;
+        // if (!pattern.test(email)) {
+        //   alert("Please enter a valid email!");
+        //   e.preventDefault();
+        //   return;
+        // }
+
+        client.post('/export/' + eventID, {
+          email: email
+        })
         .then(res => {
-            var element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
-            element.setAttribute('download', "calendar_event.ics");
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            // Autmoatically downloads ical file
-            element.click();
-            document.body.removeChild(element);
+            document.getElementById("eventExport").innerHTML = (
+                '<p class="Event__export__message">&#127881; Success! Check your email for an iCal to this event.</p>'
+            )
+            // var element = document.createElement('a');
+            // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.data));
+            // element.setAttribute('download', "calendar_event.ics");
+            // element.style.display = 'none';
+            // document.body.appendChild(element);
+            // // Autmoatically downloads ical file
+            // element.click();
+            // document.body.removeChild(element);
         })
         .catch(err => {
             console.error(err);
+            alert("Sorry, there was an error processing your email!");
         })
     }
 
@@ -70,7 +92,7 @@ export default class EventPage extends React.Component {
             )
         }
 
-        var category = this.props.event.category.pop();
+        var category = this.props.event.category[0];
 
         // check if the location is a url
         // location is a url if matches this pattern: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
@@ -146,35 +168,30 @@ export default class EventPage extends React.Component {
                         </tr>
                     }
 
-		{this.props.event.description &&
+		                {this.props.event.description &&
                     <tr class="Event__content__table__row">
                       <td class="Event__content__headers">
                         What?
                       </td>
                       <td class="Event__content__text">
-                        <details>
-                          <summary>
-                            Click here to show the details!
-                          </summary>
-                          <div dangerouslySetInnerHTML={{__html: this.props.event.description.replace(/\<br\>/, '')}}>
-                          </div>
-                        </details>
+                         <div dangerouslySetInnerHTML={{__html: this.props.event.description.replace(/\<br\>/, '')}}>
+                         </div>
                       </td>
                     </tr>
-		  }
+		                }
                   </table>
-
-                  <div class="Event__export">
-                    <input type="email" class="Event__export__field" placeholder="franklin.olin@olin.edu"/>
-                    <button class="Event__export__button" onClick={this.exportEvent}>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                      </svg>
-                      <span>Send me an iCal</span>
-                    </button>
-                  </div>
                 </section>
+
+                <div id="eventExport" class="Event__export">
+                  <input type="email" id="exportEmail" class="Event__export__field" placeholder="franklin.olin@olin.edu"/>
+                  <button class="Event__export__button" onClick={this.exportEvent}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <span>Send me an iCal</span>
+                  </button>
+                </div>
               </div>
             </div>
         )

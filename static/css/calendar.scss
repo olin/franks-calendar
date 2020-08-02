@@ -8,7 +8,7 @@
   height: 75%;
   color: $main;
   background-color: transparent !important;
-  padding: 0.4em 1em;
+  padding: 0.4em 0.8em;
   overflow: hidden;
 
   &__time {
@@ -42,11 +42,10 @@
       content: '';
       position: absolute;
       border-radius: 0.5em;
-      left: 1.5%;
-      top: 2.5%;
-      width: 0.35em;
-      height: 95%;
-      background-color: inherit;
+      left: 0;
+      top: 0%;
+      width: 0.4em;
+      height: 100%;
   }
 }
 
