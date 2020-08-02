@@ -1,4 +1,5 @@
 import os
+import base64
 from bson.objectid import ObjectId
 from jinja2 import Template
 from sendgrid import SendGridAPIClient
@@ -6,7 +7,12 @@ from sendgrid.helpers.mail import (
     Mail,
     Email,
     To,
-    Content
+    Content, 
+    Attachment, 
+    FileContent, 
+    FileName, 
+    FileType, 
+    Disposition
 )
 
 class EmailClient(object):
@@ -17,17 +23,35 @@ class EmailClient(object):
         ).client
         return self._client
 
-    def send_email(self, recipient, subject, message):
-        mail = Mail(
-            Email("frankscalendar.olin@gmail.com"),
-            To(recipient),
-            subject,
-            Content("text/plain", message)
-        )
-        try:
-            response = self.client.mail.send.post(request_body=mail.get())
-        except Exception as e:
-            print(e.message)
+    
+    def send_email(self, recipient, subject, message, attachments=None):
+            mail = Mail(
+                Email("frankscalendar.olin@gmail.com"),
+                To(recipient),
+                subject,
+                Content("text/html", message), 
+            )
+            if attachments:
+                encoded_file = base64.b64encode(attachments).decode()
+                attachedFile = Attachment(
+                    FileContent(encoded_file),
+                    FileName('event.ics'),
+                    FileType('ical/ics'),
+                    Disposition('attachment')
+                )
+                mail.attachment = attachedFile
+            
+            try:
+                response = self.client.mail.send.post(request_body=mail.get())
+            except Exception as e:
+                print(e.message)
+
+    def send_ical(self, attachment, recipient):
+            path = os.getcwd() + "/templates/emails/export.txt"
+            template = Template(open(path).read())
+            content = template.render()
+
+            self.send_email(recipient, "Requested ical", content, attachment)
 
 
     def send_edit_link(self, url, event, comments):
@@ -65,18 +89,7 @@ class EmailClient(object):
 
         self.send_email(recipient, "Reminder to make requested edits!", content) 
 
-    def send_cancellation_notice(self, event, comments):
-        #if event was cancelled by moderator, send notice
-        eventname = event['title']
-        recipient = event['host_email']
-        path = os.getcwd() + "/templates/emails/cancelled.txt"
-
-        template = Template(open(path).read())
-        content = template.render(name=eventname, reasons=comments)
-
-        self.send_email(recipient, "Event submission was cancelled", content) 
-
-    def send_approval_notice(self, event):
+    def send_approval_notice(self, url, event):
         #if event was approved by moderator, send notice
         eventlink = self.generate_link(url, event)
         eventname = event['title']
@@ -113,4 +126,4 @@ class EmailClient(object):
         eventid = str(event['_id'])
         #issues with retrieving base right now, but should be resolved when we have permanent hosting solution
         #return base + "/edit?event_id=" + eventid + "&magic=" + magic   
-        return "frankscalendar/edit/" + eventid + "?magic=" + magic    
+        return "64.227.7.192:5000/edit/" + eventid + "?magic=" + magic    
