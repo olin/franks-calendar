@@ -4,7 +4,7 @@ The event you submitted to Frank’s Calendar, {{name}}, requires edits before i
 
 _________
 
-Please make the required changes within 7 days via this <a href=http://{{link}}>magic link</a> .
+Please make the required changes within 7 days via this <a href={{link}}>magic link</a>.
 
 Sincerely, 
 Frank's Calendar
