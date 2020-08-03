@@ -430,6 +430,11 @@
     display: block;
     overflow: auto;
 
+    a {
+      color:$links;
+      text-decoration:none;
+    }
+
     &::-webkit-scrollbar {
       width: 0.75em;
       height:50%;
