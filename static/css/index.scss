@@ -300,6 +300,7 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        cursor: pointer;
 
         input[type="checkbox"] + & {
             &[for="filter--academic"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
@@ -432,7 +433,7 @@
   }
 
   &__content {
-    padding: 1.5em 0em 1em 0em;
+    padding: 1.5em 5em 1em 0em;
     display: block;
     overflow: auto;
 
@@ -443,14 +444,9 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: transparent;
+      background: #E8E8E8;
       border-radius: 0.5em;
-
-      &:hover {
-        background: #999;
-      }
     }
-
 
     &__title {
       font-family: $title;
