@@ -76,14 +76,15 @@ function clean_event_list(events) {
 }
 
 const EventComponent = ({ event, el }) => {
+  console.log(event.allDay)
   var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
   var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
 
   const content = (
     <div class="EventContent" data-category={event.extendedProps.category}>
-      <div class="EventContent__time">{startTime} - {endTime}</div>
+      {!event.allDay && <div class="EventContent__time">{startTime} - {endTime}</div> }
       <div class="EventContent__title">{event.title}</div>
-      <div class="EventContent__time">{event.extendedProps.location}</div>
+      {!event.allDay && <div class="EventContent__time">{event.extendedProps.location}</div> }
     </div>
   );
   ReactDOM.render(content, el);

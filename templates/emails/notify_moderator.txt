@@ -8,7 +8,7 @@ When: {{dtstart}} to {{dtend}}
 Where: {{location}}
 What: {{description}}
           
-If changes were not appropriate, cancel the event via this link:  {{link}}.
+If changes were not appropriate, cancel the event via this <a href=http://{{link}}>magic link</a> .
 
 Sincerely, 
 Frank's Calendar
