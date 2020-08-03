@@ -7,6 +7,8 @@ from icalendar import Calendar, Event
 import json
 from datetime import datetime
 import uuid
+from jinja2 import Template
+import os
 
 db = DatabaseClient()
 email = EmailClient()
@@ -171,60 +173,69 @@ def edit_confirmation():
     ), 200
 
 
+
 @public.route("/export/<eventid>", methods=["POST"])
 def export_event(eventid):
-    email = json.loads(request.data).get("email")
+    event_data = db.get_one(ObjectId(eventid))
+    cal = Calendar()
+    event = Event()
+    event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
+    event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
+    event["summary"] = event_data["title"]
+    event["location"] = event_data["location"]
+    event["description"] = event_data["description"]
 
-    # event_data = db.get_one(ObjectId(eventid))
-    # email.notify_moderator("frankscalendar", event_data, "")
-    # cal = Calendar()
-    # event = Event()
-    # event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
-    # event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
-    # event["summary"] = event_data["title"]
-    # event["location"] = event_data["location"]
-    # event["description"] = event_data["description"]
-    # cal.add_component(event)
-    # return cal.to_ical()
+    cal.add_component(event)
+    recipient = json.loads(request.data).get("email")
+
+    email.send_ical(cal.to_ical(), recipient)
     return "Success", 200
 
 @public.route("/approve/<event_id>", methods=["GET"])
 def approve_event(event_id):
     magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if (event_data["magic"] != magic) or (not event_data):
+    if (str(event_data["magic"]) != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
     db.update_event(event_id, {
         "status": Status.APPROVED.value
     })
+    email.send_approval_notice("",event_data)
 
-    return redirect(url_for("public.admin_page", admin_magic="test"))
+    return redirect(url_for("public.admin_page", code="test"))
 
 
 @public.route("/request_changes/<event_id>", methods=["GET"])
 def request_event_changes(event_id):
     magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if (event_data["magic"] != magic) or (not event_data):
+    if (str(event_data["magic"]) != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
     db.update_event(event_id, {
         "status": Status.WAITING.value
     })
 
-    return redirect(url_for("public.admin_page", admin_magic="test"))
+    path = os.getcwd() + "/templates/emails/edit_event.txt"
+    template = Template(open(path).read())
+    content = template.render(name=event_data["title"], link=email.generate_link("",event_data))
+
+    return redirect("mailto://{}?subject=Your%20event%20was%20canneled&body={}".format(event_data.get("email"), content ), code=302)
 
 
 @public.route("/cancel_event/<event_id>", methods=["GET"])
 def cancel_event(event_id):
     magic = request.args.get("magic")
     event_data = db.get_event_with_magic(event_id)
-    if (event_data["magic"] != magic) or (not event_data):
+    if (str(event_data["magic"]) != magic) or (not event_data):
         return redirect(url_for("public.index"))
 
     db.update_event(event_id, {
         "status": Status.CANCELED.value
     })
+    path = os.getcwd() + "/templates/emails/cancelled.txt"
+    template = Template(open(path).read())
+    content = template.render(name=event_data["title"])
 
-    return redirect(url_for("public.index"))
+    return redirect("mailto://{}?subject=Your%20event%20was%20canneled&body={}".format(event_data.get("email"), content ), code=302)
