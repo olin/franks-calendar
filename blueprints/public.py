@@ -173,7 +173,6 @@ def edit_confirmation():
     ), 200
 
 
-
 @public.route("/export/<eventid>", methods=["POST"])
 def export_event(eventid):
     event_data = db.get_one(ObjectId(eventid))
