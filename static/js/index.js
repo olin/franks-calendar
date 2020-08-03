@@ -115,26 +115,32 @@ class App extends React.Component {
         })
     }
     toggleTag(e) {
-        var tags = this.state.tags;
-        tags[e.target.value] = !tags[e.target.value];
+        const tagName = e.target.value;
+        // Make a copy of the tags in state (we shouldn't update the array
+        // in the state, otherwise React won't rerender our components)
+        const tags = [...this.state.tags];
+        tags[tagName] = !tags[tagName];
 
-        this.setState({
-            tags: tags,
-        }, () => {
-            let events = this.state.allEvents.filter(event => {
-                for (let i = 0; i < event.category.length; i++) {
-                    if (tags[event.category[i]] === false) {
-                        return false;
-                    } else {
-                        continue;
-                    }
+        // Filter the events so only those with selected tags are shown
+        const filteredEvents = this.state.allEvents.filter(event => {
+            // Check each category/tag on an event to see if it's selected
+            for (const eventCategory of event.category) {
+                // Check if this specific category/tag is currently hidden
+                if (tags[eventCategory] === false) {
+                    // FIXME: This doesn't seem like what we want to do
+                    // This category/tag is hidden, so don't show the event
+                    return false;
                 }
-                return true
-            });
-            this.setState({
-                events: events
-            })
-        })
+            }
+            // All tags on this event are visible, so show this event
+            return true;
+        });
+
+        // Update the state
+        this.setState({
+            tags,
+            events: filteredEvents,
+        });
     }
     eventClick(e) {
         let eventID = e.event.id;

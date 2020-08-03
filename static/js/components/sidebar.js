@@ -19,7 +19,7 @@ export default class Sidebar extends React.Component {
                   <div>
                     <ul className="Sidebar__filter__list">
                       <li>
-                        <input type="checkbox" id="filter--academic" defaultChecked={this.props.tags['academic_affairs']} onClick={this.props.handleClick} value={"academic_affairs"} />
+                        <input type="checkbox" id="filter--academic" checked={this.props.tags['academic_affairs']} onClick={this.props.handleClick} value={"academic_affairs"} />
                         <label for="filter--academic" className="Sidebar__filter">
                             Academic Affairs
                         </label>
@@ -33,13 +33,13 @@ export default class Sidebar extends React.Component {
 
                         <ul className="Sidebar__filter__list__group">
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--academic_calendar" defaultChecked={this.props.tags['academic_calendar']} onClick={this.props.handleClick} value={"academic_calendar"} />
+                            <input type="checkbox" id="filter--academic_calendar" checked={this.props.tags['academic_calendar']} onClick={this.props.handleClick} value={"academic_calendar"} />
                             <label for="filter--academic_calendar" className="Sidebar__filter">
                                 Academic Calendar
                             </label>
                           </li>
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--academic_advising" defaultChecked={this.props.tags['academic_advising']} onClick={this.props.handleClick} value={"academic_advising"} />
+                            <input type="checkbox" id="filter--academic_advising" checked={this.props.tags['academic_advising']} onClick={this.props.handleClick} value={"academic_advising"} />
                             <label for="filter--academic_advising" className="Sidebar__filter">
                                 Academic Advising
                             </label>
@@ -48,7 +48,7 @@ export default class Sidebar extends React.Component {
                       </li>
 
                       <li>
-                        <input type="checkbox" id="filter--student" defaultChecked={this.props.tags['student_affairs']} onClick={this.props.handleClick} value={"student_affairs"} />
+                        <input type="checkbox" id="filter--student" checked={this.props.tags['student_affairs']} onClick={this.props.handleClick} value={"student_affairs"} />
                         <label for="filter--student" className="Sidebar__filter">
                             Student Affairs
                         </label>
@@ -62,31 +62,31 @@ export default class Sidebar extends React.Component {
 
                         <ul className="Sidebar__filter__list__group">
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--residential" defaultChecked={this.props.tags['residential']} onClick={this.props.handleClick} value={"residential"} />
+                            <input type="checkbox" id="filter--residential" checked={this.props.tags['residential']} onClick={this.props.handleClick} value={"residential"} />
                             <label for="filter--residential" className="Sidebar__filter">
                                 Residential Life
                             </label>
                           </li>
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--health" defaultChecked={this.props.tags['health']} onClick={this.props.handleClick} value={"health"} />
+                            <input type="checkbox" id="filter--health" checked={this.props.tags['health']} onClick={this.props.handleClick} value={"health"} />
                             <label for="filter--health" className="Sidebar__filter">
                                 Health & Wellness
                             </label>
                           </li>
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--international" defaultChecked={this.props.tags['international']} onClick={this.props.handleClick} value={"international"} />
+                            <input type="checkbox" id="filter--international" checked={this.props.tags['international']} onClick={this.props.handleClick} value={"international"} />
                             <label for="filter--international" className="Sidebar__filter">
                                 Intl' & Study Away
                             </label>
                           </li>
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--pgp" defaultChecked={this.props.tags['pgp']} onClick={this.props.handleClick} value={"pgp"} />
+                            <input type="checkbox" id="filter--pgp" checked={this.props.tags['pgp']} onClick={this.props.handleClick} value={"pgp"} />
                             <label for="filter--pgp" className="Sidebar__filter">
                                 PGP
                             </label>
                           </li>
                           <li className="Sidebar__filter__list">
-                            <input type="checkbox" id="filter--hr" defaultChecked={this.props.tags['hr']} onClick={this.props.handleClick} value={"hr"} />
+                            <input type="checkbox" id="filter--hr" checked={this.props.tags['hr']} onClick={this.props.handleClick} value={"hr"} />
                             <label for="filter--hr" className="Sidebar__filter">
                                 HR
                             </label>
@@ -95,35 +95,35 @@ export default class Sidebar extends React.Component {
                       </li>
 
                       <li>
-                        <input type="checkbox" id="filter--admission" defaultChecked={this.props.tags['admission']} onClick={this.props.handleClick} value={"admission"} />
+                        <input type="checkbox" id="filter--admission" checked={this.props.tags['admission']} onClick={this.props.handleClick} value={"admission"} />
                         <label for="filter--admission" className="Sidebar__filter">
                             Admission & Financial Aid
                         </label>
                       </li>
 
                       <li>
-                        <input type="checkbox" id="filter--library" defaultChecked={this.props.tags['library']} onClick={this.props.handleClick} value={"library"} />
+                        <input type="checkbox" id="filter--library" checked={this.props.tags['library']} onClick={this.props.handleClick} value={"library"} />
                         <label for="filter--library" className="Sidebar__filter">
                             The Library
                         </label>
                       </li>
 
                       <li>
-                        <input type="checkbox" id="filter--shop" defaultChecked={this.props.tags['shop']} onClick={this.props.handleClick} value={"shop"} />
+                        <input type="checkbox" id="filter--shop" checked={this.props.tags['shop']} onClick={this.props.handleClick} value={"shop"} />
                         <label for="filter--shop" className="Sidebar__filter">
                             The Shop
                         </label>
                       </li>
 
                       <li>
-                        <input type="checkbox" id="filter--clubs" defaultChecked={this.props.tags['library']} onClick={this.props.handleClick} value={"clubs"} />
+                        <input type="checkbox" id="filter--clubs" checked={this.props.tags['library']} onClick={this.props.handleClick} value={"clubs"} />
                         <label for="filter--clubs" className="Sidebar__filter">
                             Clubs & Organizations
                         </label>
                       </li>
 
                       <li>
-                        <input type="checkbox" id="filter--other" defaultChecked={this.props.tags['shop']} onClick={this.props.handleClick} value={"other"} />
+                        <input type="checkbox" id="filter--other" checked={this.props.tags['shop']} onClick={this.props.handleClick} value={"other"} />
                         <label for="filter--other" className="Sidebar__filter">
                             Other Events
                         </label>
