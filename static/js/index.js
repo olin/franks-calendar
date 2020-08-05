@@ -116,10 +116,12 @@ class App extends React.Component {
     }
     toggleTag(e) {
         const tagName = e.target.value;
-        // Make a copy of the tags in state (we shouldn't update the array
+        // Make a copy of the tags in state (we shouldn't update the object
         // in the state, otherwise React won't rerender our components)
-        const tags = [...this.state.tags];
-        tags[tagName] = !tags[tagName];
+        const tags = {
+            ...this.state.tags,
+            [tagName]: !this.state.tags[tagName],
+        };
 
         // Filter the events so only those with selected tags are shown
         const filteredEvents = this.state.allEvents.filter(event => {
