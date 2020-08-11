@@ -67,8 +67,10 @@ function clean_event_list(events) {
         }
         if (!events[i].category) {
             events[i].category = ["other"]
+            events[i].categoryColor = "other"
         } else {
             events[i].category = events[i]['category'].split(":")
+            events[i].categoryColor = events[i].category[0]
         }
         events[i].color = colorMap[events[i].category[0]]
     }
@@ -76,15 +78,14 @@ function clean_event_list(events) {
 }
 
 const EventComponent = ({ event, el }) => {
-  console.log(event.allDay)
   var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
   var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
 
   const content = (
-    <div class="EventContent" data-category={event.extendedProps.category}>
-      {!event.allDay && <div class="EventContent__time">{startTime} - {endTime}</div> }
+    <div class="EventContent" data-category={event.extendedProps.category} data-category-color={event.extendedProps.categoryColor}>
       <div class="EventContent__title">{event.title}</div>
-      {!event.allDay && <div class="EventContent__time">{event.extendedProps.location}</div> }
+      {!event.allDay && <div class="EventContent__time">{startTime} - {endTime}</div> }
+      {!event.allDay && <div class="EventContent__location">{event.extendedProps.location}</div> }
     </div>
   );
   ReactDOM.render(content, el);

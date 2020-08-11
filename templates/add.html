@@ -10,7 +10,7 @@
 
             <div class="Form__field">
               {{ form.title.label }}
-              {{ form.title(placeholder="e.g. 'Hang out with Frank the Phoenix!'") }}
+              {{ form.title(placeholder="'Hang out with Frank the Phoenix!'") }}
             </div>
 
             <div class="Form__row">
@@ -272,7 +272,7 @@
 
             <div class="Form__field">
               {{ form.location.label }}
-              {{ form.location(placeholder="e.g. 'Dining Hall' or 'olin.zoom.us/j/123456789'") }}
+              {{ form.location(placeholder="'Dining Hall' or 'olin.zoom.us/j/123456789'") }}
             </div>
 
             <div class="Form__field">
@@ -291,9 +291,7 @@
 
             <div class="Form__field">
               {{ form.description.label }}
-              {{ form.description(placeholder="Who might be interested? What would they be doing? Is there anything they need to have done before hand?
-
-If you sent out an email about this event, the text from that email is probably a good thing to include here!") }}
+              {{ form.description(placeholder="Who might be interested? What would they be doing? Is there anything they need to have done before hand?") }}
             </div>
 
             <div class="Form__field">
@@ -305,16 +303,16 @@ If you sent out an email about this event, the text from that email is probably 
                   </svg>
                   <span class="Form__tooltip__text">A host can be either an individual or a group on campus. This will be displayed on the event page.</span>
                 </label>
-                {{ form.host_name(placeholder="e.g. 'Frankie Olin' or 'The Phoenix Club'") }}
+                {{ form.host_name(placeholder="'Frankie Olin' or 'The Phoenix Club'") }}
                 <label>Point of Contact Email
                   <svg class="Form__tooltip" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
                     <line x1="12" y1="17" x2="12.01" y2="17"></line>
                   </svg>
-                  <span class="Form__tooltip__text">This email will receive updates about this event submission. It will also be displayed for people to reach out with questions.</span>
+                  <span class="Form__tooltip__text">This email will receive updates from the moderator team. It will also be displayed for people to reach out with questions.</span>
                 </label>
-                {{ form.host_email(placeholder="e.g. 'frankie@olin.edu' or 'phoenixclub@olin.edu'") }}
+                {{ form.host_email(placeholder="'frankie@olin.edu' or 'phoenixclub@olin.edu'") }}
             </div>
 
           </div>
