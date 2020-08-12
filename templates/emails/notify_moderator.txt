@@ -1,14 +1,14 @@
 Hi! 
-
+<br><br>
 Changes were made to, {{title}} today. The event information now consists of: 
-
-Title: {{title}}
-Host: {{host}}, {{host_email}}
-When: {{dtstart}} to {{dtend}}
-Where: {{location}}
+<br><br>
+Title: {{title}}<br>
+Host: {{host}}, {{host_email}}<br>
+When: {{dtstart}} to {{dtend}}<br>
+Where: {{location}}<br>
 What: {{description}}
-          
+<br><br>    
 If changes were not appropriate, cancel the event via this <a href=http://{{link}}>magic link</a> .
-
-Sincerely, 
+<br><br>
+Sincerely, <br>
 Frank's Calendar
