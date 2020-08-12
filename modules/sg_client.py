@@ -44,7 +44,7 @@ class EmailClient(object):
             try:
                 response = self.client.mail.send.post(request_body=mail.get())
             except Exception as e:
-                print(e.message)
+                print(e)
 
     def send_ical(self, attachment, recipient):
             path = os.getcwd() + "/templates/emails/export.txt"
