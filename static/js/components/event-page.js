@@ -139,7 +139,7 @@ export default class EventPage extends React.Component {
 
                   <div class="Event__content__block">
                     <span data-tag={category} class="Event__content__tag">
-                      {category === "pgp" ? "PGP" : category.replace("_", " ")}
+                      {category === "pgp" ? "PGP": category === "hr" ? "HR": category.replace("_", " ")}
                     </span>
                   </div>
 
