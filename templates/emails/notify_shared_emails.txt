@@ -1,0 +1,5 @@
+Hi! <br><br>
+An event that you exported from Frank's Calendar, {{name}}, has recently been edited by its host. Here is the most updated ical of that event. 
+<br><br>
+Sincerely, <br>
+Frank's Calendar
