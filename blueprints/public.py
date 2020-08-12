@@ -7,6 +7,7 @@ import json
 import uuid
 from jinja2 import Template
 import os
+from .constants import categoryText
 
 db = DatabaseClient()
 email = EmailClient()
@@ -141,7 +142,8 @@ def confirmation():
 
     return render_template("confirmation.html",
         title=request.args.get('title'),
-        category=request.args.get('category'),
+        category_id=request.args.get('category'),
+        category_display=categoryText[request.args.get('category')],
         location=request.args.get('location'),
         description=request.args.get('description'),
         host_name=request.args.get('host_name'),

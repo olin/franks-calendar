@@ -9,9 +9,10 @@
                   {{ title }}
                 </h2>
 
+                {% set c = category.split(":") %}
                 <div class="Submission__content__block">
-                  <span data-tag="{{ category }}" class="Submission__content__tag">
-                    {{ category | replace("_", " ") | capitalize }}
+                  <span data-tag="{{ category_id }}" class="Event__content__tag">
+                    {{ category_display }}
                   </span>
                 </div>
 
@@ -64,9 +65,9 @@
             </div>
             <div class="Confirmation__message">
                 <h2>Thanks for submitting an event!</h2>
-                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours. You will receive an email at <a href="mailto:{{ host_email }}" class="Confirmation__message__link">{{ host_email }}</a> notifying you of the event status. </p>
+                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours. You will receive an email at <a class="Confirmation__message__link" href="mailto:{{ host_email }}">{{ host_email }}</a> notifying you of the event status. </p>
 
-                <p>If you wish to make changes to your event submission, use this magic link to make changes: <a class="Confirmation__message__link" href="{{ magic_link }}">link to edit this event</a>. This link will also be emailed to you and will be valid until the start of the event.</p>
+                <p>If you wish to make changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="{{ magic_link }}">link to edit this event</a>. This link will also be emailed to you for you to save.</p>
             </div>
     </main>
 {% include 'components/footer.html' %}

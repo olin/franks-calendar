@@ -57,7 +57,7 @@ class EmailClient(object):
             try:
                 response = self.client.mail.send.post(request_body=mail.get())
             except Exception as e:
-                print(e.message)
+                print(e)
 
     def send_ical(self, event_data, recipient):
         attachment = self.create_ical(event_data)

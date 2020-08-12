@@ -57,135 +57,97 @@
     }
   }
 
-  // Row for duration section
   &__row {
-    display: block;
+    display: flex;
+    flex-direction: column;
 
-    h2 {
-      display: block;
-      text-align: left;
-      font-family: $title;
-      font-size: 1em;
-      font-weight: 800;
-      color: $form-header;
-      text-transform: uppercase;
-      padding-left: 0.1em;
-      margin-bottom: 0.5em;
-    }
-
-    &__buttons {
+    &__time {
       display: flex;
+      flex-direction: column;
 
-      input {
-        display: none;
-
-        // Unchecked radio buttons should be transparent
-        &[type="radio"][name="duration"]:not(:checked) + label {
-            opacity: .5;
-        }
-        &[type="radio"][name="duration"]:checked + label {
-            opacity: 1;
-        }
+      &::placeholder {
+        color: $secondary;
       }
 
       label {
-        align-content: flex-start;
+        display: block;
+        text-align: left;
         font-family: $title;
         font-size: 1em;
-        font-weight: 800;
-        color: white;
+        font-weight: 600;
+        color: $form-header;
         text-transform: uppercase;
-        padding: 0.5em 0.5em;
-        margin: 0em 0.5em 0.5em 0em;
-        border: none;
-        border-radius: 0.5em;
-        background-color: $links;
-        opacity: 0.5;
-        transition-duration: 0.3s;
+        padding-left: 0.1em;
+        margin-bottom: 0.5em;
+      }
 
-        &:hover {
-          opacity: 1 !important;
+      &__fields {
+        display: flex;
+        align-items: baseline;
+
+        p {
+          margin: 0em 0.5em;
+          display: block;
+          text-align: center;
         }
 
-        &:focus {
-          opacity: 1 !important;
+        input {
+          display: block;
+          text-align: left;
+          width: 100%;
+          border:  0.1em solid transparent;
+          border-radius: 0.5em;
+          background-color: $secondary--light;
+          padding: 0.5em;
+          margin-bottom: 0.5em;
+          font-family: $sans;
+          font-size: 1em;
+          color: $main;
+          transition-duration: 0.3s;
+
+          &::-webkit-inner-spin-button {
+            display: none;
+          }
+
+          &::placeholder {
+            color: $secondary;
+          }
+
+          &:hover {
+            border: 0.1em solid $links;
+            outline: none;
+          }
+
+          &:active {
+            border: 0.1em solid $links;
+            outline: none;
+            transition-duration: none;
+          }
+
+          &:focus {
+            border: 0.1em solid $links;
+            outline: none;
+            transition-duration: none;
+          }
         }
       }
     }
-  }
 
-  // Row for Date-Time sections
-  &__date {
-    display: flex;
-
-    label {
+    &__day {
       display: block;
       text-align: left;
-      font-family: $title;
-      font-size: 1em;
-      font-weight: 800;
-      color: $form-header;
-      text-transform: uppercase;
-      padding-left: 0.1em;
-      margin-bottom: 0.5em;
-    }
+      margin-bottom: 1em;
 
-    input {
-
-    }
-  }
-
-  &__time {
-    overflow: visible;
-
-    label {
-      display: block;
-      text-align: left;
-      font-family: $title;
-      font-size: 1em;
-      font-weight: 800;
-      color: $form-header;
-      text-transform: uppercase;
-      padding-left: 0.1em;
-      margin-bottom: 0.5em;
-    }
-
-    select {
-      display: block;
-      font-family: $sans;
-      font-size: 1em;
-      color: $main;
-      border:  0.1em solid transparent;
-      background-color: $secondary--light;
-      border-radius: 0.5em;
-      padding: 0.5em 0.5em;
-      margin-bottom: 0.5em;
-      transition-duration: 0.3s;
-
-      &:hover {
-        box-shadow: 0.1em 0.1em 0.2em $secondary;
-      }
-
-      &:active {
-        border: 0.1em solid $links;
-        outline: none;
-        transition-duration: none;
-      }
-
-      &:focus {
-        border: 0.1em solid $links;
-        outline: none;
-        transition-duration: none;
-      }
-
-      option {
+      label {
         font-family: $sans;
-        font-size: 1em;
-        color: $main;
+        font-size: 0.75;
+
+        span {
+          font-style: italic;
+        }
       }
     }
   }
-
   // Styling dropdown menu
   &__category {
     overflow: visible;
@@ -203,7 +165,8 @@
       transition-duration: 0.3s;
 
       &:hover {
-        box-shadow: 0.1em 0.1em 0.2em $secondary;
+        border: 0.1em solid $links;
+        outline: none;
       }
 
       &:active {
@@ -246,7 +209,7 @@
       text-align: left;
       font-family: $title;
       font-size: 1em;
-      font-weight: 800;
+      font-weight: 600;
       color: $form-header;
       text-transform: uppercase;
       padding-left: 0.1em;
@@ -272,7 +235,8 @@
       }
 
       &:hover {
-        box-shadow: 0.1em 0.1em 0.2em $secondary;
+        border: 0.1em solid $links;
+        outline: none;
       }
 
       &:active {
@@ -292,12 +256,12 @@
       display: block;
       text-align: left;
       width: 29.5em;
-      height: 7em;
+      height: 5em;
       resize: vertical;
       border: 0.1em solid transparent;
       border-radius: 0.5em;
       background-color: $secondary--light;
-      padding: 0.75em 0.5em;
+      padding: 0.5em 0.5em;
       margin-bottom: 0.5em;
       font-family: $sans;
       font-size: 1em;
@@ -309,7 +273,8 @@
       }
 
       &:hover {
-        box-shadow: 0.1em 0.1em 0.2em $secondary;
+        border: 0.1em solid $links;
+        outline: none;
       }
 
       &:active {
@@ -328,7 +293,7 @@
 
   &__submit {
     background-color: $links;
-    border: none;
+    border: 0.2em solid transparent;
     border-radius: 0.25em;
     color: white;
     font-size: 1.5em;
@@ -345,6 +310,16 @@
 
     &:hover {
       background-color: $links--light;
+    }
+
+    &:focus {
+      outline: none;
+      border: 0.2em solid $links--light;
+    }
+
+    &:active {
+      outline: none;
+      border: 0.2em solid $links--light;
     }
   }
 

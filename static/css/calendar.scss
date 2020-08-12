@@ -8,10 +8,18 @@
   height: 75%;
   color: $main;
   background-color: transparent !important;
-  padding: 0.4em 0.8em;
+  padding: 0.4em 0em 0.4em 0.8em;
+  margin-right: 0.4em;
   overflow: hidden;
 
   &__time {
+    font-family: $sans;
+    font-size: 0.75em;
+    margin-bottom: 0.1em;
+  }
+
+  &__location {
+    font-style: italic;
     font-family: $sans;
     font-size: 0.75em;
     margin-bottom: 0.1em;
@@ -25,18 +33,13 @@
     margin-bottom: 0.1em;
   }
 
-  &[data-category="academic_affairs,academic_advising"] {background-color: $academic--light; &::before {background-color: $academic}}
-  &[data-category="academic_affairs,academic_calendar"] {background-color: $academic--light; &::before {background-color: $academic}}
-  &[data-category="student_affairs,international"] {background-color: $student--light; &::before {background-color: $student}}
-  &[data-category="student_affairs,residential"] {background-color: $student--light; &::before {background-color: $student}}
-  &[data-category="student_affairs,health"] {background-color: $student--light; &::before {background-color: $student}}
-  &[data-category="student_affairs,pgp"] {background-color: $student--light; &::before {background-color: $student}}
-  &[data-category="student_affairs,hr"] {background-color: $student--light; &::before {background-color: $student}}
-  &[data-category="admission"] {background-color: $admission--light; &::before {background-color: $admission}}
-  &[data-category="library"] {background-color: $library--light; &::before {background-color: $library}}
-  &[data-category="shop"] {background-color: $shop--light; &::before {background-color: $shop}}
-  &[data-category="clubs"] {background-color: $clubs--light; &::before {background-color: $clubs}}
-  &[data-category="other"] {background-color: $other--light; &::before {background-color: $other}}
+  &[data-category-color="academic_affairs"] {background-color: $academic--light; &::before {background-color: $academic}}
+  &[data-category-color="student_affairs"] {background-color: $student--light; &::before {background-color: $student}}
+  &[data-category-color="admission"] {background-color: $admission--light; &::before {background-color: $admission}}
+  &[data-category-color="library"] {background-color: $library--light; &::before {background-color: $library}}
+  &[data-category-color="shop"] {background-color: $shop--light; &::before {background-color: $shop}}
+  &[data-category-color="clubs"] {background-color: $clubs--light; &::before {background-color: $clubs}}
+  &[data-category-color="other"] {background-color: $other--light; &::before {background-color: $other}}
 
   &::before {
       content: '';
@@ -51,6 +54,7 @@
 
 .fc-event {
     cursor: pointer;
+    background-color: unset;
 
     // &[data-status="academic-affairs"] {
     //   background-color: $academic--light;
@@ -95,6 +99,7 @@
 // Modified font size of time text on table
 .fc-axis.fc-widget-content {
   font-size: 1em !important;
+  font-weight: 600;
 
   // Modified font size of "all-day" header
   span {
