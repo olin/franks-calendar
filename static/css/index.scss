@@ -12,6 +12,7 @@
 @import 'calendar.scss';
 
 @import url('https://use.typekit.net/gsh7wuf.css');
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
 .Home {
   display: flex;
@@ -299,6 +300,7 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
+        cursor: pointer;
 
         input[type="checkbox"] + & {
             &[for="filter--academic"] {background-color: rgba($academic, 0); &::before {background-color: $academic}}
@@ -409,6 +411,11 @@
     width: 11.5em;
     text-decoration: none;
     background-color: $secondary--light;
+    transition-duration: 0.3s;
+
+    &:hover {
+      opacity: 0.5;
+    }
 
     &__text {
       font-size: 1em;
@@ -426,7 +433,7 @@
   }
 
   &__content {
-    padding: 1.5em 0em 1em 0em;
+    padding: 1.5em 5em 1em 0em;
     display: block;
     overflow: auto;
 
@@ -442,14 +449,9 @@
     }
 
     &::-webkit-scrollbar-thumb {
-      background: transparent;
+      background: #E8E8E8;
       border-radius: 0.5em;
-
-      &:hover {
-        background: #999;
-      }
     }
-
 
     &__title {
       font-family: $title;
@@ -533,6 +535,11 @@
         // padding-left: 0.5em;
         color: $links;
         text-decoration: none;
+        transition-duration: 0.3s;
+
+        &:hover {
+          opacity: 0.5;
+        }
       }
     }
 
@@ -604,6 +611,20 @@
       border-radius: 0.35em;
       border: none;
       padding: 0.25em 0.5em;
+      transition-duration: 0.3s;
+
+      &:hover {
+        background-color: $links--light;
+      }
+
+      &:active {
+        outline: none;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
 
       svg {
         margin-right: 0.25em;
