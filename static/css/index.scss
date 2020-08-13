@@ -19,16 +19,16 @@
 }
 
 .Header {
-    padding: 0.35em 1em;
+    padding: 0.35rem 1rem;
     display: flex;
     flex: 0 1 0;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0.1em 0.1em 0.25em $secondary;
+    box-shadow: 0.1rem 0.1rem 0.25rem $secondary;
 
     &__title {
       font-family: $title;
-      font-size: 2em;
+      font-size: 2rem;
       color: $links;
       text-transform: uppercase;
 
@@ -42,11 +42,11 @@
 
       a {
         text-decoration: none;
-        width: 14em;
+        width: 14rem;
         overflow: auto;
         display: flex;
         flex-direction: row;
-        padding: 0.5em 1em 0.5em 0.5em;
+        padding: 0.5rem 1rem 0.5rem 0.5rem;
         color: $main;
 
         &:link {
@@ -63,13 +63,13 @@
 
       &__icon {
         order: 1;
-        width: 2em;
-        height: 2em;
-        margin-right: 0.75em;
+        width: 2rem;
+        height: 2rem;
+        margin-right: 0.75rem;
       }
 
       &__text {
-        font-size: 1.25em;
+        font-size: 1.25rem;
         font-family: $title;
         font-weight: 600;
         text-transform: uppercase;
@@ -89,27 +89,27 @@
 
       &__event {
         background-color: $links;
-        border: none;
-        border-radius: 0.35em;
+        border: 0.1rem solid transparent;
+        border-radius: 0.35rem;
         color: white;
-        font-size: 1em;
+        font-size: 1rem;
         font-family: $title;
         font-weight: 600;
         text-transform: uppercase;
-        padding: 0.25em 0.5em;
+        padding: 0.25rem 0.5rem;
         text-align: center;
         align-items: center;
         display: flex;
-        margin-right: 0.5em;
-        margin-left: 0.5em;
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
         transition-duration: 0.25s;
-        width: 8em;
+        width: 8.5rem;
         cursor: pointer;
         text-decoration: none;
 
         &:hover {
           background-color: white;
-          border: 0.1em solid $links;
+          border: 0.1rem solid $links;
           color: $links;
 
           .Header__nav__event__icon {
@@ -118,7 +118,7 @@
         }
         &--active {
           background-color: white;
-          border: 0.1em solid $links;
+          border: 0.1rem solid $links;
           color: $links;
 
           .Header__nav__event__icon {
@@ -129,27 +129,30 @@
         &__icon {
           display: inline-block;
           stroke: white;
-          margin-right: 0.25em;
+          margin-right: 0.25rem;
           transition-duration: 0.25s;
         }
       }
 
       &__link {
+        display: flex;
+        height: 2rem;
         background-color: $secondary--light;
         border: none;
-        border-radius: 0.35em;
+        border-radius: 0.35rem;
         color: $main;
-        font-size: 1em;
+        font-size: 1rem;
         font-family: $title;
         font-weight: 600;
         text-transform: uppercase;
-        padding: 0.25em 0.5em;
+        padding: 0.25rem 0.5rem;
         transition-duration: 0.25s;
-        margin-right: 0.5em;
-        width: 8em;
+        margin-right: 0.5rem;
+        width: 8rem;
         text-align: center;
         cursor: pointer;
         text-decoration: none;
+        vertical-align: baseline;
 
         &__wrapper {
           display: inline-flex;
@@ -159,7 +162,7 @@
         &__icon {
           display: inline-block;
           stroke: $main;
-          margin-right: 0.25em;
+          margin-right: 0.25rem;
           transition-duration: 0.25s;
         }
 
@@ -187,17 +190,19 @@
       &__title {
         font-family: $title;
         font-weight: 600;
-        font-size: 0.85em;
+        font-size: 0.85rem;
         color: $secondary;
         text-transform: uppercase;
+        line-height: 1rem;
       }
 
       &__time {
         font-family: $title;
         font-weight: 600;
-        font-size: 0.85em;
+        font-size: 0.85rem;
         color: $main;
         text-transform: uppercase;
+        line-height: 1rem;
       }
     }
 }
@@ -206,13 +211,13 @@
     display: flex;
     flex-direction: row;
     flex: 1 0 auto;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
 }
 
 .Button {
     font-family: $sans;
-    border-radius: 99em;
-    padding: .5em 1em;
+    border-radius: 99rem;
+    padding: .5rem 1rem;
     display: inline-block;
     color: white;
     text-decoration: none;
@@ -225,11 +230,11 @@
     justify-content: space-between;
     flex-direction: column;
     height: 100%;
-    min-width: 20em;
-    max-width: 20%;
+    min-width: 17rem;
+    max-width: 17%;
     width: 20%;
-    margin-top: 1em;
-    padding: 0 1em;
+    margin-top: 1rem;
+    padding: 0 1rem;
 
     &__block {
       order: 1;
@@ -238,11 +243,12 @@
 
     &__body {
       font-family: $sans;
-      font-size: 1em;
+      font-size: 0.85rem;
+      line-height: 1rem;
       color: black;
 
       &__text {
-        margin-top: 0.5em;
+        margin-top: 0.5rem;
       }
 
       a {
@@ -262,30 +268,31 @@
       background-color: black;
       color: white;
       border: none;
-      border-radius: 0.5em;
+      border-radius: 0.5rem;
       text-align: center;
       display: block;
-      font-size: 1.5em;
+      font-size: 1.5rem;
       width: 100%;
-      padding: 0.25em 0;
+      padding: 0.25rem 0;
       text-decoration: none;
     }
 
     &__header {
-        font-size: 1.25em;
+        font-size: 1rem;
+        line-height: 1rem;
         font-family: $title;
         font-weight: 600;
-        margin-bottom: 0.5em;
+        margin-bottom: 0.5rem;
 
         &__icon {
-            width: 0.8em;
+            width: 0.8rem;
             height: auto;
-            margin-right: 0.15em;
+            margin-right: 0.15rem;
         }
     }
     &__section {
         font-family: $sans;
-        margin: 0em 1em 1.5em 1em;
+        margin: 0rem 1rem 1.5rem 1rem;
         display: block;
     }
 
@@ -294,13 +301,13 @@
     }
 
     &__filter {
-        font-size: 1em;
+        font-size: 0.85rem;
         display: flex;
         position: relative;
-        padding: .1em 0 .1em 12px;
-        margin-bottom: .5em;
-        border-top-right-radius: .25em;
-        border-bottom-right-radius: .25em;
+        padding: .25rem 0 .25rem 12px;
+        margin-bottom: .5rem;
+        border-top-right-radius: .25rem;
+        border-bottom-right-radius: .25rem;
         background-color: none;
         justify-content: space-between;
         align-items: center;
@@ -353,13 +360,14 @@
         }
 
         &__icon {
-          padding-right: 0.5em;
+          padding-right: 0.5rem;
           display:inline-flex;
 
           &+label {
             position: absolute;
-            top:0.1em;
-            right:0.2em;
+            top:0.1rem;
+            right:0.2rem;
+            cursor: pointer;
           }
 
           &:checked {
@@ -371,11 +379,12 @@
               display:block;
             }
           }
+
         }
 
         &__list {
           list-style: none;
-          margin-left:1em;
+          margin-left:1rem;
 
           &__group {
             display:None;
@@ -403,17 +412,17 @@
   &__width {
     display: flex;
     flex-direction: column;
-    min-width: 20em;
-    max-width: 60em;
+    min-width: 20rem;
+    max-width: 60rem;
     height: 100%;
   }
 
   &__button {
-    border-radius: 0.5em;
-    padding: 0.35em 0.5em;
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.5rem;
     color: black;
     display: flex;
-    width: 11.5em;
+    width: 11.5rem;
     text-decoration: none;
     background-color: $secondary--light;
     transition-duration: 0.3s;
@@ -423,7 +432,7 @@
     }
 
     &__text {
-      font-size: 1em;
+      font-size: 1rem;
       font-family: $title;
       font-weight: 600;
       text-transform: uppercase;
@@ -432,13 +441,13 @@
     &__icon {
       display: inline-block;
       vertical-align: middle;
-      margin-right: 0.25em;
+      margin-right: 0.25rem;
       height: 20px;
     }
   }
 
   &__content {
-    padding: 1.5em 5em 1em 0em;
+    padding: 1.5rem 5rem 1rem 0rem;
     display: block;
     overflow: auto;
 
@@ -448,19 +457,19 @@
     }
 
     &::-webkit-scrollbar {
-      width: 0.75em;
+      width: 0.75rem;
       height:50%;
       background: transparent;
     }
 
     &::-webkit-scrollbar-thumb {
       background: #E8E8E8;
-      border-radius: 0.5em;
+      border-radius: 0.5rem;
     }
 
     &__title {
       font-family: $title;
-      font-size: 2em;
+      font-size: 2rem;
       font-weight: 600;
       text-transform: uppercase;
       line-height: 1;
@@ -468,17 +477,17 @@
 
     &__block {
       display: block;
-      margin: 0.75em 0em;
+      margin: 0.75rem 0rem;
     }
 
     &__tag {
-      font-size: 1em;
+      font-size: 1rem;
       font-family: $sans;
       color: black;
       text-transform: capitalize;
       text-decoration: none;
-      border-radius: 0.5em;
-      padding: 0.35em 0.5em .35em .8em;
+      border-radius: 0.5rem;
+      padding: 0.35rem 0.5rem .35rem .8rem;
       display: inline-block;
       position: relative;
 
@@ -512,28 +521,28 @@
       width: 100%;
 
       &__row {
-        height: 1.75em;
+        height: 1.75rem;
       }
     }
 
     &__headers {
       font-family: $sans;
-      font-size: 1em;
+      font-size: 1rem;
       color: black;
       font-weight: bold;
-      width: 6em;
+      width: 6rem;
       vertical-align: top;
     }
 
     &__text {
       font-family: $sans;
-      font-size: 1em;
+      font-size: 1rem;
       color: black;
       vertical-align: top;
 
       summary {
         color: $links;
-        margin-bottom: 0.5em;
+        margin-bottom: 0.5rem;
       }
 
       &__link {
@@ -551,41 +560,41 @@
     &__date {
       color: black;
       font-family: $sans;
-      font-size: 1em;
-      padding-right: 0.5em;
+      font-size: 1rem;
+      padding-right: 0.5rem;
     }
 
     &__time {
       color: black;
       font-family: $sans;
-      font-size: 1em;
-      padding-right: 0.5em;
-      padding-left: 0.5em;
+      font-size: 1rem;
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
     }
   }
 
   &__export {
-    margin-top: 2em;
+    margin-top: 2rem;
     background-color: $secondary--light;
-    border-radius: 0.5em;
+    border-radius: 0.5rem;
     border: none;
-    padding: 0.5em 0.5em;
+    padding: 0.5rem 0.5rem;
     display: flex;
     justify-content: center;
-    width: 26em;
+    width: 26rem;
     position: sticky;
     bottom: 0;
 
     input {
-      border: 0.1em solid transparent;
-      border-radius: 0.35em;
+      border: 0.1rem solid transparent;
+      border-radius: 0.35rem;
       background-color: white;
       font-family: $sans;
-      font-size: 1em;
+      font-size: 1rem;
       color: $main;
       display: block;
-      margin-right: 0.5em;
-      padding: 0em 0.5em;
+      margin-right: 0.5rem;
+      padding: 0rem 0.5rem;
       transition-duration: 0.3s;
 
       &::placeholder {
@@ -593,18 +602,18 @@
       }
 
       &:active {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
       }
 
       &:focus {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
       }
 
 
       &:hover {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
       }
     }
@@ -613,9 +622,9 @@
       display: flex;
       justify-content: center;
       background-color: $links;
-      border-radius: 0.35em;
+      border-radius: 0.35rem;
       border: none;
-      padding: 0.25em 0.5em;
+      padding: 0.25rem 0.5rem;
       transition-duration: 0.3s;
 
       &:hover {
@@ -632,12 +641,12 @@
 
 
       svg {
-        margin-right: 0.25em;
+        margin-right: 0.25rem;
       }
 
       span {
         font-family: $title;
-        font-size: 1em;
+        font-size: 1rem;
         color: white;
         text-transform: uppercase;
         font-weight: 600;
@@ -646,7 +655,7 @@
 
     &__message {
       font-family: $title;
-      font-size: 1em;
+      font-size: 1rem;
       color: $shop;
       font-weight: 600;
     }
@@ -654,22 +663,22 @@
 }
 
 .Calendar {
-    margin: 1em 1em 0em 0em;
+    margin: 1rem 1rem 0rem 0rem;
     display: block;
     position: relative;
-    min-width: 40em;
+    min-width: 40rem;
 }
 
 .Footer {
-    font-size: 0.85em;
+    font-size: 0.85rem;
     font-family: $title;
     text-transform: uppercase;
     font-weight: 600;
     text-align: center;
-    padding: 1em 1em;
+    padding: 1rem 1rem;
     flex: 0 1 0;
     position: sticky;
-    bottom: -999em;
+    bottom: -999rem;
 
     &__message {
         display: block;
@@ -678,9 +687,9 @@
         font-family: $sans;
         text-transform: none;
         font-weight: 400;
-        margin-top: 0.2em;
+        margin-top: 0.2rem;
         display: block;
-        font-size: .85em;
+        font-size: .85rem;
 
         a {
             color: $links;

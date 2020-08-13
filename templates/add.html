@@ -15,16 +15,28 @@
 
             <div class="Form__row">
               <div class="Form__row__time">
-                <label>Date & Time</label>
+                <div class="Form__row__time__labels">
+                  <label>Date & Time</label>
+                  <span>Note: You are submitting this in your time zone!<span>
+                </div>
                 <div class="Form__row__time__fields">
-                  <input placeholder="mm/dd/yyyy hh:mm xm" onfocus="(this.type='datetime-local')" id={{form.dtstart}}
+                  <input type="date" id="start_date" />
+                  <input type="time" id="start_time" style="width:7rem" />
                   <p>to</p>
-                  <input placeholder="mm/dd/yyyy hh:mm xm" onfocus="(this.type='datetime-local')" id={{form.dtend}}
+                  <input type="time" id="end_time" style="width:7rem" />
+                  <input type="date" id="end_date" style="margin-right:0em" />
                 </div>
               </div>
               <div class="Form__row__day">
-                <input type="checkbox" id="isallday" name="isallday">
-                <label for="isallday">Mark as "All Day"<span>(this ignores the start & end time)<span></label>
+                <label>
+                  <input type="checkbox" id="all_day">
+                  <span class="checkmark"></span>
+                  All Day
+                </label>
+              </div>
+              <div style="display: none">
+                {{ form.dtstart }}
+                {{ form.dtend }}
               </div>
             </div>
 
@@ -43,13 +55,15 @@
                 <span class="Form__tooltip__text">Choose the one that best describes the type of your event or who’s hosting it. If still unsure, refer to the FAQ.</span>
               </label>
               <div class="Form__category">
-                {{ form.category }}
+                {{ form.category(placeholder="Choose a category") }}
               </div>
             </div>
 
             <div class="Form__field">
               {{ form.description.label }}
-              {{ form.description(placeholder="Who might be interested? What would they be doing? Is there anything they need to have done before hand?") }}
+              {{ form.description(placeholder="Who might be interested? What would they be doing? Is there anything they need to have done before hand?
+
+*If you have a zoom invite, feel free to add it here.") }}
             </div>
 
             <div class="Form__field">
@@ -79,13 +93,30 @@
       </div>
     </main>
     {% include 'components/footer.html' %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script>
+        document.getElementById('all_day').addEventListener('click', e => {
+          console.log(e.target.checked)
+          if (e.target.checked) {
+            document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
+          } else {
+            document.querySelectorAll("input[type='time']").forEach(el => el.disabled = false);
+          }
+        });
 
         function validateForm(e) {
+            var start = document.getElementById('start_date').value;
+            var end = document.getElementById('end_date').value;
 
-            document.getElementById('dtstart').value = dtstart;
-            document.getElementById('dtend').value = dtend;
+            if (!document.getElementById("all_day").checked) {
+              start = start + " " + document.getElementById("start_time").value;
+              end = end + " " + document.getElementById("end_time").value;
+            }
+
+            var dtstart = Date.parse(start);
+            var dtend = Date.parse(end);
+
+            console.log(start);
+            console.log(end);
 
             if (dtstart > dtend) {
               alert("Start Time cannot be later than End Time!");
@@ -93,6 +124,9 @@
               e.preventDefault(); // Prevent form from being submitted
               return;
             }
+
+            document.getElementById('dtstart').value = dtstart;
+            document.getElementById('dtend').value = dtend;
 
             // Must be an Olin Email
             var emailPattern = /.*@olin\.edu/
@@ -105,23 +139,22 @@
             }
 
 
-            document.getElementById('dtstart').value = dtstart;
-            document.getElementById('dtend').value = dtend;
+
         }
 
-        document.querySelectorAll('[name="duration"]')
-            .forEach(el => {
-                // On click, the proper form fields should be shown
-                el.addEventListener('click', e => {
-                    // Remove from the ones currently have it
-                    document.querySelectorAll('.js-showFieldSet')[0]
-                        .classList.remove('js-showFieldSet');
-
-                    // And add it to the proper one
-                    var nextElement = document.getElementById("duration--" + e.target.value);
-                    nextElement.classList.add('js-showFieldSet');
-                })
-            })
+        // document.querySelectorAll('[name="duration"]')
+        //     .forEach(el => {
+        //         // On click, the proper form fields should be shown
+        //         el.addEventListener('click', e => {
+        //             // Remove from the ones currently have it
+        //             document.querySelectorAll('.js-showFieldSet')[0]
+        //                 .classList.remove('js-showFieldSet');
+        //
+        //             // And add it to the proper one
+        //             var nextElement = document.getElementById("duration--" + e.target.value);
+        //             nextElement.classList.add('js-showFieldSet');
+        //         })
+        //     })
 
         document.getElementById('submitButton')
             .addEventListener('click', e => validateForm(e))

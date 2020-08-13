@@ -1,6 +1,6 @@
 Hi!
-
+<br><br>
 Your event, {{name}} was successfully submitted for review, and is awaiting moderator approval. We will send you a notice within 24 hours, as soon it has been reviewed. In the meantime, you may make edits to your event via this <a href=http://{{link}}>magic link</a> if any information changes.
-
-Sincerely, 
+<br><br>
+Sincerely, <br>
 Frank's Calendar

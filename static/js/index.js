@@ -1,11 +1,12 @@
 // Import React stuff
 import React from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 
 import '../css/index.scss';
 import Sidebar from './components/sidebar.js';
 import EventPage from './components/event-page.js';
+import Form from './components/form.js';
 import { ErrorBoundary } from './errorboundary';
 import client from './api';
 
@@ -167,32 +168,46 @@ class App extends React.Component {
 
     }
     render() {
-        window.location.hash = ""; // Clear the hash when the calendar renders
+        // window.location.hash = ""; // Clear the hash when the calendar renders
 
         return (
             <>
-              <aside className="Sidebar">
-                <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
-              </aside>
-                <div className="Calendar">
-                    {this.state.popUp}
-
-                    <FullCalendar
-                        defaultView="timeGridWeek"
-                        nowIndicator={true}
-                        plugins={[ dayGridPlugin, timeGridPlugin ]}
-                        events={this.state.events}
-                        displayEventTime={true}
-                        eventRender={EventComponent}
-                        eventClick={this.eventClick}
-                        header={{
-                            left: 'prev,next today',
-                            center: 'title',
-                            right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                        }}
-                        height="parent"
-                    />
-                </div>
+              <HashRouter>
+                <Switch>
+                  <Route exact path="/add" component={Form} />
+                  <Route path="/:eventId" render={props => {
+                      var event = this.state.events.find(obj => obj.id === props.id);
+                      if (event) {
+                        return <EventPage event={event} returnToCalendar={this.destroyPopUp} />;
+                      } else {
+                        window.location.hash = "/"
+                      }
+                  }}
+                  />
+                </Switch>
+                  <>
+                    <aside className="Sidebar">
+                      <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
+                    </aside>
+                      <div className="Calendar">
+                          <FullCalendar
+                              defaultView="timeGridWeek"
+                              nowIndicator={true}
+                              plugins={[ dayGridPlugin, timeGridPlugin ]}
+                              events={this.state.events}
+                              displayEventTime={true}
+                              eventRender={EventComponent}
+                              eventClick={this.eventClick}
+                              header={{
+                                  left: 'prev,next today',
+                                  center: 'title',
+                                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                              }}
+                              height="parent"
+                          />
+                      </div>
+                    </>
+              </HashRouter>
             </>
         );
     };
@@ -200,9 +215,7 @@ class App extends React.Component {
 
 var renderedApp = (
     <ErrorBoundary>
-        <HashRouter hashType="noslash">
-            <App />
-        </HashRouter>
+      <App />
     </ErrorBoundary>
 );
 

@@ -1,6 +1,6 @@
 .Page {
   text-align: center;
-  margin-bottom: 1em;
+  margin-bottom: 1rem;
 }
 
 .Form {
@@ -10,15 +10,15 @@
   &__box {
     display: block;
     width: $box-width;
-    border-radius: 0.5em;
-    padding: 1em 1.5em;
-    margin: 1.5em auto 1em;
-    box-shadow: 0.1em 0.1em 0.25em $secondary;
+    border-radius: 0.5rem;
+    padding: 1rem 1rem;
+    margin: 1.5rem auto 1rem;
+    box-shadow: 0.1rem 0.1rem 0.25rem $secondary;
 
     &__buttons {
-      padding: .1em .1em;
+      padding: .1rem .1rem;
       border:transparent;
-      box-shadow: 0.1em 0.1em 0.25em transparent;
+      box-shadow: 0.1rem 0.1rem 0.25rem transparent;
     }
   }
 
@@ -33,23 +33,23 @@
     display: inline-block;
 
     &__text {
-      padding: 0.5em 0.5em;
+      padding: 0.5rem 0.5rem;
       visibility: hidden;
       text-align: left;
-      border-radius: 0.5em;
-      width: 20em;
+      border-radius: 0.5rem;
+      width: 20rem;
       background-color: $main;
       opacity: 80%;
 
       font-family: $sans;
-      font-size: 0.75em;
+      font-size: 0.75rem;
       text-transform: none;
       font-weight: 400;
       color: white;
 
       position: absolute;
       z-index: 1;
-      margin-left: 1em;
+      margin-left: 1rem;
     }
 
     &:hover + .Form__tooltip__text {
@@ -69,16 +69,30 @@
         color: $secondary;
       }
 
-      label {
-        display: block;
-        text-align: left;
-        font-family: $title;
-        font-size: 1em;
-        font-weight: 600;
-        color: $form-header;
-        text-transform: uppercase;
-        padding-left: 0.1em;
-        margin-bottom: 0.5em;
+      &__labels {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        label {
+          display: block;
+          text-align: left;
+          font-family: $title;
+          font-size: 1rem;
+          font-weight: 600;
+          color: $form-header;
+          text-transform: uppercase;
+          padding-left: 0.1rem;
+          margin-bottom: 0.5rem;
+          margin-right: 0.5rem;
+        }
+
+        span {
+          display: block;
+          font-family: $sans;
+          font-style: italic;
+          color: $links;
+        }
       }
 
       &__fields {
@@ -86,22 +100,22 @@
         align-items: baseline;
 
         p {
-          margin: 0em 0.5em;
           display: block;
           text-align: center;
+          margin-right: 0.5rem;
         }
 
         input {
           display: block;
           text-align: left;
-          width: 100%;
-          border:  0.1em solid transparent;
-          border-radius: 0.5em;
+          border:  0.1rem solid transparent;
+          border-radius: 0.5rem;
           background-color: $secondary--light;
-          padding: 0.5em;
-          margin-bottom: 0.5em;
+          padding: 0.5rem 0rem 0.5rem 0.5rem;
+          margin-bottom: 0.5rem;
+          margin-right: 0.5rem;
           font-family: $sans;
-          font-size: 1em;
+          font-size: 1rem;
           color: $main;
           transition-duration: 0.3s;
 
@@ -109,23 +123,35 @@
             display: none;
           }
 
+          &:disabled {
+            display: none;
+          }
+
+          &::-webkit-calendar-picker-indicator {
+            width: 0.5rem;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+
           &::placeholder {
             color: $secondary;
           }
 
           &:hover {
-            border: 0.1em solid $links;
+            border: 0.1rem solid $links;
             outline: none;
           }
 
           &:active {
-            border: 0.1em solid $links;
+            border: 0.1rem solid $links;
             outline: none;
             transition-duration: none;
           }
 
           &:focus {
-            border: 0.1em solid $links;
+            border: 0.1rem solid $links;
             outline: none;
             transition-duration: none;
           }
@@ -136,15 +162,11 @@
     &__day {
       display: block;
       text-align: left;
-      margin-bottom: 1em;
+      margin-bottom: 1rem;
 
       label {
         font-family: $sans;
         font-size: 0.75;
-
-        span {
-          font-style: italic;
-        }
       }
     }
   }
@@ -155,35 +177,36 @@
     select {
       display: block;
       font-family: $sans;
-      font-size: 1em;
+      font-size: 1rem;
       color: $main;
       background-color: $secondary--light;
-      border: 0.1em solid transparent;
-      border-radius: 0.5em;
-      padding: 0.5em 0.5em;
-      margin-bottom: 0.5em;
+      border: 0.1rem solid transparent;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.5rem;
+      margin-bottom: 0.5rem;
       transition-duration: 0.3s;
 
       &:hover {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
+        cursor: pointer;
       }
 
       &:active {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
         transition-duration: none;
       }
 
       &:focus {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
         transition-duration: none;
       }
 
       option {
         font-family: $sans;
-        font-size: 1em;
+        font-size: 1rem;
       }
     }
   }
@@ -200,7 +223,7 @@
       justify-content: flex-start;
 
       & > :not(:last-child) {
-          margin-right: .5em;
+          margin-right: .5rem;
       }
     }
 
@@ -208,25 +231,25 @@
       display: block;
       text-align: left;
       font-family: $title;
-      font-size: 1em;
+      font-size: 1rem;
       font-weight: 600;
       color: $form-header;
       text-transform: uppercase;
-      padding-left: 0.1em;
-      margin-bottom: 0.5em;
+      padding-left: 0.1rem;
+      margin-bottom: 0.5rem;
       }
 
     input {
       display: block;
       text-align: left;
       width: 100%;
-      border:  0.1em solid transparent;
-      border-radius: 0.5em;
+      border:  0.1rem solid transparent;
+      border-radius: 0.5rem;
       background-color: $secondary--light;
-      padding: 0.5em;
-      margin-bottom: 0.5em;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
       font-family: $sans;
-      font-size: 1em;
+      font-size: 1rem;
       color: $main;
       transition-duration: 0.3s;
 
@@ -235,18 +258,18 @@
       }
 
       &:hover {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
       }
 
       &:active {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
         transition-duration: none;
       }
 
       &:focus {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
         transition-duration: none;
       }
@@ -255,16 +278,16 @@
     textarea {
       display: block;
       text-align: left;
-      width: 29.5em;
-      height: 5em;
+      width: 100%;
+      height: 6.25rem;
       resize: vertical;
-      border: 0.1em solid transparent;
-      border-radius: 0.5em;
+      border: 0.1rem solid transparent;
+      border-radius: 0.5rem;
       background-color: $secondary--light;
-      padding: 0.5em 0.5em;
-      margin-bottom: 0.5em;
+      padding: 0.5rem 0.5rem;
+      margin-bottom: 0.5rem;
       font-family: $sans;
-      font-size: 1em;
+      font-size: 1rem;
       color: $main;
       transition-duration: 0.3s;
 
@@ -273,18 +296,18 @@
       }
 
       &:hover {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
       }
 
       &:active {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
         transition-duration: none;
       }
 
       &:focus {
-        border: 0.1em solid $links;
+        border: 0.1rem solid $links;
         outline: none;
         transition-duration: none;
       }
@@ -293,19 +316,19 @@
 
   &__submit {
     background-color: $links;
-    border: 0.2em solid transparent;
-    border-radius: 0.25em;
+    border: 0.2rem solid transparent;
+    border-radius: 0.25rem;
     color: white;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     font-family: $title;
     font-weight: 400;
-    padding: 0.25em 0.5em;
+    padding: 0.25rem 0.5rem;
     text-align: center;
     display: block;
     margin-right: auto;
     margin-left: auto;
     transition-duration: 0.3s;
-    box-shadow: 0.1em 0.1em 0.25em $secondary;
+    box-shadow: 0.1rem 0.1rem 0.25rem $secondary;
     cursor: pointer;
 
     &:hover {
@@ -314,31 +337,31 @@
 
     &:focus {
       outline: none;
-      border: 0.2em solid $links--light;
+      border: 0.2rem solid $links--light;
     }
 
     &:active {
       outline: none;
-      border: 0.2em solid $links--light;
+      border: 0.2rem solid $links--light;
     }
   }
 
   &__button {
     border: none;
-    border-radius: 0.25em;
+    border-radius: 0.25rem;
     color: white;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     font-family: $title;
     font-weight: 400;
     text-transform:uppercase;
-    padding: 0.25em 0.5em;
+    padding: 0.25rem 0.5rem;
     text-align: center;
     display: block;
     margin-right: auto;
     margin-left: auto;
     transition-duration: 0.3s;
     cursor: pointer;
-    box-shadow: 0.1em 0.1em 0.25em $secondary;
+    box-shadow: 0.1rem 0.1rem 0.25rem $secondary;
 
     &--green {
       background-color: $green;

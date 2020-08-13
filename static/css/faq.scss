@@ -37,7 +37,7 @@
         font-family: $title;
         text-transform:uppercase;
         font-size: 2em;
-        margin-top:2em;
+        font-weight: 600;
 
         &__icon {
             margin-right: 0.2em;
@@ -52,14 +52,14 @@
         color: $secondary;
     }
     &__question {
-        
+
         display: block;
         border: transparent;
         border-radius: 0.5em;
         box-shadow: 0.1em 0.1em 0.25em $secondary;
         padding: 1em 1.5em;
         margin-bottom: 1em;
-        
+
         &__summary {
             font-family: $title;
             font-size: 1.25em;
@@ -73,8 +73,19 @@
             margin-left:2.5em;
             margin-right:3em;
             line-height:1.5em;
+
+            ol {
+                list-style-type: decimal;
+                list-style-position: outside;
+                margin-left:1em;
+                margin-bottom:1em;
+
+                li {
+                  font-size: 1rem;
+                }
+            }
         }
-        
+
     }
 
 }
@@ -99,7 +110,7 @@
     &__mark {
         // highlight the mention of a category with the associated color for clarity and aesthetics
         // used where categories are defined on FAQ page
-        
+
         &--academic {
             background-color: $academic--light;
             padding: 2px 5px 2px 5px;
