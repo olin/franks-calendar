@@ -103,7 +103,7 @@
         margin-right: 0.5rem;
         margin-left: 0.5rem;
         transition-duration: 0.25s;
-        width: 8.5rem;
+        width: 8rem;
         cursor: pointer;
         text-decoration: none;
 
@@ -135,8 +135,8 @@
       }
 
       &__link {
-        display: flex;
-        height: 2rem;
+        //display: flex;
+        //height: 2rem;
         background-color: $secondary--light;
         border: none;
         border-radius: 0.35rem;
@@ -152,7 +152,7 @@
         text-align: center;
         cursor: pointer;
         text-decoration: none;
-        vertical-align: baseline;
+        //vertical-align: baseline;
 
         &__wrapper {
           display: inline-flex;
@@ -368,6 +368,16 @@
             top:0.1rem;
             right:0.2rem;
             cursor: pointer;
+
+            svg {
+              cursor: pointer;
+              transition-duration: 0.3s;
+              stroke: $main;
+
+              &:hover {
+                stroke: $links;
+              }
+            }
           }
 
           &:checked {
