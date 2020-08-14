@@ -86,6 +86,16 @@ class DatabaseClient(object):
         form["_id"] = event_id
         return form
 
+    def add_to_export_list(self, event_id, email):
+        self.client.events.update_one(
+            {
+                "_id":ObjectId(event_id)
+            },
+            {
+                "$addToSet": {"shared_emails" : email}
+            }
+        )
+
     def delete(self, event_id):
         self.client.delete_one({
             "_id": event_id

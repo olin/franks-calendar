@@ -3,10 +3,11 @@ from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
 from modules.forms import EventForm
 from bson.objectid import ObjectId
-from icalendar import Calendar, Event
 import json
-from datetime import datetime
 import uuid
+from jinja2 import Template
+import os
+from .constants import categoryText
 
 db = DatabaseClient()
 email = EmailClient()
@@ -83,7 +84,14 @@ def edit_event(event_id):
 
         return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id)
     elif request.method == "POST":
+        #I know this isn't good code, but it looks like db.update_event doesnt return the status and shared_email fields of event
+        #So i need to make a second call to retrieve event. We can change this by making update_event return the status and shared_emails
         inserted_event = db.update_event(event_id, form.data)
+        event_data = db.get_one(ObjectId(event_id))
+        if event_data["status"] == Status.APPROVED.value:
+            #if the event was already approved, send an email to everyone who may have exported and ical of the event
+            emails = event_data["shared_emails"]
+            email.notify_shared_emails(event_data, emails)
 
         return redirect(
             url_for("public.edit_confirmation",
@@ -134,7 +142,8 @@ def confirmation():
 
     return render_template("confirmation.html",
         title=request.args.get('title'),
-        category=request.args.get('category'),
+        category_id=request.args.get('category'),
+        category_display=categoryText[request.args.get('category')],
         location=request.args.get('location'),
         description=request.args.get('description'),
         host_name=request.args.get('host_name'),
@@ -171,21 +180,15 @@ def edit_confirmation():
     ), 200
 
 
+
 @public.route("/export/<eventid>", methods=["POST"])
 def export_event(eventid):
-    email = json.loads(request.data).get("email")
+    event_data = db.get_one(ObjectId(eventid))
+    recipient = json.loads(request.data).get("email")
+    db.add_to_export_list(eventid, recipient)
+    #add the recipient to a list of everyone who downloaded ical
 
-    # event_data = db.get_one(ObjectId(eventid))
-    # email.notify_moderator("frankscalendar", event_data, "")
-    # cal = Calendar()
-    # event = Event()
-    # event["dtstart"] = datetime.strftime(event_data["dtstart"], "%Y%m%dT%H%M%S")
-    # event["dtend"] = datetime.strftime(event_data["dtend"], "%Y%m%dT%H%M%S")
-    # event["summary"] = event_data["title"]
-    # event["location"] = event_data["location"]
-    # event["description"] = event_data["description"]
-    # cal.add_component(event)
-    # return cal.to_ical()
+    email.send_ical(event_data, recipient)
     return "Success", 200
 
 @public.route("/approve/<event_id>", methods=["GET"])
@@ -198,6 +201,7 @@ def approve_event(event_id):
     db.update_event(event_id, {
         "status": Status.APPROVED.value
     })
+    email.send_approval_notice("",event_data)
 
     return redirect(url_for("public.admin_page", code="test"))
 
@@ -213,7 +217,11 @@ def request_event_changes(event_id):
         "status": Status.WAITING.value
     })
 
-    return redirect(url_for("public.admin_page", code="test"))
+    path = os.getcwd() + "/templates/emails/edit_event.txt"
+    template = Template(open(path).read())
+    content = template.render(name=event_data["title"], link=email.generate_link("",event_data))
+
+    return redirect("mailto://{}?subject=Your%20event%20requires%20edits&body={}".format(event_data.get("email"), content ), code=302)
 
 
 @public.route("/cancel_event/<event_id>", methods=["GET"])
@@ -226,5 +234,8 @@ def cancel_event(event_id):
     db.update_event(event_id, {
         "status": Status.CANCELED.value
     })
+    path = os.getcwd() + "/templates/emails/cancelled.txt"
+    template = Template(open(path).read())
+    content = template.render(name=event_data["title"])
 
-    return redirect(url_for("public.index"))
+    return redirect("mailto://{}?subject=Your%20event%20was%20cancelled&body={}".format(event_data.get("email"), content ), code=302)

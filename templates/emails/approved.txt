@@ -1,6 +1,6 @@
 Hi!
-
-The event you submitted, {{name}}, was approved and is currently posted on Frank’s Calendar! As a reminder, if any event information needs to be updated, you can do so via this magic link, which is active up until the start time of your event: {{link}}.
-
-Sincerely, 
+<br><br>
+The event you submitted, {{name}}, was approved and is currently posted on Frank’s Calendar! As a reminder, if any event information needs to be updated, you can do so via this <a href=http://{{link}}>magic link</a>, which is active up until the start time of your event.
+<br><br>
+Sincerely, <br>
 Frank's Calendar

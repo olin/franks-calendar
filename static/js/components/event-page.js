@@ -53,23 +53,38 @@ export default class EventPage extends React.Component {
 
         function timeString(date) {
             let hours = date.getHours();
-            let minutes = ('0' + date.getMinutes()).slice(-2);
-            return (hours + ':' + minutes);
+            let minutes = date.getMinutes();
+
+            // Check whether AM or PM
+            var newformat = hours >= 12 ? 'PM' : 'AM';
+
+            // Find current hour in AM-PM Format
+            hours = hours % 12;
+
+            // To display "0" as "12"
+            hours = hours ? hours : 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            return (hours + ':' + minutes + ' ' + newformat);
         }
 
         var timeText;
         if (this.props.event.allDay) {
+
+            // var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
+            // var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
+
             var startDate = new Date(this.props.event.start).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             var endDate = new Date(this.props.event.end).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
             if (startDate === endDate) {
                 timeText = (
-                    <span class="Event__content__time">{startDate}</span>
+                    <span class="Event__content__date">{startDate}</span>
                 )
             } else {
                 timeText = (
                     <>
-                        <span class="Event__content__time">{startDate}</span> -
+                        <span class="Event__content__date">{startDate}</span> -
                         <span class="Event__content__time">{endDate}</span>
                     </>
                 )
@@ -105,6 +120,17 @@ export default class EventPage extends React.Component {
             location_el = location_text;
         }
 
+        // check if the location is a url
+        // location is a url if matches this pattern: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
+        // display the location as <a href="location">location</a>
+        var location_text = this.props.event.location;
+        var location_el;
+        if (location_text.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/)) {
+            location_el = <a class="Event__content__text__link" href={location_text}>{location_text}</a>;
+        } else {
+            location_el = location_text;
+        }
+
         return (
             <div class="Event">
               <div class="Event__width">
@@ -128,7 +154,7 @@ export default class EventPage extends React.Component {
 
                   <div class="Event__content__block">
                     <span data-tag={category} class="Event__content__tag">
-                      {category === "pgp" ? "PGP" : category.replace("_", " ")}
+                      {category === "pgp" ? "PGP": category === "hr" ? "HR": category.replace("_", " ")}
                     </span>
                   </div>
 

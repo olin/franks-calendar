@@ -1,6 +1,6 @@
 Hi!
-
-The event you submitted, {{name}}, was cancelled by the moderator, for the following reasons: {{reasons}}.
-
-Sincerely, 
+<br><br>
+The event you submitted, {{name}}, was cancelled by the moderator, for the following reasons:___________.
+<br><br>
+Sincerely, <br>
 Frank's Calendar
