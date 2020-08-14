@@ -17,6 +17,7 @@ class EventForm(FlaskForm):
     dtstart = DateTimeField('Start', validators=[DataRequired()], format="%y/%m/%d %H:%M:%S")
     dtend = DateTimeField('End', validators=[DataRequired()], format="%y/%m/%d %H:%M:%S")
     category = SelectField('Category', validators=[DataRequired()], choices=[
+        ("", "-- select an option --"),
         ("academic_affairs:academic_calendar", "Academic Calendar"),
         ("academic_affairs:academic_advising", "Academic Advising"),
         ("student_affairs:residential", "Residential"),
