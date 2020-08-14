@@ -21,9 +21,9 @@
                 </div>
                 <div class="Form__row__time__fields">
                   <input type="date" id="start_date" />
-                  <input type="time" id="start_time" style="width:7rem" />
+                  <input type="time" id="start_time" style="width:6rem" />
                   <p>to</p>
-                  <input type="time" id="end_time" style="width:7rem" />
+                  <input type="time" id="end_time" style="width:6rem" />
                   <input type="date" id="end_date" style="margin-right:0em" />
                 </div>
               </div>
@@ -104,57 +104,40 @@
         });
 
         function validateForm(e) {
-            var start = document.getElementById('start_date').value;
-            var end = document.getElementById('end_date').value;
+          var start = document.getElementById('start_date').value;
+          var end = document.getElementById('end_date').value;
 
-            if (!document.getElementById("all_day").checked) {
-              start = start + " " + document.getElementById("start_time").value;
-              end = end + " " + document.getElementById("end_time").value;
-            }
+          if (!document.getElementById("all_day").checked) {
+            start = start + " " + document.getElementById("start_time").value;
+            end = end + " " + document.getElementById("end_time").value;
+          }
 
-            var dtstart = Date.parse(start);
-            var dtend = Date.parse(end);
+          var dtstart = Date.parse(start);
+          var dtend = Date.parse(end);
 
-            console.log(start);
-            console.log(end);
+          console.log(start);
+          console.log(end);
 
-            if (dtstart > dtend) {
-              alert("Start Time cannot be later than End Time!");
-              window.history.forward(-1);
-              e.preventDefault(); // Prevent form from being submitted
+          if (dtstart > dtend) {
+            alert("Start Time cannot be later than End Time!");
+            window.history.forward(-1);
+            e.preventDefault(); // Prevent form from being submitted
+            return;
+          }
+
+          document.getElementById('dtstart').value = dtstart;
+          document.getElementById('dtend').value = dtend;
+
+          // Must be an Olin Email
+          var emailPattern = /.*@olin\.edu/
+          var email = document.getElementById('host_email').value;
+
+          if (!emailPattern.test(email)) {
+              alert("You must use an Olin email!");
+              e.preventDefault()
               return;
-            }
-
-            document.getElementById('dtstart').value = dtstart;
-            document.getElementById('dtend').value = dtend;
-
-            // Must be an Olin Email
-            var emailPattern = /.*@olin\.edu/
-            var email = document.getElementById('host_email').value;
-
-            if (!emailPattern.test(email)) {
-                alert("You must use an Olin email!");
-                e.preventDefault()
-                return;
-            }
-
-
-
+          }
         }
-
-        // document.querySelectorAll('[name="duration"]')
-        //     .forEach(el => {
-        //         // On click, the proper form fields should be shown
-        //         el.addEventListener('click', e => {
-        //             // Remove from the ones currently have it
-        //             document.querySelectorAll('.js-showFieldSet')[0]
-        //                 .classList.remove('js-showFieldSet');
-        //
-        //             // And add it to the proper one
-        //             var nextElement = document.getElementById("duration--" + e.target.value);
-        //             nextElement.classList.add('js-showFieldSet');
-        //         })
-        //     })
 
         document.getElementById('submitButton')
             .addEventListener('click', e => validateForm(e))

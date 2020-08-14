@@ -17,7 +17,7 @@
 
     &__buttons {
       padding: .1rem .1rem;
-      border:transparent;
+      border: transparent;
       box-shadow: 0.1rem 0.1rem 0.25rem transparent;
     }
   }
@@ -100,6 +100,8 @@
         align-items: baseline;
 
         p {
+          font-family: $sans;
+          font-size: 1rem;
           display: block;
           text-align: center;
           margin-right: 0.5rem;
