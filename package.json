@@ -52,6 +52,7 @@
     "webpack-notifier": "^1.8.0"
   },
   "dependencies": {
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.1.1"
   }
 }

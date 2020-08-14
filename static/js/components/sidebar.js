@@ -1,11 +1,84 @@
 import React from 'react';
+import styled from 'styled-components';
 
-export default class Sidebar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+const TagContainer = styled.div`
 
-    render() {
+`;
+
+const TagChildrenContainer = styled.div`
+  margin-left: 1em;
+`
+
+const TagCheckbox = styled.input`
+
+`;
+
+const TagName = styled.label`
+  word-break: keep-all;
+`;
+/*
+const ExpandCollapseCaret = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="9 18 15 12 9 6">
+                      </polyline>
+                    </svg>
+);
+
+const StyledExpandCollapseCaret = styled(ExpandCollapseCaret)`
+  transition: rotation 0.3s ease;
+  transform: rotate(${(props) => props.expanded ? 0 : 90}deg);
+`;
+*/
+
+
+const Tag = (props) => {
+  const {
+    tag,
+    onTagClicked,
+    tagStates,
+  } = props;
+  const checkboxId = `tag-${tag.id}-cb`;
+  return (
+  <TagContainer>
+    <TagCheckbox type="checkbox" id={checkboxId} onChange={() => onTagClicked(tag)} checked={tagStates[tag.path].visible} />
+    <TagName htmlFor={checkboxId}>{tag.displayName}</TagName>
+    {/*{tag.children && <StyledExpandCollapseCaret expanded={tag.defaultVisible}/>}*/}
+  </TagContainer>
+  );
+};
+
+const TagFamilyWrapper = styled.div`
+  
+  
+`;
+
+const TagFamily = (props) => (
+  <TagFamilyWrapper>
+    <Tag {...props} />
+    {props.tag.children && (
+      <TagChildrenContainer>
+        {props.tag.children.map(childTag => <TagFamily {...props} tag={childTag}/>)}
+      </TagChildrenContainer>
+    )}
+  </TagFamilyWrapper>
+);
+
+const SidebarWrapper = styled.div`
+  flex-shrink: 0;
+`;
+
+const Sidebar = (props) => (
+  <SidebarWrapper>
+    <h2 className="Sidebar__header">
+      <svg className="Sidebar__header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+      </svg>
+      FILTERS
+    </h2>
+    {props.tags.map(tag => <TagFamily tag={tag} {...props} />)}
+  </SidebarWrapper>
+);
+  function  render() {
         return (
             <>
               <section className="Sidebar__section">
@@ -150,5 +223,6 @@ export default class Sidebar extends React.Component {
               </section>
             </>
         )
-    }
 }
+
+export default Sidebar;

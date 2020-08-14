@@ -25,24 +25,122 @@ const colorMap = {
     clubs: "#FCDDC7",
     other: "#FFF0C3",
 }
-const tagList = {
-    "academic": true,
-    "academic_affairs": true,
-    "academic_calendar": true,
-    "academic_advising": true,
-    "student_affairs": true,
-    "international": true,
-    "student": true,
-    "residential":true,
-    "health":true,
-    "pgp":true,
-    "hr":true,
-    "admission": true,
-    "library": true,
-    "shop": true,
-    "clubs": true,
-    "other": true,
-}
+
+const masterTagList = [
+  {
+    id: 'academic_affairs',
+    displayName: 'Academic',
+    children: [
+      {
+        id: 'academic_calendar',
+        color: '#BFD1E2',
+        displayName: 'Academic Calendar',
+        defaultVisible: true,
+        path: 'academic_affairs:academic_calendar',
+      },
+      {
+        id: 'academic_advising',
+        color: '#BFD1E2',
+        displayName: 'Academic Advising',
+        defaultVisible: true,
+        path: 'academic_affairs:academic_advising',
+      },
+    ],
+    color: '#BFD1E2',
+    defaultExpanded: true,
+    defaultVisible: true,
+    path: 'academic_affairs',
+  },
+    {
+      id: 'student_affairs',
+      children: [
+        {
+          id: 'residential',
+          color: '#C9EAE8',
+          displayName: 'Residential',
+          defaultVisible: true,
+          path: 'student_affairs:residential',
+        },
+        {
+          id: 'health',
+          color: '#C9EAE8',
+          displayName: 'Health and Wellness',
+          defaultVisible: true,
+          path: 'student_affairs:health',
+        },
+        {
+          id: 'pgp',
+          color: '#C9EAE8',
+          displayName: 'PGP',
+          defaultVisible: true,
+          path: 'student_affairs:pgp',
+        },
+        {
+          id: 'hr',
+          color: '#C9EAE8',
+          displayName: 'HR',
+          defaultVisible: true,
+          path: 'student_affairs:hr',
+        },
+        {
+          id: 'diversity',
+          color: '#C9EAE8',
+          displayName: 'Diversity and Inclusion',
+          defaultVisible: true,
+          path: 'student_affairs:diversity',
+        },
+        {
+          id: 'international',
+          color: '#C9EAE8',
+          displayName: "Intl' and Study Away",
+          defaultVisible: true,
+          path: 'student_affairs:international',
+          },
+        ],
+        color: '#C9EAE8',
+        defaultExpanded: true,
+        defaultVisible: true,
+        displayName: 'Student Affairs',
+        path: 'student_affairs',
+    },
+  {
+    id: 'admission',
+    color: '#F8C7CE',
+    displayName: 'Admission and Financial Aid',
+    defaultVisible: true,
+    path: 'admission',
+  },
+  {
+    id: 'library',
+    color: '#DED6E9',
+    displayName: 'The Library',
+    defaultVisible: true,
+    path: 'library',
+  },
+  {
+    id: 'shop',
+    color: '#E3EFCF',
+    displayName: 'The Shop',
+    defaultVisible: true,
+    path: 'shop',
+  },
+  {
+    id: 'clubs',
+    color: '#FCDDC7',
+    displayName: 'Clubs and Organizations',
+    defaultVisible: true,
+    path: 'clubs',
+  },
+  {
+    id: 'other',
+    color: '#FFF0C3',
+    displayName: 'Other Events',
+    defaultVisible: true,
+    path: 'other',
+  },
+];
+
+
 
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
@@ -69,7 +167,7 @@ function clean_event_list(events) {
             events[i].category = ["other"]
             events[i].categoryColor = "other"
         } else {
-            events[i].category = events[i]['category'].split(":")
+            events[i].category = events[i]['category'];
             events[i].categoryColor = events[i].category[0]
         }
         events[i].color = colorMap[events[i].category[0]]
@@ -96,10 +194,13 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
+        const tagStates = this.generateInitialTagState(masterTagList);
+
         this.state = {
             events: [],
             allEvents: [],
-            tags: tagList,
+            tags: masterTagList,
+            tagStates,
             popUp: null,
             urlid: window.location.hash.substring(1),
         }
@@ -109,40 +210,66 @@ class App extends React.Component {
         this.renderEventPage = this.renderEventPage.bind(this);
 
     }
+    generateInitialTagState(tagList, tagState = {}) {
+        tagList.forEach(tag => {
+            // Initialized visibility based on the tag's defaultVisible attribute
+            tagState[tag.path] = {
+                visible: Boolean(tag.defaultVisible),
+            }
+            // Check if this tag has any children
+            if (tag.children) {
+                // Initialize whether this family is expanded or not
+                tagState[tag.path].expanded = Boolean(tag.defaultExpanded);
+                // Process the children
+                this.generateInitialTagState(tag.children, tagState);
+            }
+        });
+        return tagState;
+    }
+
     destroyPopUp() {
         this.setState({
             popUp: null
         })
     }
-    toggleTag(e) {
-        const tagName = e.target.value;
-        // Make a copy of the tags in state (we shouldn't update the object
-        // in the state, otherwise React won't rerender our components)
-        const tags = {
-            ...this.state.tags,
-            [tagName]: !this.state.tags[tagName],
-        };
 
-        // Filter the events so only those with selected tags are shown
-        const filteredEvents = this.state.allEvents.filter(event => {
-            // Check each category/tag on an event to see if it's selected
-            for (const eventCategory of event.category) {
-                // Check if this specific category/tag is currently hidden
-                if (tags[eventCategory] === false) {
-                    // FIXME: This doesn't seem like what we want to do
-                    // This category/tag is hidden, so don't show the event
-                    return false;
-                }
-            }
-            // All tags on this event are visible, so show this event
+    recursivelySetTagVisibility(tag, visibility, tagStates) {
+      tagStates[tag.path].visible = visibility;
+      if (tag.children) {
+        tag.children.forEach(childTag => this.recursivelySetTagVisibility(childTag, visibility, tagStates));
+      }
+    }
+
+    toggleTag(tag) {
+      // Create a copy of the state and a new copy of the tag state that we can modify
+      const newTagStates = {
+        ...this.state.tagStates,
+        [tag.path]: {...this.state.tagStates[tag.path]},
+      };
+      // Toggle the visibility of this tag
+      const newVisibility = !newTagStates[tag.path].visible;
+      this.recursivelySetTagVisibility(tag, newVisibility, newTagStates);
+
+      // Filter the events so only those with selected tags are shown
+      const filteredEvents = this.state.allEvents.filter(event => {
+        // Check each category/tag on an event to see if it's selected
+        for (const eventCategory of event.category) {
+          // Check if this specific category/tag is currently hidden
+          if (newTagStates[eventCategory].visible) {
+            // This category/tag is visible, so show the event
             return true;
-        });
+          }
+        }
+        // None of the tags on this event are visible, so hide this event
+        return false;
+      });
 
-        // Update the state
-        this.setState({
-            tags,
-            events: filteredEvents,
-        });
+      // Update the state
+      this.setState({
+        tags: masterTagList,
+        events: filteredEvents,
+        tagStates: newTagStates,
+      });
     }
     eventClick(e) {
         let eventID = e.event.id;
@@ -179,9 +306,7 @@ class App extends React.Component {
 
         return (
             <>
-              <aside className="Sidebar">
-                <Sidebar handleClick={this.toggleTag} tags={this.state.tags} />
-              </aside>
+                <Sidebar tags={this.state.tags} onTagClicked={this.toggleTag} tagStates={this.state.tagStates} />
                 <div className="Calendar">
                     {this.state.popUp}
 
