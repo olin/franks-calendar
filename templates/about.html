@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
+    <div class="Mainflex">
     {% include 'components/header.html' %}
     <main>
         <a href="/">← Back to Calendar</a>
@@ -25,4 +26,5 @@
         <p>The calendar was designed for people looking for events to attend in the upcoming day or week. It is also for event organizers to see what events have already been scheduled, and find a conflict-free time for their own event.</p>
     </main>
     {% include 'components/footer.html' %}
+    </div>
 {% endblock %}

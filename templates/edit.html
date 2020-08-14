@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
+    <div class="Mainflex">
     {% include 'components/header--edit.html' %}
     <main>
       <div class="Page">
@@ -326,6 +327,7 @@ If you sent out an email about this event, the text from that email is probably 
       </div>
     </main>
     {% include 'components/footer.html' %}
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
     <script>
         function confirmDelete(e) {

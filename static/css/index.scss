@@ -14,6 +14,16 @@
 @import url('https://use.typekit.net/gsh7wuf.css');
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+.Mainflex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    main {
+        flex: 1 0 auto;
+    }
+}
+
 .Home {
   display: flex;
 }
@@ -25,6 +35,7 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0.1em 0.1em 0.25em $secondary;
+    flex: 0 1 0;
 
     &__title {
       font-family: $title;
@@ -667,7 +678,6 @@
     font-weight: 600;
     text-align: center;
     padding: 1em 1em;
-    flex: 0 1 0;
     position: sticky;
     bottom: -999em;
 
