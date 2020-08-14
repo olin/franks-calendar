@@ -28,7 +28,7 @@
                 <td class="Cell--Moderator">
                     <a href="/approve/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--approve">Approve</a>
                     <a href="/request_changes/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--request">Request Changes</a>
-                    <a href="/cancel_event/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--cancel">Cancel</a>
+                    <a href="/cancel_event/{{ event['_id'] }}?magic={{ event['magic'] }}&email=yes" class="Moderator Moderator--cancel">Cancel</a>
                 </td>
                 </tr>
         {% endfor %}

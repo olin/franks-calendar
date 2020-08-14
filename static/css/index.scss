@@ -24,6 +24,26 @@
     }
 }
 
+.Messages {
+    margin-top: 1rem;
+    position: absolute;
+    width: 100%;
+
+    .Message {
+        width: 80%;
+        font-family: $sans;
+        font-size: 1.2rem;
+        color: #000;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #F8C7CE;
+        text-align: center;
+        border-radius: .25rem;
+        padding: .5em 0;
+    }
+}
+
+
 .Home {
   display: flex;
 }
