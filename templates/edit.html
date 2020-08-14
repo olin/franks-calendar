@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
+    <div class="Mainflex">
     {% include 'components/header--edit.html' %}
     <main>
       <div class="Page">
@@ -98,6 +99,7 @@
       </div>
     </main>
     {% include 'components/footer.html' %}
+    </div>
     <script>
         document.getElementById('all_day').addEventListener('click', e => {
           console.log(e.target.checked)

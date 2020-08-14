@@ -14,6 +14,36 @@
 @import url('https://use.typekit.net/gsh7wuf.css');
 @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
 
+.Mainflex {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    main {
+        flex: 1 0 auto;
+    }
+}
+
+.Messages {
+    margin-top: 1rem;
+    position: absolute;
+    width: 100%;
+
+    .Message {
+        width: 80%;
+        font-family: $sans;
+        font-size: 1.2rem;
+        color: #000;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #F8C7CE;
+        text-align: center;
+        border-radius: .25rem;
+        padding: .5em 0;
+    }
+}
+
+
 .Home {
   display: flex;
 }
@@ -25,6 +55,7 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0.1rem 0.1rem 0.25rem $secondary;
+    flex: 0 1 0;
 
     &__title {
       font-family: $title;
@@ -686,7 +717,6 @@
     font-weight: 600;
     text-align: center;
     padding: 1rem 1rem;
-    flex: 0 1 0;
     position: sticky;
     bottom: -999rem;
 

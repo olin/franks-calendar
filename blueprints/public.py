@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort
+from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort, flash
 from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
 from modules.forms import EventForm
@@ -21,8 +21,7 @@ public = Blueprint(
 
 @public.route("/", methods=["GET"])
 def index():
-    if request.method == "GET":
-        return render_template("home.html")
+    return render_template("home.html")
 
 
 @public.route("/add", methods=["POST", "GET"])
@@ -238,4 +237,8 @@ def cancel_event(event_id):
     template = Template(open(path).read())
     content = template.render(name=event_data["title"])
 
-    return redirect("mailto://{}?subject=Your%20event%20was%20cancelled&body={}".format(event_data.get("email"), content ), code=302)
+    if request.args.get("email"):
+        return redirect("mailto://{}?subject=Your%20event%20was%20cancelled&body={}".format(event_data.get("email"), content ), code=302)
+    else:
+        flash("Your event has been canceled (refresh to clear this message)")
+        return redirect(url_for("public.index"))

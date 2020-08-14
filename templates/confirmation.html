@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
+    <div class="Mainflex">
     {% include 'components/header.html' %}
     <main>
         <div class="Confirmation">
@@ -72,5 +73,6 @@
                 <p>If you wish to make changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="{{ magic_link }}">link to edit this event</a>. This link will also be emailed to you for you to save.</p>
             </div>
     </main>
-{% include 'components/footer.html' %}
+    {% include 'components/footer.html' %}
+    </div>
 {% endblock %}
