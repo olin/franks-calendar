@@ -41,7 +41,6 @@ def add_event():
                 host_name=inserted_event['host_name'],
                 host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
-                duration=inserted_event['duration']
             )
         )
     return render_template("add.html", form=form)
@@ -76,7 +75,6 @@ def edit_event(event_id):
         form.description.data = event.get("description")
         form.host_name.data = event.get("host_name")
         form.host_email.data = event.get("host_email")
-        form.duration.data = event.get("duration")
 
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
@@ -89,8 +87,9 @@ def edit_event(event_id):
         event_data = db.get_one(ObjectId(event_id))
         if event_data["status"] == Status.APPROVED.value:
             #if the event was already approved, send an email to everyone who may have exported and ical of the event
-            emails = event_data["shared_emails"]
-            email.notify_shared_emails(event_data, emails)
+            emails = event_data.get("shared_emails")
+            if emails:
+                email.notify_shared_emails(event_data, emails)
 
         return redirect(
             url_for("public.edit_confirmation",
@@ -103,7 +102,6 @@ def edit_event(event_id):
                 host_name=inserted_event['host_name'],
                 host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
-                duration=inserted_event['duration']
             ),
         )
     elif request.method == "DELETE":
@@ -129,16 +127,7 @@ def confirmation():
     event_id = request.args.get('event_id')
     magic_id = db.get_event_with_magic(event_id)["magic"]
 
-    duration_type = request.args.get('duration')
-    if duration_type == "hour":
-        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
-    elif duration_type == "day":
-        duration = request.args.get('start').split(' ')[0]
-    elif duration_type == "many":
-        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
-    else:
-        duration = request.args.get('start') + " - " + request.args.get('end')
-
+    duration = ""
     return render_template("confirmation.html",
         title=request.args.get('title'),
         category_id=request.args.get('category'),
@@ -157,16 +146,7 @@ def edit_confirmation():
     event_id = request.args.get('event_id')
     magic_id = db.get_event_with_magic(event_id)["magic"]
 
-    duration_type = request.args.get('duration')
-    if duration_type == "hour":
-        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
-    elif duration_type == "day":
-        duration = request.args.get('start').split(' ')[0]
-    elif duration_type == "many":
-        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
-    else:
-        duration = request.args.get('start') + " - " + request.args.get('end')
-
+    duration = "" # quickfix
     return render_template("confirmation--published.html",
         title=request.args.get('title'),
         category=request.args.get('category'),
@@ -175,7 +155,7 @@ def edit_confirmation():
         host_name=request.args.get('host_name'),
         host_email=request.args.get('host_email'),
         magic_link=f"/edit/{event_id}?magic={magic_id}",
-        duration=duration,
+        duration = ""
     ), 200
 
 
@@ -185,7 +165,7 @@ def export_event(eventid):
     event_data = db.get_one(ObjectId(eventid))
     recipient = json.loads(request.data).get("email")
     db.add_to_export_list(eventid, recipient)
-    #add the recipient to a list of everyone who downloaded ical
+    # add the recipient to a list of everyone who downloaded ical
 
     email.send_ical(event_data, recipient)
     return "Success", 200

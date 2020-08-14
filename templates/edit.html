@@ -93,7 +93,7 @@
           <div class="Form__flex Form__box Form__box__buttons">
             <input class="Form__button Form__button--green" type="submit" id="submitButton" name="Submit" value="Submit Changes" />
             <input class="Form__button Form__button--blue" type="reset" name="Reset" value="Reset Changes" onClick="window.location.reload()" />
-            <input class="Form__button Form__button--red" type="button" value="Cancel Event" onClick="confirmDelete()" />
+            <input class="Form__button Form__button--red" type="button" value="Cancel Event" id="deleteButton" />
           </div>
         </form>
       </div>
@@ -101,8 +101,27 @@
     {% include 'components/footer.html' %}
     </div>
     <script>
+        // Load in times
+        document.addEventListener("DOMContentLoaded", () => {
+            var dtstart = "{{ form.dtstart.data }}".split(" ");
+            var dtend = "{{ form.dtend.data }}".split(" ");
+
+            var startDate = dtstart[0];
+            var endDate = dtend[0];
+
+            document.getElementById("start_date").value = startDate.replace("/", "-");
+            document.getElementById("end_date").value = endDate.replace("/", "-");
+
+            if (dtstart[1] !== "00:00:00") {
+                document.getElementById("start_time").value = dtstart[1].substring(0,5);
+                document.getElementById("end_time").value = dtend[1].substring(0,5);
+            } else {
+                document.getElementById('all_day').checked = true;
+                document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
+            }
+        })
+
         document.getElementById('all_day').addEventListener('click', e => {
-          console.log(e.target.checked)
           if (e.target.checked) {
             document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
           } else {
@@ -110,15 +129,13 @@
           }
         });
 
-        function confirmDelete(e) {
+        document.getElementById("deleteButton").addEventListener("click", e => {
             if (confirm("Are you sure you want to delete this event?")) {
-                console.log("Called")
                 window.location.href = "/cancel_event/{{ event_id }}?magic={{ magic }}";
             } else {
-                console.log("Called2")
                 e.preventDefault();
             }
-        }
+        });
 
         function validateForm(e) {
           var start = document.getElementById('start_date').value;
@@ -129,11 +146,8 @@
             end = end + " " + document.getElementById("end_time").value;
           }
 
-          var dtstart = Date.parse(start);
-          var dtend = Date.parse(end);
-
-          console.log(start);
-          console.log(end);
+          var dtstart = new Date(start);
+          var dtend = new Date(end);
 
           if (dtstart > dtend) {
             alert("Start Time cannot be later than End Time!");
@@ -142,8 +156,17 @@
             return;
           }
 
-          document.getElementById('dtstart').value = dtstart;
-          document.getElementById('dtend').value = dtend;
+          var options = {
+              year: "2-digit",
+              month:"2-digit",
+              day:"2-digit",
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit"
+          }
+          document.getElementById("dtstart").value = dtstart.toLocaleString("en-us", options).replace(",","");
+          document.getElementById("dtend").value = dtend.toLocaleString("en-us", options).replace(",","");
 
           // Must be an Olin Email
           var emailPattern = /.*@olin\.edu/
