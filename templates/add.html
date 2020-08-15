@@ -97,7 +97,6 @@
     </div>
     <script>
         document.getElementById('all_day').addEventListener('click', e => {
-          console.log(e.target.checked)
           if (e.target.checked) {
             document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
           } else {
@@ -114,11 +113,8 @@
             end = end + " " + document.getElementById("end_time").value;
           }
 
-          var dtstart = Date.parse(start);
-          var dtend = Date.parse(end);
-
-          console.log(start);
-          console.log(end);
+          var dtstart = new Date(start);
+          var dtend = new Date(end);
 
           if (dtstart > dtend) {
             alert("Start Time cannot be later than End Time!");
@@ -127,8 +123,17 @@
             return;
           }
 
-          document.getElementById('dtstart').value = dtstart;
-          document.getElementById('dtend').value = dtend;
+          const options = {
+              year: "2-digit",
+              month:"2-digit",
+              day:"2-digit",
+              hour12: false,
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit"
+          }
+          document.getElementById('dtstart').value = dtstart.toLocaleString("en-us", options).replace(",","");
+          document.getElementById('dtend').value = dtend.toLocaleString("en-us", options).replace(",","");
 
           // Must be an Olin Email
           var emailPattern = /.*@olin\.edu/

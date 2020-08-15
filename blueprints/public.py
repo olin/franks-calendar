@@ -32,14 +32,6 @@ def add_event():
         email.send_submission_confirmation(request.base_url, inserted_event)
         return redirect(
             url_for('public.confirmation',
-                title=inserted_event['title'],
-                category=inserted_event['category'],
-                location=inserted_event['location'],
-                start=inserted_event['dtstart'].strftime("%m/%d/%Y %-I:%M %p"),
-                end=inserted_event['dtend'].strftime("%m/%d/%Y %-I:%M %p"),
-                description=inserted_event['description'],
-                host_name=inserted_event['host_name'],
-                host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
             )
         )
@@ -93,14 +85,6 @@ def edit_event(event_id):
 
         return redirect(
             url_for("public.edit_confirmation",
-                title=inserted_event['title'],
-                category=inserted_event['category'],
-                location=inserted_event['location'],
-                start=inserted_event['dtstart'].strftime("%m/%d/%Y %-I:%M %p"),
-                end=inserted_event['dtend'].strftime("%m/%d/%Y %-I:%M %p"),
-                description=inserted_event['description'],
-                host_name=inserted_event['host_name'],
-                host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
             ),
         )
@@ -125,37 +109,39 @@ def admin_page():
 @public.route("/confirmation", methods=["GET"])
 def confirmation():
     event_id = request.args.get('event_id')
-    magic_id = db.get_event_with_magic(event_id)["magic"]
+    event = db.get_event_with_magic(event_id)
 
-    duration = ""
-    return render_template("confirmation.html",
-        title=request.args.get('title'),
-        category_id=request.args.get('category'),
-        category_display=categoryText[request.args.get('category')],
-        location=request.args.get('location'),
-        description=request.args.get('description'),
-        host_name=request.args.get('host_name'),
-        host_email=request.args.get('host_email'),
-        magic_link=f"/edit/{event_id}?magic={magic_id}",
-        duration=duration,
-    ), 200
+    start_date = event["dtstart"].strftime("%b %-d, %Y")
+    start_time = event["dtstart"].strftime("%-H:%M %p")
+    end_date = event["dtend"].strftime("%b %-d, %Y")
+    end_time = event["dtend"].strftime("%-H:%M %p")
+
+    if start_date == end_date:
+        time_display = f"{start_date} {start_time} - {end_time}"
+    else:
+        time_display = f"{start_date} {start_time} - {end_date} {end_time}"
+
+    return render_template("confirmation.html", event=event, time_display=time_display), 200
 
 
 @public.route("/edit-confirmation")
 def edit_confirmation():
     event_id = request.args.get('event_id')
-    magic_id = db.get_event_with_magic(event_id)["magic"]
+    event = db.get_event_with_magic(event_id)
 
-    duration = "" # quickfix
+    start_date = event["dtstart"].strftime("%b %-d, %Y")
+    start_time = event["dtstart"].strftime("%-H:%M %p")
+    end_date = event["dtend"].strftime("%b %-d, %Y")
+    end_time = event["dtend"].strftime("%-H:%M %p")
+
+    if start_date == end_date:
+        time_display = f"{start_date} {start_time} - {end_time}"
+    else:
+        time_display = f"{start_date} {start_time} - {end_date} {end_time}"
+
     return render_template("confirmation--published.html",
-        title=request.args.get('title'),
-        category=request.args.get('category'),
-        location=request.args.get('location'),
-        description=request.args.get('description'),
-        host_name=request.args.get('host_name'),
-        host_email=request.args.get('host_email'),
-        magic_link=f"/edit/{event_id}?magic={magic_id}",
-        duration = ""
+        event=event,
+        time_display=time_display
     ), 200
 
 
