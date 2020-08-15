@@ -221,6 +221,7 @@ class App extends React.Component {
         this.toggleTag = this.toggleTag.bind(this);
         this.destroyPopUp = this.destroyPopUp.bind(this);
         this.renderEventPage = this.renderEventPage.bind(this);
+        this.handleTagCaretClick = this.handleTagCaretClick.bind(this);
 
     }
     generateInitialTagState(tagList, tagState = {}) {
@@ -290,6 +291,20 @@ class App extends React.Component {
             popUp: <EventPage event={this.state.events.find(obj => obj.id === eventID)} returnToCalendar={this.destroyPopUp} />
         })
     }
+    handleTagCaretClick(tag) {
+      const newState = {
+        tagStates: {
+          ...this.state.tagStates,
+          [tag.path]: {
+            ...this.state.tagStates[tag.path],
+            expanded: !this.state.tagStates[tag.path].expanded,
+          },
+        },
+      };
+      console.log(this.state.tagStates[tag.path])
+      console.log(newState.tagStates[tag.path])
+      this.setState(newState);
+    }
     renderEventPage() {
         let event = this.state.allEvents.find(obj => obj.id.toString() === this.state.urlid)
         if (event){
@@ -319,7 +334,7 @@ class App extends React.Component {
 
         return (
             <>
-                <Sidebar tags={this.state.tags} onTagClicked={this.toggleTag} tagStates={this.state.tagStates} />
+                <Sidebar tags={this.state.tags} onTagClicked={this.toggleTag} tagStates={this.state.tagStates} onTagCaretClick={this.handleTagCaretClick} />
                 <div className="Calendar">
                     {this.state.popUp}
 
