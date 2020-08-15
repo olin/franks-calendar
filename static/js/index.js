@@ -47,9 +47,9 @@ function clean_event_list(events, tags) {
             events[i].categoryColor = "other"
         } else {
             events[i].category = events[i]['category'];
-            events[i].categoryColor = events[i].category[0]
+            events[i].categoryColor = events[i].category;
         }
-        const tagColor =  tags[events[i].category[0]].color;
+        const tagColor =  tags[events[i].category].color;
         const tagColorLight = color(tagColor).lightness(88).hex().toString();
         events[i].backgroundColor = tagColorLight;
         events[i].borderColor = tagColorLight;
@@ -122,18 +122,7 @@ class App extends React.Component {
       const newTagStates = this.recursivelySetTagVisibility(tag.id, !tag.visible);
 
       // Filter the events so only those with selected tags are shown
-      const filteredEvents = this.state.allEvents.filter(event => {
-        // Check each category/tag on an event to see if it's selected
-        for (const tagId of event.category) {
-          // Check if this specific category/tag is currently hidden
-          if (newTagStates[tagId].visible) {
-            // This category/tag is visible, so show the event
-            return true;
-          }
-        }
-        // None of the tags on this event are visible, so hide this event
-        return false;
-      });
+      const filteredEvents = this.state.allEvents.filter(event => newTagStates[event.category].visible);
 
       // Update the state
       this.setState({
