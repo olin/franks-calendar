@@ -2,6 +2,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter, Route } from "react-router-dom";
+import color from 'color';
 
 import '../css/index.scss';
 import Sidebar from './components/sidebar.js';
@@ -33,114 +34,124 @@ const masterTagList = [
     children: [
       {
         id: 'academic_calendar',
-        color: '#BFD1E2',
+        color: '#00458C',
         displayName: 'Academic Calendar',
         defaultVisible: true,
         path: 'academic_affairs:academic_calendar',
       },
       {
         id: 'academic_advising',
-        color: '#BFD1E2',
+        color: '#00458C',
         displayName: 'Academic Advising',
         defaultVisible: true,
         path: 'academic_affairs:academic_advising',
       },
     ],
-    color: '#BFD1E2',
+    color: '#00458C',
     defaultExpanded: true,
     defaultVisible: true,
     path: 'academic_affairs',
   },
-    {
-      id: 'student_affairs',
-      children: [
-        {
-          id: 'residential',
-          color: '#C9EAE8',
-          displayName: 'Residential',
-          defaultVisible: true,
-          path: 'student_affairs:residential',
-        },
-        {
-          id: 'health',
-          color: '#C9EAE8',
-          displayName: 'Health and Wellness',
-          defaultVisible: true,
-          path: 'student_affairs:health',
-        },
-        {
-          id: 'pgp',
-          color: '#C9EAE8',
-          displayName: 'PGP',
-          defaultVisible: true,
-          path: 'student_affairs:pgp',
-        },
-        {
-          id: 'hr',
-          color: '#C9EAE8',
-          displayName: 'HR',
-          defaultVisible: true,
-          path: 'student_affairs:hr',
-        },
-        {
-          id: 'diversity',
-          color: '#C9EAE8',
-          displayName: 'Diversity and Inclusion',
-          defaultVisible: true,
-          path: 'student_affairs:diversity',
-        },
-        {
-          id: 'international',
-          color: '#C9EAE8',
-          displayName: "Intl' and Study Away",
-          defaultVisible: true,
-          path: 'student_affairs:international',
-          },
-        ],
-        color: '#C9EAE8',
-        defaultExpanded: true,
+  {
+    id: 'student_affairs',
+    children: [
+      {
+        id: 'residential',
+        color: '#26AAA5',
+        displayName: 'Residential',
         defaultVisible: true,
-        displayName: 'Student Affairs',
-        path: 'student_affairs',
-    },
+        path: 'student_affairs:residential',
+      },
+      {
+        id: 'health',
+        color: '#26AAA5',
+        displayName: 'Health and Wellness',
+        defaultVisible: true,
+        path: 'student_affairs:health',
+      },
+      {
+        id: 'pgp',
+        color: '#26AAA5',
+        displayName: 'PGP',
+        defaultVisible: true,
+        path: 'student_affairs:pgp',
+      },
+      {
+        id: 'hr',
+        color: '#26AAA5',
+        displayName: 'HR',
+        defaultVisible: true,
+        path: 'student_affairs:hr',
+      },
+      {
+        id: 'diversity',
+        color: '#26AAA5',
+        displayName: 'Diversity and Inclusion',
+        defaultVisible: true,
+        path: 'student_affairs:diversity',
+      },
+      {
+        id: 'international',
+        color: '#26AAA5',
+        displayName: "Intl' and Study Away",
+        defaultVisible: true,
+        path: 'student_affairs:international',
+        },
+      ],
+      color: '#26AAA5',
+      defaultExpanded: true,
+      defaultVisible: true,
+      displayName: 'Student Affairs',
+      path: 'student_affairs',
+  },
   {
     id: 'admission',
-    color: '#F8C7CE',
+    color: '#E31D3C',
     displayName: 'Admission and Financial Aid',
     defaultVisible: true,
     path: 'admission',
   },
   {
     id: 'library',
-    color: '#DED6E9',
+    color: '#511C74',
     displayName: 'The Library',
     defaultVisible: true,
     path: 'library',
   },
   {
     id: 'shop',
-    color: '#E3EFCF',
+    color: '#8EBE3F',
     displayName: 'The Shop',
     defaultVisible: true,
     path: 'shop',
   },
   {
     id: 'clubs',
-    color: '#FCDDC7',
+    color: '#F47920',
     displayName: 'Clubs and Organizations',
     defaultVisible: true,
     path: 'clubs',
   },
   {
     id: 'other',
-    color: '#FFF0C3',
+    color: '#FFC20E',
     displayName: 'Other Events',
     defaultVisible: true,
     path: 'other',
   },
 ];
 
+function generateTagLookupTable(tagList, table = {}) {
+  tagList.forEach(tag => {
+    table[tag.path] = tag;
+    if (tag.children) {
+      table = generateTagLookupTable(tag.children, table);
+    }
+  });
+  return table;
+}
 
+const tagLookupTable = generateTagLookupTable(masterTagList);
 
 function clean_event_list(events) {
     for (var i = 0; i < events.length; i++) {
@@ -170,7 +181,9 @@ function clean_event_list(events) {
             events[i].category = events[i]['category'];
             events[i].categoryColor = events[i].category[0]
         }
-        events[i].color = colorMap[events[i].category[0]]
+        // TODO: Change this so it uses the color of the first visible tag
+        const tagColor =  tagLookupTable[events[i].category[0]].color;
+        events[i].backgroundColor = color(tagColor).lightness(88).hex().toString();
     }
     return events
 }

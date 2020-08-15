@@ -2,19 +2,38 @@ import React from 'react';
 import styled from 'styled-components';
 
 const TagContainer = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato', sans-serif;
+  font-size: 1em;
+  margin: 8px;
 `;
 
 const TagChildrenContainer = styled.div`
   margin-left: 1em;
 `
 
-const TagCheckbox = styled.input`
-
-`;
-
-const TagName = styled.label`
+const TagToggle = styled.span`
+  background-color: ${(props) => props.checked ? `${props.color}33` : 'unset'};
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  cursor: pointer;
+  padding: 0.2em 0.2em 0.2em 12px;
+  position: relative;
+  user-select: none;
   word-break: keep-all;
+  
+  &::before {
+    background-color: ${(props) => props.checked ? props.color : 'unset'};
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 8px;
+  }
 `;
 /*
 const ExpandCollapseCaret = (
@@ -37,11 +56,19 @@ const Tag = (props) => {
     onTagClicked,
     tagStates,
   } = props;
-  const checkboxId = `tag-${tag.id}-cb`;
+  const checked = tagStates[tag.path].visible;
   return (
   <TagContainer>
-    <TagCheckbox type="checkbox" id={checkboxId} onChange={() => onTagClicked(tag)} checked={tagStates[tag.path].visible} />
-    <TagName htmlFor={checkboxId}>{tag.displayName}</TagName>
+    <TagToggle
+      aria-checked={checked}
+      checked={checked}
+      color={tag.color}
+      className={checked ? 'checked' : ''}
+      onClick={() => onTagClicked(tag)}
+      role="checkbox"
+    >
+      {tag.displayName}
+    </TagToggle>
     {/*{tag.children && <StyledExpandCollapseCaret expanded={tag.defaultVisible}/>}*/}
   </TagContainer>
   );
