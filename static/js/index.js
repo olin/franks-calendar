@@ -50,7 +50,9 @@ function clean_event_list(events, tags) {
             events[i].categoryColor = events[i].category[0]
         }
         const tagColor =  tags[events[i].category[0]].color;
-        events[i].backgroundColor = color(tagColor).lightness(88).hex().toString();
+        const tagColorLight = color(tagColor).lightness(88).hex().toString();
+        events[i].backgroundColor = tagColorLight;
+        events[i].borderColor = tagColorLight;
     }
     return events
 }
