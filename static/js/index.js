@@ -14,146 +14,14 @@ import client from './api';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import rrulePlugin from '@fullcalendar/rrule';
-
-const colorMap = {
-    links: "#009BDF",
-    academic_affairs: "#BFD1E2",
-    student_affairs: "#C9EAE8",
-    admission: "#F8C7CE",
-    library: "#DED6E9",
-    shop: "#E3EFCF",
-    clubs: "#FCDDC7",
-    other: "#FFF0C3",
-}
-
-const masterTagList = [
-  {
-    id: 'academic_affairs',
-    displayName: 'Academic',
-    children: [
-      {
-        id: 'academic_calendar',
-        color: '#00458C',
-        displayName: 'Academic Calendar',
-        defaultVisible: true,
-        path: 'academic_affairs:academic_calendar',
-      },
-      {
-        id: 'academic_advising',
-        color: '#00458C',
-        displayName: 'Academic Advising',
-        defaultVisible: true,
-        path: 'academic_affairs:academic_advising',
-      },
-    ],
-    color: '#00458C',
-    defaultExpanded: true,
-    defaultVisible: true,
-    path: 'academic_affairs',
-  },
-  {
-    id: 'student_affairs',
-    children: [
-      {
-        id: 'residential',
-        color: '#26AAA5',
-        displayName: 'Residential',
-        defaultVisible: true,
-        path: 'student_affairs:residential',
-      },
-      {
-        id: 'health',
-        color: '#26AAA5',
-        displayName: 'Health and Wellness',
-        defaultVisible: true,
-        path: 'student_affairs:health',
-      },
-      {
-        id: 'pgp',
-        color: '#26AAA5',
-        displayName: 'PGP',
-        defaultVisible: true,
-        path: 'student_affairs:pgp',
-      },
-      {
-        id: 'hr',
-        color: '#26AAA5',
-        displayName: 'HR',
-        defaultVisible: true,
-        path: 'student_affairs:hr',
-      },
-      {
-        id: 'diversity',
-        color: '#26AAA5',
-        displayName: 'Diversity and Inclusion',
-        defaultVisible: true,
-        path: 'student_affairs:diversity',
-      },
-      {
-        id: 'international',
-        color: '#26AAA5',
-        displayName: "Intl' and Study Away",
-        defaultVisible: true,
-        path: 'student_affairs:international',
-        },
-      ],
-      color: '#26AAA5',
-      defaultExpanded: true,
-      defaultVisible: true,
-      displayName: 'Student Affairs',
-      path: 'student_affairs',
-  },
-  {
-    id: 'admission',
-    color: '#E31D3C',
-    displayName: 'Admission and Financial Aid',
-    defaultVisible: true,
-    path: 'admission',
-  },
-  {
-    id: 'library',
-    color: '#511C74',
-    displayName: 'The Library',
-    defaultVisible: true,
-    path: 'library',
-  },
-  {
-    id: 'shop',
-    color: '#8EBE3F',
-    displayName: 'The Shop',
-    defaultVisible: true,
-    path: 'shop',
-  },
-  {
-    id: 'clubs',
-    color: '#F47920',
-    displayName: 'Clubs and Organizations',
-    defaultVisible: true,
-    path: 'clubs',
-  },
-  {
-    id: 'other',
-    color: '#FFC20E',
-    displayName: 'Other Events',
-    defaultVisible: true,
-    path: 'other',
-  },
-];
+import masterTagList from './tag-list.json';
 
 function generateTagLookupTable(tagList, table = {}) {
-  tagList.forEach(tag => {
-    table[tag.path] = tag;
-    if (tag.children) {
-      table = generateTagLookupTable(tag.children, table);
-    }
-  });
+  tagList.forEach(tag => table[tag.id] = tag);
   return table;
 }
 
-const tagLookupTable = generateTagLookupTable(masterTagList);
-
-function clean_event_list(events) {
+function clean_event_list(events, tags) {
     for (var i = 0; i < events.length; i++) {
         let dtstart = new Date(events[i]['dtstart']['$date']);
         let dtend = new Date(events[i]['dtend']['$date']);
@@ -181,8 +49,7 @@ function clean_event_list(events) {
             events[i].category = events[i]['category'];
             events[i].categoryColor = events[i].category[0]
         }
-        // TODO: Change this so it uses the color of the first visible tag
-        const tagColor =  tagLookupTable[events[i].category[0]].color;
+        const tagColor =  tags[events[i].category[0]].color;
         events[i].backgroundColor = color(tagColor).lightness(88).hex().toString();
     }
     return events
@@ -207,13 +74,10 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        const tagStates = this.generateInitialTagState(masterTagList);
-
         this.state = {
             events: [],
             allEvents: [],
-            tags: masterTagList,
-            tagStates,
+            tags: generateTagLookupTable(masterTagList),
             popUp: null,
             urlid: window.location.hash.substring(1),
         }
@@ -224,22 +88,6 @@ class App extends React.Component {
         this.handleTagCaretClick = this.handleTagCaretClick.bind(this);
 
     }
-    generateInitialTagState(tagList, tagState = {}) {
-        tagList.forEach(tag => {
-            // Initialized visibility based on the tag's defaultVisible attribute
-            tagState[tag.path] = {
-                visible: Boolean(tag.defaultVisible),
-            }
-            // Check if this tag has any children
-            if (tag.children) {
-                // Initialize whether this family is expanded or not
-                tagState[tag.path].expanded = Boolean(tag.defaultExpanded);
-                // Process the children
-                this.generateInitialTagState(tag.children, tagState);
-            }
-        });
-        return tagState;
-    }
 
     destroyPopUp() {
         this.setState({
@@ -247,29 +95,36 @@ class App extends React.Component {
         })
     }
 
-    recursivelySetTagVisibility(tag, visibility, tagStates) {
-      tagStates[tag.path].visible = visibility;
-      if (tag.children) {
-        tag.children.forEach(childTag => this.recursivelySetTagVisibility(childTag, visibility, tagStates));
+    recursivelySetTagVisibility(tagId, visibility, newTagsState = null) {
+      if (newTagsState === null) {
+        // Create a new copy of this.state.tags that we can modify
+        newTagsState = {...this.state.tags};
       }
+      // Create a copy of the tag object and set its visibility
+      newTagsState[tagId] = {
+        ...newTagsState[tagId],
+        visible: visibility,
+      };
+      if (newTagsState[tagId].children) {
+        newTagsState[tagId].children.forEach(childTagId => this.recursivelySetTagVisibility(childTagId, visibility, newTagsState));
+      }
+      return newTagsState;
     }
 
-    toggleTag(tag) {
-      // Create a copy of the state and a new copy of the tag state that we can modify
-      const newTagStates = {
-        ...this.state.tagStates,
-        [tag.path]: {...this.state.tagStates[tag.path]},
-      };
-      // Toggle the visibility of this tag
-      const newVisibility = !newTagStates[tag.path].visible;
-      this.recursivelySetTagVisibility(tag, newVisibility, newTagStates);
+  /**
+   * Toggles the visibility of a tag. If the tag has any children, their visibility
+   * will be set to be the same as the parent tag.
+   * @param tag the tag whose visibility is to be toggled
+   */
+  toggleTag(tag) {
+      const newTagStates = this.recursivelySetTagVisibility(tag.id, !tag.visible);
 
       // Filter the events so only those with selected tags are shown
       const filteredEvents = this.state.allEvents.filter(event => {
         // Check each category/tag on an event to see if it's selected
-        for (const eventCategory of event.category) {
+        for (const tagId of event.category) {
           // Check if this specific category/tag is currently hidden
-          if (newTagStates[eventCategory].visible) {
+          if (newTagStates[tagId].visible) {
             // This category/tag is visible, so show the event
             return true;
           }
@@ -280,9 +135,8 @@ class App extends React.Component {
 
       // Update the state
       this.setState({
-        tags: masterTagList,
+        tags: newTagStates,
         events: filteredEvents,
-        tagStates: newTagStates,
       });
     }
     eventClick(e) {
@@ -292,18 +146,14 @@ class App extends React.Component {
         })
     }
     handleTagCaretClick(tag) {
-      const newState = {
-        tagStates: {
-          ...this.state.tagStates,
-          [tag.path]: {
-            ...this.state.tagStates[tag.path],
-            expanded: !this.state.tagStates[tag.path].expanded,
-          },
+      const newTagsState = {
+        ...this.state.tags,
+        [tag.id]: {
+          ...this.state.tags[tag.id],
+          expanded: !this.state.tags[tag.id].expanded,
         },
       };
-      console.log(this.state.tagStates[tag.path])
-      console.log(newState.tagStates[tag.path])
-      this.setState(newState);
+      this.setState({ tags: newTagsState });
     }
     renderEventPage() {
         let event = this.state.allEvents.find(obj => obj.id.toString() === this.state.urlid)
@@ -317,7 +167,7 @@ class App extends React.Component {
     componentDidMount() {
         client.get('/api/events')
         .then(res => {
-            let event_list = clean_event_list(JSON.parse(res.data))
+            let event_list = clean_event_list(JSON.parse(res.data), this.state.tags)
             this.setState({
                 events: event_list,
                 allEvents: event_list,
@@ -334,7 +184,7 @@ class App extends React.Component {
 
         return (
             <>
-                <Sidebar tags={this.state.tags} onTagClicked={this.toggleTag} tagStates={this.state.tagStates} onTagCaretClick={this.handleTagCaretClick} />
+                <Sidebar tags={this.state.tags} onTagClicked={this.toggleTag} onTagCaretClick={this.handleTagCaretClick} />
                 <div className="Calendar">
                     {this.state.popUp}
 

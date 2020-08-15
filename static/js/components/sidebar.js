@@ -61,22 +61,25 @@ const Tag = (props) => {
   const {
     tag,
     onTagClicked,
-    tagStates,
     onTagCaretClick,
   } = props;
-  const checked = tagStates[tag.path].visible;
-  const expanded = tagStates[tag.path].expanded;
+  const {
+    children,
+    displayName,
+    expanded,
+    visible,
+  } = tag;
   return (
   <TagContainer>
     <TagToggle
-      aria-checked={checked}
-      checked={checked}
+      aria-checked={visible}
+      checked={visible}
       color={tag.color}
-      className={checked ? 'checked' : ''}
+      className={visible ? 'checked' : ''}
       role="checkbox"
     >
-      <TagText onClick={() => onTagClicked(tag)}>{tag.displayName}</TagText>
-      {tag.children && <ExpandCollapseCaret expanded={expanded} onClick={() => onTagCaretClick(tag)}/>}
+      <TagText onClick={() => onTagClicked(tag)}>{displayName}</TagText>
+      {children && <ExpandCollapseCaret expanded={expanded} onClick={() => onTagCaretClick(tag)}/>}
     </TagToggle>
   </TagContainer>
   );
@@ -85,9 +88,9 @@ const Tag = (props) => {
 const TagFamily = (props) => (
   <>
     <Tag {...props} />
-    {props.tag.children && props.tagStates[props.tag.path].expanded && (
+    {props.tag.children && props.tag.expanded && (
       <TagChildrenContainer>
-        {props.tag.children.map(childTag => <TagFamily {...props} tag={childTag}/>)}
+        {props.tag.children.map(childTagId => <TagFamily {...props} tag={props.tags[childTagId]}/>)}
       </TagChildrenContainer>
     )}
   </>
@@ -97,6 +100,8 @@ const SidebarWrapper = styled.div`
   flex-shrink: 0;
 `;
 
+const getTopLevelTags = (tags) => Object.values(tags).filter(t => t.id.indexOf(':') === -1);
+
 const Sidebar = (props) => (
   <SidebarWrapper>
     <h2 className="Sidebar__header">
@@ -105,7 +110,7 @@ const Sidebar = (props) => (
       </svg>
       FILTERS
     </h2>
-    {props.tags.map(tag => <TagFamily tag={tag} {...props} />)}
+    {getTopLevelTags(props.tags).map(tag => <TagFamily tag={tag} {...props} />)}
     <section className="Sidebar__section">
         <h2 className="Sidebar__header">
             <svg className="Sidebar__header__icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
