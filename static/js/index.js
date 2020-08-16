@@ -5,7 +5,7 @@ import { HashRouter, Route } from "react-router-dom";
 import color from 'color';
 
 import '../css/index.scss';
-import Sidebar from './components/Sidebar/sidebar.js';
+import Sidebar from './components/Sidebar/Sidebar.js';
 import EventPage from './components/event-page.js';
 import { ErrorBoundary } from './errorboundary';
 import client from './api';
