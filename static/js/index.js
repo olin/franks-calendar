@@ -47,7 +47,7 @@ function clean_event_list(events, tags) {
             events[i].categoryColor = "other"
         } else {
             events[i].category = events[i]['category'];
-            events[i].categoryColor = events[i].category;
+            events[i].categoryColor = events[i].category.split(":")[0];
         }
         const tagColor =  tags[events[i].category].color;
         const tagColorLight = color(tagColor).lightness(88).hex().toString();
