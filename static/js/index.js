@@ -43,7 +43,7 @@ function clean_event_list(events, tags) {
             events[i]['end'] = dtend;
         }
         if (!events[i].category) {
-            events[i].category = ["other"]
+            events[i].category = "other";
             events[i].categoryColor = "other"
         } else {
             events[i].category = events[i]['category'];
