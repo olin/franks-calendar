@@ -1,0 +1,106 @@
+[
+  {
+    "id": "academic_affairs",
+    "displayName": "Academic",
+    "children": [
+      "academic_affairs:academic_calendar",
+      "academic_affairs:academic_advising"
+    ],
+    "color": "#00458C",
+    "expanded": true,
+    "visible": true
+  },
+  {
+    "id": "academic_affairs:academic_calendar",
+    "color": "#00458C",
+    "displayName": "Academic Calendar",
+    "visible": true
+  },
+  {
+    "id": "academic_affairs:academic_advising",
+    "color": "#00458C",
+    "displayName": "Academic Advising",
+    "visible": true
+  },
+  {
+    "id": "student_affairs",
+    "children": [
+      "student_affairs:residential",
+      "student_affairs:health",
+      "student_affairs:pgp",
+      "student_affairs:hr",
+      "student_affairs:diversity",
+      "student_affairs:international"
+    ],
+    "color": "#26AAA5",
+    "expanded": true,
+    "visible": true,
+    "displayName": "Student Affairs"
+  },
+  {
+    "id": "student_affairs:residential",
+    "color": "#26AAA5",
+    "displayName": "Residential",
+    "visible": true
+  },
+  {
+    "id": "student_affairs:health",
+    "color": "#26AAA5",
+    "displayName": "Health and Wellness",
+    "visible": true
+  },
+  {
+    "id": "student_affairs:pgp",
+    "color": "#26AAA5",
+    "displayName": "PGP",
+    "visible": true
+  },
+  {
+    "id": "student_affairs:hr",
+    "color": "#26AAA5",
+    "displayName": "HR",
+    "visible": true
+  },
+  {
+    "id": "student_affairs:diversity",
+    "color": "#26AAA5",
+    "displayName": "Diversity and Inclusion",
+    "visible": true
+  },
+  {
+    "id": "student_affairs:international",
+    "color": "#26AAA5",
+    "displayName": "Intl' and Study Away",
+    "visible": true
+    },
+  {
+    "id": "admission",
+    "color": "#E31D3C",
+    "displayName": "Admission and Financial Aid",
+    "visible": true
+  },
+  {
+    "id": "library",
+    "color": "#511C74",
+    "displayName": "The Library",
+    "visible": true
+  },
+  {
+    "id": "shop",
+    "color": "#8EBE3F",
+    "displayName": "The Shop",
+    "visible": true
+  },
+  {
+    "id": "clubs",
+    "color": "#F47920",
+    "displayName": "Clubs and Organizations",
+    "visible": true
+  },
+  {
+    "id": "other",
+    "color": "#FFC20E",
+    "displayName": "Other Events",
+    "visible": true
+  }
+]

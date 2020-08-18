@@ -2,6 +2,13 @@
 {% block page %}
 
   <div style="display:flex; flex-direction: column; height:100%">
+    <div class="Messages">
+        {% for msg in get_flashed_messages() %}
+        <div class="Message">
+            {{ msg }}
+        </div>
+        {% endfor %}
+    </div>
     {% include 'components/header.html' %}
 
     <div id="calendar-root" class="Main"></div>

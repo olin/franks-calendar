@@ -1,21 +1,20 @@
 {% extends 'base.html' %}
 {% block page %}
+    <div class="Mainflex">
     {% include 'components/header.html' %}
     <main>
         <div class="Confirmation">
             <div class="Submission__box">
             <section class="Submission__content">
                 <h2 class="Submission__content__title">
-                  {{ title }}
+                  {{ event["title"] }}
                 </h2>
 
-                {% set c = category.split(":") %}
+                {% set c = event["category"].split(":") %}
                 <div class="Submission__content__block">
                   <span data-tag="{{ c[-1] }}" class="Submission__content__tag">
                     {{ c[-1] | replace("_", " ") | capitalize }}
-                  <!-- <span data-tag="{{ category_id }}" class="Event__content__tag">
-                    {{ category_display }}
-                  </span> -->
+                  </span>
                 </div>
 
                 <table class="Submission__content__table">
@@ -25,11 +24,11 @@
                     </td>
                     <td class="Submission__content__text">
                       <span class="Submission__content__date">
-                        {{ host_name }}
+                        {{ event["host_name"] }}
                       </span>
                       |
-                      <a class="Submission__content__text__link" href="mailto:{{ host_email }}">
-                          {{ host_email }}
+                      <a class="Submission__content__text__link" href="mailto:{{ event["host_email"] }}">
+                          {{ event["host_email"] }}
                       </a>
                     </td>
                   </tr>
@@ -39,7 +38,7 @@
                       When?
                     </td>
                     <td class="Submission__content__text">
-                      {{ duration }}
+                        {{ time_display }}
                     </td>
                   </tr>
 
@@ -48,7 +47,7 @@
                       Where?
                     </td>
                     <td class="Submission__content__text">
-                        {{ location }}
+                        {{ event["location"] }}
                     </td>
                   </tr>
 
@@ -57,7 +56,7 @@
                       What?
                     </td>
                     <td class="Submission__content__text">
-                        {{ description }}
+                        {{ event["description"] }}
 
                     </td>
                   </tr>
@@ -67,10 +66,11 @@
             </div>
             <div class="Confirmation__message">
                 <h2>Thanks for submitting an event!</h2>
-                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours. You will receive an email at <a class="Confirmation__message__link" href="mailto:{{ host_email }}">{{ host_email }}</a> notifying you of the event status. </p>
+                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours. You will receive an email at <a class="Confirmation__message__link" href="mailto:{{ event["host_email"] }}">{{ event["host_email"] }}</a> notifying you of the event status. </p>
 
-                <p>If you wish to make changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="{{ magic_link }}">link to edit this event</a>. This link will also be emailed to you for you to save.</p>
+                <p>If you wish to make changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="/edit/{{ event["_id"] }}?magic={{ event["magic"] }}">link to edit this event</a>. This link will also be emailed to you for you to save.</p>
             </div>
     </main>
-{% include 'components/footer.html' %}
+    {% include 'components/footer.html' %}
+    </div>
 {% endblock %}

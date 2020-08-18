@@ -2,9 +2,7 @@ FROM node:alpine
 RUN apk add --no-cache \
     python3-dev \
     gcc \
-    libc-dev \
-    libxml2-dev \
-    libxslt-dev
+    libc-dev
 
 RUN mkdir /www
 WORKDIR /www

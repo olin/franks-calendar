@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block page %}
+<div class="Mainflex">
 {% include 'components/header--admin.html' %}
 <main class="Admin  Main">
   <div class="Admin__table-wrapper">
@@ -16,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for event in events %}
+        {% for event in events[::-1] %}
             <tr>
                 <td class="Timestamp">{{ event["last_edited"] }}</td>
                 <td class="Submitter"><a href="mailto:{{ event['host_email'] }}">{{ event["host_name"] }}</a></td>
@@ -27,7 +28,7 @@
                 <td class="Cell--Moderator">
                     <a href="/approve/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--approve">Approve</a>
                     <a href="/request_changes/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--request">Request Changes</a>
-                    <a href="/cancel_event/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--cancel">Cancel</a>
+                    <a href="/cancel_event/{{ event['_id'] }}?magic={{ event['magic'] }}&email=yes" class="Moderator Moderator--cancel">Cancel</a>
                 </td>
                 </tr>
         {% endfor %}
@@ -36,4 +37,5 @@
   </div>
 </main>
 {% include 'components/footer.html' %}
+</div>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort
+from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort, flash
 from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
 from modules.forms import EventForm
@@ -21,8 +21,7 @@ public = Blueprint(
 
 @public.route("/", methods=["GET"])
 def index():
-    if request.method == "GET":
-        return render_template("home.html")
+    return render_template("home.html")
 
 
 @public.route("/add", methods=["POST", "GET"])
@@ -33,16 +32,7 @@ def add_event():
         email.send_submission_confirmation(request.base_url, inserted_event)
         return redirect(
             url_for('public.confirmation',
-                title=inserted_event['title'],
-                category=inserted_event['category'],
-                location=inserted_event['location'],
-                start=inserted_event['dtstart'].strftime("%m/%d/%Y %-I:%M %p"),
-                end=inserted_event['dtend'].strftime("%m/%d/%Y %-I:%M %p"),
-                description=inserted_event['description'],
-                host_name=inserted_event['host_name'],
-                host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
-                duration=inserted_event['duration']
             )
         )
     return render_template("add.html", form=form)
@@ -77,7 +67,6 @@ def edit_event(event_id):
         form.description.data = event.get("description")
         form.host_name.data = event.get("host_name")
         form.host_email.data = event.get("host_email")
-        form.duration.data = event.get("duration")
 
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
@@ -90,21 +79,13 @@ def edit_event(event_id):
         event_data = db.get_one(ObjectId(event_id))
         if event_data["status"] == Status.APPROVED.value:
             #if the event was already approved, send an email to everyone who may have exported and ical of the event
-            emails = event_data["shared_emails"]
-            email.notify_shared_emails(event_data, emails)
+            emails = event_data.get("shared_emails")
+            if emails:
+                email.notify_shared_emails(event_data, emails)
 
         return redirect(
             url_for("public.edit_confirmation",
-                title=inserted_event['title'],
-                category=inserted_event['category'],
-                location=inserted_event['location'],
-                start=inserted_event['dtstart'].strftime("%m/%d/%Y %-I:%M %p"),
-                end=inserted_event['dtend'].strftime("%m/%d/%Y %-I:%M %p"),
-                description=inserted_event['description'],
-                host_name=inserted_event['host_name'],
-                host_email=inserted_event['host_email'],
                 event_id=inserted_event['_id'],
-                duration=inserted_event['duration']
             ),
         )
     elif request.method == "DELETE":
@@ -128,55 +109,39 @@ def admin_page():
 @public.route("/confirmation", methods=["GET"])
 def confirmation():
     event_id = request.args.get('event_id')
-    magic_id = db.get_event_with_magic(event_id)["magic"]
+    event = db.get_event_with_magic(event_id)
 
-    duration_type = request.args.get('duration')
-    if duration_type == "hour":
-        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
-    elif duration_type == "day":
-        duration = request.args.get('start').split(' ')[0]
-    elif duration_type == "many":
-        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
+    start_date = event["dtstart"].strftime("%b %-d, %Y")
+    start_time = event["dtstart"].strftime("%-H:%M %p")
+    end_date = event["dtend"].strftime("%b %-d, %Y")
+    end_time = event["dtend"].strftime("%-H:%M %p")
+
+    if start_date == end_date:
+        time_display = f"{start_date} {start_time} - {end_time}"
     else:
-        duration = request.args.get('start') + " - " + request.args.get('end')
+        time_display = f"{start_date} {start_time} - {end_date} {end_time}"
 
-    return render_template("confirmation.html",
-        title=request.args.get('title'),
-        category_id=request.args.get('category'),
-        category_display=categoryText[request.args.get('category')],
-        location=request.args.get('location'),
-        description=request.args.get('description'),
-        host_name=request.args.get('host_name'),
-        host_email=request.args.get('host_email'),
-        magic_link=f"/edit/{event_id}?magic={magic_id}",
-        duration=duration,
-    ), 200
+    return render_template("confirmation.html", event=event, time_display=time_display), 200
 
 
 @public.route("/edit-confirmation")
 def edit_confirmation():
     event_id = request.args.get('event_id')
-    magic_id = db.get_event_with_magic(event_id)["magic"]
+    event = db.get_event_with_magic(event_id)
 
-    duration_type = request.args.get('duration')
-    if duration_type == "hour":
-        duration = request.args.get('start') + " - " + "".join(request.args.get('end').split(' ')[1:])
-    elif duration_type == "day":
-        duration = request.args.get('start').split(' ')[0]
-    elif duration_type == "many":
-        duration = request.args.get('start').split(' ')[0] + " - " + request.args.get('end').split(' ')[0]
+    start_date = event["dtstart"].strftime("%b %-d, %Y")
+    start_time = event["dtstart"].strftime("%-H:%M %p")
+    end_date = event["dtend"].strftime("%b %-d, %Y")
+    end_time = event["dtend"].strftime("%-H:%M %p")
+
+    if start_date == end_date:
+        time_display = f"{start_date} {start_time} - {end_time}"
     else:
-        duration = request.args.get('start') + " - " + request.args.get('end')
+        time_display = f"{start_date} {start_time} - {end_date} {end_time}"
 
     return render_template("confirmation--published.html",
-        title=request.args.get('title'),
-        category=request.args.get('category'),
-        location=request.args.get('location'),
-        description=request.args.get('description'),
-        host_name=request.args.get('host_name'),
-        host_email=request.args.get('host_email'),
-        magic_link=f"/edit/{event_id}?magic={magic_id}",
-        duration=duration,
+        event=event,
+        time_display=time_display
     ), 200
 
 
@@ -186,7 +151,7 @@ def export_event(eventid):
     event_data = db.get_one(ObjectId(eventid))
     recipient = json.loads(request.data).get("email")
     db.add_to_export_list(eventid, recipient)
-    #add the recipient to a list of everyone who downloaded ical
+    # add the recipient to a list of everyone who downloaded ical
 
     email.send_ical(event_data, recipient)
     return "Success", 200
@@ -238,4 +203,8 @@ def cancel_event(event_id):
     template = Template(open(path).read())
     content = template.render(name=event_data["title"])
 
-    return redirect("mailto://{}?subject=Your%20event%20was%20cancelled&body={}".format(event_data.get("email"), content ), code=302)
+    if request.args.get("email"):
+        return redirect("mailto://{}?subject=Your%20event%20was%20cancelled&body={}".format(event_data.get("email"), content ), code=302)
+    else:
+        flash("Your event has been canceled (refresh to clear this message)")
+        return redirect(url_for("public.index"))
