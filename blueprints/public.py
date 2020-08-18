@@ -112,9 +112,9 @@ def confirmation():
     event = db.get_event_with_magic(event_id)
 
     start_date = event["dtstart"].strftime("%b %-d, %Y")
-    start_time = event["dtstart"].strftime("%-H:%M %p")
+    start_time = event["dtstart"].strftime("%-I:%M %p")
     end_date = event["dtend"].strftime("%b %-d, %Y")
-    end_time = event["dtend"].strftime("%-H:%M %p")
+    end_time = event["dtend"].strftime("%-I:%M %p")
 
     if start_date == end_date:
         time_display = f"{start_date} {start_time} - {end_time}"

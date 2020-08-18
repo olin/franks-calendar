@@ -65,10 +65,13 @@
             </div>
             </div>
             <div class="Confirmation__message">
-                <h2>Thanks for submitting an event!</h2>
-                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours. You will receive an email at <a class="Confirmation__message__link" href="mailto:{{ event["host_email"] }}">{{ event["host_email"] }}</a> notifying you of the event status. </p>
+                <h2>&#127881; Thanks for submitting an event!</h2>
+                <p>A moderator will be looking at the submission and approving, requesting changes, or disapproving your event based on our <a class="Confirmation__message__link" href="/guidelines">event guidelines</a> within 24 hours.</p>
+                <p>You will receive an email at <a class="Confirmation__message__link" href="mailto:{{ event["host_email"] }}">{{ event["host_email"] }}</a> notifying you of the event status. </p>
 
-                <p>If you wish to make changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="/edit/{{ event["_id"] }}?magic={{ event["magic"] }}">link to edit this event</a>. This link will also be emailed to you for you to save.</p>
+                <h2>&#128736; To edit your event</h2>
+                <p>If something about the event details changes (or you want to update the event later with a recording link), do so here: <a class="Confirmation__message__link" href="/edit/{{ event["_id"] }}?magic={{ event["magic"] }}">edit this event</a>.</p>
+                <p>This link will also be emailed to you for you to save.</p>
             </div>
     </main>
     {% include 'components/footer.html' %}

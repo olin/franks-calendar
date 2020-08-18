@@ -21,11 +21,11 @@
                   <span>Note: You are submitting this in your time zone!<span>
                 </div>
                 <div class="Form__row__time__fields">
-                  <input type="date" id="start_date" />
-                  <input type="time" id="start_time" style="width:6rem" />
+                  <input type="date" id="start_date" required/>
+                  <input type="time" id="start_time" style="width:7rem" required/>
                   <p>to</p>
-                  <input type="time" id="end_time" style="width:6rem" />
-                  <input type="date" id="end_date" style="margin-right:0em" />
+                  <input type="time" id="end_time" style="width:7rem" required/>
+                  <input type="date" id="end_date" style="margin-right:0em" required/>
                 </div>
               </div>
               <div class="Form__row__day">
@@ -118,7 +118,6 @@
 
           if (dtstart > dtend) {
             alert("Start Time cannot be later than End Time!");
-            window.history.forward(-1);
             e.preventDefault(); // Prevent form from being submitted
             return;
           }
@@ -132,6 +131,7 @@
               minute: "2-digit",
               second: "2-digit"
           }
+
           document.getElementById('dtstart').value = dtstart.toLocaleString("en-us", options).replace(",","");
           document.getElementById('dtend').value = dtend.toLocaleString("en-us", options).replace(",","");
 
@@ -141,7 +141,7 @@
 
           if (!emailPattern.test(email)) {
               alert("You must use an Olin email!");
-              e.preventDefault()
+              e.preventDefault();
               return;
           }
         }
