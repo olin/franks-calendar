@@ -27,7 +27,7 @@ class EmailClient(object):
     
     def send_email(self, subject, message, recipient, attachments=None, ismultiple=False):
             mail = Mail(
-                from_email="frankscalendar.olin@gmail.com",
+                from_email="frankscalendar@olin.edu",
                 html_content=message, 
                 subject=subject,     
                 )
