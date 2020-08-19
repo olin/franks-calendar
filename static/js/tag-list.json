@@ -4,7 +4,7 @@
     "displayName": "Academic",
     "children": [
       "academic_affairs:academic_calendar",
-      "academic_affairs:academic_advising"
+      "academic_affairs:academic_support"
     ],
     "color": "#00458C",
     "expanded": true,
@@ -17,9 +17,9 @@
     "visible": true
   },
   {
-    "id": "academic_affairs:academic_advising",
+    "id": "academic_affairs:academic_support",
     "color": "#00458C",
-    "displayName": "Academic Advising",
+    "displayName": "Academic Support",
     "visible": true
   },
   {

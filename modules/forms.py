@@ -19,7 +19,7 @@ class EventForm(FlaskForm):
     category = SelectField('Category', validators=[DataRequired()], choices=[
         ("", "-- select an option --"),
         ("academic_affairs:academic_calendar", "Academic Calendar"),
-        ("academic_affairs:academic_advising", "Academic Advising"),
+        ("academic_affairs:academic_support", "Academic Support"),
         ("student_affairs:residential", "Residential"),
         ("student_affairs:health", "Health and Wellness"),
         ("student_affairs:pgp", "PGP"),
