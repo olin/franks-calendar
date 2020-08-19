@@ -1,7 +1,7 @@
 [
   {
     "id": "academic_affairs",
-    "displayName": "Academic",
+    "displayName": "Academic Affairs",
     "children": [
       "academic_affairs:academic_calendar",
       "academic_affairs:academic_support"
