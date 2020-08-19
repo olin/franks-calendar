@@ -65,11 +65,9 @@
           </div>
           </div>
           <div class="Confirmation__message">
-              <h2>Your event was successfully updated!</h2>
+              <h2>&#127881; Your event was successfully updated!</h2>
               <p>You can now view your new changes reflected on the main calendar.</p>
-
-              <p>If you wish to make changes to your event submission, you can do so using <a class="Confirmation__message__link" href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">this link to edit this event</a>. This link will also be emailed to you for you to save.</p>
-          </div>
+              <p>If you wish to make additional changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="/edit/{{ event["_id"] }}?magic={{ event["magic"] }}">link to edit this event</a>.</p>
     </main>
     {% include 'components/footer.html' %}
     </div>

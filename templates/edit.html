@@ -21,11 +21,11 @@
                     <span>Note: You are submitting this in your time zone!<span>
                   </div>
                   <div class="Form__row__time__fields">
-                    <input type="date" id="start_date" />
-                    <input type="time" id="start_time" style="width:6.2rem" />
+                    <input type="date" id="start_date" required/>
+                    <input type="time" id="start_time" style="width:7rem" required/>
                     <p>to</p>
-                    <input type="time" id="end_time" style="width:6.2rem" />
-                    <input type="date" id="end_date" style="margin-right:0em" />
+                    <input type="time" id="end_time" style="width:7rem" required/>
+                    <input type="date" id="end_date" style="margin-right:0em" required/>
                   </div>
                 </div>
                 <div class="Form__row__day">
@@ -64,7 +64,7 @@
                 {{ form.description.label }}
                 {{ form.description(placeholder="Who might be interested? What would they be doing? Is there anything they need to have done before hand?
 
-  *If you have a zoom invite, feel free to add it here.") }}
+*If you have a zoom invite, feel free to add it here.") }}
               </div>
 
               <div class="Form__field">
@@ -151,7 +151,6 @@
 
           if (dtstart > dtend) {
             alert("Start Time cannot be later than End Time!");
-            window.history.forward(-1);
             e.preventDefault(); // Prevent form from being submitted
             return;
           }

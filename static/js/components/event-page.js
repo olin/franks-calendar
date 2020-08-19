@@ -11,20 +11,14 @@ export default class EventPage extends React.Component {
         // Retrieves event information and returns as ical file
         var eventID = this.props.event.id;
         var email = document.getElementById("exportEmail").value;
-        console.log(email);
 
-        if (!email) {
+        const emailPattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
+
+        if (!emailPattern.test(email)) {
           alert("You must enter an email!");
           e.preventDefault();
           return;
         }
-        //
-        // var pattern = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/;
-        // if (!pattern.test(email)) {
-        //   alert("Please enter a valid email!");
-        //   e.preventDefault();
-        //   return;
-        // }
 
         client.post('/export/' + eventID, {
           email: email
@@ -208,16 +202,18 @@ export default class EventPage extends React.Component {
                   </table>
                 </section>
 
-                <div id="eventExport" class="Event__export">
-                  <input type="email" id="exportEmail" class="Event__export__field" placeholder="franklin.olin@olin.edu"/>
-                  <button class="Event__export__button" onClick={this.exportEvent}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                      <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                    <span>Send me an iCal</span>
-                  </button>
-                </div>
+                <form>
+                  <div id="eventExport" class="Event__export">
+                    <input id="exportEmail" class="Event__export__field" placeholder="franklin.olin@olin.edu" type="email" required/>
+                    <button class="Event__export__button" onClick={this.exportEvent}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                      <span>Send me an iCal</span>
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
         )
