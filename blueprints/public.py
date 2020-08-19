@@ -121,7 +121,11 @@ def confirmation():
     else:
         time_display = f"{start_date} {start_time} - {end_date} {end_time}"
 
-    return render_template("confirmation.html", event=event, time_display=time_display), 200
+    return render_template("confirmation.html", 
+        event=event, 
+        time_display=time_display, 
+        category_display=categoryText[event["category"]]
+    ), 200
 
 
 @public.route("/edit-confirmation")
@@ -141,7 +145,8 @@ def edit_confirmation():
 
     return render_template("confirmation--published.html",
         event=event,
-        time_display=time_display
+        time_display=time_display,
+        category_display=categoryText[event["category"]]
     ), 200
 
 
@@ -186,7 +191,7 @@ def request_event_changes(event_id):
     template = Template(open(path).read())
     content = template.render(name=event_data["title"], link=email.generate_link("",event_data))
 
-    return redirect("mailto://{}?subject=Your%20event%20requires%20edits&body={}".format(event_data.get("email"), content ), code=302)
+    return redirect("mailto://{}?subject=Your%20event%20requires%20edits&body={}".format(event_data.get("host_email"), content), code=302)
 
 
 @public.route("/cancel_event/<event_id>", methods=["GET"])

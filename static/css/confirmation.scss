@@ -58,30 +58,41 @@
         }
 
         &__tag {
-          font-size: 1em;
-          font-family: $sans;
-          color: black;
-          text-transform: capitalize;
-          text-decoration: none;
-          border-radius: 0.5em;
-          padding: 0.35em 0.5em;
-          display: inline-block;
-
-          &[data-tag="academic_affairs"] {background-color: $academic--light; &::before {background-color: $academic}}
-          &[data-tag="academic_advising"] {background-color: $academic--light; &::before {background-color: $academic}}
-          &[data-tag="academic_calendar"] {background-color: $academic--light; &::before {background-color: $academic}}
-          &[data-tag="international"] {background-color: $student--light; &::before {background-color: $student}}
-          &[data-tag="residential"] {background-color: $student--light; &::before {background-color: $student}}
-          &[data-tag="health"] {background-color: $student--light; &::before {background-color: $student}}
-          &[data-tag="pgp"] {background-color: $student--light; &::before {background-color: $student}}
-          &[data-tag="hr"] {background-color: $student--light; &::before {background-color: $student}}
-          &[data-tag="student_affairs"] {background-color: $student--light; &::before {background-color: $student}}
-          &[data-tag="admission"] {background-color: $admission--light; &::before {background-color: $admission}}
-          &[data-tag="library"] {background-color: $library--light; &::before {background-color: $library}}
-          &[data-tag="shop"] {background-color: $shop--light; &::before {background-color: $shop}}
-          &[data-tag="clubs"] {background-color: $clubs--light; &::before {background-color: $clubs}}
-          &[data-tag="other"] {background-color: $other--light; &::before {background-color: $other}}
-        }
+            font-size: 1rem;
+            font-family: $sans;
+            color: black;
+            text-transform: capitalize;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            padding: 0.35rem 0.5rem .35rem .8rem;
+            display: inline-block;
+            position: relative;
+      
+            &[data-tag="academic_affairs"] {background-color: $academic--light; &::before {background-color: $academic}}
+            &[data-tag="academic_support"] {background-color: $academic--light; &::before {background-color: $academic}}
+            &[data-tag="academic_calendar"] {background-color: $academic--light; &::before {background-color: $academic}}
+            &[data-tag="international"] {background-color: $student--light; &::before {background-color: $student}}
+            &[data-tag="residential"] {background-color: $student--light; &::before {background-color: $student}}
+            &[data-tag="health"] {background-color: $student--light; &::before {background-color: $student}}
+            &[data-tag="pgp"] {background-color: $student--light; &::before {background-color: $student}}
+            &[data-tag="hr"] {background-color: $student--light; &::before {background-color: $student}}
+            &[data-tag="student_affairs"] {background-color: $student--light; &::before {background-color: $student}}
+            &[data-tag="admission"] {background-color: $admission--light; &::before {background-color: $admission}}
+            &[data-tag="library"] {background-color: $library--light; &::before {background-color: $library}}
+            &[data-tag="shop"] {background-color: $shop--light; &::before {background-color: $shop}}
+            &[data-tag="clubs"] {background-color: $clubs--light; &::before {background-color: $clubs}}
+            &[data-tag="other"] {background-color: $other--light; &::before {background-color: $other}}
+      
+            &::before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 8px;
+                height: 100%;
+                background-color: inherit;
+            }
+          }
 
         &__table {
         width: 100%;

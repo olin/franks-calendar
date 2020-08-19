@@ -13,7 +13,7 @@
                 {% set c = event["category"].split(":") %}
                 <div class="Submission__content__block">
                   <span data-tag="{{ c[-1] }}" class="Submission__content__tag">
-                    {{ c[-1] | replace("_", " ") | capitalize }}
+                    {{ category_display }}
                   </span>
                 </div>
 
@@ -72,7 +72,6 @@
                 <h2>&#128736; To edit your event</h2>
                 <p>If something about the event details changes (or you want to update the event later with a recording link), do so here: <a class="Confirmation__message__link" href="/edit/{{ event["_id"] }}?magic={{ event["magic"] }}">edit this event</a>.</p>
                 <p>This link will also be emailed to you for you to save.</p>
-            </div>
     </main>
     {% include 'components/footer.html' %}
     </div>

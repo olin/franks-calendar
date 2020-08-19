@@ -13,7 +13,7 @@
                 {% set c = event["category"].split(":") %}
                 <div class="Submission__content__block">
                   <span data-tag="{{ c[-1] }}" class="Submission__content__tag">
-                    {{ c[-1] | replace("_", " ") | capitalize }}
+                    {{ category_display }}
                   </span>
                 </div>
 
@@ -67,9 +67,7 @@
           <div class="Confirmation__message">
               <h2>&#127881; Your event was successfully updated!</h2>
               <p>You can now view your new changes reflected on the main calendar.</p>
-
               <p>If you wish to make additional changes to your event submission, you can do so here: <a class="Confirmation__message__link" href="/edit/{{ event["_id"] }}?magic={{ event["magic"] }}">link to edit this event</a>.</p>
-          </div>
     </main>
     {% include 'components/footer.html' %}
     </div>
