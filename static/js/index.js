@@ -49,10 +49,15 @@ function clean_event_list(events, tags) {
             events[i].category = events[i]['category'];
             events[i].categoryColor = events[i].category.split(":")[0];
         }
-        const tagColor =  tags[events[i].category].color;
-        const tagColorLight = color(tagColor).lightness(88).hex().toString();
-        events[i].backgroundColor = tagColorLight;
-        events[i].borderColor = tagColorLight;
+        const { category } = events[i];
+        if (category in tags) {
+          const tagColor = tags[events[i].category].color;
+          const tagColorLight = color(tagColor).lightness(88).hex().toString();
+          events[i].backgroundColor = tagColorLight;
+          events[i].borderColor = tagColorLight;
+        } else {
+          console.warn(`Could not find event category "${category}" in the map of event colors.`);
+        }
     }
     return events
 }
