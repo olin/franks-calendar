@@ -149,7 +149,7 @@ class EmailClient(object):
         eventid = str(event['_id'])
         #issues with retrieving base right now, but should be resolved when we have permanent hosting solution
         #return base + "/edit?event_id=" + eventid + "&magic=" + magic   
-        return "calendar.olin.build:5000/edit/" + eventid + "?magic=" + magic 
+        return "calendar.olin.build/edit/" + eventid + "?magic=" + magic 
 
     def create_ical(self, eventdata):
         #moved this method here from the public file bc we need to generate an ical multiple times

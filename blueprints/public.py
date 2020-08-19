@@ -186,7 +186,7 @@ def request_event_changes(event_id):
     template = Template(open(path).read())
     content = template.render(name=event_data["title"], link=email.generate_link("",event_data))
 
-    return redirect("mailto://{}?subject=Your%20event%20requires%20edits&body={}".format(event_data.get("email"), content ), code=302)
+    return redirect("mailto://{}?subject=Your%20event%20requires%20edits&body={}".format(event_data.get("host_email"), content), code=302)
 
 
 @public.route("/cancel_event/<event_id>", methods=["GET"])
