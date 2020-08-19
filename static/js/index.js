@@ -1,7 +1,7 @@
 // Import React stuff
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { HashRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, useHistory } from "react-router-dom";
 import color from 'color';
 
 import '../css/index.scss';
@@ -24,13 +24,13 @@ function generateTagLookupTable(tagList, table = {}) {
 function clean_event_list(events, tags) {
     for (var i = 0; i < events.length; i++) {
         let d = new Date();
-        //The difference between current timezone and GMT in milliseconds 
-        let diff =( d.getTimezoneOffset())* 60 * 1000 
+        //The difference between current timezone and GMT in milliseconds
+        let diff =( d.getTimezoneOffset())* 60 * 1000
         /*
         subtract the difference from unix time stamp before converting it to a date object
-        Date object automatically converts unix timestamp to current timezone, so subtracting 
+        Date object automatically converts unix timestamp to current timezone, so subtracting
         diff from the unix time stamp puts it in the GMT timezone
-        */ 
+        */
         let dtstart = new Date(events[i]['dtstart']['$date'] + diff);
         let dtend = new Date(events[i]['dtend']['$date'] + diff);
 
@@ -87,123 +87,99 @@ const EventComponent = ({ event, el }) => {
   return el;
 }
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
+const App = () => {
+  const [state, setState] = useState({
+    events: [],
+    allEvents: [],
+    tags: generateTagLookupTable(masterTagList),
+  });
 
-        this.state = {
-            events: [],
-            allEvents: [],
-            tags: generateTagLookupTable(masterTagList),
-            popUp: null,
-            urlid: window.location.hash.substring(1),
-        }
-        this.eventClick = this.eventClick.bind(this);
-        this.toggleTag = this.toggleTag.bind(this);
-        this.destroyPopUp = this.destroyPopUp.bind(this);
-        this.renderEventPage = this.renderEventPage.bind(this);
-        this.handleTagCaretClick = this.handleTagCaretClick.bind(this);
+  // Load the events from the server on the component render
+  useEffect(() => {
+    client.get('/api/events')
+      .then(res => {
+        let event_list = clean_event_list(JSON.parse(res.data), state.tags);
+        setState({
+          ...state,
+          events: event_list,
+          allEvents: event_list,
+        });
+      }).catch((err) => {
+        console.error(err);
+        alert('There was an error fetching events.');
+    });
+  }, []);
 
+  // We'll use this later to push a URL onto the history stack (to view an event)
+  const history = useHistory();
+
+  const recursivelySetTagVisibility = (tagId, visibility, newTagsState = null) => {
+    if (newTagsState === null) {
+      // Create a new copy of this.state.tags that we can modify
+      newTagsState = {...state.tags};
     }
-
-    destroyPopUp() {
-        this.setState({
-            popUp: null
-        })
+    // Create a copy of the tag object and set its visibility
+    newTagsState[tagId] = {
+      ...newTagsState[tagId],
+      visible: visibility,
+    };
+    if (newTagsState[tagId].children) {
+      newTagsState[tagId].children.forEach(childTagId => recursivelySetTagVisibility(childTagId, visibility, newTagsState));
     }
-
-    recursivelySetTagVisibility(tagId, visibility, newTagsState = null) {
-      if (newTagsState === null) {
-        // Create a new copy of this.state.tags that we can modify
-        newTagsState = {...this.state.tags};
-      }
-      // Create a copy of the tag object and set its visibility
-      newTagsState[tagId] = {
-        ...newTagsState[tagId],
-        visible: visibility,
-      };
-      if (newTagsState[tagId].children) {
-        newTagsState[tagId].children.forEach(childTagId => this.recursivelySetTagVisibility(childTagId, visibility, newTagsState));
-      }
-      return newTagsState;
-    }
+    return newTagsState;
+  };
 
   /**
    * Toggles the visibility of a tag. If the tag has any children, their visibility
    * will be set to be the same as the parent tag.
    * @param tag the tag whose visibility is to be toggled
    */
-  toggleTag(tag) {
-      const newTagStates = this.recursivelySetTagVisibility(tag.id, !tag.visible);
+  const toggleTag = (tag) => {
+    const newTagStates = recursivelySetTagVisibility(tag.id, !tag.visible);
 
-      // Filter the events so only those with selected tags are shown
-      const filteredEvents = this.state.allEvents.filter(event => newTagStates[event.category].visible);
+    // Filter the events so only those with selected tags are shown
+    const filteredEvents = state.allEvents.filter(event => newTagStates[event.category].visible);
 
-      // Update the state
-      this.setState({
-        tags: newTagStates,
-        events: filteredEvents,
-      });
-    }
-    eventClick(e) {
-        let eventID = e.event.id;
-        this.setState({
-            popUp: <EventPage event={this.state.events.find(obj => obj.id === eventID)} returnToCalendar={this.destroyPopUp} />
-        })
-    }
-    handleTagCaretClick(tag) {
+    // Update the state
+    setState({
+      ...state,
+      tags: newTagStates,
+      events: filteredEvents,
+    });
+  }
+    const eventClick = (e) => {
+      const eventID = e.event.id;
+      history.push(`/events/${eventID}`);
+    };
+    const handleTagCaretClick = (tag) => {
       const newTagsState = {
-        ...this.state.tags,
+        ...state.tags,
         [tag.id]: {
-          ...this.state.tags[tag.id],
-          expanded: !this.state.tags[tag.id].expanded,
+          ...state.tags[tag.id],
+          expanded: !state.tags[tag.id].expanded,
         },
       };
-      this.setState({ tags: newTagsState });
-    }
-    renderEventPage() {
-        let event = this.state.allEvents.find(obj => obj.id.toString() === this.state.urlid)
-        if (event){
-            this.setState({
-                popUp: <EventPage event={event} returnToCalendar={this.destroyPopUp} />
-            })
-        }
+      setState({ ...state, tags: newTagsState });
     }
 
-    componentDidMount() {
-     
-        client.get('/api/events')
-        .then(res => {
-            let event_list = clean_event_list(JSON.parse(res.data), this.state.tags)
-            this.setState({
-                events: event_list,
-                allEvents: event_list,
-            })
-            this.renderEventPage();
-        })
-        .catch(err => {
-            console.error(err);
-        })
-
-    }
-    render() {
-        window.location.hash = ""; // Clear the hash when the calendar renders
-
+    // TODO: Preserve the state of Full Calendar (view mode, date, etc) so we don't need to keep rendering it when
+    // showing the event details page and so we can re-render it later with the same appearance
         return (
             <>
-                <Sidebar tags={this.state.tags} onTagClicked={this.toggleTag} onTagCaretClick={this.handleTagCaretClick} />
+                <Sidebar tags={state.tags} onTagClicked={toggleTag} onTagCaretClick={handleTagCaretClick} />
                 <div className="Calendar">
-                    {this.state.popUp}
-
+                  <Route path="/events/:eventId">
+                    <EventPage events={state.allEvents} />
+                  </Route>
                     <FullCalendar
                         allDaySlot={true}
                         defaultView="timeGridWeek"
                         nowIndicator={true}
                         plugins={[ dayGridPlugin, timeGridPlugin ]}
-                        events={this.state.events}
+                        events={state.events}
                         displayEventTime={true}
                         eventRender={EventComponent}
-                        eventClick={this.eventClick}
+                        eventClick={eventClick}
                         header={{
                             left: 'prev,next today',
                             center: 'title',
@@ -214,14 +190,13 @@ class App extends React.Component {
                 </div>
             </>
         );
-    };
 };
 
 var renderedApp = (
     <ErrorBoundary>
-        <HashRouter hashType="noslash">
+        <BrowserRouter>
             <App />
-        </HashRouter>
+        </BrowserRouter>
     </ErrorBoundary>
 );
 

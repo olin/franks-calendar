@@ -1,22 +1,16 @@
 import React from 'react';
 import client from '../api';
+import {Link, useParams} from "react-router-dom";
 
-export default class EventPage extends React.Component {
-    constructor(props) {
-        super(props);
 
-        this.exportEvent = this.exportEvent.bind(this);
-    }
-    exportEvent(e) {
+function exportEvent(eventID) {
         // Retrieves event information and returns as ical file
-        var eventID = this.props.event.id;
         var email = document.getElementById("exportEmail").value;
 
         const emailPattern = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/
 
         if (!emailPattern.test(email)) {
           alert("You must enter an email!");
-          e.preventDefault();
           return;
         }
 
@@ -42,8 +36,11 @@ export default class EventPage extends React.Component {
         })
     }
 
-    render() {
-        window.location.hash = this.props.event.id;
+const EventPage = (props) => {
+  // Get the event ID from the URL
+  const { eventId } = useParams();
+
+  const event = props.events.find(e => e.id === eventId);
 
         function timeString(date) {
             let hours = date.getHours();
@@ -63,13 +60,13 @@ export default class EventPage extends React.Component {
         }
 
         var timeText;
-        if (this.props.event.allDay) {
+        if (event.allDay) {
 
             // var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
             // var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
 
-            var startDate = new Date(this.props.event.start).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            var endDate = new Date(this.props.event.end).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            var startDate = new Date(event.start).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            var endDate = new Date(event.end).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
             if (startDate === endDate) {
                 timeText = (
@@ -87,26 +84,26 @@ export default class EventPage extends React.Component {
             timeText = (
                 <>
                     <span class="Event__content__date">
-                      {this.props.event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                      {event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
                     </span>
                     |
                     <span class="Event__content__time">
-                      {timeString(this.props.event.start)}
+                      {timeString(event.start)}
                     </span>
                     -
                     <span class="Event__content__time">
-                      {timeString(this.props.event.end)}
+                      {timeString(event.end)}
                     </span>
                 </>
             )
         }
 
-        var category = this.props.event.category.split(":").slice(-1)[0];
+        var category = event.category.split(":").slice(-1)[0];
 
         // check if the location is a url
         // location is a url if matches this pattern: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
         // display the location as <a href="location">location</a>
-        var location_text = this.props.event.location;
+        var location_text = event.location;
         var location_el;
         if (location_text.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/)) {
             location_el = <a class="Event__content__text__link" href={location_text}>{location_text}</a>;
@@ -117,7 +114,7 @@ export default class EventPage extends React.Component {
         // check if the location is a url
         // location is a url if matches this pattern: /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/
         // display the location as <a href="location">location</a>
-        var location_text = this.props.event.location;
+        var location_text = event.location;
         var location_el;
         if (location_text.match(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[\-;:&=\+\$,\w]+@)?[A-Za-z0-9\.\-]+|(?:www\.|[\-;:&=\+\$,\w]+@)[A-Za-z0-9\.\-]+)((?:\/[\+~%\/\.\w\-_]*)?\??(?:[\-\+=&;%@\.\w_]*)#?(?:[\.\!\/\\\w]*))?)/)) {
             location_el = <a class="Event__content__text__link" href={location_text}>{location_text}</a>;
@@ -128,7 +125,7 @@ export default class EventPage extends React.Component {
         return (
             <div class="Event">
               <div class="Event__width">
-                <button class="Event__button" onClick={this.props.returnToCalendar}>
+                <Link class="Event__button" to="/">
                   <span class="Event__button__icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <circle cx="12" cy="12" r="10"></circle>
@@ -139,11 +136,11 @@ export default class EventPage extends React.Component {
                   <span class="Event__button__text">
                     Back to Calendar
                   </span>
-                </button>
+                </Link>
 
                 <section class="Event__content">
                   <h2 class="Event__content__title">
-                    {this.props.event.title}
+                    {event.title}
                   </h2>
 
                   <div class="Event__content__block">
@@ -159,11 +156,11 @@ export default class EventPage extends React.Component {
                       </td>
                       <td class="Event__content__text">
                         <span class="Event__content__date">
-                          {this.props.event.host_name}
+                          {event.host_name}
                         </span>
                         |
-                        <a style={{paddingLeft:'0.5em'}} class="Event__content__text__link" href={"mailto:" + this.props.event.host_email}>
-                          {this.props.event.host_email}
+                        <a style={{paddingLeft:'0.5em'}} class="Event__content__text__link" href={"mailto:" + event.host_email}>
+                          {event.host_email}
                         </a>
                       </td>
                     </tr>
@@ -177,7 +174,7 @@ export default class EventPage extends React.Component {
                       </td>
                     </tr>
 
-                    {this.props.event.location &&
+                    {event.location &&
                         <tr class="Event__content__table__row">
                           <td class="Event__content__headers">
                             Where?
@@ -188,13 +185,13 @@ export default class EventPage extends React.Component {
                         </tr>
                     }
 
-		                {this.props.event.description &&
+		                {event.description &&
                     <tr class="Event__content__table__row">
                       <td class="Event__content__headers">
                         What?
                       </td>
                       <td class="Event__content__text">
-                         <div dangerouslySetInnerHTML={{__html: this.props.event.description.replace(/\<br\>/, '')}}>
+                         <div dangerouslySetInnerHTML={{__html: event.description.replace(/\<br\>/, '')}}>
                          </div>
                       </td>
                     </tr>
@@ -205,7 +202,7 @@ export default class EventPage extends React.Component {
                 <form>
                   <div id="eventExport" class="Event__export">
                     <input id="exportEmail" class="Event__export__field" placeholder="franklin.olin@olin.edu" type="email" required/>
-                    <button class="Event__export__button" onClick={this.exportEvent}>
+                    <button class="Event__export__button" onClick={() => exportEvent(eventId)}>
                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
@@ -217,5 +214,7 @@ export default class EventPage extends React.Component {
               </div>
             </div>
         )
-    }
 }
+
+export default EventPage;
+
