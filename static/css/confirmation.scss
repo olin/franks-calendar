@@ -69,7 +69,7 @@
             position: relative;
       
             &[data-tag="academic_affairs"] {background-color: $academic--light; &::before {background-color: $academic}}
-            &[data-tag="academic_advising"] {background-color: $academic--light; &::before {background-color: $academic}}
+            &[data-tag="academic_support"] {background-color: $academic--light; &::before {background-color: $academic}}
             &[data-tag="academic_calendar"] {background-color: $academic--light; &::before {background-color: $academic}}
             &[data-tag="international"] {background-color: $student--light; &::before {background-color: $student}}
             &[data-tag="residential"] {background-color: $student--light; &::before {background-color: $student}}
