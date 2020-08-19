@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import color from "color";
 
 const TagContainer = styled.div`
   font-family: 'Lato', sans-serif;
@@ -11,8 +12,10 @@ const TagChildrenContainer = styled.div`
   margin-left: 1em;
 `;
 
+const lightenColor = (c) => color(c).lightness(88).hex().toString();
+
 const TagToggle = styled.span`
-  background-color: ${(props) => props.checked ? `${props.color}33` : 'unset'};
+  background-color: ${(props) => props.checked ? `${lightenColor(props.color)}` : 'unset'};
   border-top-right-radius: 0.25em;
   border-bottom-right-radius: 0.25em;
   cursor: pointer;
