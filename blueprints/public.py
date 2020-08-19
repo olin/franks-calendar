@@ -19,8 +19,10 @@ public = Blueprint(
     static_folder="../static/build/"
 )
 
+
 @public.route("/", methods=["GET"])
-def index():
+@public.route("/events/<event_id>", methods=["GET"])
+def index(event_id=None):
     return render_template("home.html")
 
 

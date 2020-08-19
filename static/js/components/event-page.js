@@ -40,7 +40,27 @@ const EventPage = (props) => {
   // Get the event ID from the URL
   const { eventId } = useParams();
 
+  // If the user navigated straight to this page and the event data hasn't been loaded
+  // by index.js yet, show a loading message.
+  if (!props.events || props.events.length === 0) {
+    return (
+      <div className="Event">
+        <h1 className="Event__content__title">Loading...</h1>
+      </div>
+    );
+  }
+
   const event = props.events.find(e => e.id === eventId);
+
+  // Make sure we've found the event. Otherwise, show a 404 message.
+  if (!event) {
+    return (
+      <div className="Event">
+        <h1 className="Event__content__title">404 Event Not Found</h1>
+        <p>We're sorry, but we could not find the event you were looking for. Perhaps it has been deleted.</p>
+      </div>
+    )
+  }
 
         function timeString(date) {
             let hours = date.getHours();
