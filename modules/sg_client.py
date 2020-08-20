@@ -55,11 +55,8 @@ class EmailClient(object):
                 mail.attachment = attachedFile
             
             try:
-                print("email sent bob")
                 response = self.client.mail.send.post(request_body=mail.get())
             except Exception as e:
-                print("email not sent")
-                print("barreelasdasd")
                 print(e.message)
 
     def send_ical(self, event_data, recipient):

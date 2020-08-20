@@ -68,7 +68,7 @@ def edit_event(event_id):
         form.host_name.data = event.get("host_name")
         form.host_email.data = event.get("host_email")
 
-        status = event.get("status") + ""
+        status = event.get("status")
         
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
