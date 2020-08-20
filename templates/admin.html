@@ -23,8 +23,8 @@
                 <td class="Submitter"><a href="mailto:{{ event['host_email'] }}">{{ event["host_name"] }}</a></td>
                 <td class="Status" data-status={{ event["status"] }}>{{ event["status"] }}</td>
                 <td class="Event--Name">{{ event["title"] }}</td>
-                <td class="Event--Page"><a href="/#{{event['_id']}}">Event Page Permalink</a></td>
-                <td class="Edit--Link"><a href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">Edit Page Permalink</a></td>
+                <td class="Event--Page"><a href="/#{{event['_id']}}">View Event</a></td>
+                <td class="Edit--Link"><a href="/edit/{{ event['_id'] }}?magic={{ event['magic'] }}">Edit Event</a></td>
                 <td class="Cell--Moderator">
                     <a href="/approve/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--approve">Approve</a>
                     <a href="/request_changes/{{ event['_id'] }}?magic={{ event['magic'] }}" class="Moderator Moderator--request">Request Changes</a>

@@ -27,7 +27,7 @@ class EmailClient(object):
     
     def send_email(self, subject, message, recipient, attachments=None, ismultiple=False):
             mail = Mail(
-                from_email="frankscalendar@olin.edu",
+                from_email="frankscalendar.olin@gmail.com",
                 html_content=message, 
                 subject=subject,     
                 )
@@ -55,9 +55,12 @@ class EmailClient(object):
                 mail.attachment = attachedFile
             
             try:
+                print("email sent bob")
                 response = self.client.mail.send.post(request_body=mail.get())
             except Exception as e:
-                print(e)
+                print("email not sent")
+                print("barreelasdasd")
+                print(e.message)
 
     def send_ical(self, event_data, recipient):
         attachment = self.create_ical(event_data)
@@ -79,7 +82,7 @@ class EmailClient(object):
 
     def send_edit_link(self, url, event, comments):
         #for whenever edits are required 
-        eventlink = self.generate_link(url, event)
+        eventlink = self.generate_edit_link(url, event)
         eventname = event['title']
         recipient = event['host_email']
         path = os.getcwd() + "/templates/emails/edit_event.txt"
@@ -90,7 +93,7 @@ class EmailClient(object):
 
     def send_submission_confirmation(self, url, event):
         #if user submits event via form, send confirmation of submission
-        eventlink = self.generate_link(url, event)
+        eventlink = self.generate_edit_link(url, event)
         eventname = event['title']
         recipient = event['host_email']
         path = os.getcwd() + "/templates/emails/await_approval.txt"
@@ -102,7 +105,7 @@ class EmailClient(object):
 
     def send_reminder(self, url, event):
         #if user hasn't made requested edits, send reminder
-        eventlink = self.generate_link(url, event)
+        eventlink = self.generate_edit_link(url, event)
         eventname = event['title']
         recipient = event['host_email']
         path = os.getcwd() + "/templates/emails/cancelled.txt"
@@ -114,7 +117,7 @@ class EmailClient(object):
 
     def send_approval_notice(self, url, event):
         #if event was approved by moderator, send notice
-        eventlink = self.generate_link(url, event)
+        eventlink = self.generate_edit_link(url, event)
         eventname = event['title']
         recipient = event['host_email']
         path = os.getcwd() + "/templates/emails/approved.txt"
@@ -124,9 +127,9 @@ class EmailClient(object):
 
         self.send_email("Event submission approved!", content, recipient) 
 
-    def notify_moderator(self, url, event, moderator):
+    def notify_moderator(self, code, event, moderator):
         #if event was modified after the moderator already approved it, an email will notify the moderator of changes
-        editlink = url + "/admin"
+        editlink = "calendar.olin.build/admin?code=" + code
         path = os.getcwd() + "/templates/emails/notify_moderator.txt"
         recipient = moderator
 
@@ -142,9 +145,9 @@ class EmailClient(object):
             host=event['host_name'], 
             host_email=event['host_email'])
         
-        self.send_email("A published event was updated", content, recipient) 
+        self.send_email("A published event was updated", content, moderator) 
 
-    def generate_link(self, base, event):
+    def generate_edit_link(self, base, event):
         magic = str(event['magic'])
         eventid = str(event['_id'])
         #issues with retrieving base right now, but should be resolved when we have permanent hosting solution

@@ -23,19 +23,29 @@ function generateTagLookupTable(tagList, table = {}) {
 
 function clean_event_list(events, tags) {
     for (var i = 0; i < events.length; i++) {
-        let dtstart = new Date(events[i]['dtstart']['$date']);
-        let dtend = new Date(events[i]['dtend']['$date']);
+        let d = new Date();
+        //The difference between current timezone and GMT in milliseconds 
+        let diff =( d.getTimezoneOffset() - 120 )* 60 * 1000 
+        /*
+        subtract the difference from unix time stamp before converting it to a date object
+        Date object automatically converts unix timestamp to current timezone, so subtracting 
+        diff from the unix time stamp puts it in the GMT timezone
+        */ 
+        let dtstart = new Date(events[i]['dtstart']['$date'] - diff);
+        let dtend = new Date(events[i]['dtend']['$date'] - diff);
 
         events[i]['id'] = events[i]['_id']['$oid'];
 
         let numDays = events[i]['dtend']['$date'] - events[i]['dtstart']['$date'] + 1000;
-        if (numDays % 86400000 == 0) {
+
+        if (numDays >= 86400000 || numDays == 1000) {
             events[i]['allDay'] = true;
             /*
             I hate javascript :(
             */
             let startDate = new Date([dtstart.getFullYear(), dtstart.getUTCMonth()+1, dtstart.getUTCDate()].join('-'));
             let endDate = new Date([dtend.getFullYear(), dtend.getUTCMonth()+1, dtend.getUTCDate()].join('-'));
+
             events[i]['start'] = startDate.setDate(startDate.getDate() + 1);
             events[i]['end'] = endDate.setDate(endDate.getDate() + 1);
         } else {
@@ -161,6 +171,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+     
         client.get('/api/events')
         .then(res => {
             let event_list = clean_event_list(JSON.parse(res.data), this.state.tags)
@@ -185,6 +196,7 @@ class App extends React.Component {
                     {this.state.popUp}
 
                     <FullCalendar
+                        allDaySlot={true}
                         defaultView="timeGridWeek"
                         nowIndicator={true}
                         plugins={[ dayGridPlugin, timeGridPlugin ]}

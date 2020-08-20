@@ -69,11 +69,11 @@ def edit_event(event_id):
         form.host_email.data = event.get("host_email")
 
         status = event.get("status") + ""
-       
+        
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
 
-        return render_template("edit.html", form=form, magic=str(event.get("magic")), status=status)
+        return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id, status=status)
     elif request.method == "POST":
         #I know this isn't good code, but it looks like db.update_event doesnt return the status and shared_email fields of event
         #So i need to make a second call to retrieve event. We can change this by making update_event return the status and shared_emails

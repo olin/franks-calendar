@@ -138,6 +138,14 @@
         });
 
         function validateForm(e) {
+          {% if status == "Approved" %}
+            if (confirm("Submitting this event will send a new ical to everyone who already exported this event. Are you sure you want to submit these changes?")) {
+              console.log("event submitted")
+            } else {
+              e.preventDefault();
+              return;
+            }
+          {% endif %}
           var start = document.getElementById('start_date').value;
           var end = document.getElementById('end_date').value;
 
