@@ -25,14 +25,14 @@ function clean_event_list(events, tags) {
     for (var i = 0; i < events.length; i++) {
         let d = new Date();
         //The difference between current timezone and GMT in milliseconds 
-        let diff =( d.getTimezoneOffset() - 120 )* 60 * 1000 
+        let diff =( d.getTimezoneOffset())* 60 * 1000 
         /*
         subtract the difference from unix time stamp before converting it to a date object
         Date object automatically converts unix timestamp to current timezone, so subtracting 
         diff from the unix time stamp puts it in the GMT timezone
         */ 
-        let dtstart = new Date(events[i]['dtstart']['$date'] - diff);
-        let dtend = new Date(events[i]['dtend']['$date'] - diff);
+        let dtstart = new Date(events[i]['dtstart']['$date'] + diff);
+        let dtend = new Date(events[i]['dtend']['$date'] + diff);
 
         events[i]['id'] = events[i]['_id']['$oid'];
 
