@@ -68,16 +68,19 @@ def edit_event(event_id):
         form.host_name.data = event.get("host_name")
         form.host_email.data = event.get("host_email")
 
+        status = event.get("status")
+        
         if (str(event.get("magic")) != request.args.get("magic")) or (event is None):
             return render_template("404.html")
 
-        return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id)
+        return render_template("edit.html", form=form, magic=str(event.get("magic")), event_id=event_id, status=status)
     elif request.method == "POST":
         #I know this isn't good code, but it looks like db.update_event doesnt return the status and shared_email fields of event
         #So i need to make a second call to retrieve event. We can change this by making update_event return the status and shared_emails
         inserted_event = db.update_event(event_id, form.data)
         event_data = db.get_one(ObjectId(event_id))
         if event_data["status"] == Status.APPROVED.value:
+            email.notify_moderator("test", event_data, "frankscalendar.olin@gmail.com")
             #if the event was already approved, send an email to everyone who may have exported and ical of the event
             emails = event_data.get("shared_emails")
             if emails:
@@ -143,12 +146,13 @@ def edit_confirmation():
     else:
         time_display = f"{start_date} {start_time} - {end_date} {end_time}"
 
-    return render_template("confirmation--published.html",
+    if event["status"] == Status.APPROVED.value:
+        return render_template("confirmation--published.html",
         event=event,
-        time_display=time_display,
-        category_display=categoryText[event["category"]]
-    ), 200
-
+        time_display=time_display
+        ), 200
+    else:
+        return render_template("confirmation.html", event=event, time_display=time_display)
 
 
 @public.route("/export/<eventid>", methods=["POST"])
@@ -189,7 +193,7 @@ def request_event_changes(event_id):
 
     path = os.getcwd() + "/templates/emails/edit_event.txt"
     template = Template(open(path).read())
-    content = template.render(name=event_data["title"], link=email.generate_link("",event_data))
+    content = template.render(name=event_data["title"], link=email.generate_edit_link("",event_data))
 
     return redirect("mailto://{}?subject=Your%20event%20requires%20edits&body={}".format(event_data.get("host_email"), content), code=302)
 

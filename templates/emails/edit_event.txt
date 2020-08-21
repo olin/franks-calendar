@@ -4,5 +4,5 @@ The event you submitted to Frank’s Calendar, {{name}}, requires edits before i
 
 Please make the required changes within 7 days via this magic link: {{ link }}
 
-Sincerely,
+Sincerely, 
 Frank's Calendar
