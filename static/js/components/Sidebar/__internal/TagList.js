@@ -29,7 +29,7 @@ const TagToggle = styled.span`
   word-break: keep-all;
   
   &::before {
-    background-color: ${(props) => props.checked ? props.color : 'unset'};
+    background-color: ${(props) => props.color};
     content: '';
     display: inline-block;
     position: absolute;
