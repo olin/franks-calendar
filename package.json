@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jack-Greenberg/franks-calendar.git"
+    "url": "git+https://github.com/olin/franks-calendar.git"
   },
   "author": "Jules Brettle, Ruby Eisenbud, Karen Hinh, Jack Greenberg",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jack-Greenberg/franks-calendar/issues"
+    "url": "https://github.com/olin/franks-calendar/issues"
   },
-  "homepage": "https://github.com/jack-Greenberg/franks-calendar#readme",
+  "homepage": "https://github.com/olin/franks-calendar#readme",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
