@@ -10,7 +10,7 @@ services:
       MONGODB_SRV: ${MONGODB_SRV}
       MONGODB_DB_NAME: ${MONGODB_DB_NAME}
     env_file:
-      - ./.sendgrid.env
+      - ./.env
     restart: always
     tty: true
     ports:
