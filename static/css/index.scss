@@ -238,11 +238,29 @@
     }
 }
 
+.Mod-message {
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:1em;
+  min-width: 60em; 
+  max-width: 70em;
+  padding: 0em 1em 0em 1em;
+
+  color: $main;
+  font-family: $sans;
+  line-height:1.5em;
+  background-color: $secondary--light;
+  border-radius: 0.35rem;
+}
+
 .Main {
     display: flex;
     flex-direction: row;
     flex: 1 0 auto;
     margin-bottom: 0.5rem;
+    &.Admin {
+      flex-direction: column;
+    }
 }
 
 .Button {

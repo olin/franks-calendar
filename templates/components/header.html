@@ -56,6 +56,9 @@
         <p class="Header__timezone__time" id="Timezone"></p>
       </div>
   </header>
+  <div class="Mod-message">
+    {{ mod_message | safe }}
+  </div>
 
   <script lazy="True">
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;

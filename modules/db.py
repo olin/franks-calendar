@@ -63,6 +63,22 @@ class DatabaseClient(object):
         event["_id"] = inserted_id
         return event
 
+    def clear_mod_message(self):
+        self.client.mod_messages.delete_many({})
+    
+    def set_mod_message(self, message):
+        self.clear_mod_message()
+        self.client.mod_messages.insert_one({"message": message})
+
+    def get_mod_message(self):
+        mod_dict = self.client.mod_messages.find_one({})
+        if mod_dict is not None:
+            mod_message = mod_dict["message"]
+            return mod_message
+        else: 
+            return ""
+        
+
     def authenticate_magic_link(self, event_id, magic):
         event = self.client.events.find_one({
             "_id": ObjectId(event_id),

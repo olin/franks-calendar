@@ -155,11 +155,12 @@ class EmailClient(object):
         #moved this method here from the public file bc we need to generate an ical multiple times
         cal = Calendar()
         event = Event()
+        permalink = "http://calendar.olin.build/events/" + str(eventdata["_id"])
         event["dtstart"] = datetime.strftime(eventdata["dtstart"], "%Y%m%dT%H%M%S")
         event["dtend"] = datetime.strftime(eventdata["dtend"], "%Y%m%dT%H%M%S")
         event["summary"] = eventdata["title"]
         event["location"] = eventdata["location"]
-        event["description"] = eventdata["description"]
+        event["description"] = eventdata["description"] + "\n \n" + permalink
         cal.add_component(event)
 
         return cal.to_ical()
