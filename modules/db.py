@@ -4,6 +4,7 @@ from bson import json_util
 from uuid import uuid4 as uuid
 from datetime import datetime, timezone
 from enum import Enum
+import os
 
 
 class Status(Enum):
@@ -19,12 +20,14 @@ class DatabaseClient(object):
     """
     @property
     def client(self):
-        self._client = MongoClient(
-            "database:27017",
-            username="frank",
-            password="calendar",
-            authSource="calendar-dev"
-        )['calendar-dev']
+        # Get the MongoDB SRV connection string and the database name from environment variables
+        srv = os.environ.get('MONGODB_SRV')
+        db_name = os.environ.get('MONGODB_DB_NAME')
+        if not srv:
+            raise EnvironmentError('Could not find the environment variable "MONGODB_SRV"')
+        if not db_name:
+            raise EnvironmentError('Could not find the environment variable "MONGODB_DB_NAME"')
+        self._client = MongoClient(srv)[db_name]
 
         return self._client
 

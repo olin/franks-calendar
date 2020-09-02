@@ -45,12 +45,6 @@ printf "${NC}"
 printf "🐋 Docker containers set up!\n\n"
 sleep .1
 
-printf "📦 Ingesting mock events from events.json...\n"
-docker exec -ti franks-calendar-database \
-    mongoimport --db=calendar-dev --collection=events \
-    --authenticationDatabase=calendar-dev --username=frank \
-    --password=calendar --drop --file ./events.json > mongo.log
-
 printf "🐍 Adding additional Python libraries...\n"
 docker exec -ti franks-calendar-web pip3 install Flask-WTF > /dev/null
 sleep .1

@@ -7,25 +7,13 @@ services:
       FLASK_ENV: development
       CALENDAR_LINK: https://calendar.google.com/calendar/ical/ocrlnk9gfl2ee4shh46ffd2kgk%40group.calendar.google.com/private-50a283aa50d5e2b1108d41806b087c44/basic.ics
       ADMIN_CODE: ${ADMIN_CODE}
+      MONGODB_SRV: ${MONGODB_SRV}
+      MONGODB_DB_NAME: ${MONGODB_DB_NAME}
     env_file:
-      - ./.sendgrid.env
+      - ./.env
     restart: always
     tty: true
     ports:
     - "5000:5000"
     volumes:
     - ".:/www"
-
-  database:
-    image: mongo
-    container_name: franks-calendar-database
-    restart: always
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
-      MONGO_INITDB_DATABASE: calendar-dev
-    ports:
-    - "27017-27019:27017-27019"
-    volumes:
-    - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-    - ./events.json:/events.json
