@@ -3,7 +3,7 @@
 <div class="Mainflex">
 {% include 'components/header--admin.html' %}
 <main class="Admin  Main">
-  <form action="/mod-message" method="post" >
+  <form action="/mod-message" method="post" autocomplete="off">
     {{ form.csrf_token }}
     {{ form.modMessage.label }} {{ form.modMessage() }}
     <input type="submit" value="Submit">
