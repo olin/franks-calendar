@@ -24,12 +24,12 @@ class EmailClient(object):
         ).client
         return self._client
 
-    
+
     def send_email(self, subject, message, recipient, attachments=None, ismultiple=False):
             mail = Mail(
                 from_email="frankscalendar@olin.edu",
-                html_content=message, 
-                subject=subject,     
+                html_content=message,    
+                subject=subject,
                 )
 
             personalize = Personalization()
@@ -143,6 +143,32 @@ class EmailClient(object):
             host_email=event['host_email'])
         
         self.send_email("A published event was updated", content, moderator) 
+
+    def notify_moderator_new_event(self, code, event, moderator):
+        # if event was modified after the moderator already approved it, an email will notify the moderator of changes
+        editlink = "calendar.olin.build/admin?code=" + code
+        approve_link="calendar.olin.build/approve/{id}?magic={magic}".format(id=event['_id'], magic=event['magic'])
+        request_changes_link="calendar.olin.build/request_changes/{id}?magic={magic}".format(id=event['_id'], magic=event['magic'])
+        cancel_event_link="calendar.olin.build/cancel_event/{id}?magic={magic}&email=yes".format(id=event['_id'], magic=event['magic'])
+        
+        path = os.getcwd() + "/templates/emails/notify_moderator_new_event.txt"
+        template = Template(open(path).read())
+
+        content = template.render(
+            link=editlink,
+            title=event['title'],
+            location=event['location'],
+            dtstart=event['dtstart'],
+            dtend=event['dtend'],
+            description=event['description'],
+            host=event['host_name'],
+            host_email=event['host_email'],
+            approve_link=approve_link,
+            request_changes_link=request_changes_link,
+            cancel_event_link=cancel_event_link
+        )
+
+        self.send_email("An event was created", content, moderator)
 
     def generate_edit_link(self, base, event):
         magic = str(event['magic'])

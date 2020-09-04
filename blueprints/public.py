@@ -32,6 +32,7 @@ def add_event():
     if request.method == "POST" and form.validate_on_submit():
         inserted_event = db.create_new_event(form.data)
         email.send_submission_confirmation(request.base_url, inserted_event)
+        email.notify_moderator_new_event("test", inserted_event, "frankscalendar.olin@gmail.com")
         return redirect(
             url_for('public.confirmation',
                 event_id=inserted_event['_id'],
