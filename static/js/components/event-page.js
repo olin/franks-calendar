@@ -82,11 +82,8 @@ const EventPage = (props) => {
         var timeText;
         if (event.allDay) {
 
-            // var startTime = new Date(event.start).toLocaleString().split(", ")[1].replace(":00 ", "");
-            // var endTime = new Date(event.end).toLocaleString().split(", ")[1].replace(":00 ", "");
-
-            var startDate = new Date(event.start).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            var endDate = new Date(event.end).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            var startDate = event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            var endDate = event.end.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
             if (startDate === endDate) {
                 timeText = (

@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 from bson.objectid import ObjectId
-from bson import json_util
+from bson.codec_options import CodecOptions
 from uuid import uuid4 as uuid
 from datetime import datetime, timezone
 from enum import Enum
@@ -39,14 +39,13 @@ class DatabaseClient(object):
             "magic": False
         })
 
-    def get_all_events(self):
-        return [doc for doc in self.client.events.find({}, {'magic': False})]
-
     def get_approved_events(self):
-        return [doc for doc in self.client.events.find({}, {"magic": False}) if doc.get("status") == Status.APPROVED.value]
+        return list(self.client.events
+                    .with_options(codec_options=CodecOptions(tz_aware=True))
+                    .find({'status': 'Approved'}, {"magic": False}))
 
     def get_all_events_with_magic(self):
-        return [doc for doc in self.client.events.find()]
+        return list(self.client.events.find())
 
     def get_event_with_magic(self, event_id):
         try:
