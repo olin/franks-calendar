@@ -14,8 +14,9 @@ from wtforms.validators import DataRequired
 class EventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     location = StringField('Location', validators=[DataRequired()])
-    dtstart = DateTimeField('Start', validators=[DataRequired()], format="%m/%d/%y %H:%M:%S")
-    dtend = DateTimeField('End', validators=[DataRequired()], format="%m/%d/%y %H:%M:%S")
+    dtstart = StringField('Start', validators=[DataRequired()])
+    dtend = StringField('End', validators=[DataRequired()])
+    all_day = BooleanField('All Day')
     category = SelectField('Category', validators=[DataRequired()], choices=[
         ("", "-- select an option --"),
         ("academic_affairs:academic_calendar", "Academic Calendar"),

@@ -5,6 +5,7 @@ from uuid import uuid4 as uuid
 from datetime import datetime, timezone
 from enum import Enum
 import os
+import time
 
 
 class Status(Enum):
@@ -57,10 +58,40 @@ class DatabaseClient(object):
         except:
             return {}
 
+    def _parse_iso_date_str(self, date_time_str):
+        # datetime.fromisoformat does not handle using "Z" to represent the UTC timezone
+        # (see https://bugs.python.org/issue35829), which is how JavaScript encodes that
+        # timezone, so we need to convert the format to one readable by Python first
+        if date_time_str.endswith('Z'):
+            # Drop the 'Z' and append the UTC timezone offset
+            date_time_str = date_time_str[:-1] + '+00:00'
+        return datetime.fromisoformat(date_time_str)
+
+    def _properly_set_event_dates(self, event):
+        is_all_day = event.get('all_day', False)
+        # Convert the datetime strings to either date (for all-day events) or datetime (for events with times) objects
+        if is_all_day:
+            # The values sent from the web client are date strings.
+            # We want to store them as datetime objects in the database so that we can do queries
+            # for events between certain date ranges, so we need to convert it to a datetime object first.
+            # Let's just assume that an all-day event starts at midnight Eastern time and ends the following midnight
+            # (though we should remove this assumption by stripping the time when generating iCals later).
+            utc_offset_hours = -time.altzone / 3600
+            event['dtstart'] = datetime.fromisoformat(f"{event['dtstart']} 00:00.000{utc_offset_hours:03.0f}:00")
+            event['dtend'] = datetime.fromisoformat(f"{event['dtend']} 23:59.999{utc_offset_hours:03.0f}:00")
+        else:
+            # The values sent from the web client are datetime strings.
+            # Given that users were told to set the time based on their current timezone and that their
+            # browser should have encoded timezone information in the strings, the date and time
+            # _should_ be correct as-is.
+            event['dtstart'] = self._parse_iso_date_str(event['dtstart'])
+            event['dtend'] = self._parse_iso_date_str(event['dtend'])
+
     def create_new_event(self, event):
         event["magic"] = self.generate_magic_string()
         event["last_edited"] = datetime.now(timezone.utc)
         event["status"] = Status.PENDING.value
+        self._properly_set_event_dates(event)
         del event['csrf_token']
         inserted_id = self.client.events.insert_one(event).inserted_id
         event["_id"] = inserted_id
@@ -93,17 +124,18 @@ class DatabaseClient(object):
         else:
             return False
 
-    def update_event(self, event_id, form):
+    def update_event(self, event_id, event):
+        if 'dstart' in event and 'dtend' in event:
+            self._properly_set_event_dates(event)
         ret = self.client.events.update_one(
             {
                 "_id": ObjectId(event_id)
             },
             {
-                "$set": form
+                "$set": event
             }
         )
-        form["_id"] = event_id
-        return form
+        return event
 
     def add_to_export_list(self, event_id, email):
         self.client.events.update_one(

@@ -64,6 +64,7 @@ def edit_event(event_id):
         # Should've used SQLAlchemy and Postgres
         form.title.data = event.get("title")
         form.location.data = event.get("location")
+        form.all_day.data = event.get("all_day")
         form.dtstart.data = event.get("dtstart")
         form.dtend.data = event.get("dtend")
         form.category.data = event.get("category")
@@ -91,7 +92,7 @@ def edit_event(event_id):
 
         return redirect(
             url_for("public.edit_confirmation",
-                event_id=inserted_event['_id'],
+                event_id=event_id,
             ),
         )
     elif request.method == "DELETE":

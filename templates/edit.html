@@ -30,9 +30,8 @@
                 </div>
                 <div class="Form__row__day">
                   <label>
-                    <input type="checkbox" id="all_day">
-                    <span class="checkmark"></span>
-                    All Day
+                    {{ form.all_day() }}
+                    {{ form.all_day.label }}
                   </label>
                 </div>
                 <div style="display: none">
@@ -100,23 +99,27 @@
     {% include 'components/footer.html' %}
     </div>
     <script>
+        const zeroPad = (num, len = 2) => `${num}`.padStart(len, '0');
+        const parseUTCDateTime = (dateTime) => new Date(`${dateTime}+00:00`);
+        const buildDateString = (d) => `${d.getFullYear()}-${zeroPad(d.getMonth()+1)}-${zeroPad(d.getDate())}`;
+
         // Load in times
         document.addEventListener("DOMContentLoaded", () => {
-            var dtstart = "{{ form.dtstart.data }}".split(" ");
-            var dtend = "{{ form.dtend.data }}".split(" ");
-
-            var startDate = dtstart[0];
-            var endDate = dtend[0];
-
-            document.getElementById("start_date").value = startDate.replace("/", "-");
-            document.getElementById("end_date").value = endDate.replace("/", "-");
-
-            if (dtstart[1] !== "00:00:00") {
-                document.getElementById("start_time").value = dtstart[1].substring(0,5);
-                document.getElementById("end_time").value = dtend[1].substring(0,5);
-            } else {
+            const allDayEvent = "{{ form.all_day.data }}" === 'True';
+            const dtstart = "{{ form.dtstart.data }}";
+            const dtend = "{{ form.dtend.data }}";
+            if (allDayEvent) {
+                document.getElementById("start_date").value = dtstart;
+                document.getElementById("end_date").value = dtend;
                 document.getElementById('all_day').checked = true;
                 document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
+            } else {
+                const startDateTime = parseUTCDateTime(dtstart);
+                const endDateTime = parseUTCDateTime(dtend);
+                document.getElementById("start_date").value = buildDateString(startDateTime);
+                document.getElementById("end_date").value = buildDateString(endDateTime);
+                document.getElementById("start_time").value = `${zeroPad(startDateTime.getHours())}:${zeroPad(startDateTime.getMinutes())}`;
+                document.getElementById("end_time").value = `${zeroPad(endDateTime.getHours())}:${zeroPad(endDateTime.getMinutes())}`;
             }
         })
 
@@ -145,34 +148,29 @@
               return;
             }
           {% endif %}
-          var start = document.getElementById('start_date').value;
-          var end = document.getElementById('end_date').value;
-
-          if (!document.getElementById("all_day").checked) {
-            start = start + " " + document.getElementById("start_time").value;
-            end = end + " " + document.getElementById("end_time").value;
+          const allDayEvent = document.getElementById("all_day").checked;
+          const startDateString = document.getElementById('start_date').value;
+          const endDateString = document.getElementById('end_date').value;
+          let dtstart, dtend;
+          if (allDayEvent) {
+            // Ignore any times
+            dtstart = startDateString;
+            dtend = endDateString;
+          } else {
+            const startTimeString = document.getElementById("start_time").value;
+            const endTimeString = document.getElementById("end_time").value;
+            dtstart = new Date(`${startDateString}T${startTimeString}`).toISOString();
+            dtend = new Date(`${endDateString}T${endTimeString}`).toISOString();
           }
 
-          var dtstart = new Date(start);
-          var dtend = new Date(end);
-
-          if (dtstart > dtend) {
+          if (new Date(dtstart) > new Date(dtend)) {
             alert("Start Time cannot be later than End Time!");
             e.preventDefault(); // Prevent form from being submitted
             return;
           }
 
-          const options = {
-              year: "2-digit",
-              month:"2-digit",
-              day:"2-digit",
-              hour12: false,
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit"
-          }
-          document.getElementById("dtstart").value = dtstart.toLocaleString("en-us", options).replace(",","");
-          document.getElementById("dtend").value = dtend.toLocaleString("en-us", options).replace(",","");
+          document.getElementById('dtstart').value = dtstart;
+          document.getElementById('dtend').value = dtend;
 
           // Must be an Olin Email
           var emailPattern = /.*@olin\.edu/
