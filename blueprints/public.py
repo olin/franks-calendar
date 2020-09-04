@@ -32,7 +32,7 @@ def add_event():
     if request.method == "POST" and form.validate_on_submit():
         inserted_event = db.create_new_event(form.data)
         email.send_submission_confirmation(request.base_url, inserted_event)
-        email.notify_moderator_new_event("test", inserted_event, "frankscalendar.olin@gmail.com")
+        email.notify_moderator_new_event("test", inserted_event, "frankscalendar@olin.edu")
         return redirect(
             url_for('public.confirmation',
                 event_id=inserted_event['_id'],
@@ -83,7 +83,7 @@ def edit_event(event_id):
         inserted_event = db.update_event(event_id, form.data)
         event_data = db.get_one(ObjectId(event_id))
         if event_data["status"] == Status.APPROVED.value:
-            email.notify_moderator("test", event_data, "frankscalendar.olin@gmail.com")
+            email.notify_moderator("test", event_data, "frankscalendar@olin.edu")
             #if the event was already approved, send an email to everyone who may have exported and ical of the event
             emails = event_data.get("shared_emails")
             if emails:
