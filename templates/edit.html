@@ -100,22 +100,24 @@
     </div>
     <script>
         const zeroPad = (num, len = 2) => `${num}`.padStart(len, '0');
-        const parseUTCDateTime = (dateTime) => new Date(`${dateTime}+00:00`);
         const buildDateString = (d) => `${d.getFullYear()}-${zeroPad(d.getMonth()+1)}-${zeroPad(d.getDate())}`;
 
         // Load in times
         document.addEventListener("DOMContentLoaded", () => {
+            // All of this pains me greatly, but it will do for now
             const allDayEvent = "{{ form.all_day.data }}" === 'True';
             const dtstart = "{{ form.dtstart.data }}";
             const dtend = "{{ form.dtend.data }}";
             if (allDayEvent) {
-                document.getElementById("start_date").value = dtstart;
-                document.getElementById("end_date").value = dtend;
+              // Problem is that the date needs to be converted back to Eastern before getting passed into this tempalte
+                document.getElementById("start_date").value = dtstart.substr(0, 10);
+                document.getElementById("end_date").value = dtend.substr(0, 10);
                 document.getElementById('all_day').checked = true;
                 document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
             } else {
-                const startDateTime = parseUTCDateTime(dtstart);
-                const endDateTime = parseUTCDateTime(dtend);
+                // The following code _should_ handle converting timezones properly (but it's still a bit of a mess)
+                const startDateTime = new Date(dtstart);
+                const endDateTime = new Date(dtend);
                 document.getElementById("start_date").value = buildDateString(startDateTime);
                 document.getElementById("end_date").value = buildDateString(endDateTime);
                 document.getElementById("start_time").value = `${zeroPad(startDateTime.getHours())}:${zeroPad(startDateTime.getMinutes())}`;
