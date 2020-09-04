@@ -149,5 +149,10 @@
         document.getElementById('submitButton')
             .addEventListener('click', e => validateForm(e))
 
+        document.getElementById('start_date')
+          .addEventListener("change", () => {
+            document.getElementById('end_date').value = document.getElementById('start_date').value;
+          })
+
     </script>
 {% endblock %}
