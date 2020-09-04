@@ -8,6 +8,7 @@ import uuid
 from jinja2 import Template
 import os
 from .constants import categoryText
+import pytz
 
 db = DatabaseClient()
 email = EmailClient()
@@ -120,15 +121,25 @@ def mod_message():
     db.set_mod_message(form.data["modMessage"])
     return redirect("/")
 
+def _convert_utc_to_eastern_time(dt):
+    # First let Python know the datetime is in UTC time
+    dt = dt.replace(tzinfo=pytz.utc)
+    # Now convert to Eastern time (this should really be done client-side,
+    # or converted to the user's timezone after determining where they are)
+    return dt.astimezone(pytz.timezone('America/New_York'))
+
+
 @public.route("/confirmation", methods=["GET"])
 def confirmation():
     event_id = request.args.get('event_id')
     event = db.get_event_with_magic(event_id)
 
-    start_date = event["dtstart"].strftime("%b %-d, %Y")
-    start_time = event["dtstart"].strftime("%-I:%M %p")
-    end_date = event["dtend"].strftime("%b %-d, %Y")
-    end_time = event["dtend"].strftime("%-I:%M %p")
+    start_date_time = _convert_utc_to_eastern_time(event["dtstart"])
+    start_date = start_date_time.strftime("%b %-d, %Y")
+    start_time = start_date_time.strftime("%-I:%M %p")
+    end_date_time = _convert_utc_to_eastern_time(event["dtend"])
+    end_date = end_date_time.strftime("%b %-d, %Y")
+    end_time = end_date_time.strftime("%-I:%M %p")
 
     if start_date == end_date:
         time_display = f"{start_date} {start_time} - {end_time}"
@@ -147,10 +158,12 @@ def edit_confirmation():
     event_id = request.args.get('event_id')
     event = db.get_event_with_magic(event_id)
 
-    start_date = event["dtstart"].strftime("%b %-d, %Y")
-    start_time = event["dtstart"].strftime("%-H:%M %p")
-    end_date = event["dtend"].strftime("%b %-d, %Y")
-    end_time = event["dtend"].strftime("%-H:%M %p")
+    start_date_time = _convert_utc_to_eastern_time(event["dtstart"])
+    start_date = start_date_time.strftime("%b %-d, %Y")
+    start_time = start_date_time.strftime("%-I:%M %p")
+    end_date_time = _convert_utc_to_eastern_time(event["dtend"])
+    end_date = end_date_time.strftime("%b %-d, %Y")
+    end_time = end_date_time.strftime("%-I:%M %p")
 
     if start_date == end_date:
         time_display = f"{start_date} {start_time} - {end_time}"

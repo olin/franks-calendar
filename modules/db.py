@@ -125,7 +125,7 @@ class DatabaseClient(object):
             return False
 
     def update_event(self, event_id, event):
-        if 'dstart' in event and 'dtend' in event:
+        if 'dtstart' in event and 'dtend' in event:
             self._properly_set_event_dates(event)
         ret = self.client.events.update_one(
             {
