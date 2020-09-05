@@ -96,6 +96,21 @@
     {% include 'components/footer.html' %}
     </div>
     <script>
+
+        // fill date and time with current date and time in browser timezone
+        const currentDate = new Date()
+        document.getElementById('start_date').valueAsDate = currentDate;
+        document.getElementById('end_date').valueAsDate = currentDate;
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        document.getElementById('start_time').value = `${hours}:${minutes}`;
+        document.getElementById('end_time').value = `${hours}:${minutes}`;
+
+        // end_date box should update with the input of start_date
+        document.getElementById('start_date').addEventListener("change", () => {
+          document.getElementById('end_date').value = document.getElementById('start_date').value;
+        })
+
         document.getElementById('all_day').addEventListener('click', e => {
           if (e.target.checked) {
             document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
