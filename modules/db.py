@@ -73,11 +73,11 @@ class DatabaseClient(object):
             # The values sent from the web client are date strings.
             # We want to store them as datetime objects in the database so that we can do queries
             # for events between certain date ranges, so we need to convert it to a datetime object first.
-            # Let's just assume that an all-day event starts at midnight Eastern time and ends the following midnight
-            # (though we should remove this assumption by stripping the time when generating iCals later).
+            # To match the iCal spec, all-day events start at midnight on one day and end at midnight the day after
+            # we would consider them to end (i.e. "Mon thru Thurs" -> Mon @ 00:00 -> Fri @ 00:00).
             utc_offset_hours = -time.altzone / 3600
             event['dtstart'] = datetime.fromisoformat(f"{event['dtstart']} 00:00.000{utc_offset_hours:03.0f}:00")
-            event['dtend'] = datetime.fromisoformat(f"{event['dtend']} 23:59.999{utc_offset_hours:03.0f}:00")
+            event['dtend'] = datetime.fromisoformat(f"{event['dtend']} 00:00.000{utc_offset_hours:03.0f}:00")
         else:
             # The values sent from the web client are datetime strings.
             # Given that users were told to set the time based on their current timezone and that their

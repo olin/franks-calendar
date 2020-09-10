@@ -9,6 +9,7 @@ from jinja2 import Template
 import os
 from .constants import categoryText
 import pytz
+from datetime import timedelta
 
 db = DatabaseClient()
 email = EmailClient()
@@ -129,26 +130,39 @@ def _convert_utc_to_eastern_time(dt):
     return dt.astimezone(pytz.timezone('America/New_York'))
 
 
+def _get_formatted_start_end_str(event):
+    start_date_time = _convert_utc_to_eastern_time(event["dtstart"])
+    end_date_time = _convert_utc_to_eastern_time(event["dtend"])
+    all_day = event.get('all_day')
+    if all_day:
+        # All-day events are stored as ending at midnight the day after we humans would consider them
+        # to end (i.e. "Mon thru Thurs" -> Mon @ 00:00 -> Fri @ 00:00), so we should knock off a day
+        # before generating our text to display.
+        end_date_time -= timedelta(days=1)
+    start_date = start_date_time.strftime("%b %-d, %Y")
+    start_time = start_date_time.strftime("%-I:%M %p")
+    end_date = end_date_time.strftime("%b %-d, %Y")
+    end_time = end_date_time.strftime("%-I:%M %p")
+    if all_day:
+        if start_date == end_date:
+            return start_date
+        else:
+            return f"{start_date} - {end_date}"
+    else:
+        if start_date == end_date:
+            return f"{start_date} {start_time} - {end_time}"
+        else:
+            return f"{start_date} {start_time} - {end_date} {end_time}"
+
+
 @public.route("/confirmation", methods=["GET"])
 def confirmation():
     event_id = request.args.get('event_id')
     event = db.get_event_with_magic(event_id)
 
-    start_date_time = _convert_utc_to_eastern_time(event["dtstart"])
-    start_date = start_date_time.strftime("%b %-d, %Y")
-    start_time = start_date_time.strftime("%-I:%M %p")
-    end_date_time = _convert_utc_to_eastern_time(event["dtend"])
-    end_date = end_date_time.strftime("%b %-d, %Y")
-    end_time = end_date_time.strftime("%-I:%M %p")
-
-    if start_date == end_date:
-        time_display = f"{start_date} {start_time} - {end_time}"
-    else:
-        time_display = f"{start_date} {start_time} - {end_date} {end_time}"
-
     return render_template("confirmation.html", 
         event=event, 
-        time_display=time_display, 
+        time_display=_get_formatted_start_end_str(event),
         category_display=categoryText[event["category"]]
     ), 200
 
@@ -158,25 +172,13 @@ def edit_confirmation():
     event_id = request.args.get('event_id')
     event = db.get_event_with_magic(event_id)
 
-    start_date_time = _convert_utc_to_eastern_time(event["dtstart"])
-    start_date = start_date_time.strftime("%b %-d, %Y")
-    start_time = start_date_time.strftime("%-I:%M %p")
-    end_date_time = _convert_utc_to_eastern_time(event["dtend"])
-    end_date = end_date_time.strftime("%b %-d, %Y")
-    end_time = end_date_time.strftime("%-I:%M %p")
-
-    if start_date == end_date:
-        time_display = f"{start_date} {start_time} - {end_time}"
-    else:
-        time_display = f"{start_date} {start_time} - {end_date} {end_time}"
-
     if event["status"] == Status.APPROVED.value:
         return render_template("confirmation--published.html",
         event=event,
-        time_display=time_display
+        time_display=_get_formatted_start_end_str(event)
         ), 200
     else:
-        return render_template("confirmation.html", event=event, time_display=time_display)
+        return render_template("confirmation.html", event=event, time_display=_get_formatted_start_end_str(event))
 
 
 @public.route("/export/<eventid>", methods=["POST"])

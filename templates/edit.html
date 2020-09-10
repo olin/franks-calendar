@@ -109,9 +109,10 @@
             const dtstart = "{{ form.dtstart.data }}";
             const dtend = "{{ form.dtend.data }}";
             if (allDayEvent) {
-              // Problem is that the date needs to be converted back to Eastern before getting passed into this tempalte
                 document.getElementById("start_date").value = dtstart.substr(0, 10);
-                document.getElementById("end_date").value = dtend.substr(0, 10);
+                // All-day events are saved as ending at midnight the day after, but we want to set the date picker
+                // to the prior day, so subtract one day from the saved date
+                document.getElementById("end_date").value = dayjs(dtend.substr(0, 10)).subtract(1, 'd').format('YYYY-MM-DD');
                 document.getElementById('all_day').checked = true;
                 document.querySelectorAll("input[type='time']").forEach(el => el.disabled = true);
             } else {
@@ -157,7 +158,8 @@
           if (allDayEvent) {
             // Ignore any times
             dtstart = startDateString;
-            dtend = endDateString;
+            // FullCalendar and iCal want the end date to be midnight of the next day
+            dtend = dayjs(endDateString).add(1, 'd').format('YYYY-MM-DD');
           } else {
             const startTimeString = document.getElementById("start_time").value;
             const endTimeString = document.getElementById("end_time").value;

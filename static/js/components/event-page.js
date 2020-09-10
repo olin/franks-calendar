@@ -36,6 +36,33 @@ function exportEvent(eventID) {
         })
     }
 
+/**
+ * Uses the Day.js formatting utils to generate the desired event "When?" string.
+ * Considers whether the event is all-day or if it spans multiple days when determining
+ * the specific format to use.
+ * @see https://day.js.org/docs/en/display/format
+ * @param event an event object with `start`, `end` and `allDay` properties
+ * @returns {string} the formatted string
+ */
+const getFormattedWhenString = (event) => {
+  const startDateTime = dayjs(event.start);
+  const endDateTime = dayjs(event.end);
+  if (event.allDay) {
+    if (startDateTime.isSame(endDateTime, 'day')) {
+      return startDateTime.format('MMM D, YYYY');
+    } else {
+      // Subtract one day from the end date because the datetime is actually midnight Eastern the next day
+      return `${startDateTime.format('MMM D, YYYY')} - ${endDateTime.subtract(1, 'day').format('MMM D, YYYY')}`;
+    }
+  } else {
+    if (startDateTime.isSame(endDateTime, 'day')) {
+      return `${startDateTime.format('MMM D, YYYY h:mm A')} - ${endDateTime.format('h:mm A')}`;
+    } else {
+      return `${startDateTime.format('MMM D, YYYY h:mm A')} - ${endDateTime.format('MMM D, YYYY h:mm A')}`;
+    }
+  }
+};
+
 const EventPage = (props) => {
   // Get the event ID from the URL
   const { eventId } = useParams();
@@ -61,60 +88,6 @@ const EventPage = (props) => {
       </div>
     )
   }
-
-        function timeString(date) {
-            let hours = date.getHours();
-            let minutes = date.getMinutes();
-
-            // Check whether AM or PM
-            var newformat = hours >= 12 ? 'PM' : 'AM';
-
-            // Find current hour in AM-PM Format
-            hours = hours % 12;
-
-            // To display "0" as "12"
-            hours = hours ? hours : 12;
-            minutes = minutes < 10 ? '0' + minutes : minutes;
-
-            return (hours + ':' + minutes + ' ' + newformat);
-        }
-
-        var timeText;
-        if (event.allDay) {
-
-            var startDate = event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            var endDate = event.end.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-            if (startDate === endDate) {
-                timeText = (
-                    <span class="Event__content__date">{startDate}</span>
-                )
-            } else {
-                timeText = (
-                    <>
-                        <span class="Event__content__date">{startDate}</span> -
-                        <span class="Event__content__time">{endDate}</span>
-                    </>
-                )
-            }
-        } else {
-            timeText = (
-                <>
-                    <span class="Event__content__date">
-                      {event.start.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                    </span>
-                    |
-                    <span class="Event__content__time">
-                      {timeString(event.start)}
-                    </span>
-                    -
-                    <span class="Event__content__time">
-                      {timeString(event.end)}
-                    </span>
-                </>
-            )
-        }
-
         var category = event.category.split(":").slice(-1)[0];
 
         // check if the location is a url
@@ -187,7 +160,7 @@ const EventPage = (props) => {
                         When?
                       </td>
                       <td class="Event__content__text">
-                        {timeText}
+                        {getFormattedWhenString(event)} (your time)
                       </td>
                     </tr>
 

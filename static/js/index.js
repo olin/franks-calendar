@@ -25,6 +25,8 @@ function clean_event_list(events, tags) {
     for (var i = 0; i < events.length; i++) {
         events[i]['id'] = events[i]['_id']['$oid'];
         // Convert seconds since UNIX epoch to Date objects
+        // FIXME: Dates will appear off by one if user is past the West Coast going west or past England going east.
+        // Fix is to only send the date (no time) from the server for all-day events.
         events[i]['start'] = new Date(events[i]['dtstart']['$date']);
         events[i]['end'] = new Date(events[i]['dtend']['$date']);
         // Convert to Full Calendar's preferred format

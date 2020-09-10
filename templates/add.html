@@ -126,7 +126,8 @@
           if (allDayEvent) {
             // Ignore any times
             startDateTime = startDateString;
-            endDateTime = endDateString;
+            // FullCalendar and iCal want the end date to be midnight of the next day
+            endDateTime = dayjs(endDateString).add(1, 'd').format('YYYY-MM-DD');
           } else {
             const startTimeString = document.getElementById("start_time").value;
             const endTimeString = document.getElementById("end_time").value;
