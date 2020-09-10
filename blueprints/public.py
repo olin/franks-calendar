@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, current_app, abort, flash
 from modules.db import DatabaseClient, Status
 from modules.sg_client import EmailClient
-from modules.forms import EventForm
+from modules.forms import EventForm, ModMessageForm
 from bson.objectid import ObjectId
 import json
 import uuid
@@ -23,7 +23,8 @@ public = Blueprint(
 @public.route("/", methods=["GET"])
 @public.route("/events/<event_id>", methods=["GET"])
 def index(event_id=None):
-    return render_template("home.html")
+    mod_message = db.get_mod_message().replace("\n","<br>")
+    return render_template("home.html", mod_message=mod_message)
 
 
 @public.route("/add", methods=["POST", "GET"])
@@ -103,13 +104,20 @@ def edit_event(event_id):
 
 @public.route("/admin", methods=["GET"])
 def admin_page():
+    form = ModMessageForm()
     if request.method == "GET":
         if request.args.get("code") != current_app.config.get("ADMIN_CODE"):
             abort(404)
 
         events = db.get_all_events_with_magic()
-        return render_template("admin.html", events=events)
+        return render_template("admin.html", events=events, form=form)
 
+@public.route("/mod-message", methods=["POST"])
+def mod_message():
+    form = ModMessageForm()
+    print(form.data)
+    db.set_mod_message(form.data["modMessage"])
+    return redirect("/")
 
 @public.route("/confirmation", methods=["GET"])
 def confirmation():
