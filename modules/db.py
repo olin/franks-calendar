@@ -4,6 +4,7 @@ from bson.codec_options import CodecOptions
 from uuid import uuid4 as uuid
 from datetime import datetime, timezone
 from enum import Enum
+import math
 import os
 import time
 
@@ -75,9 +76,13 @@ class DatabaseClient(object):
             # for events between certain date ranges, so we need to convert it to a datetime object first.
             # To match the iCal spec, all-day events start at midnight on one day and end at midnight the day after
             # we would consider them to end (i.e. "Mon thru Thurs" -> Mon @ 00:00 -> Fri @ 00:00).
-            utc_offset_hours = -time.altzone / 3600
-            event['dtstart'] = datetime.fromisoformat(f"{event['dtstart']} 00:00.000{utc_offset_hours:03.0f}:00")
-            event['dtend'] = datetime.fromisoformat(f"{event['dtend']} 00:00.000{utc_offset_hours:03.0f}:00")
+            utc_offset_sign = '-' if time.altzone > 0 else '+'
+            utc_offset_minutes = abs(time.altzone // 60)
+            utc_offset_hours = utc_offset_minutes // 60
+            utc_offset_minutes_remainder = utc_offset_minutes % 60
+            time_format = f"00:00.000{utc_offset_sign}{utc_offset_hours:02.0f}:{utc_offset_minutes_remainder:02.0f}"
+            event['dtstart'] = datetime.fromisoformat(f"{event['dtstart']} {time_format}")
+            event['dtend'] = datetime.fromisoformat(f"{event['dtend']} {time_format}")
         else:
             # The values sent from the web client are datetime strings.
             # Given that users were told to set the time based on their current timezone and that their

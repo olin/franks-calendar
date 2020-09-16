@@ -51,7 +51,8 @@ const getFormattedWhenString = (event) => {
     if (startDateTime.isSame(endDateTime, 'day')) {
       return startDateTime.format('MMM D, YYYY');
     } else {
-      // Subtract one day from the end date because the datetime is actually midnight Eastern the next day
+      // Subtract one day from the end date because the date is actually the following day (the end datetime was stored
+      // as midnight Eastern the following day in the database, though we weren't given the time here)
       return `${startDateTime.format('MMM D, YYYY')} - ${endDateTime.subtract(1, 'day').format('MMM D, YYYY')}`;
     }
   } else {
