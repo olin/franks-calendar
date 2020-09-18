@@ -30,9 +30,8 @@
               </div>
               <div class="Form__row__day">
                 <label>
-                  <input type="checkbox" id="all_day">
-                  <span class="checkmark"></span>
-                  All Day
+                  {{ form.all_day() }}
+                  {{ form.all_day.label }}
                 </label>
               </div>
               <div style="display: none">
@@ -120,35 +119,30 @@
         });
 
         function validateForm(e) {
-          var start = document.getElementById('start_date').value;
-          var end = document.getElementById('end_date').value;
-
-          if (!document.getElementById("all_day").checked) {
-            start = start + " " + document.getElementById("start_time").value;
-            end = end + " " + document.getElementById("end_time").value;
+          const allDayEvent = document.getElementById("all_day").checked;
+          const startDateString = document.getElementById('start_date').value;
+          const endDateString = document.getElementById('end_date').value;
+          let startDateTime, endDateTime;
+          if (allDayEvent) {
+            // Ignore any times
+            startDateTime = startDateString;
+            // FullCalendar and iCal want the end date to be midnight of the next day
+            endDateTime = dayjs(endDateString).add(1, 'd').format('YYYY-MM-DD');
+          } else {
+            const startTimeString = document.getElementById("start_time").value;
+            const endTimeString = document.getElementById("end_time").value;
+            startDateTime = new Date(`${startDateString}T${startTimeString}`).toISOString();
+            endDateTime = new Date(`${endDateString}T${endTimeString}`).toISOString();
           }
 
-          var dtstart = new Date(start);
-          var dtend = new Date(end);
-
-          if (dtstart > dtend) {
+          if (new Date(startDateTime) > new Date(endDateTime)) {
             alert("Start Time cannot be later than End Time!");
             e.preventDefault(); // Prevent form from being submitted
             return;
           }
 
-          const options = {
-              year: "2-digit",
-              month:"2-digit",
-              day:"2-digit",
-              hour12: false,
-              hour: "2-digit",
-              minute: "2-digit",
-              second: "2-digit"
-          }
-
-          document.getElementById('dtstart').value = dtstart.toLocaleString("en-us", options).replace(",","");
-          document.getElementById('dtend').value = dtend.toLocaleString("en-us", options).replace(",","");
+          document.getElementById('dtstart').value = startDateTime;
+          document.getElementById('dtend').value = endDateTime;
 
           // Must be an Olin Email
           var emailPattern = /.*@olin\.edu/

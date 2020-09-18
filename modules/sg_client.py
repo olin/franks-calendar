@@ -156,8 +156,12 @@ class EmailClient(object):
         cal = Calendar()
         event = Event()
         permalink = "http://calendar.olin.build/events/" + str(eventdata["_id"])
-        event["dtstart"] = datetime.strftime(eventdata["dtstart"], "%Y%m%dT%H%M%S")
-        event["dtend"] = datetime.strftime(eventdata["dtend"], "%Y%m%dT%H%M%S")
+        if eventdata["all_day"]:
+            event["dtstart"] = datetime.strftime(eventdata["dtstart"], "%Y%m%d")
+            event["dtend"] = datetime.strftime(eventdata["dtend"], "%Y%m%d")
+        else:
+            event["dtstart"] = datetime.strftime(eventdata["dtstart"], "%Y%m%dT%H%M%S")
+            event["dtend"] = datetime.strftime(eventdata["dtend"], "%Y%m%dT%H%M%S")
         event["summary"] = eventdata["title"]
         event["location"] = eventdata["location"]
         event["description"] = eventdata["description"] + "\n \n" + permalink
