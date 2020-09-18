@@ -51,11 +51,10 @@
 .Header {
     padding: 0.35rem 1rem;
     display: flex;
-    flex: 0 1 0;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0.1rem 0.1rem 0.25rem $secondary;
-    flex: 0 1 0;
 
     &__title {
       font-family: $title;
@@ -245,6 +244,7 @@
   min-width: 60em; 
   max-width: 70em;
   padding: 0em 1em 0em 1em;
+  flex: 0 0 auto;
 
   color: $main;
   font-family: $sans;
@@ -552,8 +552,7 @@
     font-weight: 600;
     text-align: center;
     padding: 1rem 1rem;
-    position: sticky;
-    bottom: -999rem;
+    flex: 0 0 auto;
 
     &__message {
         display: block;
