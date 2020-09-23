@@ -4,6 +4,7 @@
   "description": "A centralized calendar for the Olin community!",
   "main": "index.js",
   "scripts": {
+    "start": "webpack-dev-server -p --config webpack-dev.config.js --watch",
     "serve": "concurrently \"webpack -p --progress --mode=development --display-error-details --config webpack.config.js --watch\" \"FLASK_ENV=development flask run --host=\"0.0.0.0\"\""
   },
   "repository": {
@@ -49,6 +50,7 @@
     "tui-calendar": "^1.12.12",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
     "webpack-notifier": "^1.8.0"
   },
   "dependencies": {

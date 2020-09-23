@@ -7,6 +7,8 @@
 4. I'll check for merge conflicts, resolve any that come up, and then merge your request (this helps manage merge conflicts that are a pain to deal with on your own).
 
 ## Running the app
+
+**TODO: Update these to reflect non-Docker dev with MongoDB Atlas**
 1. Fork the repository by going to the [main repository](https://github.com/olin/franks-calendar) and clicking the button that says `Fork`.
 
 2. Clone the repository to your local computer. In your terminal, run
