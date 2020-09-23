@@ -1,0 +1,19 @@
+Hi Moderator! 
+<br><br>
+Event {{title}} was created today. The event information now consists of: 
+<br><br>
+Title: {{title}}<br>
+Host: {{host}}, {{host_email}}<br>
+When: {{dtstart}} to {{dtend}}<br>
+Where: {{location}}<br>
+What: {{description}}
+<br><br>    
+If changes were not appropriate, request changes via this <a href=http://{{link}}>magic link</a> .
+<br><br>
+Quick Links:<br>
+<a href=http://{{approve_link}}>approve link</a><br><br>
+<a href=http://{{request_changes_link}}>request changes link</a><br><br>
+<a href=http://{{cancel_event_link}}>cancel event link</a><br><br>
+<br>
+Sincerely, <br>
+Frank's Calendar
