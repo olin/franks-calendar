@@ -1,4 +1,4 @@
-arrow==0.14.7
+arrow==0.15.1
 beautifulsoup4==4.9.0
 cachetools==4.1.0
 certifi==2020.4.5.1
